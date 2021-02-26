@@ -22,6 +22,7 @@ public class Main extends ApplicationAdapter {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		Gdx.app.log("testi", "testi");
 		Gdx.app.log("toinen","testi");
+		//kolmas testi
 		batch.begin();
 		batch.draw(img, 0, 0);
 		batch.end();
