@@ -18,6 +18,8 @@ public class playerActor extends Actor {
     private int PLAYER_HEALTH = 100;
     private String healthAmount;
 
+    public boolean playerActionDone = false;
+
     public playerActor() {
         playerTexture = new Texture(Gdx.files.internal("playercharacter.png"));
         healthAmount = "" + PLAYER_HEALTH;
@@ -28,7 +30,6 @@ public class playerActor extends Actor {
         setBounds(0,40, getWidth(), getHeight());
 
         addListener(new PlayerListener());
-
     }
 
     @Override
@@ -51,17 +52,24 @@ public class playerActor extends Actor {
 
         MoveToAction moveAction = new MoveToAction();
         MoveToAction moveBack = new MoveToAction();
-
+        RotateToAction rotateAction = new RotateToAction();
 
         moveAction.setPosition(300f, 40f);
         moveAction.setDuration(1f);
         moveBack.setPosition(0f, 40f);
         moveBack.setDuration(1f);
 
+        rotateAction.setRotation(360f);
+        rotateAction.setDuration(1f);
+
         sequenceAction.addAction(moveAction);
+        sequenceAction.addAction(rotateAction);
         sequenceAction.addAction(moveBack);
 
         playerActor.this.addAction(sequenceAction);
+
+        fightingStageScreen.enemy.reduceHealth(15);
+        playerActionDone = true;
     }
 
      public class PlayerListener extends InputListener {

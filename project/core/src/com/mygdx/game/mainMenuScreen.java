@@ -51,9 +51,7 @@ public class mainMenuScreen implements Screen {
 
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                if(Gdx.input.isTouched()) {
                     host.setScreen(new fightingStageScreen(host));
-                }
                 return true;
             }
         });

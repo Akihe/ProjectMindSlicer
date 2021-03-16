@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
@@ -23,7 +24,7 @@ public class fightingStageScreen implements Screen {
 
     private Stage gameStage;
     private playerActor player;
-    private enemyActor enemy;
+    public static enemyActor enemy;
 
 
     public fightingStageScreen(Main host) {
@@ -34,7 +35,6 @@ public class fightingStageScreen implements Screen {
         gameStage = new Stage(new FitViewport(Main.WORLD_WIDTH,Main.WORLD_HEIGHT), batch);
         Gdx.input.setInputProcessor(gameStage);
 
-
         player = new playerActor();
         gameStage.addActor(player);
 
@@ -43,25 +43,25 @@ public class fightingStageScreen implements Screen {
 
         Skin mySkin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
         ImageButton button2 = new ImageButton(mySkin);
-        button2.getStyle().imageUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("Garmfiel.png"))));
-        button2.getStyle().imageDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("badlogic.jpg"))));
+        //button2.getStyle().imageUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("Garmfiel.png"))));
+        //button2.getStyle().imageDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("badlogic.jpg"))));
+        button2.setTransform(true);
+        button2.setScale(0.5f);
         button2.setPosition(20,300 );
 
         button2.addListener(new InputListener(){
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                //outputLabel.setText("Press a Button");
             }
 
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 player.hitAction();
-                enemy.reduceHealth(15);
                 return true;
             }
         });
-        gameStage.addActor(button2);
 
+        gameStage.addActor(button2);
 
     }
 

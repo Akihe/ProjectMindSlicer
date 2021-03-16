@@ -24,7 +24,6 @@ public class enemyActor extends Actor {
 
     public void reduceHealth(int damageTaken) {
         this.ENEMY_HEALTH = this.ENEMY_HEALTH - damageTaken;
-        Gdx.app.log("Enemy class", " HP is " + ENEMY_HEALTH);
         healthAmount = "" + ENEMY_HEALTH;
     }
 
