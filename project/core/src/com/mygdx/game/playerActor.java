@@ -13,14 +13,19 @@ import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 
 public class playerActor extends Actor {
 
-    private Texture playerTexture;
+    private final Texture playerTexture;
+
+    private int PLAYER_HEALTH = 100;
+    private String healthAmount;
 
     public playerActor() {
         playerTexture = new Texture(Gdx.files.internal("playercharacter.png"));
+        healthAmount = "" + PLAYER_HEALTH;
 
-        setWidth(playerTexture.getWidth() / 100f);
-        setHeight(playerTexture.getHeight() / 100f);
-        setBounds(0,0, getWidth(), getHeight());
+
+        setWidth(playerTexture.getWidth()/2);
+        setHeight(playerTexture.getHeight()/2);
+        setBounds(0,40, getWidth(), getHeight());
 
         addListener(new PlayerListener());
 
@@ -38,34 +43,31 @@ public class playerActor extends Actor {
                 this.getScaleY(),
                 this.getRotation(),0,0,
                 playerTexture.getWidth(), playerTexture.getHeight(), false, false);
+        Main.font.draw(Main.getBatch(), healthAmount, 50, 30);
     }
 
-    class PlayerListener extends InputListener {
+    public void hitAction() {
+        SequenceAction sequenceAction = new SequenceAction();
+
+        MoveToAction moveAction = new MoveToAction();
+        MoveToAction moveBack = new MoveToAction();
 
 
-        @Override
+        moveAction.setPosition(300f, 40f);
+        moveAction.setDuration(1f);
+        moveBack.setPosition(0f, 40f);
+        moveBack.setDuration(1f);
+
+        sequenceAction.addAction(moveAction);
+        sequenceAction.addAction(moveBack);
+
+        playerActor.this.addAction(sequenceAction);
+    }
+
+     public class PlayerListener extends InputListener {
+
+
         public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-            SequenceAction sequenceAction = new SequenceAction();
-
-            MoveToAction moveAction = new MoveToAction();
-            RotateToAction rotateAction = new RotateToAction();
-            ScaleToAction scaleAction = new ScaleToAction();
-
-            moveAction.setPosition(1.00f, 1.00f);
-            moveAction.setDuration(1f);
-
-            rotateAction.setRotation(720f);
-            rotateAction.setDuration(1f);
-
-            scaleAction.setScale(0.5f);
-            scaleAction.setDuration(1f);
-
-            sequenceAction.addAction(moveAction);
-            sequenceAction.addAction(rotateAction);
-            sequenceAction.addAction(scaleAction);
-
-
-            playerActor.this.addAction(sequenceAction);
             return true;
         }
     }
