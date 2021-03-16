@@ -92,17 +92,17 @@ public class playerActor extends Actor {
         RotateToAction rotateRightAction = new RotateToAction();
         RotateToAction rotateBackAction = new RotateToAction();
 
-        moveUpAction.setPosition(0f, 100f);
-        moveUpAction.setDuration(0.3f);
+        moveUpAction.setPosition(0f, 120f);
+        moveUpAction.setDuration(0.2f);
         moveBackDown.setPosition(0f, 40f);
         moveBackDown.setDuration(0.1f);
 
-        rotateLeftAction.setRotation(20f);
-        rotateLeftAction.setDuration(0.7f);
-        rotateRightAction.setRotation(-20f);
-        rotateRightAction.setDuration(0.7f);
+        rotateLeftAction.setRotation(15f);
+        rotateLeftAction.setDuration(0.4f);
+        rotateRightAction.setRotation(-15f);
+        rotateRightAction.setDuration(0.4f);
         rotateBackAction.setRotation(0f);
-        rotateBackAction.setDuration(0.3f);
+        rotateBackAction.setDuration(0.1f);
 
         Think_Action.addAction(rotateLeftAction);
         Think_Action.addAction(rotateRightAction);
