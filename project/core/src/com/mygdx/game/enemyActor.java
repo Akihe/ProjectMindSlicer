@@ -4,6 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
+import com.badlogic.gdx.scenes.scene2d.actions.RotateToAction;
+import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 
 public class enemyActor extends Actor {
 
@@ -41,6 +44,30 @@ public class enemyActor extends Actor {
                 enemyTexture.getWidth(), enemyTexture.getHeight(), false, false);
         Main.font.draw(Main.getBatch(), healthAmount, 660, 30);
     }
+    public void enemyHit() {
+        SequenceAction sequenceAction = new SequenceAction();
 
+        MoveToAction moveAction = new MoveToAction();
+        MoveToAction moveBack = new MoveToAction();
+
+
+        RotateToAction rotateAction = new RotateToAction();
+
+        moveAction.setPosition(300f, 30f);
+        moveAction.setDuration(0.7f);
+
+        moveBack.setPosition(660f, 30f);
+        moveBack.setDuration(1.9f);
+
+
+        sequenceAction.addAction(moveAction);
+        sequenceAction.addAction(rotateAction);
+        sequenceAction.addAction(moveBack);
+
+        enemyActor.this.addAction(sequenceAction);
+
+        fightingStageScreen.player.reduceHealth(5);
+        playerActor.playerActionDone = false;
+    }
 
 }

@@ -17,8 +17,9 @@ public class playerActor extends Actor {
 
     private int PLAYER_HEALTH = 100;
     private String healthAmount;
+    public int PLAYER_ATK = 15;
 
-    public boolean playerActionDone = false;
+    public static boolean playerActionDone = false;
 
     public playerActor() {
         playerTexture = new Texture(Gdx.files.internal("playercharacter.png"));
@@ -30,6 +31,11 @@ public class playerActor extends Actor {
         setBounds(0,40, getWidth(), getHeight());
 
         addListener(new PlayerListener());
+    }
+//Liitetty reducehealth metodi pelaajalle myös. Voiko käyttää samaa metodia jos sen tekee uuteen luokkaan, ja kutsuu arvoja mm this.health (täytyy tehdä olio-ohjelmoinnilla parent olio, jolla on attribbutti HEALTH)
+    public void reduceHealth(int damageTaken) {
+        this.PLAYER_HEALTH = this.PLAYER_HEALTH - damageTaken;
+        healthAmount = "" + PLAYER_HEALTH;
     }
 
     @Override
@@ -53,6 +59,7 @@ public class playerActor extends Actor {
         MoveToAction moveAction = new MoveToAction();
         MoveToAction moveBack = new MoveToAction();
         RotateToAction rotateAction = new RotateToAction();
+        RotateToAction rotateBackAction = new RotateToAction();
 
         moveAction.setPosition(300f, 40f);
         moveAction.setDuration(1f);
@@ -61,18 +68,57 @@ public class playerActor extends Actor {
 
         rotateAction.setRotation(360f);
         rotateAction.setDuration(1f);
+        rotateBackAction.setRotation(0f);
+        rotateBackAction.setDuration(0.01f);
 
         sequenceAction.addAction(moveAction);
         sequenceAction.addAction(rotateAction);
+        sequenceAction.addAction(rotateBackAction);
         sequenceAction.addAction(moveBack);
 
         playerActor.this.addAction(sequenceAction);
 
-        fightingStageScreen.enemy.reduceHealth(15);
+        fightingStageScreen.enemy.reduceHealth(PLAYER_ATK);
         playerActionDone = true;
     }
 
-     public class PlayerListener extends InputListener {
+    public void thinkAction() {
+
+        SequenceAction Think_Action = new SequenceAction();
+
+        MoveToAction moveUpAction = new MoveToAction();
+        MoveToAction moveBackDown = new MoveToAction();
+        RotateToAction rotateLeftAction = new RotateToAction();
+        RotateToAction rotateRightAction = new RotateToAction();
+        RotateToAction rotateBackAction = new RotateToAction();
+
+        moveUpAction.setPosition(0f, 100f);
+        moveUpAction.setDuration(0.3f);
+        moveBackDown.setPosition(0f, 40f);
+        moveBackDown.setDuration(0.1f);
+
+        rotateLeftAction.setRotation(20f);
+        rotateLeftAction.setDuration(0.7f);
+        rotateRightAction.setRotation(-20f);
+        rotateRightAction.setDuration(0.7f);
+        rotateBackAction.setRotation(0f);
+        rotateBackAction.setDuration(0.3f);
+
+        Think_Action.addAction(rotateLeftAction);
+        Think_Action.addAction(rotateRightAction);
+        Think_Action.addAction(rotateBackAction);
+        Think_Action.addAction(moveUpAction);
+        Think_Action.addAction(moveBackDown);
+
+        playerActor.this.addAction(Think_Action);
+
+
+        double ATK_RISE = PLAYER_ATK*1.5;
+        PLAYER_ATK= (int) ATK_RISE;
+        playerActionDone = true;
+    }
+
+    public class PlayerListener extends InputListener {
 
 
         public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {

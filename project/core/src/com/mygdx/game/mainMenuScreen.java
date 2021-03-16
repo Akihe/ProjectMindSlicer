@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -26,6 +27,7 @@ public class mainMenuScreen implements Screen {
     Main host;
     SpriteBatch batch;
     private Stage gameStage;
+//private Texture BACKGROUND;
 
 
 
@@ -35,6 +37,10 @@ public class mainMenuScreen implements Screen {
 
         gameStage = new Stage(new FitViewport(Main.WORLD_WIDTH,Main.WORLD_HEIGHT), batch);
         Gdx.input.setInputProcessor(gameStage);
+
+//BACKGROUND=new Texture("TITLE_BACK.png");
+
+
 
 
         Skin mySkin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
@@ -68,7 +74,7 @@ public class mainMenuScreen implements Screen {
 
         Gdx.gl.glClearColor(1, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
+    //batch.draw(BACKGROUND,0,0,Main.WORLD_WIDTH,Main.WORLD_HEIGHT);
         gameStage.act();
         gameStage.draw();
 

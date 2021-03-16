@@ -23,7 +23,8 @@ public class fightingStageScreen implements Screen {
 
 
     private Stage gameStage;
-    private playerActor player;
+    public static playerActor player;
+    //vaihdettu staticiksi enemyn hyökkäystä  varten
     public static enemyActor enemy;
 
 
@@ -43,8 +44,8 @@ public class fightingStageScreen implements Screen {
 
         Skin mySkin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
         ImageButton button2 = new ImageButton(mySkin);
-        //button2.getStyle().imageUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("Garmfiel.png"))));
-        //button2.getStyle().imageDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("badlogic.jpg"))));
+       // button2.getStyle().imageUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("badlogic.jpg"))));
+
         button2.setTransform(true);
         button2.setScale(0.5f);
         button2.setPosition(20,300 );
@@ -57,11 +58,32 @@ public class fightingStageScreen implements Screen {
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 player.hitAction();
+
+                return true;
+            }
+        });
+
+        ImageButton button3 = new ImageButton(mySkin);
+       // button3.getStyle().imageUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("garmfiel.png"))));
+        button3.setTransform(true);
+        button3.setScale(0.5f);
+        button3.setPosition(20,370 );
+
+        button3.addListener(new InputListener(){
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+            }
+
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                player.thinkAction();
+
                 return true;
             }
         });
 
         gameStage.addActor(button2);
+        gameStage.addActor(button3);
 
     }
 
@@ -78,7 +100,10 @@ public class fightingStageScreen implements Screen {
 
         gameStage.act();
         gameStage.draw();
-
+        if(player.playerActionDone==true){
+            enemy.enemyHit();
+        }
+        // MITEN VASTUSTAJAN HYÖKKÄYKSEN SAA TEHTYÄ VASTA PELAAJAN JÄLKEEN
         batch.begin();
         batch.end();
 
