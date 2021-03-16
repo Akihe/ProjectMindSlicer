@@ -40,15 +40,14 @@ public class Main extends ApplicationAdapter {
 		gameStage.addActor(player);
 		Gdx.input.setInputProcessor(gameStage);
 
-		Gdx.input.setInputProcessor(gameStage);
-
-		Skin mySkin = new Skin(Gdx.files.internal("glassy-ui.json"));
+		Skin mySkin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
 		ImageButton button2 = new ImageButton(mySkin);
-		button2.setSize(10,10);
-		button2.getStyle().imageUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("garmfiel.png"))));
-		button2.getStyle().imageDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("badlogic.png"))));
-
-		button2.setPosition(20,20);
+		button2.setSize(screenWidth/12,screenHeight/12);
+		button2.getStyle().imageUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("Garmfiel.png"))));
+		button2.getStyle().imageDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("badlogic.jpg"))));
+		button2.setTransform(true);
+		button2.scaleBy(1f);
+		button2.setPosition(4f,2f);
 		gameStage.addActor(button2);
 
 		button2.addListener(new InputListener(){
