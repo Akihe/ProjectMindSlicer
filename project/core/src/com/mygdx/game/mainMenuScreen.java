@@ -27,7 +27,7 @@ public class mainMenuScreen implements Screen {
     Main host;
     SpriteBatch batch;
     private Stage gameStage;
-//private Texture BACKGROUND;
+    private Texture BACKGROUND;
 
 
 
@@ -38,7 +38,7 @@ public class mainMenuScreen implements Screen {
         gameStage = new Stage(new FitViewport(Main.WORLD_WIDTH,Main.WORLD_HEIGHT), batch);
         Gdx.input.setInputProcessor(gameStage);
 
-//BACKGROUND=new Texture("TITLE_BACK.png");
+        BACKGROUND = new Texture("TITLE_BACK.png");
 
 
 
@@ -74,9 +74,13 @@ public class mainMenuScreen implements Screen {
 
         Gdx.gl.glClearColor(1, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-    //batch.draw(BACKGROUND,0,0,Main.WORLD_WIDTH,Main.WORLD_HEIGHT);
+
+        batch.begin();
+        batch.draw(BACKGROUND,0,0,Main.WORLD_WIDTH,Main.WORLD_HEIGHT);
+        batch.end();
         gameStage.act();
         gameStage.draw();
+
 
     }
 

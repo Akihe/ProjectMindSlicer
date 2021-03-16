@@ -53,10 +53,10 @@ public class enemyActor extends Actor {
 
         RotateToAction rotateAction = new RotateToAction();
 
-        moveAction.setPosition(300f, 30f);
+        moveAction.setPosition(300f, 40f);
         moveAction.setDuration(0.7f);
 
-        moveBack.setPosition(660f, 30f);
+        moveBack.setPosition(600f, 40f);
         moveBack.setDuration(1.9f);
 
 

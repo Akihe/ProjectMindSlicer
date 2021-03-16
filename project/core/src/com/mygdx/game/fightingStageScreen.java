@@ -3,16 +3,12 @@ package com.mygdx.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 public class fightingStageScreen implements Screen {
@@ -20,7 +16,7 @@ public class fightingStageScreen implements Screen {
     Main host;
     SpriteBatch batch;
 
-
+    float timeSinceAttack = 0;
 
     private Stage gameStage;
     public static playerActor player;
@@ -100,14 +96,21 @@ public class fightingStageScreen implements Screen {
 
         gameStage.act();
         gameStage.draw();
+
+        //Enemy attacks only after the player attacks, and DeltaTime counts a 2 second delay for the enemys move.
         if(player.playerActionDone==true){
-            enemy.enemyHit();
+            timeSinceAttack += Gdx.graphics.getDeltaTime();
+            if (timeSinceAttack > 2.0f) {
+                enemy.enemyHit();
+                timeSinceAttack = 0;
+            }
         }
         // MITEN VASTUSTAJAN HYÖKKÄYKSEN SAA TEHTYÄ VASTA PELAAJAN JÄLKEEN
         batch.begin();
         batch.end();
 
     }
+
 
     @Override
     public void resize(int width, int height) {
