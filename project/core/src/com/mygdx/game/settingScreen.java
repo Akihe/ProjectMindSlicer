@@ -2,37 +2,26 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
-public class mainMenuScreen implements Screen {
+public class settingScreen implements Screen {
 
     Main host;
     SpriteBatch batch;
     private Stage gameStage;
     private Texture BACKGROUND;
 
-
-
-    public mainMenuScreen(final Main host) {
+    public settingScreen (final Main host) {
         this.host = host;
         batch = host.batch;
 
@@ -41,32 +30,27 @@ public class mainMenuScreen implements Screen {
 
         BACKGROUND = new Texture("mainmenu_screen.png");
 
-
-
-
         Skin mySkin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
         ImageButton button2 = new ImageButton(mySkin);
-        button2.getStyle().imageUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("Garmfiel.png"))));
-        button2.getStyle().imageDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("Garmfiel.png"))));
-        button2.setPosition(250,200 );
-
+        button2.setPosition(100,100 );
         button2.addListener(new InputListener(){
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                host.setScreen(new fightingStageScreen(host));
             }
 
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                return true;
+                host.setScreen(new mainMenuScreen(host));
+                return false;
             }
         });
         gameStage.addActor(button2);
 
     }
 
-    @Override
+        @Override
     public void show() {
+
     }
 
     @Override
@@ -80,7 +64,6 @@ public class mainMenuScreen implements Screen {
         batch.end();
         gameStage.act();
         gameStage.draw();
-
 
     }
 

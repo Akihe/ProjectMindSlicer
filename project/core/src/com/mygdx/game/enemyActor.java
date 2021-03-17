@@ -20,7 +20,7 @@ public class enemyActor extends Actor {
 
         setWidth(enemyTexture.getWidth()/2);
         setHeight(enemyTexture.getHeight()/2);
-        setBounds(600,40, getWidth(), getHeight());
+        setBounds(600,140, getWidth(), getHeight());
 
         healthAmount = "" + ENEMY_HEALTH;
     }
@@ -53,10 +53,10 @@ public class enemyActor extends Actor {
 
         RotateToAction rotateAction = new RotateToAction();
 
-        moveAction.setPosition(300f, 40f);
+        moveAction.setPosition(300f, 140f);
         moveAction.setDuration(0.7f);
 
-        moveBack.setPosition(600f, 40f);
+        moveBack.setPosition(600f, 140f);
         moveBack.setDuration(1.9f);
 
 
