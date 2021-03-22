@@ -12,7 +12,7 @@ public class enemyActor extends Actor {
 
     private Texture enemyTexture;
 
-    private int ENEMY_HEALTH = 100;
+    public int ENEMY_HEALTH = 100;
     private String healthAmount;
 
     public enemyActor() {
@@ -69,5 +69,23 @@ public class enemyActor extends Actor {
         fightingStageScreen.player.reduceHealth(5);
         playerActor.playerActionDone = false;
     }
+    public void enemyDie() {
+        SequenceAction sequenceAction = new SequenceAction();
 
+        MoveToAction moveAction = new MoveToAction();
+
+        RotateToAction rotateAction = new RotateToAction();
+
+        moveAction.setPosition(1000f, 30f);
+        moveAction.setDuration(0.01f);
+
+
+        rotateAction.setRotation(720);
+        rotateAction.setDuration(1f);
+
+        sequenceAction.addAction(rotateAction);
+        sequenceAction.addAction(moveAction);
+
+        enemyActor.this.addAction(sequenceAction);
+    }
 }

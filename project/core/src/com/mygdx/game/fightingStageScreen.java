@@ -103,6 +103,9 @@ public class fightingStageScreen implements Screen {
         if(player.playerActionDone==true){
             enemy.enemyHit();
         }
+        if(enemy.ENEMY_HEALTH<=0){
+            enemy.enemyDie();
+        }
         // MITEN VASTUSTAJAN HYÖKKÄYKSEN SAA TEHTYÄ VASTA PELAAJAN JÄLKEEN
         batch.begin();
         batch.end();
