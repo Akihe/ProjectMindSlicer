@@ -16,10 +16,12 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 
 public class settingScreen implements Screen {
 
-    Main host;
+    static Main host;
     SpriteBatch batch;
     private Stage gameStage;
     private Texture BACKGROUND;
+
+    private returnButton returnbutton;
 
     public settingScreen (final Main host) {
         this.host = host;
@@ -30,6 +32,9 @@ public class settingScreen implements Screen {
 
         BACKGROUND = new Texture("mainmenu_screen.png");
 
+        returnbutton = new returnButton();
+        gameStage.addActor(returnbutton);
+/*
         Skin mySkin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
         ImageButton button2 = new ImageButton(mySkin);
         button2.setPosition(100,100 );
@@ -45,7 +50,11 @@ public class settingScreen implements Screen {
             }
         });
         gameStage.addActor(button2);
+*/
+    }
 
+    public static void setMainMenuScreen() {
+        host.setScreen(new mainMenuScreen(host));
     }
 
         @Override

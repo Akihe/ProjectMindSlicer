@@ -2,35 +2,31 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 public class mainMenuScreen implements Screen {
 
-    Main host;
+    static Main host;
     SpriteBatch batch;
     private Stage gameStage;
-    private Texture BACKGROUND;
+    private Texture backgroundTexture;
+    private Image background;
 
+    playButton playbutton;
+    settingsButton settingsbutton;
 
+/*
+    private Stage backStage;
+    ExtendViewport backViewport;
+*/
 
     public mainMenuScreen(final Main host) {
         this.host = host;
@@ -39,11 +35,26 @@ public class mainMenuScreen implements Screen {
         gameStage = new Stage(new FitViewport(Main.WORLD_WIDTH,Main.WORLD_HEIGHT), batch);
         Gdx.input.setInputProcessor(gameStage);
 
-        BACKGROUND = new Texture("mainmenu_screen.png");
 
+        backgroundTexture = new Texture("mainmenu_screen.png");
+        background = new Image(backgroundTexture);
+        background.setPosition(0, 0);
+/*
+        backViewport = new ExtendViewport(Main.WORLD_WIDTH, Main.WORLD_HEIGHT);
 
+        backStage = new Stage();
+        backStage.setViewport(backViewport);
+        backStage.addActor(background);
+        gameStage.addActor(background);
 
+*/
 
+        playbutton = new playButton();
+        gameStage.addActor(playbutton);
+
+        settingsbutton = new settingsButton();
+        gameStage.addActor(settingsbutton);
+/*
         Skin mySkin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
         ImageButton button2 = new ImageButton(mySkin);
         button2.getStyle().imageUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("Garmfiel.png"))));
@@ -62,7 +73,15 @@ public class mainMenuScreen implements Screen {
             }
         });
         gameStage.addActor(button2);
+*/
+    }
 
+    public static void setPlayScreen() {
+        host.setScreen(new fightingStageScreen(host));
+    }
+
+    public static void setSettingsScreen() {
+        host.setScreen(new settingScreen(host));
     }
 
     @Override
@@ -75,10 +94,14 @@ public class mainMenuScreen implements Screen {
         Gdx.gl.glClearColor(1, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        batch.begin();
-        batch.draw(BACKGROUND,0,0,Main.WORLD_WIDTH,Main.WORLD_HEIGHT);
-        batch.end();
+        gameStage.getBatch().begin();
+        gameStage.getBatch().draw(backgroundTexture, 0,0, Main.WORLD_WIDTH, Main.WORLD_HEIGHT);
+        gameStage.getBatch().end();
+
+        //backStage.act();
         gameStage.act();
+
+        //backStage.draw();
         gameStage.draw();
 
 
@@ -86,7 +109,9 @@ public class mainMenuScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-        gameStage.getViewport().update(width, height, true);
+        gameStage.getViewport().update(width, height, false);
+        //background.setPosition(0, 0);
+
     }
 
     @Override

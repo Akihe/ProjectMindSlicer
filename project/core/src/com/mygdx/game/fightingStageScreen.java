@@ -18,6 +18,9 @@ public class fightingStageScreen implements Screen {
     SpriteBatch batch;
     private Texture BACKGROUND;
 
+    private actionButton actionbutton;
+    private thinkButton thinkbutton;
+
 
     float timeSinceAttack = 0;
 
@@ -43,6 +46,12 @@ public class fightingStageScreen implements Screen {
         enemy = new enemyActor();
         gameStage.addActor(enemy);
 
+        actionbutton = new actionButton();
+        gameStage.addActor(actionbutton);
+
+        thinkbutton = new thinkButton();
+        gameStage.addActor(thinkbutton);
+/*
         Skin mySkin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
         ImageButton button2 = new ImageButton(mySkin);
        // button2.getStyle().imageUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("badlogic.jpg"))));
@@ -66,6 +75,8 @@ public class fightingStageScreen implements Screen {
             }
         });
 
+
+
         ImageButton button3 = new ImageButton(mySkin);
        // button3.getStyle().imageUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("garmfiel.png"))));
         button3.setTransform(true);
@@ -85,8 +96,8 @@ public class fightingStageScreen implements Screen {
             }
         });
 
-        gameStage.addActor(button2);
         gameStage.addActor(button3);
+*/
 
     }
 
@@ -110,7 +121,7 @@ public class fightingStageScreen implements Screen {
         gameStage.draw();
 
         //Enemy attacks only after the player attacks, and DeltaTime counts a 2 second delay for the enemies move.
-        if(player.playerActionDone==true){
+        if(player.playerActionDone){
             timeSinceAttack += Gdx.graphics.getDeltaTime();
             if (timeSinceAttack > 2.0f) {
                 enemy.enemyHit();
