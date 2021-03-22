@@ -28,7 +28,7 @@ public class playerActor extends Actor {
 
         setWidth(playerTexture.getWidth()/2);
         setHeight(playerTexture.getHeight()/2);
-        setBounds(0,40, getWidth(), getHeight());
+        setBounds(20,40, getWidth(), getHeight());
 
         addListener(new PlayerListener());
     }
@@ -63,10 +63,10 @@ public class playerActor extends Actor {
 
         moveAction.setPosition(300f, 40f);
         moveAction.setDuration(1f);
-        moveBack.setPosition(0f, 40f);
+        moveBack.setPosition(20f, 40f);
         moveBack.setDuration(1f);
 
-        rotateAction.setRotation(360f);
+        rotateAction.setRotation(-360f);
         rotateAction.setDuration(1f);
         rotateBackAction.setRotation(0f);
         rotateBackAction.setDuration(0.01f);
@@ -92,9 +92,9 @@ public class playerActor extends Actor {
         RotateToAction rotateRightAction = new RotateToAction();
         RotateToAction rotateBackAction = new RotateToAction();
 
-        moveUpAction.setPosition(0f, 120f);
+        moveUpAction.setPosition(20f, 120f);
         moveUpAction.setDuration(0.2f);
-        moveBackDown.setPosition(0f, 40f);
+        moveBackDown.setPosition(20f, 40f);
         moveBackDown.setDuration(0.1f);
 
         rotateLeftAction.setRotation(15f);

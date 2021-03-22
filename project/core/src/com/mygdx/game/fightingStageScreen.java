@@ -5,22 +5,21 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 public class fightingStageScreen implements Screen {
 
     Main host;
     SpriteBatch batch;
+    private Texture BACKGROUND;
 
 
+    float timeSinceAttack = 0;
 
     private Stage gameStage;
     public static playerActor player;
@@ -29,6 +28,8 @@ public class fightingStageScreen implements Screen {
 
 
     public fightingStageScreen(Main host) {
+
+        BACKGROUND = new Texture("taustakoulu.png");
 
         this.host = host;
         batch = host.batch;
@@ -48,7 +49,7 @@ public class fightingStageScreen implements Screen {
 
         button2.setTransform(true);
         button2.setScale(0.5f);
-        button2.setPosition(20,300 );
+        button2.setPosition(10,300 );
 
         button2.addListener(new InputListener(){
             @Override
@@ -67,7 +68,7 @@ public class fightingStageScreen implements Screen {
        // button3.getStyle().imageUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("garmfiel.png"))));
         button3.setTransform(true);
         button3.setScale(0.5f);
-        button3.setPosition(20,370 );
+        button3.setPosition(10,370 );
 
         button3.addListener(new InputListener(){
             @Override
@@ -98,19 +99,29 @@ public class fightingStageScreen implements Screen {
         Gdx.gl.glClearColor(50, 50, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+        batch.begin();
+        batch.draw(BACKGROUND,0,0,Main.WORLD_WIDTH,Main.WORLD_HEIGHT);
+        batch.end();
+
+
         gameStage.act();
         gameStage.draw();
+
+        //Enemy attacks only after the player attacks, and DeltaTime counts a 2 second delay for the enemies move.
         if(player.playerActionDone==true){
-            enemy.enemyHit();
+            timeSinceAttack += Gdx.graphics.getDeltaTime();
+            if (timeSinceAttack > 2.0f) {
+                enemy.enemyHit();
+                timeSinceAttack = 0;
+            }
         }
         if(enemy.ENEMY_HEALTH<=0){
             enemy.enemyDie();
         }
         // MITEN VASTUSTAJAN HYÖKKÄYKSEN SAA TEHTYÄ VASTA PELAAJAN JÄLKEEN
-        batch.begin();
-        batch.end();
 
     }
+
 
     @Override
     public void resize(int width, int height) {
