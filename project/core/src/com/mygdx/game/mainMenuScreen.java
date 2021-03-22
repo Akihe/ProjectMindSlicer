@@ -86,7 +86,7 @@ public class mainMenuScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-
+        gameStage.getViewport().update(width, height, true);
     }
 
     @Override

@@ -67,7 +67,7 @@ public class playerActor extends Actor {
         moveBack.setDuration(1f);
 
         rotateAction.setRotation(-360f);
-        rotateAction.setDuration(1f);
+        rotateAction.setDuration(0.8f);
         rotateBackAction.setRotation(0f);
         rotateBackAction.setDuration(0.01f);
 

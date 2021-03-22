@@ -49,6 +49,8 @@ public class fightingStageScreen implements Screen {
 
         button2.setTransform(true);
         button2.setScale(0.5f);
+        button2.setPosition(Gdx.graphics.getWidth() * 0.0125f, Gdx.graphics.getHeight() * 0.625f );
+
         button2.setPosition(10,300 );
 
         button2.addListener(new InputListener(){
@@ -122,7 +124,6 @@ public class fightingStageScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-
     }
 
     @Override
