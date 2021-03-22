@@ -117,6 +117,9 @@ public class fightingStageScreen implements Screen {
                 timeSinceAttack = 0;
             }
         }
+        if(enemy.ENEMY_HEALTH<=0){
+            enemy.enemyDie();
+        }
         // MITEN VASTUSTAJAN HYÖKKÄYKSEN SAA TEHTYÄ VASTA PELAAJAN JÄLKEEN
 
     }
