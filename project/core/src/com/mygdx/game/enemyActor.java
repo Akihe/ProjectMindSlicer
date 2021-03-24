@@ -4,6 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.actions.AlphaAction;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
 import com.badlogic.gdx.scenes.scene2d.actions.RotateToAction;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
@@ -16,11 +18,11 @@ public class enemyActor extends Actor {
     private String healthAmount;
 
     public enemyActor() {
-        enemyTexture = new Texture(Gdx.files.internal("kaljanhimo.png"));
+        enemyTexture = new Texture(Gdx.files.internal("monster2.png"));
 
-        setWidth(enemyTexture.getWidth()/2);
-        setHeight(enemyTexture.getHeight()/2);
-        setBounds(600,140, getWidth(), getHeight());
+        setWidth(enemyTexture.getWidth()/3);
+        setHeight(enemyTexture.getHeight()/3);
+        setBounds(550,140, getWidth(), getHeight());
 
         healthAmount = "" + ENEMY_HEALTH;
     }
@@ -70,6 +72,14 @@ public class enemyActor extends Actor {
         playerActor.playerActionDone = false;
     }
     public void enemyDie() {
+
+
+        enemyTexture = new Texture("child1.png");
+        setHeight(enemyTexture.getHeight() /3);
+        setWidth(enemyTexture.getWidth() /3);
+        setBounds(550f, 20f, getWidth(), getHeight());
+
+ /*
         SequenceAction sequenceAction = new SequenceAction();
 
         MoveToAction moveAction = new MoveToAction();
@@ -87,5 +97,7 @@ public class enemyActor extends Actor {
         sequenceAction.addAction(moveAction);
 
         enemyActor.this.addAction(sequenceAction);
+
+  */
     }
 }

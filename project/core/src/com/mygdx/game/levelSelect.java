@@ -12,7 +12,7 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
-public class mainMenuScreen implements Screen {
+public class levelSelect implements Screen {
 
     static Main host;
     SpriteBatch batch;
@@ -20,68 +20,31 @@ public class mainMenuScreen implements Screen {
     private Texture backgroundTexture;
     private Image background;
 
-    playButton playbutton;
-    settingsButton settingsbutton;
+    level1Button level1button;
 
-/*
-    private Stage backStage;
-    ExtendViewport backViewport;
-*/
 
-    public mainMenuScreen(final Main host) {
+    public levelSelect (final Main host) {
         this.host = host;
         batch = host.batch;
 
         gameStage = new Stage(new FitViewport(Main.WORLD_WIDTH,Main.WORLD_HEIGHT), batch);
         Gdx.input.setInputProcessor(gameStage);
 
-
         backgroundTexture = new Texture("mainmenu_screen.png");
         background = new Image(backgroundTexture);
         background.setPosition(0, 0);
-/*
-        backViewport = new ExtendViewport(Main.WORLD_WIDTH, Main.WORLD_HEIGHT);
 
-        backStage = new Stage();
-        backStage.setViewport(backViewport);
-        backStage.addActor(background);
-        gameStage.addActor(background);
+        level1button = new level1Button();
+        gameStage.addActor(level1button);
 
-*/
-
-        playbutton = new playButton();
-        gameStage.addActor(playbutton);
-
-        settingsbutton = new settingsButton();
-        gameStage.addActor(settingsbutton);
-/*
-        Skin mySkin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
-        ImageButton button2 = new ImageButton(mySkin);
-        button2.getStyle().imageUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("Garmfiel.png"))));
-        button2.getStyle().imageDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("Garmfiel.png"))));
-        button2.setPosition(250,200 );
-
-        button2.addListener(new InputListener(){
-            @Override
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                host.setScreen(new fightingStageScreen(host));
-            }
-
-            @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                return true;
-            }
-        });
-        gameStage.addActor(button2);
-*/
     }
 
-    public static void setPlayScreen() {
-        host.setScreen(new levelSelect(host));
+    public static void setLevel1() {
+        host.setScreen(new fightingStageScreen(host));
     }
 
-    public static void setSettingsScreen() {
-        host.setScreen(new settingScreen(host));
+    public static void setMainMenu() {
+        host.setScreen(new mainMenuScreen(host));
     }
 
     @Override
