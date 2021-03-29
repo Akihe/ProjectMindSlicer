@@ -37,6 +37,9 @@ public class returnButton extends Actor {
             if (position.equals("LevelSelect")) {
                 levelSelect.setMainMenu();
             }
+            if (position.equals("LevelUP")) {
+                mainMenuScreen.setPlayScreen();
+            }
             return true;
         }
     }

@@ -23,6 +23,7 @@ public class levelSelect implements Screen {
 
     level1Button level1button;
     returnButton returnBtn;
+    LevelLoungeButton LevelLoungeButton;
 
 
     public levelSelect (final Main host) {
@@ -42,10 +43,17 @@ public class levelSelect implements Screen {
         returnBtn = new returnButton(100f,100f, "LevelSelect");
         gameStage.addActor((returnBtn));
 
+        LevelLoungeButton = new LevelLoungeButton();
+        gameStage.addActor(LevelLoungeButton);
+
     }
 
     public static void setLevel1() {
         host.setScreen(new fightingStageScreen(host));
+    }
+
+    public static void setLevelUP() {
+        host.setScreen(new LevelUpLounge(host));
     }
 
     public static void setMainMenu() {
