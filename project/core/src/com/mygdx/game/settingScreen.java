@@ -82,7 +82,7 @@ public class settingScreen implements Screen {
 
     @Override
     public void dispose() {
-    batch.dispose();
-    gameStage.dispose();
+        batch.dispose();
+        gameStage.dispose();
     }
 }

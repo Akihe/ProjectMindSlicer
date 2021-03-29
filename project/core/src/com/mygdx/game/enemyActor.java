@@ -44,7 +44,7 @@ public class enemyActor extends Actor {
                 this.getScaleY(),
                 this.getRotation(),0,0,
                 enemyTexture.getWidth(), enemyTexture.getHeight(), false, false);
-        Main.font.draw(Main.getBatch(), healthAmount, 660, 30);
+        Main.font.draw(batch, healthAmount, 660, 30);
     }
     public void enemyHit() {
         SequenceAction sequenceAction = new SequenceAction();
@@ -73,7 +73,6 @@ public class enemyActor extends Actor {
     }
     public void enemyDie() {
 
-
         enemyTexture = new Texture("child1.png");
         setHeight(enemyTexture.getHeight() /3);
         setWidth(enemyTexture.getWidth() /3);
@@ -88,7 +87,6 @@ public class enemyActor extends Actor {
 
         moveAction.setPosition(1000f, 30f);
         moveAction.setDuration(0.01f);
-
 
         rotateAction.setRotation(720);
         rotateAction.setDuration(1f);

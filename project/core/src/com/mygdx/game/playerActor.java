@@ -25,7 +25,6 @@ public class playerActor extends Actor {
         playerTexture = new Texture(Gdx.files.internal("playercharacter.png"));
         healthAmount = "" + PLAYER_HEALTH;
 
-
         setWidth(playerTexture.getWidth()/2);
         setHeight(playerTexture.getHeight()/2);
         setBounds(20,40, getWidth(), getHeight());
@@ -50,7 +49,8 @@ public class playerActor extends Actor {
                 this.getScaleY(),
                 this.getRotation(),0,0,
                 playerTexture.getWidth(), playerTexture.getHeight(), false, false);
-        Main.font.draw(Main.getBatch(), healthAmount, 50, 30);
+
+        Main.font.draw(batch, healthAmount, 50, 30);
     }
 
     public void hitAction() {
