@@ -67,7 +67,6 @@ public class mainMenuScreen implements Screen {
         gameStage.getBatch().end();
 
         gameStage.act();
-
         gameStage.draw();
     }
 

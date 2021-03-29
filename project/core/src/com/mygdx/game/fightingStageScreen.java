@@ -89,7 +89,6 @@ public class fightingStageScreen implements Screen {
 
     }
 
-
     @Override
     public void resize(int width, int height) {
         gameStage.getViewport().update(width, height, true);
@@ -112,6 +111,7 @@ public class fightingStageScreen implements Screen {
 
     @Override
     public void dispose() {
-
+        batch.dispose();
+        gameStage.dispose();
     }
 }

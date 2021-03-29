@@ -13,7 +13,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 public class Main extends Game {
 
 	static SpriteBatch batch;
-	Texture img;
 	public static BitmapFont font;
 
 	public static final int WORLD_WIDTH = 800;
@@ -22,7 +21,6 @@ public class Main extends Game {
 	public static SpriteBatch getBatch() {
 		return batch;
 	}
-
 
 	@Override
 	public void create () {
