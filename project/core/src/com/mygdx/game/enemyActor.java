@@ -78,6 +78,8 @@ public class enemyActor extends Actor {
         setWidth(enemyTexture.getWidth() /3);
         setBounds(550f, 20f, getWidth(), getHeight());
 
+      //  playerActor.MONEY =playerActor.MONEY+50; !!!!
+
  /*
         SequenceAction sequenceAction = new SequenceAction();
 

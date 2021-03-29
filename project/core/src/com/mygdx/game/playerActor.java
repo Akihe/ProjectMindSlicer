@@ -18,6 +18,7 @@ public class playerActor extends Actor {
     private int PLAYER_HEALTH = 100;
     private String healthAmount;
     public int PLAYER_ATK = 15;
+    public static int MONEY =50;
 
     public static boolean playerActionDone = false;
 
