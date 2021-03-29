@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
 
 public class settingScreen implements Screen {
 
@@ -27,30 +28,13 @@ public class settingScreen implements Screen {
         this.host = host;
         batch = host.batch;
 
-        gameStage = new Stage(new FitViewport(Main.WORLD_WIDTH,Main.WORLD_HEIGHT), batch);
+        gameStage = new Stage(new StretchViewport(Main.WORLD_WIDTH,Main.WORLD_HEIGHT));
         Gdx.input.setInputProcessor(gameStage);
 
         BACKGROUND = new Texture("mainmenu_screen.png");
 
-        returnbutton = new returnButton();
+        returnbutton = new returnButton(100f, 100f, "Settings");
         gameStage.addActor(returnbutton);
-/*
-        Skin mySkin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
-        ImageButton button2 = new ImageButton(mySkin);
-        button2.setPosition(100,100 );
-        button2.addListener(new InputListener(){
-            @Override
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-            }
-
-            @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                host.setScreen(new mainMenuScreen(host));
-                return false;
-            }
-        });
-        gameStage.addActor(button2);
-*/
     }
 
     public static void setMainMenuScreen() {
@@ -98,6 +82,7 @@ public class settingScreen implements Screen {
 
     @Override
     public void dispose() {
-
+    batch.dispose();
+    gameStage.dispose();
     }
 }

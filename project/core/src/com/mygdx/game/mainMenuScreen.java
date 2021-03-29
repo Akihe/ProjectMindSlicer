@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
 
 public class mainMenuScreen implements Screen {
 
@@ -23,57 +24,24 @@ public class mainMenuScreen implements Screen {
     playButton playbutton;
     settingsButton settingsbutton;
 
-/*
-    private Stage backStage;
-    ExtendViewport backViewport;
-*/
-
     public mainMenuScreen(final Main host) {
         this.host = host;
         batch = host.batch;
 
-        gameStage = new Stage(new FitViewport(Main.WORLD_WIDTH,Main.WORLD_HEIGHT), batch);
+        gameStage = new Stage(new StretchViewport(Main.WORLD_WIDTH,Main.WORLD_HEIGHT));
         Gdx.input.setInputProcessor(gameStage);
 
 
         backgroundTexture = new Texture("mainmenu_screen.png");
         background = new Image(backgroundTexture);
         background.setPosition(0, 0);
-/*
-        backViewport = new ExtendViewport(Main.WORLD_WIDTH, Main.WORLD_HEIGHT);
-
-        backStage = new Stage();
-        backStage.setViewport(backViewport);
-        backStage.addActor(background);
-        gameStage.addActor(background);
-
-*/
 
         playbutton = new playButton();
         gameStage.addActor(playbutton);
 
         settingsbutton = new settingsButton();
         gameStage.addActor(settingsbutton);
-/*
-        Skin mySkin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
-        ImageButton button2 = new ImageButton(mySkin);
-        button2.getStyle().imageUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("Garmfiel.png"))));
-        button2.getStyle().imageDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("Garmfiel.png"))));
-        button2.setPosition(250,200 );
 
-        button2.addListener(new InputListener(){
-            @Override
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                host.setScreen(new fightingStageScreen(host));
-            }
-
-            @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                return true;
-            }
-        });
-        gameStage.addActor(button2);
-*/
     }
 
     public static void setPlayScreen() {
@@ -98,20 +66,14 @@ public class mainMenuScreen implements Screen {
         gameStage.getBatch().draw(backgroundTexture, 0,0, Main.WORLD_WIDTH, Main.WORLD_HEIGHT);
         gameStage.getBatch().end();
 
-        //backStage.act();
         gameStage.act();
 
-        //backStage.draw();
         gameStage.draw();
-
-
     }
 
     @Override
     public void resize(int width, int height) {
         gameStage.getViewport().update(width, height, false);
-        //background.setPosition(0, 0);
-
     }
 
     @Override

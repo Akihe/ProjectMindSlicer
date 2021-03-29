@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
 
 public class levelSelect implements Screen {
 
@@ -21,13 +22,14 @@ public class levelSelect implements Screen {
     private Image background;
 
     level1Button level1button;
+    returnButton returnBtn;
 
 
     public levelSelect (final Main host) {
         this.host = host;
         batch = host.batch;
 
-        gameStage = new Stage(new FitViewport(Main.WORLD_WIDTH,Main.WORLD_HEIGHT), batch);
+        gameStage = new Stage(new StretchViewport(Main.WORLD_WIDTH,Main.WORLD_HEIGHT));
         Gdx.input.setInputProcessor(gameStage);
 
         backgroundTexture = new Texture("mainmenu_screen.png");
@@ -36,6 +38,9 @@ public class levelSelect implements Screen {
 
         level1button = new level1Button();
         gameStage.addActor(level1button);
+
+        returnBtn = new returnButton(100f,100f, "LevelSelect");
+        gameStage.addActor((returnBtn));
 
     }
 
@@ -61,10 +66,7 @@ public class levelSelect implements Screen {
         gameStage.getBatch().draw(backgroundTexture, 0,0, Main.WORLD_WIDTH, Main.WORLD_HEIGHT);
         gameStage.getBatch().end();
 
-        //backStage.act();
         gameStage.act();
-
-        //backStage.draw();
         gameStage.draw();
 
 
@@ -73,8 +75,6 @@ public class levelSelect implements Screen {
     @Override
     public void resize(int width, int height) {
         gameStage.getViewport().update(width, height, false);
-        //background.setPosition(0, 0);
-
     }
 
     @Override
@@ -94,6 +94,7 @@ public class levelSelect implements Screen {
 
     @Override
     public void dispose() {
-
+        batch.dispose();
+        gameStage.dispose();
     }
 }

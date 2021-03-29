@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
 
 public class fightingStageScreen implements Screen {
 
@@ -37,7 +38,7 @@ public class fightingStageScreen implements Screen {
         this.host = host;
         batch = host.batch;
 
-        gameStage = new Stage(new FitViewport(Main.WORLD_WIDTH,Main.WORLD_HEIGHT), batch);
+        this.gameStage = new Stage(new StretchViewport(Main.WORLD_WIDTH,Main.WORLD_HEIGHT));
         Gdx.input.setInputProcessor(gameStage);
 
         player = new playerActor();
@@ -51,53 +52,6 @@ public class fightingStageScreen implements Screen {
 
         thinkbutton = new thinkButton();
         gameStage.addActor(thinkbutton);
-/*
-        Skin mySkin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
-        ImageButton button2 = new ImageButton(mySkin);
-       // button2.getStyle().imageUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("badlogic.jpg"))));
-
-        button2.setTransform(true);
-        button2.setScale(0.5f);
-        button2.setPosition(Gdx.graphics.getWidth() * 0.0125f, Gdx.graphics.getHeight() * 0.625f );
-
-        button2.setPosition(10,300 );
-
-        button2.addListener(new InputListener(){
-            @Override
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-            }
-
-            @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                player.hitAction();
-
-                return true;
-            }
-        });
-
-
-
-        ImageButton button3 = new ImageButton(mySkin);
-       // button3.getStyle().imageUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("garmfiel.png"))));
-        button3.setTransform(true);
-        button3.setScale(0.5f);
-        button3.setPosition(10,370 );
-
-        button3.addListener(new InputListener(){
-            @Override
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-            }
-
-            @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                player.thinkAction();
-
-                return true;
-            }
-        });
-
-        gameStage.addActor(button3);
-*/
 
     }
 
