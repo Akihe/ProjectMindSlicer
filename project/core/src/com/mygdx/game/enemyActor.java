@@ -16,6 +16,7 @@ public class enemyActor extends Actor {
 
     public int ENEMY_HEALTH = 100;
     private String healthAmount;
+    private int ATK_damage = 10;
 
     public enemyActor() {
         enemyTexture = new Texture(Gdx.files.internal("monster2.png"));
@@ -46,6 +47,7 @@ public class enemyActor extends Actor {
                 enemyTexture.getWidth(), enemyTexture.getHeight(), false, false);
         Main.font.draw(batch, healthAmount, 660, 30);
     }
+
     public void enemyHit() {
         SequenceAction sequenceAction = new SequenceAction();
 
@@ -73,9 +75,26 @@ public class enemyActor extends Actor {
     }
 
     public void enemyBuff() {
-
+        int buffAmount = 5;
+        ATK_damage += buffAmount;
     }
 
+    public void majorAttack() {
+        level1.player.reduceHealth(50);
+        playerActor.playerActionDone = false;
+    }
+/*
+    public void randomAttack() {
+
+        switch(random) {
+            case 1: enemyHit();
+            case 2: enemyBuff();
+            case 3: majorAttack();
+        }
+    }
+
+ */
+/*
     public void allowPlayerAttack(int delay) {
         int timer = 0;
         timer += Gdx.graphics.getDeltaTime();
@@ -83,6 +102,13 @@ public class enemyActor extends Actor {
         if (timer > delay) {
         }
     }
+
+
+ */
+    public void chooseEnemyAttack() {
+
+    }
+
 
     public void enemyDie() {
 
