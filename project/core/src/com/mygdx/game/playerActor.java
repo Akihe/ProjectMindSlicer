@@ -8,8 +8,9 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
 import com.badlogic.gdx.scenes.scene2d.actions.RotateToAction;
-import com.badlogic.gdx.scenes.scene2d.actions.ScaleToAction;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
+import com.mygdx.game.screens.*;
+
 
 public class playerActor extends Actor {
 
@@ -19,6 +20,7 @@ public class playerActor extends Actor {
     private String healthAmount;
     public int PLAYER_ATK = 15;
     public static int MONEY =50;
+    public int enemyAttacksAfter;
 
     public static boolean playerActionDone = false;
 
@@ -79,8 +81,9 @@ public class playerActor extends Actor {
 
         playerActor.this.addAction(sequenceAction);
 
-        fightingStageScreen.enemy.reduceHealth(PLAYER_ATK);
+        level1.enemy.reduceHealth(PLAYER_ATK);
         playerActionDone = true;
+        enemyAttacksAfter = 4;
     }
 
     public void thinkAction() {
@@ -117,6 +120,8 @@ public class playerActor extends Actor {
         double ATK_RISE = PLAYER_ATK*1.5;
         PLAYER_ATK= (int) ATK_RISE;
         playerActionDone = true;
+        enemyAttacksAfter = 3;
+
     }
 
     public class PlayerListener extends InputListener {

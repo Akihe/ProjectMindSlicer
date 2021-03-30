@@ -1,22 +1,24 @@
-package com.mygdx.game;
+package com.mygdx.game.buttons;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.mygdx.game.screens.*;
 
-public class playButton extends Actor {
+
+
+public class level1Button extends Actor {
 
     private final Texture texture;
-    playerActor player;
 
-    public playButton() {
-        texture = new Texture("Garmfiel.png");
+    public level1Button() {
+        texture = new Texture("level1.png");
 
-        setWidth(texture.getWidth()/2);
-        setHeight(texture.getHeight()/2);
-        setBounds(350, 270f, getWidth(), getHeight());
+        setWidth(texture.getWidth());
+        setHeight(texture.getHeight());
+        setBounds(250, 260f, getWidth(), getHeight());
 
         addListener(new PlayerListener());
     }
@@ -26,11 +28,11 @@ public class playButton extends Actor {
 
     }
 
-        class PlayerListener extends InputListener {
+    class PlayerListener extends InputListener {
 
         @Override
         public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-            mainMenuScreen.setPlayScreen();
+            levelSelect.setLevel1();
             return true;
         }
     }

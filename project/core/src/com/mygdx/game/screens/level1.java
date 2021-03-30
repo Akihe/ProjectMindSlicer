@@ -1,19 +1,17 @@
-package com.mygdx.game;
+package com.mygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.mygdx.game.buttons.*;
+import com.mygdx.game.*;
 
-public class fightingStageScreen implements Screen {
+
+public class level1 implements Screen {
 
     Main host;
     SpriteBatch batch;
@@ -31,7 +29,7 @@ public class fightingStageScreen implements Screen {
     public static enemyActor enemy;
 
 
-    public fightingStageScreen(Main host) {
+    public level1(Main host) {
 
         BACKGROUND = new Texture("taustakoulu.png");
 
@@ -75,11 +73,12 @@ public class fightingStageScreen implements Screen {
         gameStage.draw();
 
         //Enemy attacks only after the player attacks, and DeltaTime counts a 2 second delay for the enemies move.
-        if(player.playerActionDone){
+        if(player.playerActionDone ){
             timeSinceAttack += Gdx.graphics.getDeltaTime();
-            if (timeSinceAttack > 2.0f) {
+            if (timeSinceAttack > player.enemyAttacksAfter) {
                 enemy.enemyHit();
                 timeSinceAttack = 0;
+                player.enemyAttacksAfter = 0;
             }
         }
         if(enemy.ENEMY_HEALTH<=0){

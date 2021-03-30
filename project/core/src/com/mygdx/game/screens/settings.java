@@ -1,21 +1,18 @@
-package com.mygdx.game;
+package com.mygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.mygdx.game.buttons.*;
+import com.mygdx.game.*;
+import com.mygdx.game.screens.*;
 
-public class settingScreen implements Screen {
+
+public class settings implements Screen {
 
     static Main host;
     SpriteBatch batch;
@@ -24,7 +21,7 @@ public class settingScreen implements Screen {
 
     private returnButton returnbutton;
 
-    public settingScreen (final Main host) {
+    public settings(final Main host) {
         this.host = host;
         batch = host.batch;
 

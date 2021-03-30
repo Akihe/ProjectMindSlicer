@@ -1,19 +1,18 @@
-package com.mygdx.game;
+package com.mygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.utils.viewport.ExtendViewport;
-import com.badlogic.gdx.utils.viewport.FillViewport;
-import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.mygdx.game.buttons.*;
+import com.mygdx.game.*;
 
-public class mainMenuScreen implements Screen {
+
+public class levelSelect implements Screen {
 
     static Main host;
     SpriteBatch batch;
@@ -21,35 +20,43 @@ public class mainMenuScreen implements Screen {
     private Texture backgroundTexture;
     private Image background;
 
-    playButton playbutton;
-    settingsButton settingsbutton;
+    level1Button level1button;
+    returnButton returnBtn;
+    LevelLoungeButton LevelLoungeButton;
 
-    public mainMenuScreen(final Main host) {
+
+    public levelSelect (final Main host) {
         this.host = host;
         batch = host.batch;
 
         gameStage = new Stage(new StretchViewport(Main.WORLD_WIDTH,Main.WORLD_HEIGHT));
         Gdx.input.setInputProcessor(gameStage);
 
-
         backgroundTexture = new Texture("mainmenu_screen.png");
         background = new Image(backgroundTexture);
         background.setPosition(0, 0);
 
-        playbutton = new playButton();
-        gameStage.addActor(playbutton);
+        level1button = new level1Button();
+        gameStage.addActor(level1button);
 
-        settingsbutton = new settingsButton();
-        gameStage.addActor(settingsbutton);
+        returnBtn = new returnButton(100f,100f, "LevelSelect");
+        gameStage.addActor((returnBtn));
+
+        LevelLoungeButton = new LevelLoungeButton();
+        gameStage.addActor(LevelLoungeButton);
 
     }
 
-    public static void setPlayScreen() {
-        host.setScreen(new levelSelect(host));
+    public static void setLevel1() {
+        host.setScreen(new level1(host));
     }
 
-    public static void setSettingsScreen() {
-        host.setScreen(new settingScreen(host));
+    public static void setLevelUP() {
+        host.setScreen(new LevelUpLounge(host));
+    }
+
+    public static void setMainMenu() {
+        host.setScreen(new mainMenuScreen(host));
     }
 
     @Override
@@ -68,6 +75,8 @@ public class mainMenuScreen implements Screen {
 
         gameStage.act();
         gameStage.draw();
+
+
     }
 
     @Override
@@ -92,6 +101,7 @@ public class mainMenuScreen implements Screen {
 
     @Override
     public void dispose() {
-
+        batch.dispose();
+        gameStage.dispose();
     }
 }

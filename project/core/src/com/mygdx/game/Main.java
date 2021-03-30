@@ -8,11 +8,13 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.mygdx.game.screens.*;
+
 
 
 public class Main extends Game {
 
-	static SpriteBatch batch;
+	public static SpriteBatch batch;
 	public static BitmapFont font;
 
 	public static final int WORLD_WIDTH = 800;

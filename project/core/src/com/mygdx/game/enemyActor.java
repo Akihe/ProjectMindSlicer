@@ -4,11 +4,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.actions.AlphaAction;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
 import com.badlogic.gdx.scenes.scene2d.actions.RotateToAction;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
+import com.mygdx.game.screens.*;
+
 
 public class enemyActor extends Actor {
 
@@ -68,9 +68,22 @@ public class enemyActor extends Actor {
 
         enemyActor.this.addAction(sequenceAction);
 
-        fightingStageScreen.player.reduceHealth(5);
+        level1.player.reduceHealth(5);
         playerActor.playerActionDone = false;
     }
+
+    public void enemyBuff() {
+
+    }
+
+    public void allowPlayerAttack(int delay) {
+        int timer = 0;
+        timer += Gdx.graphics.getDeltaTime();
+
+        if (timer > delay) {
+        }
+    }
+
     public void enemyDie() {
 
         enemyTexture = new Texture("child1.png");
@@ -97,7 +110,6 @@ public class enemyActor extends Actor {
         sequenceAction.addAction(moveAction);
 
         enemyActor.this.addAction(sequenceAction);
-
   */
     }
 }
