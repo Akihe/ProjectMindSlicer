@@ -49,9 +49,10 @@ public class settings implements Screen {
         Gdx.gl.glClearColor(1, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        batch.begin();
-        batch.draw(BACKGROUND,0,0,Main.WORLD_WIDTH,Main.WORLD_HEIGHT);
-        batch.end();
+        gameStage.getBatch().begin();
+        gameStage.getBatch().draw(BACKGROUND,0,0,Main.WORLD_WIDTH,Main.WORLD_HEIGHT);
+        gameStage.getBatch().end();
+
         gameStage.act();
         gameStage.draw();
 

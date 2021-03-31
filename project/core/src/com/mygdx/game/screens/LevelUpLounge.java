@@ -49,9 +49,9 @@ public class LevelUpLounge implements Screen {
         Gdx.gl.glClearColor(50, 50, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        batch.begin();
-        batch.draw(backgroundTexture,0,0,Main.WORLD_WIDTH,Main.WORLD_HEIGHT);
-        batch.end();
+        gameStage.getBatch().begin();
+        gameStage.getBatch().draw(backgroundTexture,0,0,Main.WORLD_WIDTH,Main.WORLD_HEIGHT);
+        gameStage.getBatch().end();
 
 
         gameStage.act();

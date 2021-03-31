@@ -1,0 +1,76 @@
+{
+com.badlogic.gdx.graphics.g2d.BitmapFont: {
+	Lato-Bold: {
+		file: Lato-Bold.fnt
+	}
+	Lato-Regular: {
+		file: Lato-Regular.fnt
+	}
+}
+com.badlogic.gdx.graphics.Color: {
+	RGBA_0_0_0_255: {
+		r: 0
+		g: 0
+		b: 0
+		a: 1
+	}
+}
+com.badlogic.gdx.scenes.scene2d.ui.CheckBox$CheckBoxStyle: {
+	default: {
+		checkboxOn: silent_mode
+		checkboxOff: speaker_fullsound
+		font: Lato-Regular
+	}
+}
+com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton$ImageTextButtonStyle: {
+	default: {
+		font: Lato-Regular
+	}
+}
+com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
+	default: {
+		font: Lato-Regular
+	}
+}
+com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle: {
+	default: {
+		font: Lato-Regular
+		fontColorSelected: RGBA_0_0_0_255
+		fontColorUnselected: RGBA_0_0_0_255
+		selection: silent_mode
+	}
+}
+com.badlogic.gdx.scenes.scene2d.ui.ProgressBar$ProgressBarStyle: {
+	default-horizontal: {
+		background: dialog
+	}
+}
+com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
+	default: {
+		font: Lato-Bold
+		up: buttonproto1
+		down: buttonproto1
+	}
+}
+com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle: {
+	default: {
+		font: Lato-Regular
+		fontColor: RGBA_0_0_0_255
+	}
+}
+com.badlogic.gdx.scenes.scene2d.ui.TextTooltip$TextTooltipStyle: {
+	default: {
+		label: default
+	}
+}
+com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle: {
+	default: {
+		background: dialog
+		titleFont: Lato-Bold
+	}
+	window-popup: {
+		background: dialog
+		titleFont: Lato-Regular
+	}
+}
+}

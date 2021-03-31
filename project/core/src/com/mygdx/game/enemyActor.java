@@ -79,6 +79,7 @@ public class enemyActor extends Actor {
         ATK_damage += buffAmount;
     }
 
+
     public void majorAttack() {
         level1.player.reduceHealth(50);
         playerActor.playerActionDone = false;

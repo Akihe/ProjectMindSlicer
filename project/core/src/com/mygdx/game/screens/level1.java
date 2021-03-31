@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.mygdx.game.buttons.*;
 import com.mygdx.game.*;
@@ -58,15 +60,30 @@ public class level1 implements Screen {
 
     }
 
+    public void winPopup() {
+
+        Skin skin = new Skin(Gdx.files.internal("test-skin.json"));
+        Dialog dialog = new Dialog("Congratz!", skin, "window-popup") {
+            public void result(Object obj) {
+                Gdx.app.log("nappi ", "nappi" + obj);
+            }
+        };
+        dialog.text("You won the fight! \n Your award is 500 coins");
+        dialog.button("Okay", true); //sends "true" as the result
+        //dialog.button("No", false); //sends "false" as the result
+        dialog.show(gameStage);
+    }
+
+
     @Override
     public void render(float delta) {
 
-        Gdx.gl.glClearColor(50, 50, 0, 1);
+        Gdx.gl.glClearColor(0, 0, 0, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        batch.begin();
-        batch.draw(BACKGROUND,0,0,Main.WORLD_WIDTH,Main.WORLD_HEIGHT);
-        batch.end();
+        gameStage.getBatch().begin();
+        gameStage.getBatch().draw(BACKGROUND,0,0,Main.WORLD_WIDTH,Main.WORLD_HEIGHT);
+        gameStage.getBatch().end();
 
 
         gameStage.act();
@@ -82,7 +99,7 @@ public class level1 implements Screen {
             }
         }
         if(enemy.ENEMY_HEALTH<=0){
-            enemy.enemyDie();
+            winPopup();
         }
         // MITEN VASTUSTAJAN HYÖKKÄYKSEN SAA TEHTYÄ VASTA PELAAJAN JÄLKEEN
 

@@ -13,10 +13,9 @@ import com.mygdx.game.screens.*;
 public class playButton extends Actor {
 
     private final Texture texture;
-    playerActor player;
 
     public playButton() {
-        texture = new Texture("Garmfiel.png");
+        texture = new Texture("buttonproto2.1.png");
 
         setWidth(texture.getWidth()/2);
         setHeight(texture.getHeight()/2);
@@ -27,7 +26,6 @@ public class playButton extends Actor {
 
     public void draw(Batch batch, float alpha) {
         batch.draw(texture, this.getX(), this.getY(), getWidth(), getHeight());
-
     }
 
         class PlayerListener extends InputListener {
