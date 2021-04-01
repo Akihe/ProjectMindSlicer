@@ -18,7 +18,7 @@ public class playerActor extends Actor {
 
     private int PLAYER_HEALTH = 100;
     private String healthAmount;
-    public int PLAYER_ATK = 15;
+    public int PLAYER_ATK = 30;
     public static int MONEY =50;
     public int enemyAttacksAfter;
 

@@ -9,6 +9,9 @@ import com.badlogic.gdx.scenes.scene2d.actions.RotateToAction;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.mygdx.game.screens.*;
 
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.run;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
+
 
 public class enemyActor extends Actor {
 
@@ -67,11 +70,18 @@ public class enemyActor extends Actor {
         sequenceAction.addAction(moveAction);
         sequenceAction.addAction(rotateAction);
         sequenceAction.addAction(moveBack);
+/*
+        enemyActor.this.addAction(sequence(sequenceAction, run(new Runnable() {
+            public void run () {
+                playerActor.playerActionDone = false;
+            }
+        })));
 
+ */
         enemyActor.this.addAction(sequenceAction);
-
         level1.player.reduceHealth(5);
         playerActor.playerActionDone = false;
+
     }
 
     public void enemyBuff() {
@@ -106,10 +116,6 @@ public class enemyActor extends Actor {
 
 
  */
-    public void chooseEnemyAttack() {
-
-    }
-
 
     public void enemyDie() {
 

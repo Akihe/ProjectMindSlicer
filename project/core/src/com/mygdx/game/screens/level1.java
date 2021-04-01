@@ -70,7 +70,7 @@ public class level1 implements Screen {
         };
         dialog.text("You won the fight! \n Your award is 500 coins");
         dialog.button("Okay", true); //sends "true" as the result
-        //dialog.button("No", false); //sends "false" as the result
+        dialog.button("esim. nappi", false); //sends "false" as the result
         dialog.show(gameStage);
     }
 
