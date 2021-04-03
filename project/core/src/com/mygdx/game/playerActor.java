@@ -14,11 +14,13 @@ import com.mygdx.game.screens.*;
 
 public class playerActor extends Actor {
 
-    private final Texture playerTexture;
+    private Texture playerTexture;
+    private Texture hitTexture;
+    private Texture recentTexture;
 
     private int PLAYER_HEALTH = 100;
     private String healthAmount;
-    public int PLAYER_ATK = 30;
+    public int PLAYER_ATK = 15;
     public static int MONEY =50;
     public int enemyAttacksAfter;
 
@@ -57,6 +59,14 @@ public class playerActor extends Actor {
     }
 
     public void hitAction() {
+        hitTexture = new Texture("thumbs_up.png");
+        recentTexture = playerTexture;
+        playerTexture = hitTexture;
+
+        setWidth(playerTexture.getWidth()/2);
+        setHeight(playerTexture.getHeight()/2);
+
+
         SequenceAction sequenceAction = new SequenceAction();
 
         MoveToAction moveAction = new MoveToAction();
@@ -79,11 +89,18 @@ public class playerActor extends Actor {
         sequenceAction.addAction(rotateBackAction);
         sequenceAction.addAction(moveBack);
 
-        playerActor.this.addAction(sequenceAction);
+        //playerActor.this.addAction(sequenceAction);
 
         level1.enemy.reduceHealth(PLAYER_ATK);
         playerActionDone = true;
         enemyAttacksAfter = 4;
+    }
+
+    public void resetPlayer() {
+        playerTexture = recentTexture;
+        setWidth(playerTexture.getWidth()/2);
+        setHeight(playerTexture.getHeight()/2);
+
     }
 
     public void thinkAction() {

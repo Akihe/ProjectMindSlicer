@@ -21,6 +21,7 @@ public class level1 implements Screen {
 
     private actionButton actionbutton;
     private thinkButton thinkbutton;
+    Stage stage;
 
 
     float timeSinceAttack = 0;
@@ -62,6 +63,7 @@ public class level1 implements Screen {
 
     public void winPopup() {
 
+        stage = new Stage();
         Skin skin = new Skin(Gdx.files.internal("test-skin.json"));
         Dialog dialog = new Dialog("Congratz!", skin, "window-popup") {
             public void result(Object obj) {
@@ -71,7 +73,8 @@ public class level1 implements Screen {
         dialog.text("You won the fight! \n Your award is 500 coins");
         dialog.button("Okay", true); //sends "true" as the result
         dialog.button("esim. nappi", false); //sends "false" as the result
-        dialog.show(gameStage);
+        dialog.show(stage);
+
     }
 
 
@@ -85,7 +88,6 @@ public class level1 implements Screen {
         gameStage.getBatch().draw(BACKGROUND,0,0,Main.WORLD_WIDTH,Main.WORLD_HEIGHT);
         gameStage.getBatch().end();
 
-
         gameStage.act();
         gameStage.draw();
 
@@ -96,6 +98,7 @@ public class level1 implements Screen {
                 enemy.enemyHit();
                 timeSinceAttack = 0;
                 player.enemyAttacksAfter = 0;
+                player.resetPlayer();
             }
         }
         if(enemy.ENEMY_HEALTH<=0){

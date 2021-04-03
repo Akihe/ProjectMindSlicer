@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.mygdx.game.screens.*;
 
+import java.util.logging.Level;
 
 
 public class statsButton extends Actor {
@@ -32,6 +33,7 @@ public class statsButton extends Actor {
 
         @Override
         public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+            LevelUpLounge.table.setVisible(true);
             return true;
         }
     }

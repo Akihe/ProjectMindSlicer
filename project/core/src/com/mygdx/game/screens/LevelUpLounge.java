@@ -29,6 +29,8 @@ public class LevelUpLounge implements Screen {
     statsButton statsBtn;
     Image image;
 
+    public static Table table;
+
     public LevelUpLounge(Main host){
         this.host = host;
         batch = host.batch;
@@ -48,28 +50,34 @@ public class LevelUpLounge implements Screen {
 
         Skin skin = new Skin(Gdx.files.internal("test-skin.json"));
 
-        Label nameLabel = new Label("Name:", skin);
-        TextField nameText = new TextField("", skin);
-        Label addressLabel = new Label("Address:", skin);
-        TextField addressText = new TextField("", skin);
+        Label attackLabel = new Label(" Attack upgrade ", skin);
+        Label defenceLabel = new Label(" Defence upgrade ", skin);
 
-        Table table = new Table(skin);
-        table.add(nameLabel);
-        table.add(nameText).width(100);
-        table.row();
-        table.add(addressLabel);
-        table.add(addressText).width(100);
-        table.setFillParent(true);
+        table = new Table(skin);
 
-        Pixmap pixmap = new Pixmap(1,1,Pixmap.Format.RGB565);
+    /*    Pixmap pixmap = new Pixmap(1,1,Pixmap.Format.RGB565);
         pixmap.setColor(0, 0, 0, 0);
         pixmap.fill();
 
+     */
+
         Image plus = new Image(new Texture("plussa.png"));
         Image minus = new Image(new Texture("miinus.png"));
-        table.add(plus, minus);
+        Image plus2 = new Image(new Texture("plussa.png"));
+        Image minus2 = new Image(new Texture("miinus.png"));
 
-        //table.setBackground( );
+        table.setBackground("dialog");
+
+        table.add(minus, attackLabel, plus);
+        table.row();
+        table.row();
+        table.add(plus2, defenceLabel, minus2);
+
+        table.setFillParent(true);
+
+        table.debugAll();
+
+        table.setVisible(false);
         gameStage.addActor(table);
 
     }
