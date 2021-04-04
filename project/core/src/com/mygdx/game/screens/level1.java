@@ -85,14 +85,14 @@ public class level1 implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         gameStage.getBatch().begin();
-        gameStage.getBatch().draw(BACKGROUND,0,0,Main.WORLD_WIDTH,Main.WORLD_HEIGHT);
+        gameStage.getBatch().draw(BACKGROUND, 0, 0, Main.WORLD_WIDTH, Main.WORLD_HEIGHT);
         gameStage.getBatch().end();
 
         gameStage.act();
         gameStage.draw();
 
         //Enemy attacks only after the player attacks, and DeltaTime counts a 2 second delay for the enemies move.
-        if(player.playerActionDone ){
+        if (player.playerActionDone) {
             timeSinceAttack += Gdx.graphics.getDeltaTime();
             if (timeSinceAttack > player.enemyAttacksAfter) {
                 enemy.enemyHit();
@@ -101,10 +101,13 @@ public class level1 implements Screen {
                 player.resetPlayer();
             }
         }
-        if(enemy.ENEMY_HEALTH<=0){
+        if (enemy.ENEMY_HEALTH <= 0) {
             winPopup();
         }
-        // MITEN VASTUSTAJAN HYÖKKÄYKSEN SAA TEHTYÄ VASTA PELAAJAN JÄLKEEN
+        if (player.PLAYER_HEALTH <= 0) {
+
+            host.setScreen(new GameOverScreen(host));
+        }
 
     }
 
