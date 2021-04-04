@@ -19,7 +19,7 @@ public class enemyActor extends Actor {
 
     public int ENEMY_HEALTH = 100;
     private String healthAmount;
-    private int ATK_damage = 10;
+    private int ATK_damage = 5;
 
     public enemyActor() {
         enemyTexture = new Texture(Gdx.files.internal("monster2.png"));
@@ -79,7 +79,7 @@ public class enemyActor extends Actor {
 
  */
         enemyActor.this.addAction(sequenceAction);
-        level1.player.reduceHealth(5);
+        level1.player.reduceHealth(ATK_damage);
         playerActor.playerActionDone = false;
 
     }
