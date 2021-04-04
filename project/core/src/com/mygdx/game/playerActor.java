@@ -20,8 +20,10 @@ public class playerActor extends Actor {
 
     private int PLAYER_HEALTH = 100;
     private String healthAmount;
-    public int PLAYER_ATK = 15;
-    public static int MONEY =50;
+
+    public static int PLAYER_ATK = 15;
+
+    public static int MONEY = 500;
     public int enemyAttacksAfter;
 
     public static boolean playerActionDone = false;
@@ -36,6 +38,7 @@ public class playerActor extends Actor {
 
         addListener(new PlayerListener());
     }
+
 //Liitetty reducehealth metodi pelaajalle myös. Voiko käyttää samaa metodia jos sen tekee uuteen luokkaan, ja kutsuu arvoja mm this.health (täytyy tehdä olio-ohjelmoinnilla parent olio, jolla on attribbutti HEALTH)
     public void reduceHealth(int damageTaken) {
         this.PLAYER_HEALTH = this.PLAYER_HEALTH - damageTaken;
@@ -100,7 +103,6 @@ public class playerActor extends Actor {
         playerTexture = recentTexture;
         setWidth(playerTexture.getWidth()/2);
         setHeight(playerTexture.getHeight()/2);
-
     }
 
     public void thinkAction() {

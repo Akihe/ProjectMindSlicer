@@ -73,7 +73,7 @@ public class level1 implements Screen {
         dialog.text("You won the fight! \n Your award is 500 coins");
         dialog.button("Okay", true); //sends "true" as the result
         dialog.button("esim. nappi", false); //sends "false" as the result
-        dialog.show(stage);
+        dialog.show(gameStage);
 
     }
 
@@ -101,7 +101,7 @@ public class level1 implements Screen {
                 player.resetPlayer();
             }
         }
-        if(enemy.ENEMY_HEALTH<=0){
+        if(enemy.ENEMY_HEALTH <= 0){
             winPopup();
         }
         // MITEN VASTUSTAJAN HYÖKKÄYKSEN SAA TEHTYÄ VASTA PELAAJAN JÄLKEEN
