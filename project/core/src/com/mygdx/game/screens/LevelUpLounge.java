@@ -31,7 +31,6 @@ public class LevelUpLounge implements Screen {
     private Image background;
     returnButton returnBtn;
     statsButton statsBtn;
-    Image image;
 
     int holder;
 
@@ -62,12 +61,6 @@ public class LevelUpLounge implements Screen {
         statsBtn = new statsButton();
         gameStage.addActor(statsBtn);
 
-        Pixmap pixmap = new Pixmap(1,1,Pixmap.Format.RGB565);
-        pixmap.setColor(0, 0, 0, 0);
-        pixmap.fill();
-
-
-
         Skin skin = new Skin(Gdx.files.internal("test-skin.json"));
 
         Drawable background = skin.getDrawable("dialog");
@@ -77,8 +70,7 @@ public class LevelUpLounge implements Screen {
         attackLabel = new Label(" Attack value : " + holder, skin);
         Label defenceLabel = new Label(" Defence upgrade ", skin);
 
-        moneyLabel = new Label("Coins : " + playerActor.MONEY, skin);
-
+        moneyLabel = new Label(" Coins : " + playerActor.MONEY, skin);
 
         Container<Table> tableContainer = new Container<Table>();
         tableContainer.setSize(Main.WORLD_WIDTH / 2, Main.WORLD_HEIGHT / 2);
@@ -105,7 +97,7 @@ public class LevelUpLounge implements Screen {
 
         table.setFillParent(true);
 
-        //table.debugAll();
+        table.debugAll();
 
         table.setVisible(false);
 

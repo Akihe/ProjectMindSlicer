@@ -48,7 +48,7 @@ public class statsPlusMinus extends Actor {
                 playerActor.MONEY -= cost;
                 timesPressed++;
                 Gdx.app.log("timespressed", "" + timesPressed);
-            } else if (timesPressed > 0 && usage.equals("attackMinus") ) {
+            } else if (usage.equals("attackMinus") ) {
                 playerActor.PLAYER_ATK -= 10;
                 playerActor.MONEY += cost;
                 timesPressed--;
