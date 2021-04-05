@@ -2,20 +2,15 @@ package com.mygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Container;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.mygdx.game.buttons.*;
@@ -31,18 +26,23 @@ public class LevelUpLounge implements Screen {
     private Image background;
     returnButton returnBtn;
     statsButton statsBtn;
-    Image image;
 
-    int holder;
+    int attackValue;
+    int defenceValue;
 
     public static Table table;
 
     Label attackLabel;
     Label moneyLabel;
+    Label defenceLabel;
 
     public void updateStats() {
-        attackLabel.setText(" Attack value : " + holder);
+        attackValue = playerActor.PLAYER_ATK;
+        defenceValue = playerActor.PLAYER_DEF;
+
+        attackLabel.setText(" Attack value : " + attackValue);
         moneyLabel.setText("" + playerActor.MONEY);
+        defenceLabel.setText(" Defence : " + defenceValue);
     }
 
     public LevelUpLounge(Main host){
@@ -62,23 +62,17 @@ public class LevelUpLounge implements Screen {
         statsBtn = new statsButton();
         gameStage.addActor(statsBtn);
 
-        Pixmap pixmap = new Pixmap(1,1,Pixmap.Format.RGB565);
-        pixmap.setColor(0, 0, 0, 0);
-        pixmap.fill();
-
-
-
         Skin skin = new Skin(Gdx.files.internal("test-skin.json"));
 
         Drawable background = skin.getDrawable("dialog");
         Gdx.app.log("background", "korkeus" + background.getBottomHeight());
-        holder = playerActor.PLAYER_ATK;
+        attackValue = playerActor.PLAYER_ATK;
+        defenceValue = playerActor.PLAYER_DEF;
 
-        attackLabel = new Label(" Attack value : " + holder, skin);
-        Label defenceLabel = new Label(" Defence upgrade ", skin);
+        attackLabel = new Label(" Attack : " + attackValue, skin);
+        defenceLabel = new Label(" Defence : " + defenceValue, skin);
 
-        moneyLabel = new Label("Coins : " + playerActor.MONEY, skin);
-
+        moneyLabel = new Label(" Coins : " + playerActor.MONEY, skin);
 
         Container<Table> tableContainer = new Container<Table>();
         tableContainer.setSize(Main.WORLD_WIDTH / 2, Main.WORLD_HEIGHT / 2);
@@ -89,23 +83,20 @@ public class LevelUpLounge implements Screen {
 
         statsPlusMinus attackPlus = new statsPlusMinus("attackPlus");
         statsPlusMinus attackMinus = new statsPlusMinus("attackMinus");
-
-        Image plus = new Image(new Texture("plussa.png"));
-        Image minus = new Image(new Texture("miinus.png"));
-        Image plus2 = new Image(new Texture("plussa.png"));
-        Image minus2 = new Image(new Texture("miinus.png"));
+        statsPlusMinus defencePlus = new statsPlusMinus("defencePlus");
+        statsPlusMinus defenceMinus = new statsPlusMinus("defenceMinus");
 
         table.setBackground(background);
 
-        table.add(moneyLabel);
+        table.add(moneyLabel).center();
         table.row();
         table.add(attackMinus, attackLabel, attackPlus);
         table.row();
-        table.add(minus2, defenceLabel, plus2);
+        table.add(defenceMinus, defenceLabel, defencePlus);
 
         table.setFillParent(true);
 
-        //table.debugAll();
+        table.debugAll();
 
         table.setVisible(false);
 
@@ -125,8 +116,6 @@ public class LevelUpLounge implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-        holder = playerActor.PLAYER_ATK;
 
         updateStats();
 

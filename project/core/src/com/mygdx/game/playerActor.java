@@ -26,8 +26,10 @@ public class playerActor extends Actor {
     public static int MONEY = 500;
     public int enemyAttacksAfter;
     public static int PLAYER_DEF = 5;
-public static boolean shield_ON= false;
+    public static boolean shield_ON= false;
     public static boolean playerActionDone = false;
+
+    public static int statPointsBought = 0;
 
     public playerActor() {
         playerTexture = new Texture(Gdx.files.internal("playercharacter.png"));
