@@ -95,7 +95,13 @@ public class level1 implements Screen {
         if(player.playerActionDone ){
             timeSinceAttack += Gdx.graphics.getDeltaTime();
             if (timeSinceAttack > player.enemyAttacksAfter) {
-                enemy.enemyHit();
+                if(enemy.AttackNRO>=0 && enemy.AttackNRO<30){
+                enemy.enemyHit();}
+                if(enemy.AttackNRO>=30 && enemy.AttackNRO<67){
+                    enemy.enemyBuff();}
+                if(enemy.AttackNRO>=67 && enemy.AttackNRO<=100){
+                    enemy.majorAttack();}
+                enemy.chooseAttack();
                 timeSinceAttack = 0;
                 player.enemyAttacksAfter = 0;
                 player.resetPlayer();

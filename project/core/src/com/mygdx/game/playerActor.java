@@ -48,11 +48,12 @@ public class playerActor extends Actor {
             damageTaken=0;
             shield_ON=false;
         }
-        int damage_Taken=PLAYER_DEF-damageTaken;
-        if(damage_Taken>=0){
-            damage_Taken=-1;
+        int totalDamage=PLAYER_DEF-damageTaken;
+        if(totalDamage>=0){
+            totalDamage=-1;
+
         }
-        this.PLAYER_HEALTH = this.PLAYER_HEALTH + damage_Taken;
+        this.PLAYER_HEALTH = this.PLAYER_HEALTH + totalDamage;
         healthAmount = "" + PLAYER_HEALTH;
 
     }

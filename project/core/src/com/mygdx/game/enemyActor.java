@@ -9,6 +9,9 @@ import com.badlogic.gdx.scenes.scene2d.actions.RotateToAction;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.mygdx.game.screens.*;
 
+
+import java.util.Random;
+
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.run;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 
@@ -19,7 +22,10 @@ public class enemyActor extends Actor {
 
     public int ENEMY_HEALTH = 100;
     private String healthAmount;
-    private int ATK_damage = 100;
+    private int ATK_damage = 20;
+    private int ENEMY_DEF=5;
+    public static Random attackRoll=new Random();
+    public static int AttackNRO;
 
     public enemyActor() {
         enemyTexture = new Texture(Gdx.files.internal("monster2.png"));
@@ -32,8 +38,18 @@ public class enemyActor extends Actor {
     }
 
     public void reduceHealth(int damageTaken) {
-        this.ENEMY_HEALTH = this.ENEMY_HEALTH - damageTaken;
+
+        int totalDamage=ENEMY_DEF-damageTaken;
+        if(totalDamage>=0){
+            totalDamage=-1;
+
+        }
+        this.ENEMY_HEALTH = this.ENEMY_HEALTH + totalDamage;
         healthAmount = "" + ENEMY_HEALTH;
+
+    }
+    public void chooseAttack(){
+       AttackNRO = attackRoll.nextInt(100);
     }
 
     @Override
@@ -85,12 +101,63 @@ public class enemyActor extends Actor {
     }
 
     public void enemyBuff() {
+        SequenceAction Think_Action = new SequenceAction();
+
+        MoveToAction moveUpAction = new MoveToAction();
+        MoveToAction moveBackDown = new MoveToAction();
+        RotateToAction rotateLeftAction = new RotateToAction();
+        RotateToAction rotateRightAction = new RotateToAction();
+        RotateToAction rotateBackAction = new RotateToAction();
+
+        moveUpAction.setPosition(550f, 220f);
+        moveUpAction.setDuration(0.2f);
+        moveBackDown.setPosition(550f, 140f);
+        moveBackDown.setDuration(0.1f);
+
+        rotateLeftAction.setRotation(15f);
+        rotateLeftAction.setDuration(0.4f);
+        rotateRightAction.setRotation(-15f);
+        rotateRightAction.setDuration(0.4f);
+        rotateBackAction.setRotation(0f);
+        rotateBackAction.setDuration(0.1f);
+
+        Think_Action.addAction(rotateLeftAction);
+        Think_Action.addAction(rotateRightAction);
+        Think_Action.addAction(rotateBackAction);
+        Think_Action.addAction(moveUpAction);
+        Think_Action.addAction(moveBackDown);
+
+        enemyActor.this.addAction(Think_Action);
+
+
+
         int buffAmount = 5;
         ATK_damage += buffAmount;
+        playerActor.playerActionDone = false;
     }
 
 
     public void majorAttack() {
+        SequenceAction sequenceAction = new SequenceAction();
+
+        MoveToAction moveAction = new MoveToAction();
+        MoveToAction moveBack = new MoveToAction();
+
+
+        RotateToAction rotateAction = new RotateToAction();
+
+        moveAction.setPosition(300f, 140f);
+        moveAction.setDuration(0.3f);
+
+        moveBack.setPosition(600f, 140f);
+        moveBack.setDuration(2.3f);
+
+
+        sequenceAction.addAction(moveAction);
+        sequenceAction.addAction(rotateAction);
+        sequenceAction.addAction(moveBack);
+        enemyActor.this.addAction(sequenceAction);
+
         level1.player.reduceHealth(50);
         playerActor.playerActionDone = false;
     }
