@@ -104,7 +104,9 @@ public class level1 implements Screen {
         if(enemy.ENEMY_HEALTH <= 0){
             winPopup();
         }
-        // MITEN VASTUSTAJAN HYÖKKÄYKSEN SAA TEHTYÄ VASTA PELAAJAN JÄLKEEN
+        if(player.PLAYER_HEALTH<=0){
+            host.setScreen(new GameOverScreen(host));
+        }
 
     }
 

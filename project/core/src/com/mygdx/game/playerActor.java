@@ -42,15 +42,10 @@ public static boolean shield_ON= false;
 
 //Liitetty reducehealth metodi pelaajalle myös. Voiko käyttää samaa metodia jos sen tekee uuteen luokkaan, ja kutsuu arvoja mm this.health (täytyy tehdä olio-ohjelmoinnilla parent olio, jolla on attribbutti HEALTH)
     public void reduceHealth(int damageTaken) {
-        if (shield_ON=true){
-            damageTaken=damageTaken/5;
             shield_ON=false;
         }
         int damage_Taken=PLAYER_DEF-damageTaken;
-        if(damage_Taken<=0){
-            damage_Taken=1;
         }
-        this.PLAYER_HEALTH = this.PLAYER_HEALTH - damage_Taken;
         healthAmount = "" + PLAYER_HEALTH;
 
     }

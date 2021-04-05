@@ -19,7 +19,7 @@ public class enemyActor extends Actor {
 
     public int ENEMY_HEALTH = 100;
     private String healthAmount;
-    private int ATK_damage = 5;
+    private int ATK_damage = 100;
 
     public enemyActor() {
         enemyTexture = new Texture(Gdx.files.internal("monster2.png"));
