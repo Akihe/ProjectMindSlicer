@@ -161,17 +161,17 @@ public class enemyActor extends Actor {
         level1.player.reduceHealth(50);
         playerActor.playerActionDone = false;
     }
-/*
-    public void randomAttack() {
 
-        switch(random) {
-            case 1: enemyHit();
-            case 2: enemyBuff();
-            case 3: majorAttack();
-        }
+    public void randomAttack() {
+        if(AttackNRO>=0 && AttackNRO<30){
+            enemyHit();}
+        if(AttackNRO>=30 && AttackNRO<67){
+            enemyBuff();}
+        if(AttackNRO>=67 && AttackNRO<=100){
+            majorAttack();}
     }
 
- */
+
 /*
     public void allowPlayerAttack(int delay) {
         int timer = 0;
