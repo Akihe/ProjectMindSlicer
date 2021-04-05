@@ -6,15 +6,20 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.mygdx.game.defaultValues;
 import com.mygdx.game.playerActor;
 
 public class statsPlusMinus extends Actor {
 
     private Texture texture;
     String usage;
-    int timesPressed = 0;
 
 
+    /**
+     * This class is used for creating buttons which increase or reduce chosen values
+     * at the "teachers lounge"
+     * @param Usage What is the button used for, "attackPlus", "defenceMinus" etc.
+     */
     public statsPlusMinus(String Usage) {
 
         usage = Usage;
@@ -43,19 +48,29 @@ public class statsPlusMinus extends Actor {
         @Override
         public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
 
+            /**
+             * Chooses the stat which will be increased or decreased based on the parameter given when creating a button using this class.
+             * Prevents the player from going below default values and checks the times bought and can u afford the cost.
+             */
             if (usage.equals("attackPlus") && playerActor.MONEY >= cost) {
                 playerActor.PLAYER_ATK += 10;
                 playerActor.MONEY -= cost;
-                timesPressed++;
-                Gdx.app.log("timespressed", "" + timesPressed);
-            } else if (usage.equals("attackMinus") ) {
+                playerActor.statPointsBought++;
+
+            } else if (usage.equals("attackMinus") && playerActor.statPointsBought > 0 && playerActor.PLAYER_ATK > defaultValues.playerAttack) {
                 playerActor.PLAYER_ATK -= 10;
                 playerActor.MONEY += cost;
-                timesPressed--;
-            } else if (usage.equals("defencePlus")) {
+                playerActor.statPointsBought--;
 
-            } else if (usage.equals("defenceMinus")) {
+            } else if (usage.equals("defencePlus") && playerActor.MONEY >= cost) {
+                playerActor.PLAYER_DEF += 5;
+                playerActor.MONEY -= cost;
+                playerActor.statPointsBought++;
 
+            } else if (usage.equals("defenceMinus") && playerActor.statPointsBought > 0 && playerActor.PLAYER_DEF > defaultValues.playerDefence) {
+                playerActor.PLAYER_DEF -= 5;
+                playerActor.MONEY += cost;
+                playerActor.statPointsBought--;
             }
             return true;
         }

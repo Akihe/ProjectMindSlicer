@@ -29,6 +29,8 @@ public class playerActor extends Actor {
     public static boolean shield_ON= false;
     public static boolean playerActionDone = false;
 
+    public static int statPointsBought = 0;
+
     public playerActor() {
         playerTexture = new Texture(Gdx.files.internal("playercharacter.png"));
         healthAmount = "" + PLAYER_HEALTH;
