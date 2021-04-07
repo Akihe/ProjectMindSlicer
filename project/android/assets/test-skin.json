@@ -65,8 +65,9 @@ com.badlogic.gdx.scenes.scene2d.ui.TextTooltip$TextTooltipStyle: {
 }
 com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle: {
 	default: {
-		background: dialog
+		background: dialog4
 		titleFont: Lato-Bold
+		titleFontColor: RGBA_0_0_0_255
 	}
 	window-popup: {
 		background: dialog

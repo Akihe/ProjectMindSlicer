@@ -13,18 +13,17 @@ public class settingsButton extends Actor {
     private final Texture texture;
 
     public settingsButton() {
-        texture = new Texture("Garmfiel.png");
+        texture = new Texture("settings_button.png");
 
         setWidth(texture.getWidth()/2);
         setHeight(texture.getHeight()/2);
-        setBounds(350, 160f, getWidth(), getHeight());
+        setBounds(288, 200, getWidth(), getHeight());
 
         addListener(new PlayerListener());
     }
 
     public void draw(Batch batch, float alpha) {
         batch.draw(texture, this.getX(), this.getY(), getWidth(), getHeight());
-
     }
 
     class PlayerListener extends InputListener {
