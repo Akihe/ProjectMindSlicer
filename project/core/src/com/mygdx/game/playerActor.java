@@ -25,7 +25,7 @@ public class playerActor extends Actor {
 
     public static int MONEY = 500;
     public int enemyAttacksAfter;
-    public static int PLAYER_DEF = defaultValues.currentDefense;
+    public static int PLAYER_DEF = defaultValues.currentDefence;
     public static boolean shield_ON= false;
     public static boolean playerActionDone = false;
 
@@ -79,12 +79,12 @@ public class playerActor extends Actor {
     }
 
     public void hitAction() {
-        hitTexture = new Texture("thumbs_up.png");
+        hitTexture = new Texture("drink_coffee_buff1.png");
         recentTexture = playerTexture;
         playerTexture = hitTexture;
 
-        setWidth(playerTexture.getWidth()/2);
-        setHeight(playerTexture.getHeight()/2);
+        setWidth(playerTexture.getWidth());
+        setHeight(playerTexture.getHeight());
 
 
         SequenceAction sequenceAction = new SequenceAction();

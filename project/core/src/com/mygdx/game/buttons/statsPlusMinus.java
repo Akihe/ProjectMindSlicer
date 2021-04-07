@@ -53,22 +53,22 @@ public class statsPlusMinus extends Actor {
              * Prevents the player from going below default values and checks the times bought and can u afford the cost.
              */
             if (usage.equals("attackPlus") && playerActor.MONEY >= cost) {
-                playerActor.PLAYER_ATK += 10;
+                defaultValues.currentAttack += 10;
                 playerActor.MONEY -= cost;
                 playerActor.statPointsBought++;
 
             } else if (usage.equals("attackMinus") && playerActor.statPointsBought > 0 && playerActor.PLAYER_ATK > defaultValues.playerAttack) {
-                playerActor.PLAYER_ATK -= 10;
+                defaultValues.currentAttack -= 10;
                 playerActor.MONEY += cost;
                 playerActor.statPointsBought--;
 
             } else if (usage.equals("defencePlus") && playerActor.MONEY >= cost) {
-                playerActor.PLAYER_DEF += 5;
+                defaultValues.currentDefence += 5;
                 playerActor.MONEY -= cost;
                 playerActor.statPointsBought++;
 
             } else if (usage.equals("defenceMinus") && playerActor.statPointsBought > 0 && playerActor.PLAYER_DEF > defaultValues.playerDefence) {
-                playerActor.PLAYER_DEF -= 5;
+                defaultValues.currentDefence -= 5;
                 playerActor.MONEY += cost;
                 playerActor.statPointsBought--;
             }
