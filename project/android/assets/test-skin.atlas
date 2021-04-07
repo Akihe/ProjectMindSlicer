@@ -29,22 +29,49 @@ buttonproto1
   index: -1
 dialog
   rotate: false
-  xy: 1, 170
+  xy: 123, 292
   size: 48, 60
   split: 9, 9, 30, 9
   orig: 48, 60
   offset: 0, 0
   index: -1
+dialog2
+  rotate: false
+  xy: 1, 106
+  size: 48, 60
+  split: 6, 6, 30, 7
+  pad: 10, 10, 34, 11
+  orig: 48, 60
+  offset: 0, 0
+  index: -1
+dialog3
+  rotate: false
+  xy: 53, 170
+  size: 48, 60
+  split: 13, 13, 27, 9
+  pad: 13, 13, 32, 13
+  orig: 48, 60
+  offset: 0, 0
+  index: -1
+dialog4
+  rotate: false
+  xy: 1, 168
+  size: 50, 62
+  split: 14, 14, 28, 10
+  pad: 14, 14, 31, 13
+  orig: 50, 62
+  offset: 0, 0
+  index: -1
 silent_mode
   rotate: false
-  xy: 1, 146
+  xy: 173, 330
   size: 19, 22
   orig: 19, 22
   offset: 0, 0
   index: -1
 speaker_fullsound
   rotate: false
-  xy: 123, 330
+  xy: 123, 268
   size: 19, 22
   orig: 19, 22
   offset: 0, 0

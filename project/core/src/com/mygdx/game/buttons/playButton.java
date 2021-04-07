@@ -15,11 +15,11 @@ public class playButton extends Actor {
     private final Texture texture;
 
     public playButton() {
-        texture = new Texture("buttonproto2.1.png");
+        texture = new Texture("start_button2.png");
 
         setWidth(texture.getWidth()/2);
         setHeight(texture.getHeight()/2);
-        setBounds(350, 270f, getWidth(), getHeight());
+        setBounds(275, 270f, getWidth(), getHeight());
 
         addListener(new PlayerListener());
     }

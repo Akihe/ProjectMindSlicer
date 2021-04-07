@@ -32,6 +32,8 @@ public class LevelUpLounge implements Screen {
 
     public static Table table;
 
+    public static Table tableExit;
+
     Label attackLabel;
     Label moneyLabel;
     Label defenceLabel;
@@ -40,9 +42,9 @@ public class LevelUpLounge implements Screen {
         attackValue = playerActor.PLAYER_ATK;
         defenceValue = playerActor.PLAYER_DEF;
 
-        attackLabel.setText(" Attack value : " + attackValue);
-        moneyLabel.setText("" + playerActor.MONEY);
-        defenceLabel.setText(" Defence : " + defenceValue);
+        attackLabel.setText("Attack : " + attackValue + "  ");
+        moneyLabel.setText("Coins : " + playerActor.MONEY);
+        defenceLabel.setText("Defence : " + defenceValue + "  ");
     }
 
     public LevelUpLounge(Main host){
@@ -64,7 +66,7 @@ public class LevelUpLounge implements Screen {
 
         Skin skin = new Skin(Gdx.files.internal("test-skin.json"));
 
-        Drawable background = skin.getDrawable("dialog");
+        Drawable background = skin.getDrawable("dialog4");
         Gdx.app.log("background", "korkeus" + background.getBottomHeight());
         attackValue = playerActor.PLAYER_ATK;
         defenceValue = playerActor.PLAYER_DEF;
@@ -81,6 +83,10 @@ public class LevelUpLounge implements Screen {
 
         table = new Table(skin);
 
+        statsPlusMinus attackPlus2 = new statsPlusMinus("attackPlus");
+
+
+
         statsPlusMinus attackPlus = new statsPlusMinus("attackPlus");
         statsPlusMinus attackMinus = new statsPlusMinus("attackMinus");
         statsPlusMinus defencePlus = new statsPlusMinus("defencePlus");
@@ -88,7 +94,7 @@ public class LevelUpLounge implements Screen {
 
         table.setBackground(background);
 
-        table.add(moneyLabel).center();
+        table.add(moneyLabel);
         table.row();
         table.add(attackMinus, attackLabel, attackPlus);
         table.row();
@@ -96,11 +102,12 @@ public class LevelUpLounge implements Screen {
 
         table.setFillParent(true);
 
-        table.debugAll();
+        //table.debugAll();
 
         table.setVisible(false);
 
         tableContainer.setActor(table);
+
         gameStage.addActor(tableContainer);
         Gdx.app.log("background", "korkeus" + background.getBottomHeight());
 
@@ -119,11 +126,9 @@ public class LevelUpLounge implements Screen {
 
         updateStats();
 
-
         gameStage.getBatch().begin();
         gameStage.getBatch().draw(backgroundTexture,0,0,Main.WORLD_WIDTH,Main.WORLD_HEIGHT);
         gameStage.getBatch().end();
-
 
         gameStage.act();
         gameStage.draw();
