@@ -18,7 +18,7 @@ public class HealButton extends Actor {
 
         setWidth(texture.getWidth());
         setHeight(texture.getHeight());
-        setBounds(240, 230, getWidth(), getHeight());
+        setBounds(235, 230, getWidth(), getHeight());
 
         player = level1.player;
 
