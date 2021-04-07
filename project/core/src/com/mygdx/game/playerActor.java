@@ -135,7 +135,7 @@ public class playerActor extends Actor {
 
     public void MunkkiHeal(){
 
-      PLAYER_HEALTH=PLAYER_HEALTH+20;
+      PLAYER_HEALTH=PLAYER_HEALTH+25;
         playerActionDone=true;
         enemyAttacksAfter = 3;
     }
