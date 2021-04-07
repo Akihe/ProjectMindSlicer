@@ -15,7 +15,7 @@ public class thinkButton extends Actor {
     playerActor player;
 
     public thinkButton() {
-        texture = new Texture("shield_icon1.png");
+        texture = new Texture("coffee_cup.png");
 
         setWidth(texture.getWidth());
         setHeight(texture.getHeight());

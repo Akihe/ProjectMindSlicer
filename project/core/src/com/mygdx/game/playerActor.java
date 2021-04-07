@@ -79,7 +79,7 @@ public class playerActor extends Actor {
     }
 
     public void hitAction() {
-        hitTexture = new Texture("drink_coffee_buff1.png");
+        hitTexture = new Texture("thumbs_up.png");
         recentTexture = playerTexture;
         playerTexture = hitTexture;
 

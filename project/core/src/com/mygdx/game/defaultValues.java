@@ -10,8 +10,8 @@ public class defaultValues {
     public final static int playerAttack = 15;
     public final static int playerDefence = 5;
 
-    public static int currentAttack = playerAttack;
-    public static int currentDefence = playerDefence;
+    public static int currentAttack = 15;
+    public static int currentDefence = 5;
 
     //Starting values for Level 1 monster
     public static int monsterAttack = 15;
