@@ -21,11 +21,11 @@ public class playerActor extends Actor {
     public int PLAYER_HEALTH = 100;
     private String healthAmount;
 
-    public static int PLAYER_ATK = 15;
+    public static int PLAYER_ATK = defaultValues.playerAttack;
 
     public static int MONEY = 500;
     public int enemyAttacksAfter;
-    public static int PLAYER_DEF = 5;
+    public static int PLAYER_DEF = defaultValues.playerAttack;
     public static boolean shield_ON= false;
     public static boolean playerActionDone = false;
 

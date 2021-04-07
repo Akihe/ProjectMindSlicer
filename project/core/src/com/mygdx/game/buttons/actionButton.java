@@ -14,7 +14,7 @@ public class actionButton extends Actor {
     playerActor player;
 
     public actionButton() {
-        playTexture = new Texture("Garmfiel.png");
+        playTexture = new Texture("wooden_sword.png");
 
         setWidth(playTexture.getWidth()/2);
         setHeight(playTexture.getHeight()/2);
