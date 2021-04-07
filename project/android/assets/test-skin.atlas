@@ -1,26 +1,40 @@
 
 test-skin.png
-size: 512,512
+size: 1024,1024
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
+Chilanka-Regular
+  rotate: false
+  xy: 1, 817
+  size: 506, 103
+  orig: 506, 103
+  offset: 0, 0
+  index: -1
+chilanka-header
+  rotate: false
+  xy: 1, 670
+  size: 505, 145
+  orig: 505, 145
+  offset: 0, 0
+  index: -1
 Lato-Bold
   rotate: false
-  xy: 1, 415
+  xy: 1, 922
   size: 506, 90
   orig: 506, 90
   offset: 0, 0
   index: -1
 Lato-Regular
   rotate: false
-  xy: 1, 354
+  xy: 509, 953
   size: 505, 59
   orig: 505, 59
   offset: 0, 0
   index: -1
 buttonproto1
   rotate: false
-  xy: 1, 232
+  xy: 509, 831
   size: 120, 120
   split: 30, 57, 64, 46
   pad: 32, 59, 66, 47
@@ -29,7 +43,7 @@ buttonproto1
   index: -1
 dialog
   rotate: false
-  xy: 123, 292
+  xy: 631, 891
   size: 48, 60
   split: 9, 9, 30, 9
   orig: 48, 60
@@ -37,7 +51,7 @@ dialog
   index: -1
 dialog2
   rotate: false
-  xy: 1, 106
+  xy: 1, 544
   size: 48, 60
   split: 6, 6, 30, 7
   pad: 10, 10, 34, 11
@@ -46,7 +60,7 @@ dialog2
   index: -1
 dialog3
   rotate: false
-  xy: 53, 170
+  xy: 53, 608
   size: 48, 60
   split: 13, 13, 27, 9
   pad: 13, 13, 32, 13
@@ -55,7 +69,7 @@ dialog3
   index: -1
 dialog4
   rotate: false
-  xy: 1, 168
+  xy: 1, 606
   size: 50, 62
   split: 14, 14, 28, 10
   pad: 14, 14, 31, 13
@@ -64,14 +78,14 @@ dialog4
   index: -1
 silent_mode
   rotate: false
-  xy: 173, 330
+  xy: 681, 929
   size: 19, 22
   orig: 19, 22
   offset: 0, 0
   index: -1
 speaker_fullsound
   rotate: false
-  xy: 123, 268
+  xy: 631, 867
   size: 19, 22
   orig: 19, 22
   offset: 0, 0

@@ -1,5 +1,11 @@
 {
 com.badlogic.gdx.graphics.g2d.BitmapFont: {
+	chilanka-header: {
+		file: chilanka-header.fnt
+	}
+	Chilanka-Regular: {
+		file: Chilanka-Regular.fnt
+	}
 	Lato-Bold: {
 		file: Lato-Bold.fnt
 	}
@@ -66,7 +72,7 @@ com.badlogic.gdx.scenes.scene2d.ui.TextTooltip$TextTooltipStyle: {
 com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle: {
 	default: {
 		background: dialog4
-		titleFont: Lato-Bold
+		titleFont: chilanka-header
 		titleFontColor: RGBA_0_0_0_255
 	}
 	window-popup: {

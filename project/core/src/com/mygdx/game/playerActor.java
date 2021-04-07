@@ -37,7 +37,7 @@ public class playerActor extends Actor {
 
         setWidth(playerTexture.getWidth()/2);
         setHeight(playerTexture.getHeight()/2);
-        setBounds(20,40, getWidth(), getHeight());
+        setBounds(100,40, getWidth(), getHeight());
 
         addListener(new PlayerListener());
     }

@@ -6,9 +6,12 @@ public class defaultValues {
     //Example = int currentPlayerAttack = defaultvalues.playerAttack;
 
     //Starting values for the player
-    public static int startingMoney = 500;
-    public static int playerAttack = 15;
-    public static int playerDefence = 5;
+    public final static int startingMoney = 500;
+    public final static int playerAttack = 15;
+    public final static int playerDefence = 5;
+
+    public static int currentAttack = playerAttack;
+    public static int currentDefence = playerDefence;
 
     //Starting values for Level 1 monster
     public static int monsterAttack = 15;
