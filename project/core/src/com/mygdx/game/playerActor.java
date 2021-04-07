@@ -25,7 +25,7 @@ public class playerActor extends Actor {
 
     public static int MONEY = 500;
     public int enemyAttacksAfter;
-    public static int PLAYER_DEF = defaultValues.playerAttack;
+    public static int PLAYER_DEF = defaultValues.currentDefense;
     public static boolean shield_ON= false;
     public static boolean playerActionDone = false;
 

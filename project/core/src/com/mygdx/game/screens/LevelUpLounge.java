@@ -40,7 +40,7 @@ public class LevelUpLounge implements Screen {
 
     public void updateStats() {
         attackValue = defaultValues.currentAttack;
-        defenceValue = defaultValues.currentAttack;
+        defenceValue = defaultValues.currentDefence;   //Vaiko PLAYER_DEFENSE
 
         attackLabel.setText("Attack : " + attackValue + "  ");
         moneyLabel.setText("Coins : " + playerActor.MONEY);
