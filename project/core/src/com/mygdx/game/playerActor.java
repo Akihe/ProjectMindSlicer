@@ -48,7 +48,7 @@ public class playerActor extends Actor {
 //Liitetty reducehealth metodi pelaajalle myös. Voiko käyttää samaa metodia jos sen tekee uuteen luokkaan, ja kutsuu arvoja mm this.health (täytyy tehdä olio-ohjelmoinnilla parent olio, jolla on attribbutti HEALTH)
     public void reduceHealth(int damageTaken) {
         if (shield_ON==true){
-            damageTaken=0;
+            damageTaken=damageTaken/3;
             shield_ON=false;
         }
         int totalDamage=PLAYER_DEF-damageTaken;
