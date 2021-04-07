@@ -22,6 +22,8 @@ public class level1 implements Screen {
     private actionButton actionbutton;
     private thinkButton thinkbutton;
     private shieldButton shieldButton;
+    private HealButton HealButton;
+
     Stage stage;
 
 
@@ -57,6 +59,9 @@ public class level1 implements Screen {
 
         shieldButton=new shieldButton();
         gameStage.addActor(shieldButton);
+
+        HealButton =new HealButton();
+        gameStage.addActor(HealButton);
 
     }
 

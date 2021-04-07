@@ -132,6 +132,13 @@ public class playerActor extends Actor {
         playerActionDone=true;
         enemyAttacksAfter = 3;
     }
+
+    public void MunkkiHeal(){
+
+      PLAYER_HEALTH=PLAYER_HEALTH+20;
+        playerActionDone=true;
+        enemyAttacksAfter = 3;
+    }
     public void resetPlayer() {
         playerTexture = recentTexture;
         setWidth(playerTexture.getWidth()/2);
