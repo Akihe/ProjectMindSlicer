@@ -42,6 +42,9 @@ public class playerActor extends Actor {
         addListener(new PlayerListener());
     }
 
+    public void resetStats(){
+        PLAYER_ATK=defaultValues.playerAttack;
+    }
 //Liitetty reducehealth metodi pelaajalle myös. Voiko käyttää samaa metodia jos sen tekee uuteen luokkaan, ja kutsuu arvoja mm this.health (täytyy tehdä olio-ohjelmoinnilla parent olio, jolla on attribbutti HEALTH)
     public void reduceHealth(int damageTaken) {
         if (shield_ON==true){
@@ -57,6 +60,7 @@ public class playerActor extends Actor {
         healthAmount = "" + PLAYER_HEALTH;
 
     }
+
 
     @Override
     public void draw(Batch batch, float alpha) {

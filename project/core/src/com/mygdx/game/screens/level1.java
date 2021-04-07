@@ -106,6 +106,7 @@ public class level1 implements Screen {
             winPopup();
         }
         if(player.PLAYER_HEALTH<=0){
+            player.resetStats();
             host.setScreen(new GameOverScreen(host));
         }
 
