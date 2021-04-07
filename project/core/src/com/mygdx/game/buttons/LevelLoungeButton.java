@@ -14,11 +14,11 @@ public class LevelLoungeButton extends Actor {
 
 
     public LevelLoungeButton() {
-        playTexture = new Texture("Garmfiel.png");
+        playTexture = new Texture("LevelUPButton.png");
 
         setWidth(playTexture.getWidth()/2);
         setHeight(playTexture.getHeight()/2);
-        setBounds(400, 350, getWidth(), getHeight());
+        setBounds(265, 400, getWidth()*2, getHeight()*2);
 
         addListener(new PlayerListener());
     }
