@@ -28,11 +28,11 @@ public class enemyActor extends Actor {
     public static int AttackNRO;
 
     public enemyActor() {
-        enemyTexture = new Texture(Gdx.files.internal("monster2.png"));
+        enemyTexture = new Texture(Gdx.files.internal("child2.png"));
 
-        setWidth(enemyTexture.getWidth()/3);
-        setHeight(enemyTexture.getHeight()/3);
-        setBounds(550,140, getWidth(), getHeight());
+        setWidth(enemyTexture.getWidth());
+        setHeight(enemyTexture.getHeight());
+        setBounds(550,40, getWidth(), getHeight());
 
         healthAmount = "" + ENEMY_HEALTH;
     }
