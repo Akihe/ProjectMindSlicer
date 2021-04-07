@@ -101,12 +101,8 @@ public class level1 implements Screen {
         gameStage.act();
         gameStage.draw();
 
-        if(player.PLAYER_HEALTH==100 && player.playerActionDone==false){
-            player.updateStats();
-        }
-
         //Enemy attacks only after the player attacks, and DeltaTime counts a 2 second delay for the enemies move.
-        if(player.playerActionDone ){
+        if(player.playerActionDone && enemy.ENEMY_HEALTH > 0){
             timeSinceAttack += Gdx.graphics.getDeltaTime();
             if (timeSinceAttack > player.enemyAttacksAfter) {
             enemy.randomAttack();
@@ -116,9 +112,11 @@ public class level1 implements Screen {
                 player.resetPlayer();
             }
         }
+
         if(enemy.ENEMY_HEALTH <= 0){
-            winPopup();
+            enemy.enemyDie();
         }
+
         if(player.PLAYER_HEALTH<=0){
             player.resetStats();
             host.setScreen(new GameOverScreen(host));

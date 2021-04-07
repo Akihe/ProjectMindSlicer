@@ -75,6 +75,4 @@ public class statsPlusMinus extends Actor {
             return true;
         }
     }
-
-
 }

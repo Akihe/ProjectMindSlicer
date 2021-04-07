@@ -1,17 +1,23 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.actions.AlphaAction;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
 import com.badlogic.gdx.scenes.scene2d.actions.RotateToAction;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
+import com.badlogic.gdx.utils.Timer;
 import com.mygdx.game.screens.*;
 
 
 import java.util.Random;
 
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeIn;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeOut;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.run;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 
@@ -26,12 +32,13 @@ public class enemyActor extends Actor {
     private int ENEMY_DEF=5;
     public static Random attackRoll=new Random();
     public static int AttackNRO;
+    SequenceAction fadeIn;
 
     public enemyActor() {
-        enemyTexture = new Texture(Gdx.files.internal("child2.png"));
+        enemyTexture = new Texture(Gdx.files.internal("monster2.png"));
 
-        setWidth(enemyTexture.getWidth());
-        setHeight(enemyTexture.getHeight());
+        setWidth(enemyTexture.getWidth()/3);
+        setHeight(enemyTexture.getHeight()/3);
         setBounds(550,40, getWidth(), getHeight());
 
         healthAmount = "" + ENEMY_HEALTH;
@@ -54,6 +61,8 @@ public class enemyActor extends Actor {
 
     @Override
     public void draw(Batch batch, float alpha) {
+        batch.setColor(this.getColor());
+        batch.getColor().a *= alpha;
         batch.draw(enemyTexture,
                 this.getX(), this.getY(),
                 this.getOriginX(),
@@ -65,6 +74,7 @@ public class enemyActor extends Actor {
                 this.getRotation(),0,0,
                 enemyTexture.getWidth(), enemyTexture.getHeight(), false, false);
         Main.font.draw(batch, healthAmount, 660, 30);
+        batch.setColor(Color.WHITE); // reset the color
     }
 
     public void enemyHit() {
@@ -72,9 +82,6 @@ public class enemyActor extends Actor {
 
         MoveToAction moveAction = new MoveToAction();
         MoveToAction moveBack = new MoveToAction();
-
-
-        RotateToAction rotateAction = new RotateToAction();
 
         moveAction.setPosition(300f, 140f);
         moveAction.setDuration(0.7f);
@@ -84,7 +91,6 @@ public class enemyActor extends Actor {
 
 
         sequenceAction.addAction(moveAction);
-        sequenceAction.addAction(rotateAction);
         sequenceAction.addAction(moveBack);
 /*
         enemyActor.this.addAction(sequence(sequenceAction, run(new Runnable() {
@@ -94,6 +100,7 @@ public class enemyActor extends Actor {
         })));
 
  */
+
         enemyActor.this.addAction(sequenceAction);
         level1.player.reduceHealth(ATK_damage);
         playerActor.playerActionDone = false;
@@ -186,7 +193,31 @@ public class enemyActor extends Actor {
 
     public void enemyDie() {
 
-        enemyTexture = new Texture("child1.png");
+        SequenceAction fadeOut = new SequenceAction();
+        fadeOut.addAction((Actions.fadeOut(2)));
+        enemyActor.this.addAction(fadeOut);
+        fadeIn = new SequenceAction();
+        fadeIn.addAction((Actions.fadeIn(2)));
+
+       // enemyTexture = new Texture("child1.png");
+       // enemyActor.this.addAction(fadeIn);
+
+        float timer = 0;
+
+        float delay = 2;
+
+        Timer.schedule(new Timer.Task() {
+            @Override
+            public void run() {
+                Gdx.app.log("timer", "yli 2");
+                enemyTexture = new Texture("child1.png");
+                enemyActor.this.addAction(fadeIn);
+            }
+        }, delay);
+
+
+
+
         setHeight(enemyTexture.getHeight() /3);
         setWidth(enemyTexture.getWidth() /3);
         setBounds(550f, 20f, getWidth(), getHeight());

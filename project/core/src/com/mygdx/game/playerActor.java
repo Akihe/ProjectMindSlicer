@@ -21,7 +21,7 @@ public class playerActor extends Actor {
     public int PLAYER_HEALTH = 100;
     private String healthAmount;
 
-    public static int PLAYER_ATK ;
+    public static int PLAYER_ATK;
 
     public static int MONEY = 500;
     public int enemyAttacksAfter;
@@ -35,8 +35,11 @@ public class playerActor extends Actor {
         playerTexture = new Texture(Gdx.files.internal("playercharacter.png"));
         healthAmount = "" + PLAYER_HEALTH;
 
-        setWidth(playerTexture.getWidth()/2);
-        setHeight(playerTexture.getHeight()/2);
+        PLAYER_ATK = defaultValues.currentAttack;
+        PLAYER_DEF = defaultValues.currentDefence;
+
+        setWidth(playerTexture.getWidth());
+        setHeight(playerTexture.getHeight());
         setBounds(100,40, getWidth(), getHeight());
 
         addListener(new PlayerListener());
@@ -88,8 +91,8 @@ public class playerActor extends Actor {
         recentTexture = playerTexture;
         playerTexture = hitTexture;
 
-        setWidth(playerTexture.getWidth()/2);
-        setHeight(playerTexture.getHeight()/2);
+        setWidth(playerTexture.getWidth());
+        setHeight(playerTexture.getHeight());
 
 
         SequenceAction sequenceAction = new SequenceAction();
@@ -122,7 +125,16 @@ public class playerActor extends Actor {
     }
 
     public void superShield(){
+        hitTexture = new Texture("main_def.png");
+        recentTexture = playerTexture;
+        playerTexture = hitTexture;
+
+        setWidth(playerTexture.getWidth());
+        setHeight(playerTexture.getHeight());
+
+
         shield_ON=true;
+        /*
         SequenceAction sequenceAction = new SequenceAction();
         RotateToAction rotateAction = new RotateToAction();
         RotateToAction rotateBackAction = new RotateToAction();
@@ -134,24 +146,41 @@ public class playerActor extends Actor {
 
         sequenceAction.addAction(rotateAction);
         sequenceAction.addAction(rotateBackAction);
+
+         */
         playerActionDone=true;
         enemyAttacksAfter = 3;
     }
 
     public void MunkkiHeal(){
+        hitTexture = new Texture("sweet_health_buff.png");
+        recentTexture = playerTexture;
+        playerTexture = hitTexture;
 
-      PLAYER_HEALTH=PLAYER_HEALTH+25;
-        playerActionDone=true;
+        setWidth(playerTexture.getWidth());
+        setHeight(playerTexture.getHeight());
+
+
+        PLAYER_HEALTH = PLAYER_HEALTH + 25;
+        playerActionDone = true;
         enemyAttacksAfter = 3;
     }
     public void resetPlayer() {
         playerTexture = recentTexture;
-        setWidth(playerTexture.getWidth()/2);
-        setHeight(playerTexture.getHeight()/2);
+        setWidth(playerTexture.getWidth());
+        setHeight(playerTexture.getHeight());
     }
 
     public void thinkAction() {
+        hitTexture = new Texture("drink_coffee_buff1.png");
+        recentTexture = playerTexture;
+        playerTexture = hitTexture;
 
+        setWidth(playerTexture.getWidth());
+        setHeight(playerTexture.getHeight());
+
+
+        /*
         SequenceAction Think_Action = new SequenceAction();
 
         MoveToAction moveUpAction = new MoveToAction();
@@ -180,6 +209,8 @@ public class playerActor extends Actor {
 
         playerActor.this.addAction(Think_Action);
 
+
+         */
 
         double ATK_RISE = PLAYER_ATK*1.5;
         PLAYER_ATK= (int) ATK_RISE;
