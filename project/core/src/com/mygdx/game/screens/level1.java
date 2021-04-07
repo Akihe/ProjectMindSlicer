@@ -101,6 +101,10 @@ public class level1 implements Screen {
         gameStage.act();
         gameStage.draw();
 
+        if(player.PLAYER_HEALTH==100 && player.playerActionDone==false){
+            player.updateStats();
+        }
+
         //Enemy attacks only after the player attacks, and DeltaTime counts a 2 second delay for the enemies move.
         if(player.playerActionDone ){
             timeSinceAttack += Gdx.graphics.getDeltaTime();

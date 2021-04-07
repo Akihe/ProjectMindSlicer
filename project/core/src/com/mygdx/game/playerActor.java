@@ -21,11 +21,11 @@ public class playerActor extends Actor {
     public int PLAYER_HEALTH = 100;
     private String healthAmount;
 
-    public static int PLAYER_ATK = defaultValues.currentAttack;
+    public static int PLAYER_ATK ;
 
     public static int MONEY = 500;
     public int enemyAttacksAfter;
-    public static int PLAYER_DEF = defaultValues.currentDefence;
+    public static int PLAYER_DEF;
     public static boolean shield_ON= false;
     public static boolean playerActionDone = false;
 
@@ -40,6 +40,11 @@ public class playerActor extends Actor {
         setBounds(100,40, getWidth(), getHeight());
 
         addListener(new PlayerListener());
+    }
+
+    public void updateStats(){
+        PLAYER_ATK=defaultValues.currentAttack;
+        PLAYER_DEF=defaultValues.currentDefence;
     }
 
     public void resetStats(){
@@ -83,8 +88,8 @@ public class playerActor extends Actor {
         recentTexture = playerTexture;
         playerTexture = hitTexture;
 
-        setWidth(playerTexture.getWidth());
-        setHeight(playerTexture.getHeight());
+        setWidth(playerTexture.getWidth()/2);
+        setHeight(playerTexture.getHeight()/2);
 
 
         SequenceAction sequenceAction = new SequenceAction();
