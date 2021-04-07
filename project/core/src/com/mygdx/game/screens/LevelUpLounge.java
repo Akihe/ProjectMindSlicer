@@ -39,8 +39,8 @@ public class LevelUpLounge implements Screen {
     Label defenceLabel;
 
     public void updateStats() {
-        attackValue = playerActor.PLAYER_ATK;
-        defenceValue = playerActor.PLAYER_DEF;
+        attackValue = defaultValues.playerAttack;
+        defenceValue = defaultValues.playerAttack;
 
         attackLabel.setText("Attack : " + attackValue + "  ");
         moneyLabel.setText("Coins : " + playerActor.MONEY);
