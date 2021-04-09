@@ -54,7 +54,7 @@ public class LevelUpLounge implements Screen {
         gameStage = new Stage(new StretchViewport(Main.WORLD_WIDTH,Main.WORLD_HEIGHT));
         Gdx.input.setInputProcessor(gameStage);
 
-        backgroundTexture = new Texture("Lounge.png");
+        backgroundTexture = new Texture("level_up.png");
         background = new Image(backgroundTexture);
         background.setPosition(0, 0);
 
@@ -62,7 +62,7 @@ public class LevelUpLounge implements Screen {
         gameStage.addActor((returnBtn));
 
         statsBtn = new statsButton();
-        gameStage.addActor(statsBtn);
+        //gameStage.addActor(statsBtn);
 
         Skin skin = new Skin(Gdx.files.internal("test-skin.json"));
 
