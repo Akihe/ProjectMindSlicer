@@ -62,7 +62,7 @@ public class LevelUpLounge implements Screen {
         gameStage.addActor((returnBtn));
 
         statsBtn = new statsButton();
-        //gameStage.addActor(statsBtn);
+        gameStage.addActor(statsBtn);
 
         Skin skin = new Skin(Gdx.files.internal("test-skin.json"));
 
@@ -77,8 +77,8 @@ public class LevelUpLounge implements Screen {
         moneyLabel = new Label(" Coins : " + playerActor.MONEY, skin);
 
         Container<Table> tableContainer = new Container<Table>();
-        tableContainer.setSize(Main.WORLD_WIDTH / 2, Main.WORLD_HEIGHT / 2);
-        tableContainer.setPosition(Main.WORLD_WIDTH / 4, Main.WORLD_HEIGHT / 4);
+        tableContainer.setSize(Main.WORLD_WIDTH / 2f, Main.WORLD_HEIGHT / 2f);
+        tableContainer.setPosition(Main.WORLD_WIDTH / 4f, Main.WORLD_HEIGHT / 4f);
         tableContainer.fillX();
 
         table = new Table(skin);

@@ -23,15 +23,15 @@ public class level1 implements Screen {
     private thinkButton thinkbutton;
     private shieldButton shieldButton;
     private HealButton HealButton;
+    kidActor kid;
 
     Stage stage;
 
 
     float timeSinceAttack = 0;
 
-    private Stage gameStage;
+    private final Stage gameStage;
     public static playerActor player;
-    //vaihdettu staticiksi enemyn hyökkäystä  varten
     public static enemyActor enemy;
 
 
@@ -57,11 +57,14 @@ public class level1 implements Screen {
         thinkbutton = new thinkButton();
         gameStage.addActor(thinkbutton);
 
-        shieldButton=new shieldButton();
+        shieldButton = new shieldButton();
         gameStage.addActor(shieldButton);
 
-        HealButton =new HealButton();
+        HealButton = new HealButton();
         gameStage.addActor(HealButton);
+
+        kid = new kidActor();
+        gameStage.addActor(kid);
 
     }
 
@@ -83,7 +86,7 @@ public class level1 implements Screen {
         dialog.button("Okay", true); //sends "true" as the result
         dialog.button("esim. nappi", false); //sends "false" as the result
         dialog.pack();
-        dialog.setPosition(Main.WORLD_WIDTH/4, Main.WORLD_HEIGHT/4);
+        dialog.setPosition(Main.WORLD_WIDTH/4f, Main.WORLD_HEIGHT/4f);
         gameStage.addActor(dialog);
     }
 
@@ -98,14 +101,12 @@ public class level1 implements Screen {
         gameStage.getBatch().draw(BACKGROUND,0,0,Main.WORLD_WIDTH,Main.WORLD_HEIGHT);
         gameStage.getBatch().end();
 
-        gameStage.act();
-        gameStage.draw();
 
         //Enemy attacks only after the player attacks, and DeltaTime counts a 2 second delay for the enemies move.
         if(player.playerActionDone && enemy.ENEMY_HEALTH > 0){
             timeSinceAttack += Gdx.graphics.getDeltaTime();
             if (timeSinceAttack > player.enemyAttacksAfter) {
-            enemy.randomAttack();
+                enemy.randomAttack();
                 enemy.chooseAttack();
                 timeSinceAttack = 0;
                 player.enemyAttacksAfter = 0;
@@ -115,12 +116,17 @@ public class level1 implements Screen {
 
         if(enemy.ENEMY_HEALTH <= 0){
             enemy.enemyDie();
+            kid.appear();
+            winPopup();
         }
 
         if(player.PLAYER_HEALTH<=0){
             player.resetStats();
             host.setScreen(new GameOverScreen(host));
         }
+
+        gameStage.act();
+        gameStage.draw();
 
     }
 

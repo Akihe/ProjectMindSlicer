@@ -193,34 +193,9 @@ public class enemyActor extends Actor {
 
     public void enemyDie() {
 
-        SequenceAction fadeOut = new SequenceAction();
-        fadeOut.addAction((Actions.fadeOut(2)));
-        enemyActor.this.addAction(fadeOut);
-        fadeIn = new SequenceAction();
-        fadeIn.addAction((Actions.fadeIn(2)));
-
-       // enemyTexture = new Texture("child1.png");
-       // enemyActor.this.addAction(fadeIn);
-
-        float timer = 0;
-
-        float delay = 2;
-
-        Timer.schedule(new Timer.Task() {
-            @Override
-            public void run() {
-                Gdx.app.log("timer", "yli 2");
-                enemyTexture = new Texture("child1.png");
-                enemyActor.this.addAction(fadeIn);
-            }
-        }, delay);
-
-
-
-
-        setHeight(enemyTexture.getHeight() /3);
-        setWidth(enemyTexture.getWidth() /3);
-        setBounds(550f, 20f, getWidth(), getHeight());
+            SequenceAction fadeOut = new SequenceAction();
+            fadeOut.addAction((Actions.fadeOut(2)));
+            enemyActor.this.addAction(fadeOut);
 
       //  playerActor.MONEY =playerActor.MONEY+50; !!!!
 
