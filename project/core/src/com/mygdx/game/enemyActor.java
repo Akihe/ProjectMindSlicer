@@ -83,10 +83,10 @@ public class enemyActor extends Actor {
         MoveToAction moveAction = new MoveToAction();
         MoveToAction moveBack = new MoveToAction();
 
-        moveAction.setPosition(300f, 140f);
+        moveAction.setPosition(300f, 40f);
         moveAction.setDuration(0.7f);
 
-        moveBack.setPosition(600f, 140f);
+        moveBack.setPosition(600f, 40f);
         moveBack.setDuration(1.9f);
 
 
@@ -118,7 +118,7 @@ public class enemyActor extends Actor {
 
         moveUpAction.setPosition(550f, 220f);
         moveUpAction.setDuration(0.2f);
-        moveBackDown.setPosition(550f, 140f);
+        moveBackDown.setPosition(550f, 40f);
         moveBackDown.setDuration(0.1f);
 
         rotateLeftAction.setRotation(15f);
@@ -156,7 +156,7 @@ public class enemyActor extends Actor {
         moveAction.setPosition(300f, 140f);
         moveAction.setDuration(0.3f);
 
-        moveBack.setPosition(600f, 140f);
+        moveBack.setPosition(600f, 40f);
         moveBack.setDuration(2.3f);
 
 
@@ -170,11 +170,11 @@ public class enemyActor extends Actor {
     }
 
     public void randomAttack() {
-        if(AttackNRO>=0 && AttackNRO<30){
+        if(AttackNRO>=0 && AttackNRO<50){
             enemyHit();}
-        if(AttackNRO>=30 && AttackNRO<67){
+        if(AttackNRO>=50 && AttackNRO<85){
             enemyBuff();}
-        if(AttackNRO>=67 && AttackNRO<=100){
+        if(AttackNRO>=85 && AttackNRO<=100){
             majorAttack();}
     }
 
