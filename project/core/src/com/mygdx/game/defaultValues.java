@@ -17,5 +17,6 @@ public class defaultValues {
     public static int monsterAttack = 15;
     public static int monsterDefence = 15;
 
+    public static boolean LoungeEntry=false;
 
 }
