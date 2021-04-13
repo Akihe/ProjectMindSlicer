@@ -29,16 +29,15 @@ public class enemyActor extends Actor {
     public int ENEMY_HEALTH = 100;
     private String healthAmount;
     private int ATK_damage = 20;
-    private int ENEMY_DEF=5;
+    private int ENEMY_DEF = 5;
     public static Random attackRoll=new Random();
     public static int AttackNRO;
-    SequenceAction fadeIn;
 
     public enemyActor() {
         enemyTexture = new Texture(Gdx.files.internal("monster2.png"));
 
-        setWidth(enemyTexture.getWidth()/3);
-        setHeight(enemyTexture.getHeight()/3);
+        setWidth(enemyTexture.getWidth()/3f);
+        setHeight(enemyTexture.getHeight()/3f);
         setBounds(550,40, getWidth(), getHeight());
 
         healthAmount = "" + ENEMY_HEALTH;
@@ -198,24 +197,5 @@ public class enemyActor extends Actor {
             enemyActor.this.addAction(fadeOut);
 
       //  playerActor.MONEY =playerActor.MONEY+50; !!!!
-
- /*
-        SequenceAction sequenceAction = new SequenceAction();
-
-        MoveToAction moveAction = new MoveToAction();
-
-        RotateToAction rotateAction = new RotateToAction();
-
-        moveAction.setPosition(1000f, 30f);
-        moveAction.setDuration(0.01f);
-
-        rotateAction.setRotation(720);
-        rotateAction.setDuration(1f);
-
-        sequenceAction.addAction(rotateAction);
-        sequenceAction.addAction(moveAction);
-
-        enemyActor.this.addAction(sequenceAction);
-  */
     }
 }

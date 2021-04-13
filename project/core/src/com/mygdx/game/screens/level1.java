@@ -2,12 +2,16 @@ package com.mygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.mygdx.game.buttons.*;
 import com.mygdx.game.*;
@@ -26,7 +30,7 @@ public class level1 implements Screen {
     kidActor kid;
 
     Stage stage;
-
+    String winner;
 
     float timeSinceAttack = 0;
 
@@ -41,6 +45,8 @@ public class level1 implements Screen {
 
         this.host = host;
         batch = host.batch;
+
+        winner = Main.getLevelText("winner");
 
         this.gameStage = new Stage(new StretchViewport(Main.WORLD_WIDTH,Main.WORLD_HEIGHT));
         Gdx.input.setInputProcessor(gameStage);
@@ -68,11 +74,6 @@ public class level1 implements Screen {
 
     }
 
-    @Override
-    public void show() {
-
-    }
-
     public void winPopup() {
 
         stage = new Stage();
@@ -82,12 +83,17 @@ public class level1 implements Screen {
                 Gdx.app.log("nappi ", "nappi" + obj);
             }
         };
-        dialog.text("You won the fight! \n Your award is 500 coins");
+        dialog.text(winner);
         dialog.button("Okay", true); //sends "true" as the result
         dialog.button("esim. nappi", false); //sends "false" as the result
         dialog.pack();
         dialog.setPosition(Main.WORLD_WIDTH/4f, Main.WORLD_HEIGHT/4f);
         gameStage.addActor(dialog);
+    }
+
+    @Override
+    public void show() {
+
     }
 
 
@@ -117,7 +123,15 @@ public class level1 implements Screen {
         if(enemy.ENEMY_HEALTH <= 0){
             enemy.enemyDie();
             kid.appear();
-            winPopup();
+
+            float delay = 2;
+            Timer.schedule(new Timer.Task() {
+                @Override
+                public void run() {
+                    gameStage.getActors().removeValue(enemy, true);
+                    winPopup();
+                }
+            }, delay);
         }
 
         if(player.PLAYER_HEALTH<=0){
