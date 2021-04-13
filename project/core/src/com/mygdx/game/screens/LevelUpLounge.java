@@ -6,7 +6,9 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Container;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -27,6 +29,9 @@ public class LevelUpLounge implements Screen {
     returnButton returnBtn;
     statsButton statsBtn;
 
+    Stage stage;
+    String enter;
+
     int attackValue;
     int defenceValue;
 
@@ -37,6 +42,7 @@ public class LevelUpLounge implements Screen {
     Label attackLabel;
     Label moneyLabel;
     Label defenceLabel;
+    Dialog dialog;
 
     public void updateStats() {
         attackValue = defaultValues.currentAttack;
@@ -51,6 +57,7 @@ public class LevelUpLounge implements Screen {
         this.host = host;
         batch = host.batch;
 
+        enter = Main.getLevelText("Enter");
         gameStage = new Stage(new StretchViewport(Main.WORLD_WIDTH,Main.WORLD_HEIGHT));
         Gdx.input.setInputProcessor(gameStage);
 
@@ -113,16 +120,40 @@ public class LevelUpLounge implements Screen {
 
     }
 
+    public void entryPopup() {
+ //Dialog dialog is initialized on the top
+        //boolean value for showing popup is changed to true in the render call
+        stage = new Stage();
+        Skin skin = new Skin(Gdx.files.internal("test-skin.json"));
+         dialog = new Dialog("Welcome", skin, "window-popup") {
+            public void result(Object obj) {
+                if(obj.equals(true)){
+                    dialog.setVisible(false);
+                }
+
+                Gdx.app.log("nappi ", "nappi" + obj);
+            }
+        };
+        dialog.text(enter);
+        dialog.button("Okay", true); //sends "true" as the result
+        dialog.pack();
+        dialog.setPosition(Main.WORLD_WIDTH/4f, Main.WORLD_HEIGHT/4f);
+        gameStage.addActor(dialog);
+    }
 
     @Override
     public void show() {
 
     }
 
+
+
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+
 
         updateStats();
 
@@ -132,6 +163,10 @@ public class LevelUpLounge implements Screen {
 
         gameStage.act();
         gameStage.draw();
+        if (defaultValues.LoungeEntry==false){
+            entryPopup();
+            defaultValues.LoungeEntry=true;
+        }
     }
 
     @Override
