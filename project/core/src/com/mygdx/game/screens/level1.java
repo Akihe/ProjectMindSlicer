@@ -38,7 +38,6 @@ public class level1 implements Screen {
     public static playerActor player;
     public static enemyActor enemy;
 
-
     public level1(Main host) {
 
         BACKGROUND = new Texture("taustakoulu.png");
