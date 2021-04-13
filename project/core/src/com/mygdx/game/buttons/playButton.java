@@ -1,5 +1,6 @@
 package com.mygdx.game.buttons;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -15,7 +16,7 @@ public class playButton extends Actor {
     private final Texture texture;
 
     public playButton() {
-        texture = new Texture("start_button2.png");
+        texture = new Texture(Gdx.files.internal("start_button2.png"));
 
         setWidth(texture.getWidth()/2);
         setHeight(texture.getHeight()/2);

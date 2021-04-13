@@ -16,7 +16,7 @@ public class returnButton extends Actor {
     public returnButton(float xPos, float yPos, String screen) {
         position = screen;
 
-        texture = new Texture("Garmfiel.png");
+        texture = new Texture("arrow.png");
 
         setWidth(texture.getWidth()/2);
         setHeight(texture.getHeight()/2);

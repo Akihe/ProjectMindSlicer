@@ -1,5 +1,6 @@
 package com.mygdx.game.buttons;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -14,7 +15,7 @@ public class LevelLoungeButton extends Actor {
 
 
     public LevelLoungeButton() {
-        playTexture = new Texture("LevelUPButton.png");
+        playTexture = new Texture(Gdx.files.internal("levelupbutton.png"));
 
         setWidth(playTexture.getWidth()/2);
         setHeight(playTexture.getHeight()/2);

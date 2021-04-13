@@ -32,7 +32,7 @@ public class Main extends Game {
 		batch = new SpriteBatch();
 		setScreen(new mainMenuScreen(this));
 
-		font = new BitmapFont(Gdx.files.internal("Chilanka-Regular.fnt"));
+		font = new BitmapFont();
 		font.getData().setScale(2);
 	}
 

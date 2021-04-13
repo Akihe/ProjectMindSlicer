@@ -27,7 +27,7 @@ public class GameOverScreen implements Screen {
 private levelsButton levelsButton;
 
     public GameOverScreen(Main host) {
-        BACKGROUND = new Texture("GameOver.png");
+        BACKGROUND = new Texture("gameover.png");
 
         this.host = host;
         batch = host.batch;
