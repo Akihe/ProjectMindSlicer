@@ -1,5 +1,6 @@
 package com.mygdx.game.buttons;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -35,12 +36,19 @@ public class returnButton extends Actor {
         public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
             if (position.equals("Settings")) {
                 settings.setMainMenuScreen();
-            }
-            if (position.equals("LevelSelect")) {
+
+            } else if (position.equals("LevelSelect")) {
                 levelSelect.setMainMenu();
-            }
-            if (position.equals("LevelUP")) {
+
+            } else if (position.equals("LevelUP")) {
                 mainMenuScreen.setPlayScreen();
+
+            } else if (position.equals("LevelUP")) {
+                mainMenuScreen.setPlayScreen();
+
+            } else if (position.equals("ingameSettings")) {
+                level1.table.setVisible(false);
+               // Gdx.input.setInputProcessor();
             }
             return true;
         }

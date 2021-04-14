@@ -26,7 +26,7 @@ public class playerActor extends Actor {
     public static int MONEY = 500;
     public int enemyAttacksAfter;
     public static int PLAYER_DEF;
-    public static boolean shield_ON= false;
+    public static boolean shield_ON = false;
     public static boolean playerActionDone = false;
 
     public static int statPointsBought = 0;
@@ -46,22 +46,22 @@ public class playerActor extends Actor {
     }
 
     public void updateStats(){
-        PLAYER_ATK=defaultValues.currentAttack;
-        PLAYER_DEF=defaultValues.currentDefence;
+        PLAYER_ATK = defaultValues.currentAttack;
+        PLAYER_DEF = defaultValues.currentDefence;
     }
 
     public void resetStats(){
-        PLAYER_ATK=defaultValues.playerAttack;
+        PLAYER_ATK = defaultValues.playerAttack;
     }
 //Liitetty reducehealth metodi pelaajalle myös. Voiko käyttää samaa metodia jos sen tekee uuteen luokkaan, ja kutsuu arvoja mm this.health (täytyy tehdä olio-ohjelmoinnilla parent olio, jolla on attribbutti HEALTH)
     public void reduceHealth(int damageTaken) {
-        if (shield_ON==true){
-            damageTaken=damageTaken/3;
-            shield_ON=false;
+        if (shield_ON){
+            damageTaken = damageTaken / 3;
+            shield_ON = false;
         }
-        int totalDamage=PLAYER_DEF-damageTaken;
-        if(totalDamage>=0){
-            totalDamage=-1;
+        int totalDamage = PLAYER_DEF-damageTaken;
+        if(totalDamage >= 0){
+            totalDamage = -1;
 
         }
         this.PLAYER_HEALTH = this.PLAYER_HEALTH + totalDamage;
@@ -121,6 +121,7 @@ public class playerActor extends Actor {
 
         level1.enemy.reduceHealth(PLAYER_ATK);
         playerActionDone = true;
+        enemyActor.allowPlayerAttack = false;
         enemyAttacksAfter = 4;
     }
 

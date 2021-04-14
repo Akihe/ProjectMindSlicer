@@ -30,8 +30,9 @@ public class enemyActor extends Actor {
     private String healthAmount;
     private int ATK_damage = 20;
     private int ENEMY_DEF = 5;
-    public static Random attackRoll=new Random();
+    public static Random attackRoll = new Random();
     public static int AttackNRO;
+    public static boolean allowPlayerAttack = true;
 
     public enemyActor() {
         enemyTexture = new Texture(Gdx.files.internal("monster2.png"));
@@ -45,10 +46,9 @@ public class enemyActor extends Actor {
 
     public void reduceHealth(int damageTaken) {
 
-        int totalDamage=ENEMY_DEF-damageTaken;
-        if(totalDamage>=0){
-            totalDamage=-1;
-
+        int totalDamage = ENEMY_DEF - damageTaken;
+        if(totalDamage >= 0){
+            totalDamage = -1;
         }
         this.ENEMY_HEALTH = this.ENEMY_HEALTH + totalDamage;
         healthAmount = "" + ENEMY_HEALTH;
@@ -77,6 +77,7 @@ public class enemyActor extends Actor {
     }
 
     public void enemyHit() {
+        int attackLength = 3;
         SequenceAction sequenceAction = new SequenceAction();
 
         MoveToAction moveAction = new MoveToAction();
@@ -91,22 +92,16 @@ public class enemyActor extends Actor {
 
         sequenceAction.addAction(moveAction);
         sequenceAction.addAction(moveBack);
-/*
-        enemyActor.this.addAction(sequence(sequenceAction, run(new Runnable() {
-            public void run () {
-                playerActor.playerActionDone = false;
-            }
-        })));
-
- */
 
         enemyActor.this.addAction(sequenceAction);
         level1.player.reduceHealth(ATK_damage);
         playerActor.playerActionDone = false;
+        allowPlayerToAttack(attackLength);
 
     }
 
     public void enemyBuff() {
+        int attackLength = 3;
         SequenceAction Think_Action = new SequenceAction();
 
         MoveToAction moveUpAction = new MoveToAction();
@@ -140,10 +135,13 @@ public class enemyActor extends Actor {
         int buffAmount = 5;
         ATK_damage += buffAmount;
         playerActor.playerActionDone = false;
+        allowPlayerToAttack(attackLength);
+
     }
 
 
     public void majorAttack() {
+        int attackLength = 3;
         SequenceAction sequenceAction = new SequenceAction();
 
         MoveToAction moveAction = new MoveToAction();
@@ -166,6 +164,7 @@ public class enemyActor extends Actor {
 
         level1.player.reduceHealth(50);
         playerActor.playerActionDone = false;
+        allowPlayerToAttack(attackLength);
     }
 
     public void randomAttack() {
@@ -178,17 +177,18 @@ public class enemyActor extends Actor {
     }
 
 
-/*
-    public void allowPlayerAttack(int delay) {
-        int timer = 0;
-        timer += Gdx.graphics.getDeltaTime();
+    public void allowPlayerToAttack(int delay) {
 
-        if (timer > delay) {
-        }
+        Timer.schedule(new Timer.Task() {
+            @Override
+            public void run() {
+                allowPlayerAttack = true;
+            }
+        }, delay);
+
     }
 
 
- */
 
     public void enemyDie() {
 

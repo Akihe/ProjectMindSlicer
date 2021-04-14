@@ -34,7 +34,7 @@ public class actionButton extends Actor {
 
         @Override
         public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-            if (!playerActor.playerActionDone) {
+            if (!playerActor.playerActionDone && enemyActor.allowPlayerAttack) {
                 player.hitAction();
             }
             return true;

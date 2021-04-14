@@ -57,7 +57,7 @@ public class statsPlusMinus extends Actor {
                 playerActor.MONEY -= cost;
                 playerActor.statPointsBought++;
 
-            } else if (usage.equals("attackMinus") && playerActor.statPointsBought > 0 && playerActor.PLAYER_ATK > defaultValues.playerAttack) {
+            } else if (usage.equals("attackMinus") && playerActor.PLAYER_ATK > defaultValues.playerAttack) {
                 defaultValues.currentAttack -= 10;
                 playerActor.MONEY += cost;
                 playerActor.statPointsBought--;
@@ -67,7 +67,7 @@ public class statsPlusMinus extends Actor {
                 playerActor.MONEY -= cost;
                 playerActor.statPointsBought++;
 
-            } else if (usage.equals("defenceMinus") && playerActor.statPointsBought > 0 && playerActor.PLAYER_DEF > defaultValues.playerDefence) {
+            } else if (usage.equals("defenceMinus") && playerActor.PLAYER_DEF > defaultValues.playerDefence) {
                 defaultValues.currentDefence -= 5;
                 playerActor.MONEY += cost;
                 playerActor.statPointsBought--;
