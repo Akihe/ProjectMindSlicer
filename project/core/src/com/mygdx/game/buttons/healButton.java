@@ -5,21 +5,19 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.mygdx.game.*;
-import com.mygdx.game.screens.*;
+import com.mygdx.game.playerActor;
+import com.mygdx.game.screens.level1;
 
-
-public class thinkButton extends Actor {
+public class healButton extends Actor{
 
     private final Texture texture;
     playerActor player;
 
-    public thinkButton() {
-        texture = new Texture("coffee_cup.png");
-
+    public healButton() {
+        texture = new Texture("sweet_health.png");
         setWidth(texture.getWidth());
         setHeight(texture.getHeight());
-        setBounds(80, 320, getWidth(), getHeight());
+        setBounds(235, 230, getWidth(), getHeight());
 
         player = level1.player;
 
@@ -34,10 +32,9 @@ public class thinkButton extends Actor {
 
         @Override
         public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-            if (!playerActor.playerActionDone && enemyActor.allowPlayerAttack) {
-                player.thinkAction();
-            }
+            player.MunkkiHeal();
             return true;
         }
     }
 }
+
