@@ -29,11 +29,13 @@ public class level1 implements Screen {
     private actionButton actionbutton;
     private thinkButton thinkbutton;
     private shieldButton shieldButton;
-    private HealButton HealButton;
+    private healButton healbutton;
     private settingsIngameButton settingsingame;
     kidActor kid;
     public static Table table;
     Container<Table> tableContainer;
+    boolean winScreenShown = false;
+    Dialog dialog;
 
 
     Skin skin;
@@ -73,8 +75,8 @@ public class level1 implements Screen {
         shieldButton = new shieldButton();
         gameStage.addActor(shieldButton);
 
-        HealButton = new HealButton();
-        gameStage.addActor(HealButton);
+        healbutton = new healButton();
+        gameStage.addActor(healbutton);
 
         kid = new kidActor();
         gameStage.addActor(kid);
@@ -82,15 +84,20 @@ public class level1 implements Screen {
         settingsingame = new settingsIngameButton(skin);
         gameStage.addActor(settingsingame);
         settingsTable();
+        winPopup();
+
     }
 
     public void winPopup() {
-
-        Dialog dialog = new Dialog("Congratz!", skin, "window-popup") {
+        dialog = new Dialog("Congratz!", skin, "window-popup") {
             public void result(Object obj) {
                 Gdx.app.log("nappi ", "nappi" + obj);
-                if(obj.equals(true)){
-                    mainMenuScreen.setPlayScreen();
+
+
+
+                if (obj.equals(true)) {
+                    dialog.setVisible(false);
+
                 }
             }
         };
@@ -100,6 +107,7 @@ public class level1 implements Screen {
         dialog.pack();
         dialog.setPosition(Main.WORLD_WIDTH/4f, Main.WORLD_HEIGHT/4f);
         gameStage.addActor(dialog);
+        dialog.setVisible(false);
     }
 
     @Override
@@ -127,21 +135,25 @@ public class level1 implements Screen {
             kid.appear();
             defaultValues.levelInd=0;
 
+
             float delay = 2;
             Timer.schedule(new Timer.Task() {
                 @Override
                 public void run() {
                     gameStage.getActors().removeValue(enemy, true);
+                    player.resetPlayer();
                 }
             }, delay);
 
-            Timer.schedule(new Timer.Task() {
-                @Override
-                public void run() {
-                    winPopup();
-                }
-            }, delay*2);
-
+            if (!winScreenShown) {
+                Timer.schedule(new Timer.Task() {
+                    @Override
+                    public void run() {
+                        dialog.setVisible(true);
+                        winScreenShown = true;
+                    }
+                }, delay*2);
+            }
         }
 
     }
@@ -164,7 +176,6 @@ public class level1 implements Screen {
 
         table.add(returni);
         table.row();
-
 
         table.setFillParent(true);
 

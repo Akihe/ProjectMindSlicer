@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.mygdx.game.enemyActor;
 import com.mygdx.game.playerActor;
 import com.mygdx.game.screens.level1;
 
@@ -33,7 +34,9 @@ public class shieldButton extends Actor {
 
         @Override
         public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-            player.superShield();
+            if (!playerActor.playerActionDone && enemyActor.allowPlayerAttack) {
+                player.superShield();
+            }
             return true;
         }
     }

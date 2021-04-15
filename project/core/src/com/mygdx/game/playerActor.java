@@ -168,9 +168,9 @@ public class playerActor extends Actor {
         enemyAttacksAfter = 3;
     }
     public void resetPlayer() {
-        playerTexture = recentTexture;
-        setWidth(playerTexture.getWidth());
-        setHeight(playerTexture.getHeight());
+            playerTexture = recentTexture;
+            setWidth(playerTexture.getWidth());
+            setHeight(playerTexture.getHeight());
     }
 
     public void thinkAction() {
@@ -214,8 +214,8 @@ public class playerActor extends Actor {
 
          */
 
-        double ATK_RISE = PLAYER_ATK*1.5;
-        PLAYER_ATK= (int) ATK_RISE;
+        double ATK_RISE = PLAYER_ATK * 1.5;
+        PLAYER_ATK = (int) ATK_RISE;
         playerActionDone = true;
         enemyAttacksAfter = 3;
 
