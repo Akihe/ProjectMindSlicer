@@ -21,6 +21,7 @@ public class levelSelect implements Screen {
     private Image background;
 
     level1Button level1button;
+    level2Button level2Button;
     returnButton returnBtn;
     LevelLoungeButton LevelLoungeButton;
 
@@ -32,12 +33,17 @@ public class levelSelect implements Screen {
         gameStage = new Stage(new StretchViewport(Main.WORLD_WIDTH,Main.WORLD_HEIGHT));
         Gdx.input.setInputProcessor(gameStage);
 
+        defaultValues.levelInd=0;
+
         backgroundTexture = new Texture("mainmenu_screen.png");
         background = new Image(backgroundTexture);
         background.setPosition(0, 0);
 
         level1button = new level1Button();
         gameStage.addActor(level1button);
+
+        level2Button= new level2Button();
+        gameStage.addActor(level2Button);
 
         returnBtn = new returnButton(100f,100f, "LevelSelect");
         gameStage.addActor((returnBtn));
@@ -49,6 +55,10 @@ public class levelSelect implements Screen {
 
     public static void setLevel1() {
         host.setScreen(new level1(host));
+    }
+
+    public static void setLevel2() {
+        host.setScreen(new level2(host));
     }
 
     public static void setLevelUP() {

@@ -5,8 +5,12 @@ public class defaultValues {
     //Use these when creating a new character (we should implement these later on, not just yet)
     //Example = int currentPlayerAttack = defaultvalues.playerAttack;
 
+    public static int levelInd;
+    //index used for player actor to see which level the player is on(for enemy's damage taken)
+
+
     //Starting values for the player
-    public final static int startingMoney = 500;
+    public static int startingMoney = 500;
     public final static int playerAttack = 20;
     public final static int playerDefence = 5;
 

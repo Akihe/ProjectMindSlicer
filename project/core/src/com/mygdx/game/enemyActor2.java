@@ -22,23 +22,23 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.run;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 
 
-public class enemyActor extends Actor {
+public class enemyActor2 extends Actor {
 
     private Texture enemyTexture;
 
-    public int ENEMY_HEALTH = 100;
+    public int ENEMY_HEALTH = 150;
     private String healthAmount;
-    private int ATK_damage = 20;
-    private int ENEMY_DEF = 5;
+    private int ATK_damage = 40;
+    private int ENEMY_DEF = 15;
     public static Random attackRoll = new Random();
     public static int AttackNRO;
     public static boolean allowPlayerAttack = true;
 
-    public enemyActor() {
+    public enemyActor2() {
         enemyTexture = new Texture(Gdx.files.internal("monster2.png"));
 
-        setWidth(enemyTexture.getWidth()/3f);
-        setHeight(enemyTexture.getHeight()/3f);
+        setWidth(enemyTexture.getWidth()/2);
+        setHeight(enemyTexture.getHeight()/2);
         setBounds(550,40, getWidth(), getHeight());
 
         healthAmount = "" + ENEMY_HEALTH;
@@ -55,7 +55,7 @@ public class enemyActor extends Actor {
 
     }
     public void chooseAttack(){
-       AttackNRO = attackRoll.nextInt(100);
+        AttackNRO = attackRoll.nextInt(100);
     }
 
     @Override
@@ -93,10 +93,9 @@ public class enemyActor extends Actor {
         sequenceAction.addAction(moveAction);
         sequenceAction.addAction(moveBack);
 
-        enemyActor.this.addAction(sequenceAction);
+        enemyActor2.this.addAction(sequenceAction);
 
-            level1.player.reduceHealth(ATK_damage);
-
+        level2.player.reduceHealth(ATK_damage);
         playerActor.playerActionDone = false;
         allowPlayerToAttack(attackLength);
 
@@ -130,11 +129,11 @@ public class enemyActor extends Actor {
         Think_Action.addAction(moveUpAction);
         Think_Action.addAction(moveBackDown);
 
-        enemyActor.this.addAction(Think_Action);
+        enemyActor2.this.addAction(Think_Action);
 
 
 
-        int buffAmount = 5;
+        int buffAmount = 10;
         ATK_damage += buffAmount;
         playerActor.playerActionDone = false;
         allowPlayerToAttack(attackLength);
@@ -162,13 +161,9 @@ public class enemyActor extends Actor {
         sequenceAction.addAction(moveAction);
         sequenceAction.addAction(rotateAction);
         sequenceAction.addAction(moveBack);
-        enemyActor.this.addAction(sequenceAction);
+        enemyActor2.this.addAction(sequenceAction);
 
-
-            level1.player.reduceHealth(50);
-
-
-       // level1.player.reduceHealth(50);
+        level2.player.reduceHealth(50);
         playerActor.playerActionDone = false;
         allowPlayerToAttack(attackLength);
     }
@@ -198,10 +193,10 @@ public class enemyActor extends Actor {
 
     public void enemyDie() {
 
-            SequenceAction fadeOut = new SequenceAction();
-            fadeOut.addAction((Actions.fadeOut(2)));
-            enemyActor.this.addAction(fadeOut);
+        SequenceAction fadeOut = new SequenceAction();
+        fadeOut.addAction((Actions.fadeOut(2)));
+        enemyActor2.this.addAction(fadeOut);
 
-      //  playerActor.MONEY =playerActor.MONEY+50; !!!!
+        //  playerActor.MONEY =playerActor.MONEY+50; !!!!
     }
 }

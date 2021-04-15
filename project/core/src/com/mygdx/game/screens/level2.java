@@ -36,10 +36,10 @@ public class level2 implements Screen {
 
     private final Stage gameStage;
     public static playerActor player;
-    public static enemyActor enemy;
+    public static enemyActor2 enemy;
 
     public level2(Main host) {
-
+defaultValues.levelInd=2;
         BACKGROUND = new Texture("taustakoulu.png");
 
         this.host = host;
@@ -53,7 +53,7 @@ public class level2 implements Screen {
         player = new playerActor();
         gameStage.addActor(player);
 
-        enemy = new enemyActor();
+        enemy = new enemyActor2();
         gameStage.addActor(enemy);
 
         actionbutton = new actionButton();
@@ -99,6 +99,7 @@ public class level2 implements Screen {
     @Override
     public void render(float delta) {
 
+        defaultValues.levelInd=2;
         Gdx.gl.glClearColor(0, 0, 0, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
@@ -122,6 +123,8 @@ public class level2 implements Screen {
         if(enemy.ENEMY_HEALTH <= 0){
             enemy.enemyDie();
             kid.appear();
+           defaultValues.levelInd=0;
+            defaultValues.startingMoney= defaultValues.startingMoney+500;
 
             float delay = 2;
             Timer.schedule(new Timer.Task() {
@@ -136,6 +139,7 @@ public class level2 implements Screen {
         if(player.PLAYER_HEALTH<=0){
             player.resetStats();
             host.setScreen(new GameOverScreen(host));
+            defaultValues.levelInd=0;
         }
 
         gameStage.act();

@@ -23,7 +23,7 @@ public class playerActor extends Actor {
 
     public static int PLAYER_ATK;
 
-    public static int MONEY = 500;
+    public static int MONEY = defaultValues.startingMoney;
     public int enemyAttacksAfter;
     public static int PLAYER_DEF;
     public static boolean shield_ON = false;
@@ -120,6 +120,7 @@ public class playerActor extends Actor {
         //playerActor.this.addAction(sequenceAction);
 
         level1.enemy.reduceHealth(PLAYER_ATK);
+
         playerActionDone = true;
         enemyActor.allowPlayerAttack = false;
         enemyAttacksAfter = 4;

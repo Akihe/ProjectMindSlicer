@@ -46,6 +46,7 @@ public class level1 implements Screen {
     public static enemyActor enemy;
 
     public level1(Main host) {
+        defaultValues.levelInd=1;
         skin = new Skin(Gdx.files.internal("test-skin.json"));
         BACKGROUND = new Texture("taustakoulu.png");
 
@@ -88,11 +89,14 @@ public class level1 implements Screen {
         Dialog dialog = new Dialog("Congratz!", skin, "window-popup") {
             public void result(Object obj) {
                 Gdx.app.log("nappi ", "nappi" + obj);
+                if(obj.equals(true)){
+                    mainMenuScreen.setPlayScreen();
+                }
             }
         };
         dialog.text(winner);
         dialog.button("Okay", true); //sends "true" as the result
-        dialog.button("esim. nappi", false); //sends "false" as the result
+      //  dialog.button("esim. nappi", false); //sends "false" as the result
         dialog.pack();
         dialog.setPosition(Main.WORLD_WIDTH/4f, Main.WORLD_HEIGHT/4f);
         gameStage.addActor(dialog);
@@ -119,7 +123,9 @@ public class level1 implements Screen {
 
         if(enemy.ENEMY_HEALTH <= 0){
             enemy.enemyDie();
+         player.MONEY= player.MONEY+500;
             kid.appear();
+            defaultValues.levelInd=0;
 
             float delay = 2;
             Timer.schedule(new Timer.Task() {
