@@ -21,7 +21,11 @@ public class thinkButton extends Actor {
         setHeight(texture.getHeight());
         setBounds(80, 320, getWidth(), getHeight());
 
-        player = level1.player;
+        if (defaultValues.levelInd == 1) {
+            player = level1.player;
+        } else if (defaultValues.levelInd == 2) {
+            player = level2.player;
+        }
 
         addListener(new PlayerListener());
     }

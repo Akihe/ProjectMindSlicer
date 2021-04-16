@@ -2,7 +2,7 @@ package com.mygdx.game;
 
 public class defaultValues {
 
-    //Use these when creating a new character (we should implement these later on, not just yet)
+    //Use these when creating a new character
     //Example = int currentPlayerAttack = defaultvalues.playerAttack;
 
     public static int levelInd;

@@ -94,31 +94,6 @@ public class playerActor extends Actor {
         setWidth(playerTexture.getWidth());
         setHeight(playerTexture.getHeight());
 
-
-        SequenceAction sequenceAction = new SequenceAction();
-
-        MoveToAction moveAction = new MoveToAction();
-        MoveToAction moveBack = new MoveToAction();
-        RotateToAction rotateAction = new RotateToAction();
-        RotateToAction rotateBackAction = new RotateToAction();
-
-        moveAction.setPosition(300f, 40f);
-        moveAction.setDuration(1f);
-        moveBack.setPosition(20f, 40f);
-        moveBack.setDuration(1f);
-
-        rotateAction.setRotation(-360f);
-        rotateAction.setDuration(0.8f);
-        rotateBackAction.setRotation(0f);
-        rotateBackAction.setDuration(0.01f);
-
-        sequenceAction.addAction(moveAction);
-        sequenceAction.addAction(rotateAction);
-        sequenceAction.addAction(rotateBackAction);
-        sequenceAction.addAction(moveBack);
-
-        //playerActor.this.addAction(sequenceAction);
-
         level1.enemy.reduceHealth(PLAYER_ATK);
 
         playerActionDone = true;

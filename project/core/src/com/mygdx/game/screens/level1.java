@@ -48,7 +48,7 @@ public class level1 implements Screen {
     public static enemyActor enemy;
 
     public level1(Main host) {
-        defaultValues.levelInd=1;
+        defaultValues.levelInd = 1;
         skin = new Skin(Gdx.files.internal("test-skin.json"));
         BACKGROUND = new Texture("taustakoulu.png");
 
@@ -93,8 +93,6 @@ public class level1 implements Screen {
             public void result(Object obj) {
                 Gdx.app.log("nappi ", "nappi" + obj);
 
-
-
                 if (obj.equals(true)) {
                     dialog.setVisible(false);
 
@@ -128,13 +126,15 @@ public class level1 implements Screen {
                 player.resetPlayer();
             }
         }
+    }
+
+    public void loseCheck() {
 
         if(enemy.ENEMY_HEALTH <= 0){
             enemy.enemyDie();
-         player.MONEY= player.MONEY+500;
+            player.MONEY = player.MONEY + 500;
             kid.appear();
-            defaultValues.levelInd=0;
-
+            defaultValues.levelInd = 0;
 
             float delay = 2;
             Timer.schedule(new Timer.Task() {
@@ -156,6 +156,10 @@ public class level1 implements Screen {
             }
         }
 
+        if(player.PLAYER_HEALTH<=0){
+            player.resetStats();
+            host.setScreen(new GameOverScreen(host));
+        }
     }
 
     public void settingsTable() {
@@ -197,14 +201,8 @@ public class level1 implements Screen {
         gameStage.getBatch().draw(BACKGROUND,0,0,Main.WORLD_WIDTH,Main.WORLD_HEIGHT);
         gameStage.getBatch().end();
 
-
         fight();
 
-
-        if(player.PLAYER_HEALTH<=0){
-            player.resetStats();
-            host.setScreen(new GameOverScreen(host));
-        }
 
         gameStage.act();
         gameStage.draw();

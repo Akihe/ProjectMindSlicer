@@ -5,8 +5,11 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.mygdx.game.defaultValues;
+import com.mygdx.game.enemyActor;
 import com.mygdx.game.playerActor;
 import com.mygdx.game.screens.level1;
+import com.mygdx.game.screens.level2;
 
 public class healButton extends Actor{
 
@@ -19,7 +22,11 @@ public class healButton extends Actor{
         setHeight(texture.getHeight());
         setBounds(235, 230, getWidth(), getHeight());
 
-        player = level1.player;
+        if (defaultValues.levelInd == 1) {
+            player = level1.player;
+        } else if (defaultValues.levelInd == 2) {
+            player = level2.player;
+        }
 
         addListener(new PlayerListener());
     }
@@ -32,7 +39,9 @@ public class healButton extends Actor{
 
         @Override
         public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-            player.MunkkiHeal();
+            if (!playerActor.playerActionDone && enemyActor.allowPlayerAttack) {
+                player.MunkkiHeal();
+            }
             return true;
         }
     }

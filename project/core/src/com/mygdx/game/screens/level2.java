@@ -39,7 +39,8 @@ public class level2 implements Screen {
     public static enemyActor2 enemy;
 
     public level2(Main host) {
-defaultValues.levelInd=2;
+        defaultValues.levelInd = 2;
+
         BACKGROUND = new Texture("taustakoulu.png");
 
         this.host = host;

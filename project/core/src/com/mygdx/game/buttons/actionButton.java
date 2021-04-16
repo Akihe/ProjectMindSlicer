@@ -20,7 +20,11 @@ public class actionButton extends Actor {
         setHeight(playTexture.getHeight());
         setBounds(20, 230, getWidth(), getHeight());
 
-        player = level1.player;
+        if (defaultValues.levelInd == 1) {
+            player = level1.player;
+        } else if (defaultValues.levelInd == 2) {
+            player = level2.player;
+        }
 
         addListener(new PlayerListener());
     }

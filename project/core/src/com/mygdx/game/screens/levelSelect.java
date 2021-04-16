@@ -20,6 +20,7 @@ public class levelSelect implements Screen {
     private Texture backgroundTexture;
     private Image background;
 
+
     level1Button level1button;
     level2Button level2Button;
     returnButton returnBtn;
@@ -42,7 +43,7 @@ public class levelSelect implements Screen {
         level1button = new level1Button();
         gameStage.addActor(level1button);
 
-        level2Button= new level2Button();
+        level2Button = new level2Button();
         gameStage.addActor(level2Button);
 
         returnBtn = new returnButton(100f,100f, "LevelSelect");

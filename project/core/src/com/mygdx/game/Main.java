@@ -23,6 +23,7 @@ public class Main extends Game {
 	public static final int WORLD_WIDTH = 800;
 	public static final int WORLD_HEIGHT = 480;
 
+
 	public SpriteBatch getBatch() {
 		return batch;
 	}
