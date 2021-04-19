@@ -5,7 +5,15 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Window;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.mygdx.game.buttons.*;
 import com.mygdx.game.*;
@@ -18,12 +26,16 @@ public class settings implements Screen {
     SpriteBatch batch;
     private Stage gameStage;
     private Texture BACKGROUND;
+    Skin skin;
+    private Window window;
+    private Table table;
 
     private returnButton returnbutton;
 
     public settings(final Main host) {
         this.host = host;
         batch = host.batch;
+        skin = host.skin;
 
         gameStage = new Stage(new StretchViewport(Main.WORLD_WIDTH,Main.WORLD_HEIGHT));
         Gdx.input.setInputProcessor(gameStage);
@@ -32,13 +44,63 @@ public class settings implements Screen {
 
         returnbutton = new returnButton(100f, 100f, "Settings");
         gameStage.addActor(returnbutton);
+        languageButton();
     }
 
     public static void setMainMenuScreen() {
         host.setScreen(new mainMenuScreen(host));
     }
 
-        @Override
+    private void languageButton() {
+        TextButton textbtn;
+        textbtn = new TextButton("Change to Finnish", skin);
+
+        textbtn.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                host.setToFinnish();
+                Gdx.app.log("nappi", "painettu");
+            }
+        });
+
+        textbtn.setPosition(250f, 200f);
+        gameStage.addActor(textbtn);
+    }
+
+
+
+    public void createTable() {
+        table = new Table();
+        table.setSize(Gdx.graphics.getWidth() / 2
+                , Gdx.graphics.getHeight() / 5);
+        window = new Window("", skin);
+        window.setSize(table.getWidth(), table.getHeight());
+
+        Button btnWindow = new Button(skin);
+        btnWindow.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                window.setVisible(false);
+            }
+        });
+        window.add(btnWindow);
+        btnWindow.setSize(50, 50);
+        btnWindow.setPosition(window.getWidth() - btnWindow.getWidth()
+                , window.getHeight() - btnWindow.getHeight());
+
+        table.add(window);
+
+        window.setModal(true);
+        table.setPosition(Gdx.graphics.getWidth() / 2 - window.getWidth() / 2
+                , Gdx.graphics.getHeight() / 2 - window.getHeight() / 2 +
+                        100);
+        window.addAction(Actions.sequence(Actions.alpha(0)
+                , Actions.fadeIn(1f)));
+        gameStage.addActor(table);
+    }
+
+
+    @Override
     public void show() {
 
     }

@@ -108,7 +108,6 @@ public class playerActor extends Actor {
         setWidth(playerTexture.getWidth());
         setHeight(playerTexture.getHeight());
 
-
         shield_ON = true;
 
         playerActionDone = true;
@@ -122,7 +121,6 @@ public class playerActor extends Actor {
 
         setWidth(playerTexture.getWidth());
         setHeight(playerTexture.getHeight());
-
 
         PLAYER_HEALTH = PLAYER_HEALTH + 25;
         playerActionDone = true;
@@ -146,7 +144,6 @@ public class playerActor extends Actor {
         PLAYER_ATK = (int) ATK_RISE;
         playerActionDone = true;
         enemyAttacksAfter = 3;
-
     }
 
 }

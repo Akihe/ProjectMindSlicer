@@ -25,7 +25,9 @@ public class Main extends Game {
 
 	public static final int WORLD_WIDTH = 800;
 	public static final int WORLD_HEIGHT = 480;
-	public static Skin skin;
+	public Skin skin;
+	public static Locale locale;
+
 
 	public SpriteBatch getBatch() {
 		return batch;
@@ -38,6 +40,8 @@ public class Main extends Game {
 		skin = new Skin(Gdx.files.internal("skin.json"));
 
 		font = skin.getFont("chilanka-normal");
+		locale = new Locale("en_US");
+
 	}
 
 	/*
@@ -50,15 +54,22 @@ public class Main extends Game {
 		return generator.generateFont(parameter);
 	}
 
-	 */
+						*/
 
-	// String text = getLevelText("level1");
+	public static final void setToEnglish() {
+		locale = new Locale("en_US");
+	}
+
+	public static final void setToFinnish() {
+		locale = new Locale("fi_FI");
+	}
+
+
+		// String text = getLevelText("level1");
 	public static final String getLevelText(String key) {
 		// Kysy käyttikseltä millä kielellä mennään
-		Locale locale = Locale.getDefault();
-
 		I18NBundle myBundle =
-				I18NBundle.createBundle(Gdx.files.internal("MyBundle"), "UTF-8");
+				I18NBundle.createBundle(Gdx.files.internal("MyBundle"), locale, "utf-8");
 		return myBundle.get(key);
 	}
 

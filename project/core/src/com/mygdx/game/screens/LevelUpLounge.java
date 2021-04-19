@@ -72,7 +72,7 @@ public class LevelUpLounge implements Screen {
         statsBtn = new statsButton();
         gameStage.addActor(statsBtn);
 
-        skin = Main.skin;
+        skin = host.skin;
 
         upgradeTable();
 

@@ -39,12 +39,12 @@ public class levelSelect implements Screen {
         this.host = host;
         batch = host.batch;
 
-        skin = Main.skin;
+        skin = host.skin;
         gameStage = new Stage(new StretchViewport(Main.WORLD_WIDTH,Main.WORLD_HEIGHT));
         Gdx.input.setInputProcessor(gameStage);
         open = Main.getLevelText("startingDialog");
 
-        defaultValues.levelInd=0;
+        defaultValues.levelInd = 0;
 
         backgroundTexture = new Texture("mainmenu_screen.png");
         background = new Image(backgroundTexture);
@@ -53,8 +53,8 @@ public class levelSelect implements Screen {
         level1button = new level1Button();
         gameStage.addActor(level1button);
 
-      //  level2Button = new level2Button();
-       // gameStage.addActor(level2Button);
+        level2Button = new level2Button();
+        gameStage.addActor(level2Button);
 
         returnBtn = new returnButton(100f,100f, "LevelSelect");
         gameStage.addActor((returnBtn));
@@ -66,7 +66,6 @@ public class levelSelect implements Screen {
     }
 
     private void openingDialog() {
-        Label test = new Label(open, skin);
 
         dialog = new Dialog("Työhakemus", skin, "default") {
             public void result(Object obj) {
@@ -117,7 +116,6 @@ public class levelSelect implements Screen {
 
         gameStage.act();
         gameStage.draw();
-
 
     }
 

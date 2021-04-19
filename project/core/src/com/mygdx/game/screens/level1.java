@@ -49,13 +49,13 @@ public class level1 implements Screen {
 
     public level1(Main host) {
         defaultValues.levelInd = 1;
-        skin = new Skin(Gdx.files.internal("skin.json"));
+        skin = host.skin;
         BACKGROUND = new Texture("taustakoulu.png");
 
         this.host = host;
         batch = host.batch;
 
-        winner = Main.getLevelText("winner");
+        winner = host.getLevelText("winner");
 
         this.gameStage = new Stage(new StretchViewport(Main.WORLD_WIDTH,Main.WORLD_HEIGHT));
         Gdx.input.setInputProcessor(gameStage);
@@ -84,29 +84,29 @@ public class level1 implements Screen {
         settingsingame = new settingsIngameButton(skin);
         gameStage.addActor(settingsingame);
         settingsTable();
+        openingDialog();
         winPopup();
     }
+    private void openingDialog() {
+        String introduceKid = host.getLevelText("kid1");
 
-    public void openingDialog() {
-        Label test = new Label(winner, skin);
-
-        dialog = new Dialog("Congratz!", skin, "default") {
+        dialog = new Dialog("Työhakemus", skin, "default") {
             public void result(Object obj) {
                 Gdx.app.log("nappi ", "nappi" + obj);
+
                 if (obj.equals(true)) {
                     dialog.setVisible(false);
                 }
             }
         };
-        dialog.text(winner);
+        dialog.text(introduceKid);
         dialog.button("Okay", true); //sends "true" as the result
         //  dialog.button("esim. nappi", false); //sends "false" as the result
         dialog.pack();
         dialog.setPosition(Main.WORLD_WIDTH/4f, Main.WORLD_HEIGHT/4f);
         gameStage.addActor(dialog);
-        dialog.setVisible(false);
-
     }
+
 
     public void winPopup() {
         dialog = new Dialog("Congratz!", skin, "default") {
