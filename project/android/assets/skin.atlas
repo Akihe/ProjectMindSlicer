@@ -1,0 +1,52 @@
+
+skin.png
+size: 512,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Chilanka-Regular
+  rotate: false
+  xy: 1, 255
+  size: 505, 145
+  orig: 505, 145
+  offset: 0, 0
+  index: -1
+buttonproto1
+  rotate: false
+  xy: 1, 133
+  size: 120, 120
+  split: 30, 57, 64, 46
+  pad: 32, 59, 66, 47
+  orig: 120, 120
+  offset: 0, 0
+  index: -1
+chilanka-normal
+  rotate: false
+  xy: 1, 402
+  size: 506, 103
+  orig: 506, 103
+  offset: 0, 0
+  index: -1
+dialog4
+  rotate: false
+  xy: 1, 1
+  size: 50, 62
+  split: 14, 14, 28, 10
+  pad: 14, 14, 31, 13
+  orig: 50, 62
+  offset: 0, 0
+  index: -1
+silent_mode1
+  rotate: false
+  xy: 1, 65
+  size: 57, 66
+  orig: 57, 66
+  offset: 0, 0
+  index: -1
+speaker_fullsound2
+  rotate: false
+  xy: 123, 187
+  size: 57, 66
+  orig: 57, 66
+  offset: 0, 0
+  index: -1

@@ -6,7 +6,10 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.mygdx.game.buttons.*;
 import com.mygdx.game.*;
@@ -20,6 +23,11 @@ public class levelSelect implements Screen {
     private Texture backgroundTexture;
     private Image background;
 
+    Dialog dialog;
+    Skin skin;
+
+    String open;
+
 
     level1Button level1button;
     level2Button level2Button;
@@ -31,8 +39,10 @@ public class levelSelect implements Screen {
         this.host = host;
         batch = host.batch;
 
+        skin = Main.skin;
         gameStage = new Stage(new StretchViewport(Main.WORLD_WIDTH,Main.WORLD_HEIGHT));
         Gdx.input.setInputProcessor(gameStage);
+        open = Main.getLevelText("startingDialog");
 
         defaultValues.levelInd=0;
 
@@ -43,8 +53,8 @@ public class levelSelect implements Screen {
         level1button = new level1Button();
         gameStage.addActor(level1button);
 
-        level2Button = new level2Button();
-        gameStage.addActor(level2Button);
+      //  level2Button = new level2Button();
+       // gameStage.addActor(level2Button);
 
         returnBtn = new returnButton(100f,100f, "LevelSelect");
         gameStage.addActor((returnBtn));
@@ -52,6 +62,27 @@ public class levelSelect implements Screen {
         LevelLoungeButton = new LevelLoungeButton();
         gameStage.addActor(LevelLoungeButton);
 
+        openingDialog();
+    }
+
+    private void openingDialog() {
+        Label test = new Label(open, skin);
+
+        dialog = new Dialog("Työhakemus", skin, "default") {
+            public void result(Object obj) {
+                Gdx.app.log("nappi ", "nappi" + obj);
+
+                if (obj.equals(true)) {
+                    dialog.setVisible(false);
+                }
+            }
+        };
+        dialog.text(open);
+        dialog.button("Okay", true); //sends "true" as the result
+        //  dialog.button("esim. nappi", false); //sends "false" as the result
+        dialog.pack();
+        dialog.setPosition(Main.WORLD_WIDTH/4f, Main.WORLD_HEIGHT/4f);
+        gameStage.addActor(dialog);
     }
 
     public static void setLevel1() {

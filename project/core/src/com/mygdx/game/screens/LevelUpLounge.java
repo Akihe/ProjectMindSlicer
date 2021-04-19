@@ -72,7 +72,7 @@ public class LevelUpLounge implements Screen {
         statsBtn = new statsButton();
         gameStage.addActor(statsBtn);
 
-        skin = new Skin(Gdx.files.internal("test-skin.json"));
+        skin = Main.skin;
 
         upgradeTable();
 
@@ -80,8 +80,8 @@ public class LevelUpLounge implements Screen {
 
     public void upgradeTable() {
         Drawable background = skin.getDrawable("dialog4");
-        attackValue = playerActor.PLAYER_ATK;
-        defenceValue = playerActor.PLAYER_DEF;
+        attackValue = defaultValues.currentAttack;
+        defenceValue = defaultValues.currentDefence;
 
         attackLabel = new Label(" Attack : " + attackValue, skin);
         defenceLabel = new Label(" Defence : " + defenceValue, skin);
@@ -91,7 +91,7 @@ public class LevelUpLounge implements Screen {
         Container<Table> tableContainer = new Container<Table>();
         tableContainer.setSize(Main.WORLD_WIDTH / 2f, Main.WORLD_HEIGHT / 2f);
         tableContainer.setPosition(Main.WORLD_WIDTH / 4f, Main.WORLD_HEIGHT / 4f);
-        tableContainer.fillX();
+      //  tableContainer.fillX();
 
         table = new Table(skin);
 
@@ -104,9 +104,9 @@ public class LevelUpLounge implements Screen {
 
         table.add(moneyLabel);
         table.row().pad(5f);
-        table.add(attackMinus, attackLabel, attackPlus).pad(50f);
+        table.add(attackMinus, attackLabel, attackPlus);
         table.row();
-        table.add(defenceMinus, defenceLabel, defencePlus).pad(100f);
+        table.add(defenceMinus, defenceLabel, defencePlus);
 
         table.setFillParent(true);
 
@@ -123,8 +123,8 @@ public class LevelUpLounge implements Screen {
  //Dialog dialog is initialized on the top
         //boolean value for showing popup is changed to true in the render call
         stage = new Stage();
-        Skin skin = new Skin(Gdx.files.internal("test-skin.json"));
-         dialog = new Dialog("Welcome", skin, "window-popup") {
+        Skin skin = new Skin(Gdx.files.internal("skin.json"));
+         dialog = new Dialog("Welcome", skin, "default") {
             public void result(Object obj) {
                 if(obj.equals(true)){
                     dialog.setVisible(false);
@@ -151,8 +151,6 @@ public class LevelUpLounge implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-
 
         updateStats();
 

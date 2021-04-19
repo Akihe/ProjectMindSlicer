@@ -15,11 +15,11 @@ public class LevelLoungeButton extends Actor {
 
 
     public LevelLoungeButton() {
-        playTexture = new Texture(Gdx.files.internal("nappia.png"));
+        playTexture = new Texture(Gdx.files.internal("loungebtn.png"));
 
-        setWidth(playTexture.getWidth()/2);
-        setHeight(playTexture.getHeight()/2);
-        setBounds(265, 400, getWidth()*2, getHeight()*2);
+        setWidth(playTexture.getWidth());
+        setHeight(playTexture.getHeight());
+        setBounds(265, 330, getWidth(), getHeight());
 
         addListener(new PlayerListener());
     }

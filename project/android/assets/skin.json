@@ -1,16 +1,10 @@
 {
 com.badlogic.gdx.graphics.g2d.BitmapFont: {
 	chilanka-header: {
-		file: chilanka-header.fnt
-	}
-	Chilanka-Regular: {
 		file: Chilanka-Regular.fnt
 	}
-	Lato-Bold: {
-		file: Lato-Bold.fnt
-	}
-	Lato-Regular: {
-		file: Lato-Regular.fnt
+	chilanka-normal: {
+		file: chilanka-normal.fnt
 	}
 }
 com.badlogic.gdx.graphics.Color: {
@@ -21,46 +15,29 @@ com.badlogic.gdx.graphics.Color: {
 		a: 1
 	}
 }
-com.badlogic.gdx.scenes.scene2d.ui.CheckBox$CheckBoxStyle: {
-	default: {
-		checkboxOn: silent_mode
-		checkboxOff: speaker_fullsound
-		font: Lato-Regular
-	}
-}
-com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton$ImageTextButtonStyle: {
-	default: {
-		font: Lato-Regular
-	}
-}
 com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
 	default: {
-		font: Lato-Regular
+		font: chilanka-normal
 	}
 }
 com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle: {
 	default: {
-		font: Lato-Regular
+		font: chilanka-normal
 		fontColorSelected: RGBA_0_0_0_255
 		fontColorUnselected: RGBA_0_0_0_255
-		selection: silent_mode
-	}
-}
-com.badlogic.gdx.scenes.scene2d.ui.ProgressBar$ProgressBarStyle: {
-	default-horizontal: {
-		background: dialog
+		selection: buttonproto1
 	}
 }
 com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
 	default: {
-		font: Lato-Bold
+		font: chilanka-normal
 		up: buttonproto1
 		down: buttonproto1
 	}
 }
 com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle: {
 	default: {
-		font: Lato-Regular
+		font: chilanka-normal
 		fontColor: RGBA_0_0_0_255
 	}
 }
@@ -74,10 +51,6 @@ com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle: {
 		background: dialog4
 		titleFont: chilanka-header
 		titleFontColor: RGBA_0_0_0_255
-	}
-	window-popup: {
-		background: dialog
-		titleFont: Lato-Regular
 	}
 }
 }

@@ -42,7 +42,6 @@ public class playerActor extends Actor {
         setHeight(playerTexture.getHeight());
         setBounds(100,40, getWidth(), getHeight());
 
-        addListener(new PlayerListener());
     }
 
     public void updateStats(){
@@ -110,22 +109,9 @@ public class playerActor extends Actor {
         setHeight(playerTexture.getHeight());
 
 
-        shield_ON=true;
-        /*
-        SequenceAction sequenceAction = new SequenceAction();
-        RotateToAction rotateAction = new RotateToAction();
-        RotateToAction rotateBackAction = new RotateToAction();
+        shield_ON = true;
 
-        rotateAction.setRotation(360f);
-        rotateAction.setDuration(0.8f);
-        rotateBackAction.setRotation(0f);
-        rotateBackAction.setDuration(0.01f);
-
-        sequenceAction.addAction(rotateAction);
-        sequenceAction.addAction(rotateBackAction);
-
-         */
-        playerActionDone=true;
+        playerActionDone = true;
         enemyAttacksAfter = 3;
     }
 
@@ -156,39 +142,6 @@ public class playerActor extends Actor {
         setWidth(playerTexture.getWidth());
         setHeight(playerTexture.getHeight());
 
-
-        /*
-        SequenceAction Think_Action = new SequenceAction();
-
-        MoveToAction moveUpAction = new MoveToAction();
-        MoveToAction moveBackDown = new MoveToAction();
-        RotateToAction rotateLeftAction = new RotateToAction();
-        RotateToAction rotateRightAction = new RotateToAction();
-        RotateToAction rotateBackAction = new RotateToAction();
-
-        moveUpAction.setPosition(20f, 120f);
-        moveUpAction.setDuration(0.2f);
-        moveBackDown.setPosition(20f, 40f);
-        moveBackDown.setDuration(0.1f);
-
-        rotateLeftAction.setRotation(15f);
-        rotateLeftAction.setDuration(0.4f);
-        rotateRightAction.setRotation(-15f);
-        rotateRightAction.setDuration(0.4f);
-        rotateBackAction.setRotation(0f);
-        rotateBackAction.setDuration(0.1f);
-
-        Think_Action.addAction(rotateLeftAction);
-        Think_Action.addAction(rotateRightAction);
-        Think_Action.addAction(rotateBackAction);
-        Think_Action.addAction(moveUpAction);
-        Think_Action.addAction(moveBackDown);
-
-        playerActor.this.addAction(Think_Action);
-
-
-         */
-
         double ATK_RISE = PLAYER_ATK * 1.5;
         PLAYER_ATK = (int) ATK_RISE;
         playerActionDone = true;
@@ -196,11 +149,4 @@ public class playerActor extends Actor {
 
     }
 
-    public class PlayerListener extends InputListener {
-
-
-        public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-            return true;
-        }
-    }
 }

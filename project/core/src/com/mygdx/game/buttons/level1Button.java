@@ -15,7 +15,7 @@ public class level1Button extends Actor {
     private final Texture texture;
 
     public level1Button() {
-        texture = new Texture("level1.png");
+        texture = new Texture("yksi.png");
 
         setWidth(texture.getWidth());
         setHeight(texture.getHeight());
