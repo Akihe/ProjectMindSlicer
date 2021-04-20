@@ -17,7 +17,7 @@ public class healButton extends Actor{
     playerActor player;
 
     public healButton() {
-        texture = new Texture("munkki.png");
+        texture = new Texture("sweet_health.png");
         setWidth(texture.getWidth());
         setHeight(texture.getHeight());
         setBounds(235, 230, getWidth(), getHeight());

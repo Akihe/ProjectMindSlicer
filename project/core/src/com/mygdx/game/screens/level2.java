@@ -36,7 +36,7 @@ public class level2 implements Screen {
 
     private final Stage gameStage;
     public static playerActor player;
-    public static enemyActor2 enemy;
+    public static enemyActor enemy;
 
     public level2(Main host) {
         defaultValues.levelInd = 2;
@@ -54,7 +54,7 @@ public class level2 implements Screen {
         player = new playerActor();
         gameStage.addActor(player);
 
-        enemy = new enemyActor2();
+        enemy = new enemyActor(2);
         gameStage.addActor(enemy);
 
         actionbutton = new actionButton();

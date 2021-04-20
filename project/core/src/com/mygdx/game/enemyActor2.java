@@ -35,6 +35,7 @@ public class enemyActor2 extends Actor {
     public static boolean allowPlayerAttack = true;
 
     public enemyActor2() {
+
         enemyTexture = new Texture(Gdx.files.internal("monster2.png"));
 
         setWidth(enemyTexture.getWidth()/2);

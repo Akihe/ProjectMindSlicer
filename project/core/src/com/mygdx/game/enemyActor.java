@@ -26,16 +26,32 @@ public class enemyActor extends Actor {
 
     private Texture enemyTexture;
 
-    public int ENEMY_HEALTH = 100;
+    public int ENEMY_HEALTH;
     private String healthAmount;
-    private int ATK_damage = 20;
-    private int ENEMY_DEF = 5;
+    private int ATK_damage;
+    private int ENEMY_DEF;
     public static Random attackRoll = new Random();
     public static int AttackNRO;
     public static boolean allowPlayerAttack = true;
 
-    public enemyActor() {
-        enemyTexture = new Texture(Gdx.files.internal("monster2.png"));
+    public enemyActor(int level) {
+
+        if (level == 1) {
+            enemyTexture = new Texture(Gdx.files.internal("monster2.png"));
+            ENEMY_HEALTH = 100;
+            ATK_damage = 20;
+            ENEMY_DEF = 5;
+        } else if (level == 2) {
+            enemyTexture = new Texture(Gdx.files.internal("monster2.png"));
+            ENEMY_HEALTH = 150;
+            ATK_damage = 40;
+            ENEMY_DEF = 15;
+        } else if (level == 3) {
+            enemyTexture = new Texture(Gdx.files.internal("monster2.png"));
+            ENEMY_HEALTH = 300;
+            ATK_damage = 80;
+            ENEMY_DEF = 30;
+        }
 
         setWidth(enemyTexture.getWidth()/3f);
         setHeight(enemyTexture.getHeight()/3f);

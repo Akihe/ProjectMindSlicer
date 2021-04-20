@@ -17,7 +17,7 @@ public class shieldButton extends Actor {
     playerActor player;
 
     public shieldButton() {
-        texture = new Texture("shield.png");
+        texture = new Texture("shield_icon1.png");
 
         setWidth(texture.getWidth());
         setHeight(texture.getHeight());

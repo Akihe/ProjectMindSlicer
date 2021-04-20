@@ -11,6 +11,14 @@ Chilanka-Regular
   orig: 505, 145
   offset: 0, 0
   index: -1
+button
+  rotate: false
+  xy: 123, 194
+  size: 66, 59
+  split: 17, 17, 15, 17
+  orig: 66, 59
+  offset: 0, 0
+  index: -1
 buttonproto1
   rotate: false
   xy: 1, 133
@@ -27,9 +35,18 @@ chilanka-normal
   orig: 506, 103
   offset: 0, 0
   index: -1
+dialog
+  rotate: false
+  xy: 1, 44
+  size: 70, 87
+  split: 16, 16, 43, 12
+  pad: 16, 16, 48, 12
+  orig: 70, 87
+  offset: 0, 0
+  index: -1
 dialog4
   rotate: false
-  xy: 1, 1
+  xy: 250, 191
   size: 50, 62
   split: 14, 14, 28, 10
   pad: 14, 14, 31, 13
@@ -38,14 +55,14 @@ dialog4
   index: -1
 silent_mode1
   rotate: false
-  xy: 1, 65
+  xy: 123, 126
   size: 57, 66
   orig: 57, 66
   offset: 0, 0
   index: -1
 speaker_fullsound2
   rotate: false
-  xy: 123, 187
+  xy: 191, 187
   size: 57, 66
   orig: 57, 66
   offset: 0, 0

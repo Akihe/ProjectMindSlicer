@@ -61,7 +61,7 @@ public class Main extends Game {
 	}
 
 	public static final void setToFinnish() {
-		locale = new Locale("fi_FI");
+		locale = new Locale("");
 	}
 
 

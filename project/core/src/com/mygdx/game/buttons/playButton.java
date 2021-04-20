@@ -16,10 +16,10 @@ public class playButton extends Actor {
     private final Texture texture;
 
     public playButton() {
-        texture = new Texture(Gdx.files.internal("start_button2.png"));
+        texture = new Texture(Gdx.files.internal("start.png"));
 
-        setWidth(texture.getWidth()/2);
-        setHeight(texture.getHeight()/2);
+        setWidth(texture.getWidth());
+        setHeight(texture.getHeight());
         setBounds(275, 270f, getWidth(), getHeight());
 
         addListener(new PlayerListener());

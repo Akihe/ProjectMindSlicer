@@ -63,7 +63,7 @@ public class level1 implements Screen {
         player = new playerActor();
         gameStage.addActor(player);
 
-        enemy = new enemyActor();
+        enemy = new enemyActor(1);
         gameStage.addActor(enemy);
 
         actionbutton = new actionButton();

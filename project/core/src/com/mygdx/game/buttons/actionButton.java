@@ -14,7 +14,7 @@ public class actionButton extends Actor {
     playerActor player;
 
     public actionButton() {
-        playTexture = new Texture("puhekupla.png");
+        playTexture = new Texture("bubble.png");
 
         setWidth(playTexture.getWidth());
         setHeight(playTexture.getHeight());
