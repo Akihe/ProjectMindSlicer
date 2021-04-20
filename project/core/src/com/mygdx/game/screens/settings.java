@@ -31,11 +31,13 @@ public class settings implements Screen {
     private Table table;
 
     private returnButton returnbutton;
+    String languagebtn;
 
     public settings(final Main host) {
         this.host = host;
         batch = host.batch;
         skin = host.skin;
+        languagebtn = Main.getLevelText("languagebtn");
 
         gameStage = new Stage(new StretchViewport(Main.WORLD_WIDTH,Main.WORLD_HEIGHT));
         Gdx.input.setInputProcessor(gameStage);
@@ -53,13 +55,22 @@ public class settings implements Screen {
 
     private void languageButton() {
         TextButton textbtn;
-        textbtn = new TextButton("Change to Finnish", skin);
+        textbtn = new TextButton(languagebtn, skin);
 
         textbtn.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                host.setToFinnish();
-                Gdx.app.log("nappi", "painettu");
+                if (host.finnish) {
+                    host.setToEnglish();
+                    host.finnish = false;
+                    Gdx.app.log("nappi", "suomeksi");
+                } else if (!host.finnish) {
+                    host.setToFinnish();
+                    host.finnish = true;
+                    Gdx.app.log("nappi", "vaihtuu enkuksi");
+                }
+                gameStage.clear();
+                host.setScreen(new settings(host));
             }
         });
 

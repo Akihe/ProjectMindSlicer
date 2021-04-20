@@ -27,6 +27,7 @@ public class Main extends Game {
 	public static final int WORLD_HEIGHT = 480;
 	public Skin skin;
 	public static Locale locale;
+	public boolean finnish;
 
 
 	public SpriteBatch getBatch() {
@@ -40,21 +41,11 @@ public class Main extends Game {
 		skin = new Skin(Gdx.files.internal("skin.json"));
 
 		font = skin.getFont("chilanka-normal");
-		locale = new Locale("en_US");
+		locale = new Locale("");
+		finnish = true;
+
 
 	}
-
-	/*
-	public BitmapFont generateFont() {
-		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("Chilanka-Regular.ttf"));
-		FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-		parameter.size = 24;
-		parameter.borderColor = Color.BLACK;
-		parameter.borderWidth = 3;
-		return generator.generateFont(parameter);
-	}
-
-						*/
 
 	public static final void setToEnglish() {
 		locale = new Locale("en_US");
