@@ -44,7 +44,6 @@ public class Main extends Game {
 		locale = new Locale("");
 		finnish = true;
 
-
 	}
 
 	public static final void setToEnglish() {

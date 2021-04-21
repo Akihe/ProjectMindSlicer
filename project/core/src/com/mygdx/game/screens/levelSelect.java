@@ -8,7 +8,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.mygdx.game.buttons.*;
@@ -29,8 +28,7 @@ public class levelSelect implements Screen {
     String open;
 
 
-    level1Button level1button;
-    level2Button level2Button;
+    levelButtons levelButtons;
     returnButton returnBtn;
     LevelLoungeButton LevelLoungeButton;
 
@@ -50,11 +48,15 @@ public class levelSelect implements Screen {
         background = new Image(backgroundTexture);
         background.setPosition(0, 0);
 
-        level1button = new level1Button();
-        gameStage.addActor(level1button);
+        levelButtons = new levelButtons(260f, 250f, 1);
+        gameStage.addActor(levelButtons);
 
-        level2Button = new level2Button();
-        gameStage.addActor(level2Button);
+        levelButtons = new levelButtons(360f, 250f, 2);
+        gameStage.addActor(levelButtons);
+
+        levelButtons = new levelButtons(460f, 250f, 3);
+        gameStage.addActor(levelButtons);
+
 
         returnBtn = new returnButton(100f,100f, "LevelSelect");
         gameStage.addActor((returnBtn));
@@ -90,6 +92,10 @@ public class levelSelect implements Screen {
 
     public static void setLevel2() {
         host.setScreen(new level2(host));
+    }
+
+    public static void setLevel3() {
+        host.setScreen(new level3(host));
     }
 
     public static void setLevelUP() {

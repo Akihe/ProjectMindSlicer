@@ -58,7 +58,7 @@ public class statsPlusMinus extends Actor {
                 playerActor.MONEY -= cost;
                 playerActor.statPointsBought++;
 
-            } else if (usage.equals("attackMinus")) {
+            } else if (usage.equals("attackMinus") && defaultValues.currentAttack > defaultValues.playerDefaultAttack) {
                 defaultValues.currentAttack -= 10;
                 playerActor.MONEY += cost;
                 playerActor.statPointsBought--;
@@ -70,7 +70,7 @@ public class statsPlusMinus extends Actor {
                 playerActor.statPointsBought++;
                 Gdx.app.log("plus", "def");
 
-            } else if (usage.equals("defenceMinus") && playerActor.PLAYER_DEF > defaultValues.playerDefence) {
+            } else if (usage.equals("defenceMinus") && playerActor.PLAYER_DEF > defaultValues.playerDefaultDefence) {
                 defaultValues.currentDefence -= 5;
                 playerActor.MONEY += cost;
                 playerActor.statPointsBought--;

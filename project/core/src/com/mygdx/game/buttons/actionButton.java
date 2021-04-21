@@ -24,6 +24,8 @@ public class actionButton extends Actor {
             player = level1.player;
         } else if (defaultValues.levelInd == 2) {
             player = level2.player;
+        } else if (defaultValues.levelInd == 3) {
+
         }
 
         addListener(new PlayerListener());

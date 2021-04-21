@@ -33,20 +33,21 @@ public class enemyActor extends Actor {
     public static Random attackRoll = new Random();
     public static int AttackNRO;
     public static boolean allowPlayerAttack = true;
+    private int currentLevel;
 
     public enemyActor(int level) {
-
-        if (level == 1) {
+        currentLevel = level;
+        if (currentLevel == 1) {
             enemyTexture = new Texture(Gdx.files.internal("monster2.png"));
             ENEMY_HEALTH = 100;
             ATK_damage = 20;
             ENEMY_DEF = 5;
-        } else if (level == 2) {
+        } else if (currentLevel == 2) {
             enemyTexture = new Texture(Gdx.files.internal("monster2.png"));
             ENEMY_HEALTH = 150;
             ATK_damage = 40;
             ENEMY_DEF = 15;
-        } else if (level == 3) {
+        } else if (currentLevel == 3) {
             enemyTexture = new Texture(Gdx.files.internal("monster2.png"));
             ENEMY_HEALTH = 300;
             ATK_damage = 80;
@@ -111,8 +112,13 @@ public class enemyActor extends Actor {
 
         enemyActor.this.addAction(sequenceAction);
 
+        if(currentLevel == 1) {
             level1.player.reduceHealth(ATK_damage);
-
+        } else if (currentLevel == 2) {
+            level2.player.reduceHealth(ATK_damage);
+        } else if (currentLevel == 3) {
+            //level3.player...
+        }
         playerActor.playerActionDone = false;
         allowPlayerToAttack(attackLength);
 
@@ -148,13 +154,10 @@ public class enemyActor extends Actor {
 
         enemyActor.this.addAction(Think_Action);
 
-
-
         int buffAmount = 5;
         ATK_damage += buffAmount;
         playerActor.playerActionDone = false;
         allowPlayerToAttack(attackLength);
-
     }
 
 
@@ -165,7 +168,6 @@ public class enemyActor extends Actor {
         MoveToAction moveAction = new MoveToAction();
         MoveToAction moveBack = new MoveToAction();
 
-
         RotateToAction rotateAction = new RotateToAction();
 
         moveAction.setPosition(300f, 140f);
@@ -174,28 +176,33 @@ public class enemyActor extends Actor {
         moveBack.setPosition(600f, 40f);
         moveBack.setDuration(2.3f);
 
-
         sequenceAction.addAction(moveAction);
         sequenceAction.addAction(rotateAction);
         sequenceAction.addAction(moveBack);
         enemyActor.this.addAction(sequenceAction);
 
-
+        if (currentLevel == 1) {
             level1.player.reduceHealth(50);
+        } else if (currentLevel == 2) {
+            level2.player.reduceHealth(100);
+        } else if (currentLevel == 3) {
+            //level3.player..
+        }
 
-
-       // level1.player.reduceHealth(50);
         playerActor.playerActionDone = false;
         allowPlayerToAttack(attackLength);
     }
 
     public void randomAttack() {
-        if(AttackNRO>=0 && AttackNRO<50){
-            enemyHit();}
-        if(AttackNRO>=50 && AttackNRO<85){
-            enemyBuff();}
-        if(AttackNRO>=85 && AttackNRO<=100){
-            majorAttack();}
+        if(AttackNRO >= 0 && AttackNRO < 40){
+            enemyHit();
+        }
+        if(AttackNRO >= 40 && AttackNRO < 80){
+            enemyBuff();
+        }
+        if(AttackNRO >= 80 && AttackNRO <= 100){
+            majorAttack();
+        }
     }
 
 

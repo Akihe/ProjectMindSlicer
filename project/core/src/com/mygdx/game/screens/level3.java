@@ -17,7 +17,7 @@ import com.mygdx.game.buttons.*;
 import com.mygdx.game.*;
 
 
-public class level2 implements Screen {
+public class level3 implements Screen {
 
     Main host;
     SpriteBatch batch;
@@ -38,11 +38,10 @@ public class level2 implements Screen {
     public static playerActor player;
     public static enemyActor enemy;
 
-    public level2(Main host) {
-        Main.save("player");
-        defaultValues.levelInd = 2;
+    public level3(Main host) {
+        defaultValues.levelInd = 3;
 
-        BACKGROUND = new Texture("puisto.png");
+        BACKGROUND = new Texture("taustakoulu.png");
 
         this.host = host;
         batch = host.batch;
@@ -52,10 +51,10 @@ public class level2 implements Screen {
         this.gameStage = new Stage(new StretchViewport(Main.WORLD_WIDTH,Main.WORLD_HEIGHT));
         Gdx.input.setInputProcessor(gameStage);
 
-        player = new playerActor(2);
+        player = new playerActor(3);
         gameStage.addActor(player);
 
-        enemy = new enemyActor(2);
+        enemy = new enemyActor(3);
         gameStage.addActor(enemy);
 
         actionbutton = new actionButton();
@@ -101,7 +100,6 @@ public class level2 implements Screen {
     @Override
     public void render(float delta) {
 
-        defaultValues.levelInd=2;
         Gdx.gl.glClearColor(0, 0, 0, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
@@ -125,7 +123,6 @@ public class level2 implements Screen {
         if(enemy.ENEMY_HEALTH <= 0){
             enemy.enemyDie();
             kid.appear();
-           defaultValues.levelInd=0;
             defaultValues.startingMoney= defaultValues.startingMoney+500;
 
             float delay = 2;

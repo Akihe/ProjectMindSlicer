@@ -10,16 +10,25 @@ import com.mygdx.game.screens.*;
 
 
 
-public class level1Button extends Actor {
+public class levelButtons extends Actor {
 
-    private final Texture texture;
+    private Texture texture;
+    private int currentLevel;
 
-    public level1Button() {
+    public levelButtons(float xPos, float yPos, int level) {
+        currentLevel = level;
+
         texture = new Texture("yksi.png");
+
+        if (currentLevel == 2) {
+            texture = new Texture("kaksi.png");
+        } else if (currentLevel == 3) {
+            texture = new Texture("kolme.png");
+        }
 
         setWidth(texture.getWidth());
         setHeight(texture.getHeight());
-        setBounds(250, 260f, getWidth(), getHeight());
+        setBounds(xPos, yPos, getWidth(), getHeight());
 
         addListener(new PlayerListener());
     }
@@ -33,8 +42,17 @@ public class level1Button extends Actor {
 
         @Override
         public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-            levelSelect.setLevel1();
-            defaultValues.levelInd=2;
+            if (currentLevel == 1) {
+                levelSelect.setLevel1();
+                defaultValues.levelInd = 1;
+            } else if (currentLevel == 2) {
+                levelSelect.setLevel2();
+                defaultValues.levelInd = 2;
+            } else if (currentLevel == 3) {
+                levelSelect.setLevel3();
+                defaultValues.levelInd = 3;
+            }
+
             return true;
         }
     }

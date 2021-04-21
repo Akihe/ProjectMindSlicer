@@ -4,11 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
-import com.badlogic.gdx.scenes.scene2d.actions.RotateToAction;
-import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.mygdx.game.screens.*;
 
 
@@ -16,7 +11,7 @@ public class playerActor extends Actor {
 
     private Texture playerTexture;
     private Texture hitTexture;
-    private Texture recentTexture;
+    private Texture defaultTexture;
 
     public int PLAYER_HEALTH = 100;
     private String healthAmount;
@@ -28,12 +23,15 @@ public class playerActor extends Actor {
     public static int PLAYER_DEF;
     public static boolean shield_ON = false;
     public static boolean playerActionDone = false;
+    private int currentLevel;
 
     public static int statPointsBought = 0;
 
-    public playerActor() {
-        playerTexture = new Texture(Gdx.files.internal("playercharacter.png"));
+    public playerActor(int level) {
+        defaultTexture = new Texture(Gdx.files.internal("playercharacter.png"));
+        playerTexture = defaultTexture;
         healthAmount = "" + PLAYER_HEALTH;
+        currentLevel = level;
 
         PLAYER_ATK = defaultValues.currentAttack;
         PLAYER_DEF = defaultValues.currentDefence;
@@ -50,7 +48,7 @@ public class playerActor extends Actor {
     }
 
     public void resetStats(){
-        PLAYER_ATK = defaultValues.playerAttack;
+        PLAYER_ATK = defaultValues.playerDefaultAttack;
     }
 //Liitetty reducehealth metodi pelaajalle myös. Voiko käyttää samaa metodia jos sen tekee uuteen luokkaan, ja kutsuu arvoja mm this.health (täytyy tehdä olio-ohjelmoinnilla parent olio, jolla on attribbutti HEALTH)
     public void reduceHealth(int damageTaken) {
@@ -87,13 +85,16 @@ public class playerActor extends Actor {
 
     public void hitAction() {
         hitTexture = new Texture("thumbs_up.png");
-        recentTexture = playerTexture;
         playerTexture = hitTexture;
 
         setWidth(playerTexture.getWidth());
         setHeight(playerTexture.getHeight());
 
-        level1.enemy.reduceHealth(PLAYER_ATK);
+        if(currentLevel == 1) {
+            level1.enemy.reduceHealth(PLAYER_ATK);
+        } else if (currentLevel == 2) {
+            level2.enemy.reduceHealth(PLAYER_ATK);
+        }
 
         playerActionDone = true;
         enemyActor.allowPlayerAttack = false;
@@ -102,7 +103,6 @@ public class playerActor extends Actor {
 
     public void superShield(){
         hitTexture = new Texture("main_def.png");
-        recentTexture = playerTexture;
         playerTexture = hitTexture;
 
         setWidth(playerTexture.getWidth());
@@ -116,7 +116,6 @@ public class playerActor extends Actor {
 
     public void MunkkiHeal(){
         hitTexture = new Texture("sweet_health_buff.png");
-        recentTexture = playerTexture;
         playerTexture = hitTexture;
 
         setWidth(playerTexture.getWidth());
@@ -127,14 +126,13 @@ public class playerActor extends Actor {
         enemyAttacksAfter = 3;
     }
     public void resetPlayer() {
-            playerTexture = recentTexture;
+            playerTexture = defaultTexture;
             setWidth(playerTexture.getWidth());
             setHeight(playerTexture.getHeight());
     }
 
     public void thinkAction() {
         hitTexture = new Texture("drink_coffee_buff1.png");
-        recentTexture = playerTexture;
         playerTexture = hitTexture;
 
         setWidth(playerTexture.getWidth());
@@ -145,5 +143,4 @@ public class playerActor extends Actor {
         playerActionDone = true;
         enemyAttacksAfter = 3;
     }
-
 }

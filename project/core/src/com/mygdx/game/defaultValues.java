@@ -11,8 +11,8 @@ public class defaultValues {
 
     //Starting values for the player
     public static int startingMoney = 500;
-    public final static int playerAttack = 20;
-    public final static int playerDefence = 5;
+    public static final int playerDefaultAttack = 20;
+    public static final int playerDefaultDefence = 5;
 
     public static int currentAttack = 20;
     public static int currentDefence = 5;
@@ -21,6 +21,6 @@ public class defaultValues {
     public static int monsterAttack = 15;
     public static int monsterDefence = 15;
 
-    public static boolean LoungeEntry=false;
+    public static boolean LoungeEntry = false;
 
 }

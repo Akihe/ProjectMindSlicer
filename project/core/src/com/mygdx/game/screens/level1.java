@@ -60,7 +60,7 @@ public class level1 implements Screen {
         this.gameStage = new Stage(new StretchViewport(Main.WORLD_WIDTH,Main.WORLD_HEIGHT));
         Gdx.input.setInputProcessor(gameStage);
 
-        player = new playerActor();
+        player = new playerActor(1);
         gameStage.addActor(player);
 
         enemy = new enemyActor(1);
