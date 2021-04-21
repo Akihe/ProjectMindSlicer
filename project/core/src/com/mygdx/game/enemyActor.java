@@ -35,6 +35,8 @@ public class enemyActor extends Actor {
     public static boolean allowPlayerAttack = true;
     private int currentLevel;
 
+    private Texture buffTexture;
+
     public enemyActor(int level) {
         currentLevel = level;
         if (currentLevel == 1) {
@@ -59,6 +61,8 @@ public class enemyActor extends Actor {
         setBounds(550,40, getWidth(), getHeight());
 
         healthAmount = "" + ENEMY_HEALTH;
+
+        buffTexture = new Texture("bad_words.png");
     }
 
     public void reduceHealth(int damageTaken) {
@@ -117,7 +121,7 @@ public class enemyActor extends Actor {
         } else if (currentLevel == 2) {
             level2.player.reduceHealth(ATK_damage);
         } else if (currentLevel == 3) {
-            //level3.player...
+            level3.player.reduceHealth(ATK_damage);
         }
         playerActor.playerActionDone = false;
         allowPlayerToAttack(attackLength);
