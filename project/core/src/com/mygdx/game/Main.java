@@ -29,7 +29,6 @@ public class Main extends Game {
 	public static Locale locale;
 	public boolean finnish;
 
-
 	public SpriteBatch getBatch() {
 		return batch;
 	}

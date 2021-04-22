@@ -36,7 +36,8 @@ public class level1 implements Screen {
     public static Table table;
     Container<Table> tableContainer;
     boolean winScreenShown = false;
-    Dialog dialog;
+    Dialog openDialog;
+    Dialog winDialog;
 
     Skin skin;
     String winner;
@@ -84,47 +85,48 @@ public class level1 implements Screen {
         settingsingame = new settingsIngameButton(skin);
         gameStage.addActor(settingsingame);
         settingsTable();
-        openingDialog();
         winPopup();
+        openingDialog();
+
     }
     private void openingDialog() {
         String introduceKid = host.getLevelText("kid1");
 
-        dialog = new Dialog("Työhakemus", skin, "default") {
+        openDialog = new Dialog("Työhakemus", skin, "default") {
             public void result(Object obj) {
                 Gdx.app.log("nappi ", "nappi" + obj);
 
                 if (obj.equals(true)) {
-                    dialog.setVisible(false);
+                    openDialog.setVisible(false);
                 }
             }
         };
-        dialog.text(introduceKid);
-        dialog.button("Okay", true); //sends "true" as the result
+        openDialog.text(introduceKid);
+        openDialog.button("Okay", true); //sends "true" as the result
         //  dialog.button("esim. nappi", false); //sends "false" as the result
-        dialog.pack();
-        dialog.setPosition(Main.WORLD_WIDTH/4f, Main.WORLD_HEIGHT/4f);
-        gameStage.addActor(dialog);
+        openDialog.pack();
+        openDialog.setPosition(Main.WORLD_WIDTH/4f, Main.WORLD_HEIGHT/4f);
+        gameStage.addActor(openDialog);
     }
 
 
     public void winPopup() {
-        dialog = new Dialog("Congratz!", skin, "default") {
+        winDialog = new Dialog("Congratz!", skin, "default") {
             public void result(Object obj) {
                 Gdx.app.log("nappi ", "nappi" + obj);
 
                 if (obj.equals(true)) {
-                    dialog.setVisible(false);
+                    winDialog.setVisible(false);
                 }
             }
         };
-        dialog.text(winner);
-        dialog.button("Okay", true); //sends "true" as the result
+        winDialog.text(winner);
+        winDialog.button("Okay", true); //sends "true" as the result
       //  dialog.button("esim. nappi", false); //sends "false" as the result
-        dialog.pack();
-        dialog.setPosition(Main.WORLD_WIDTH/4f, Main.WORLD_HEIGHT/4f);
-        gameStage.addActor(dialog);
-        dialog.setVisible(false);
+        winDialog.pack();
+        winDialog.setPosition(Main.WORLD_WIDTH/4f, Main.WORLD_HEIGHT/4f);
+        gameStage.addActor(winDialog);
+        winDialog.setVisible(false);
     }
 
     @Override
@@ -167,7 +169,7 @@ public class level1 implements Screen {
                 Timer.schedule(new Timer.Task() {
                     @Override
                     public void run() {
-                        dialog.setVisible(true);
+                        winDialog.setVisible(true);
                         winScreenShown = true;
                     }
                 }, delay*2);

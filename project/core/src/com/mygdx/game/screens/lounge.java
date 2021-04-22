@@ -19,7 +19,7 @@ import com.mygdx.game.buttons.*;
 import com.mygdx.game.*;
 
 
-public class LevelUpLounge implements Screen {
+public class lounge implements Screen {
 
     static Main host;
     SpriteBatch batch;
@@ -54,7 +54,7 @@ public class LevelUpLounge implements Screen {
         defenceLabel.setText("Defence : " + defenceValue + "  ");
     }
 
-    public LevelUpLounge(Main host){
+    public lounge(Main host){
         this.host = host;
         batch = host.batch;
 
@@ -62,7 +62,7 @@ public class LevelUpLounge implements Screen {
         gameStage = new Stage(new StretchViewport(Main.WORLD_WIDTH,Main.WORLD_HEIGHT));
         Gdx.input.setInputProcessor(gameStage);
 
-        backgroundTexture = new Texture("level_up.png");
+        backgroundTexture = new Texture("tlounge.png");
         background = new Image(backgroundTexture);
         background.setPosition(0, 0);
 

@@ -27,7 +27,6 @@ public class levelSelect implements Screen {
 
     String open;
 
-
     levelButtons levelButtons;
     returnButton returnBtn;
     LevelLoungeButton LevelLoungeButton;
@@ -99,7 +98,7 @@ public class levelSelect implements Screen {
     }
 
     public static void setLevelUP() {
-        host.setScreen(new LevelUpLounge(host));
+        host.setScreen(new lounge(host));
     }
 
     public static void setMainMenu() {

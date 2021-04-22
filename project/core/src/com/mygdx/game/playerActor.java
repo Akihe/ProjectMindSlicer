@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -22,13 +23,26 @@ public class playerActor extends Actor {
     public int enemyAttacksAfter;
     public static int PLAYER_DEF;
     public static boolean shield_ON = false;
-    public static boolean playerActionDone = false;
+    public static boolean playerActionDone;
     private int currentLevel;
+
+    private Sound buffSound;
+    private Sound hitSound;
+    private Sound healSound;
+    private Sound shieldSound;
+
 
     public static int statPointsBought = 0;
 
     public playerActor(int level) {
+
+        playerActionDone = false;
         defaultTexture = new Texture(Gdx.files.internal("playercharacter.png"));
+
+        buffSound = Gdx.audio.newSound(Gdx.files.internal("sounds/drink.wav"));
+        shieldSound = Gdx.audio.newSound(Gdx.files.internal("sounds/mixdown.wav"));
+        healSound = Gdx.audio.newSound(Gdx.files.internal("sounds/eat.wav"));
+
         playerTexture = defaultTexture;
         healthAmount = "" + PLAYER_HEALTH;
         currentLevel = level;
@@ -52,15 +66,16 @@ public class playerActor extends Actor {
     }
 //Liitetty reducehealth metodi pelaajalle myös. Voiko käyttää samaa metodia jos sen tekee uuteen luokkaan, ja kutsuu arvoja mm this.health (täytyy tehdä olio-ohjelmoinnilla parent olio, jolla on attribbutti HEALTH)
     public void reduceHealth(int damageTaken) {
-        if (shield_ON){
+        if (shield_ON) {
             damageTaken = damageTaken / 3;
             shield_ON = false;
         }
-        int totalDamage = PLAYER_DEF-damageTaken;
-        if(totalDamage >= 0){
-            totalDamage = -1;
 
+        int totalDamage = PLAYER_DEF-damageTaken;
+        if (totalDamage >= 0) {
+            totalDamage = -1;
         }
+
         this.PLAYER_HEALTH = this.PLAYER_HEALTH + totalDamage;
         healthAmount = "" + PLAYER_HEALTH;
 
@@ -90,10 +105,12 @@ public class playerActor extends Actor {
         setWidth(playerTexture.getWidth());
         setHeight(playerTexture.getHeight());
 
-        if(currentLevel == 1) {
+        if (currentLevel == 1) {
             level1.enemy.reduceHealth(PLAYER_ATK);
         } else if (currentLevel == 2) {
             level2.enemy.reduceHealth(PLAYER_ATK);
+        } else if (currentLevel == 3) {
+            level3.enemy.reduceHealth(PLAYER_ATK);
         }
 
         playerActionDone = true;
@@ -102,6 +119,7 @@ public class playerActor extends Actor {
     }
 
     public void superShield(){
+        shieldSound.play();
         hitTexture = new Texture("main_def.png");
         playerTexture = hitTexture;
 
@@ -114,7 +132,7 @@ public class playerActor extends Actor {
         enemyAttacksAfter = 3;
     }
 
-    public void MunkkiHeal(){
+    public void heal(){
         hitTexture = new Texture("sweet_health_buff.png");
         playerTexture = hitTexture;
 
@@ -126,12 +144,13 @@ public class playerActor extends Actor {
         enemyAttacksAfter = 3;
     }
     public void resetPlayer() {
-            playerTexture = defaultTexture;
-            setWidth(playerTexture.getWidth());
-            setHeight(playerTexture.getHeight());
+        playerTexture = defaultTexture;
+        setWidth(playerTexture.getWidth());
+        setHeight(playerTexture.getHeight());
     }
 
     public void thinkAction() {
+        buffSound.play();
         hitTexture = new Texture("drink_coffee_buff1.png");
         playerTexture = hitTexture;
 

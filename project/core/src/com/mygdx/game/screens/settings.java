@@ -47,6 +47,7 @@ public class settings implements Screen {
         returnbutton = new returnButton(100f, 100f, "Settings");
         gameStage.addActor(returnbutton);
         languageButton();
+        //createTable();
     }
 
     public static void setMainMenuScreen() {
@@ -94,6 +95,7 @@ public class settings implements Screen {
                 window.setVisible(false);
             }
         });
+
         window.add(btnWindow);
         btnWindow.setSize(50, 50);
         btnWindow.setPosition(window.getWidth() - btnWindow.getWidth()
