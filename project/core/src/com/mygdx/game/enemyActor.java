@@ -40,24 +40,24 @@ public class enemyActor extends Actor {
     public enemyActor(int level) {
         currentLevel = level;
         if (currentLevel == 1) {
-            enemyTexture = new Texture(Gdx.files.internal("monster2.png"));
+            enemyTexture = new Texture(Gdx.files.internal("rasistimonster.png"));
             ENEMY_HEALTH = 100;
             ATK_damage = 20;
             ENEMY_DEF = 5;
         } else if (currentLevel == 2) {
-            enemyTexture = new Texture(Gdx.files.internal("monster2.png"));
+            enemyTexture = new Texture(Gdx.files.internal("masismonster.png"));
             ENEMY_HEALTH = 150;
             ATK_damage = 40;
             ENEMY_DEF = 15;
         } else if (currentLevel == 3) {
-            enemyTexture = new Texture(Gdx.files.internal("monster2.png"));
+            enemyTexture = new Texture(Gdx.files.internal("moneymonster.png"));
             ENEMY_HEALTH = 300;
             ATK_damage = 80;
             ENEMY_DEF = 30;
         }
 
-        setWidth(enemyTexture.getWidth()/3f);
-        setHeight(enemyTexture.getHeight()/3f);
+        setWidth(enemyTexture.getWidth());
+        setHeight(enemyTexture.getHeight());
         setBounds(550,40, getWidth(), getHeight());
 
         healthAmount = "" + ENEMY_HEALTH;
