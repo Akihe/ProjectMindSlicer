@@ -42,9 +42,9 @@ public class Main extends Game {
 	public void create () {
 		fightMusic = Gdx.audio.newMusic(Gdx.files.internal("sounds/fightmusic.wav"));
 		fightMusic.setLooping(true);
-	//	fightMusic.play();
+		fightMusic.play();
 
-		menuMusic = Gdx.audio.newMusic(Gdx.files.internal("sounds/valikkomusa1.wav"));
+		menuMusic = Gdx.audio.newMusic(Gdx.files.internal("sounds/menumusic.wav"));
 		menuMusic.setLooping(true);
 		menuMusic.play();
 		batch = new SpriteBatch();
