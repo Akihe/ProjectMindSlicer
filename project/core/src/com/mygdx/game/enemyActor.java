@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.actions.AlphaAction;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
 import com.badlogic.gdx.scenes.scene2d.actions.RotateToAction;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
@@ -15,12 +14,6 @@ import com.mygdx.game.screens.*;
 
 
 import java.util.Random;
-
-import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeIn;
-import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeOut;
-import static com.badlogic.gdx.scenes.scene2d.actions.Actions.run;
-import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
-
 
 public class enemyActor extends Actor {
 
@@ -32,12 +25,13 @@ public class enemyActor extends Actor {
     private int ENEMY_DEF;
     public static Random attackRoll = new Random();
     public static int AttackNRO;
-    public static boolean allowPlayerAttack = true;
+    public static boolean allowPlayerAttack;
     private int currentLevel;
 
     private Texture buffTexture;
 
     public enemyActor(int level) {
+        allowPlayerAttack = true;
         currentLevel = level;
         if (currentLevel == 1) {
             enemyTexture = new Texture(Gdx.files.internal("rasistimonster.png"));
@@ -68,7 +62,7 @@ public class enemyActor extends Actor {
     public void reduceHealth(int damageTaken) {
 
         int totalDamage = ENEMY_DEF - damageTaken;
-        if(totalDamage >= 0){
+        if(totalDamage >= 0) {
             totalDamage = -1;
         }
         this.ENEMY_HEALTH = this.ENEMY_HEALTH + totalDamage;

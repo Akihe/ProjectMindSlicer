@@ -3,6 +3,8 @@ package com.mygdx.game;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -29,12 +31,22 @@ public class Main extends Game {
 	public static Locale locale;
 	public boolean finnish;
 
+	public static Music menuMusic;
+	public static Music fightMusic;
+
 	public SpriteBatch getBatch() {
 		return batch;
 	}
 
 	@Override
 	public void create () {
+		fightMusic = Gdx.audio.newMusic(Gdx.files.internal("sounds/fightmusic.wav"));
+		fightMusic.setLooping(true);
+	//	fightMusic.play();
+
+		menuMusic = Gdx.audio.newMusic(Gdx.files.internal("sounds/valikkomusa1.wav"));
+		menuMusic.setLooping(true);
+		menuMusic.play();
 		batch = new SpriteBatch();
 		setScreen(new mainMenuScreen(this));
 		skin = new Skin(Gdx.files.internal("skin.json"));
