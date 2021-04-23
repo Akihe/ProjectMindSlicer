@@ -9,6 +9,9 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -47,7 +50,7 @@ public class settings implements Screen {
         returnbutton = new returnButton(100f, 100f, "Settings");
         gameStage.addActor(returnbutton);
         languageButton();
-        //createTable();
+        createTable();
     }
 
     public static void setMainMenuScreen() {
@@ -79,36 +82,73 @@ public class settings implements Screen {
         gameStage.addActor(textbtn);
     }
 
+    public void infoButton() {
+        TextButton infoOpener;
+        infoOpener = new TextButton("help", skin);
 
+        infoOpener.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                window.setVisible(true);
+            }
+        });
+
+        infoOpener.setPosition(250f, 250f);
+        gameStage.addActor(infoOpener);
+    }
 
     public void createTable() {
+        infoButton();
+
         table = new Table();
-        table.setSize(Gdx.graphics.getWidth() / 2
-                , Gdx.graphics.getHeight() / 5);
+        table.setSize(Main.WORLD_WIDTH, Main.WORLD_HEIGHT);
         window = new Window("", skin);
         window.setSize(table.getWidth(), table.getHeight());
 
-        Button btnWindow = new Button(skin);
-        btnWindow.addListener(new ClickListener() {
+        Image attack = new Image(new Texture("bubble.png"));
+        Label attackText = new Label("Your basic attack,\nincreases inclusion by 15.", skin);
+
+        window.add(attack);
+
+        Image buff = new Image(new Texture("coffee_cup.png"));
+        window.add(buff);
+        Label buffText = new Label("You take a zip of coffee\nand re-focus, making your moves\nincrease inclusion even more", skin);
+        window.row();
+        window.add(attackText);
+        window.add(buffText);
+        window.row();
+
+        Image shield = new Image(new Texture("shield_icon1.png"));
+        Label shieldText = new Label("This will protect you\nfrom the monsters attacks", skin);
+        window.add(shield);
+
+        Image heal = new Image(new Texture("sweet_health.png"));
+        Label healText = new Label("This will make you happier\nand raise your health", skin);
+        window.add(heal);
+        window.row();
+        window.add(shieldText);
+        window.add(healText);
+        window.row();
+
+        TextButton close = new TextButton("close", skin);
+        close.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 window.setVisible(false);
             }
         });
 
-        window.add(btnWindow);
-        btnWindow.setSize(50, 50);
-        btnWindow.setPosition(window.getWidth() - btnWindow.getWidth()
-                , window.getHeight() - btnWindow.getHeight());
+        window.add(close);
+        window.setMovable(false);
+        window.setVisible(false);
 
         table.add(window);
 
         window.setModal(true);
-        table.setPosition(Gdx.graphics.getWidth() / 2 - window.getWidth() / 2
-                , Gdx.graphics.getHeight() / 2 - window.getHeight() / 2 +
-                        100);
-        window.addAction(Actions.sequence(Actions.alpha(0)
+ /*       window.addAction(Actions.sequence(Actions.alpha(0)
                 , Actions.fadeIn(1f)));
+
+  */
         gameStage.addActor(table);
     }
 
