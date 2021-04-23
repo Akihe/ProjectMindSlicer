@@ -50,47 +50,42 @@ public class level1 implements Screen {
 
     public level1(Main host) {
         defaultValues.levelInd = 1;
+        this.host = host;
         skin = host.skin;
+        batch = host.batch;
         BACKGROUND = new Texture("taustakoulu.png");
 
-        this.host = host;
-        batch = host.batch;
-
-        winner = host.getLevelText("winner");
+        winner = Main.getLevelText("winner");
 
         this.gameStage = new Stage(new StretchViewport(Main.WORLD_WIDTH,Main.WORLD_HEIGHT));
         Gdx.input.setInputProcessor(gameStage);
 
         player = new playerActor(1);
-        gameStage.addActor(player);
-
         enemy = new enemyActor(1);
-        gameStage.addActor(enemy);
-
         actionbutton = new actionButton();
-        gameStage.addActor(actionbutton);
-
         thinkbutton = new thinkButton();
-        gameStage.addActor(thinkbutton);
-
         shieldButton = new shieldButton();
-        gameStage.addActor(shieldButton);
-
         healbutton = new healButton();
-        gameStage.addActor(healbutton);
-
         kid = new kidActor();
-        gameStage.addActor(kid);
-
         settingsingame = new settingsIngameButton(skin);
+
+
+        gameStage.addActor(player);
+        gameStage.addActor(enemy);
+        gameStage.addActor(actionbutton);
+        gameStage.addActor(thinkbutton);
+        gameStage.addActor(shieldButton);
+        gameStage.addActor(healbutton);
+        gameStage.addActor(kid);
         gameStage.addActor(settingsingame);
+
         settingsTable();
         winPopup();
         openingDialog();
 
     }
     private void openingDialog() {
-        String introduceKid = host.getLevelText("kid1");
+        String introduceKid = Main.getLevelText("kid1");
 
         openDialog = new Dialog("Työhakemus", skin, "default") {
             public void result(Object obj) {
@@ -99,13 +94,13 @@ public class level1 implements Screen {
                 if (obj.equals(true)) {
                     openDialog.setVisible(false);
                 }
-            }
-        };
+            }};
+
         openDialog.text(introduceKid);
         openDialog.button("Okay", true); //sends "true" as the result
-        //  dialog.button("esim. nappi", false); //sends "false" as the result
         openDialog.pack();
         openDialog.setPosition(Main.WORLD_WIDTH/4f, Main.WORLD_HEIGHT/4f);
+        openDialog.setMovable(false);
         gameStage.addActor(openDialog);
     }
 

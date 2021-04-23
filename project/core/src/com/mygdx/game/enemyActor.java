@@ -33,6 +33,7 @@ public class enemyActor extends Actor {
     public enemyActor(int level) {
         allowPlayerAttack = true;
         currentLevel = level;
+
         if (currentLevel == 1) {
             enemyTexture = new Texture(Gdx.files.internal("rasistimonster.png"));
             ENEMY_HEALTH = 100;
@@ -65,10 +66,11 @@ public class enemyActor extends Actor {
         if(totalDamage >= 0) {
             totalDamage = -1;
         }
+
         this.ENEMY_HEALTH = this.ENEMY_HEALTH + totalDamage;
         healthAmount = "" + ENEMY_HEALTH;
-
     }
+
     public void chooseAttack(){
        AttackNRO = attackRoll.nextInt(100);
     }
@@ -117,6 +119,7 @@ public class enemyActor extends Actor {
         } else if (currentLevel == 3) {
             level3.player.reduceHealth(ATK_damage);
         }
+
         playerActor.playerActionDone = false;
         allowPlayerToAttack(attackLength);
 
@@ -184,7 +187,7 @@ public class enemyActor extends Actor {
         } else if (currentLevel == 2) {
             level2.player.reduceHealth(100);
         } else if (currentLevel == 3) {
-            //level3.player..
+            level3.player.reduceHealth(150);
         }
 
         playerActor.playerActionDone = false;
@@ -192,6 +195,7 @@ public class enemyActor extends Actor {
     }
 
     public void randomAttack() {
+        Gdx.app.log("random", "nro " + AttackNRO);
         if(AttackNRO >= 0 && AttackNRO < 40){
             enemyHit();
         }
@@ -223,6 +227,6 @@ public class enemyActor extends Actor {
             fadeOut.addAction((Actions.fadeOut(2)));
             enemyActor.this.addAction(fadeOut);
 
-      //  playerActor.MONEY =playerActor.MONEY+50; !!!!
+      //  playerActor.MONEY = playerActor.MONEY+50; !!!!
     }
 }

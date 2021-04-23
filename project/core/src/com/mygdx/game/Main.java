@@ -48,12 +48,15 @@ public class Main extends Game {
 		menuMusic.setLooping(true);
 		menuMusic.play();
 		batch = new SpriteBatch();
-		setScreen(new mainMenuScreen(this));
+		open("player");
+
 		skin = new Skin(Gdx.files.internal("skin.json"));
 
 		font = skin.getFont("chilanka-normal");
 		locale = new Locale("");
 		finnish = true;
+
+		setScreen(new mainMenuScreen(this));
 
 	}
 
@@ -69,8 +72,12 @@ public class Main extends Game {
 		// String text = getLevelText("level1");
 	public static final String getLevelText(String key) {
 		// Kysy käyttikseltä millä kielellä mennään
-		I18NBundle myBundle =
+		I18NBundle myBundleFin =
 				I18NBundle.createBundle(Gdx.files.internal("MyBundle"), locale, "utf-8");
+
+		I18NBundle myBundleEng =
+				I18NBundle.createBundle(Gdx.files.internal("MyBundle"), locale, "utf-8");
+
 		return myBundle.get(key);
 	}
 
@@ -79,6 +86,7 @@ public class Main extends Game {
 				Gdx.app.getPreferences("MyPreferencesSetti");  // MyPreferencesSetti.xml
 
 		prefs.putString("name", name);                           // <name>Jack</name>
+		prefs.putInteger("money", playerActor.MONEY);
 		prefs.flush();
 	}
 

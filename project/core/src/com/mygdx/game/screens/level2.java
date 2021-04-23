@@ -9,8 +9,11 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
+import com.badlogic.gdx.scenes.scene2d.ui.Container;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.mygdx.game.buttons.*;
@@ -29,7 +32,11 @@ public class level2 implements Screen {
     private HealButton HealButton;
     kidActor kid;
 
-    Stage stage;
+    Dialog openDialog;
+    Dialog winDialog;
+
+    Skin skin;
+
     String winner;
 
     float timeSinceAttack = 0;
@@ -41,6 +48,7 @@ public class level2 implements Screen {
     public level2(Main host) {
         Main.save("player");
         defaultValues.levelInd = 2;
+        skin = host.skin;
 
         BACKGROUND = new Texture("puisto.png");
 
@@ -72,24 +80,57 @@ public class level2 implements Screen {
 
         kid = new kidActor();
         gameStage.addActor(kid);
+        settingsTable();
 
     }
 
+    public void settingsTable() {
+
+        Drawable background = skin.getDrawable("dialog4");
+
+        Container<Table> tableContainer = new Container<Table>();
+        tableContainer.setSize(Main.WORLD_WIDTH / 2f, Main.WORLD_HEIGHT / 2f);
+        tableContainer.setPosition(Main.WORLD_WIDTH / 4f, Main.WORLD_HEIGHT / 4f);
+        tableContainer.fillX();
+
+        Table table = new Table(skin);
+
+        table.setBackground(background);
+
+        playButton returni = new playButton();
+        returnButton returnbutton = new returnButton(0,0,"ingameSettings");
+
+        table.add(returni);
+        table.row();
+
+        table.setFillParent(true);
+
+        table.setVisible(false);
+        table.setDebug(true);
+        table.add(returnbutton);
+        tableContainer.setActor(table);
+        gameStage.addActor(tableContainer);
+    }
+
+
     public void winPopup() {
 
-        stage = new Stage();
-        Skin skin = new Skin(Gdx.files.internal("test-skin.json"));
-        Dialog dialog = new Dialog("Congratz!", skin, "window-popup") {
+        winDialog = new Dialog("Congratz!", skin, "default") {
             public void result(Object obj) {
                 Gdx.app.log("nappi ", "nappi" + obj);
+
+                if (obj.equals(true)) {
+                    winDialog.setVisible(false);
+                }
             }
         };
-        dialog.text(winner);
-        dialog.button("Okay", true); //sends "true" as the result
-        dialog.button("esim. nappi", false); //sends "false" as the result
-        dialog.pack();
-        dialog.setPosition(Main.WORLD_WIDTH/4f, Main.WORLD_HEIGHT/4f);
-        gameStage.addActor(dialog);
+        winDialog.text(winner);
+        winDialog.button("Okay", true); //sends "true" as the result
+        //  dialog.button("esim. nappi", false); //sends "false" as the result
+        winDialog.pack();
+        winDialog.setPosition(Main.WORLD_WIDTH/4f, Main.WORLD_HEIGHT/4f);
+        gameStage.addActor(winDialog);
+        winDialog.setVisible(false);
     }
 
     @Override

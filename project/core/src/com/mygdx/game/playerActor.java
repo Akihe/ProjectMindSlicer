@@ -47,7 +47,7 @@ public class playerActor extends Actor {
         healthAmount = "" + PLAYER_HEALTH;
         currentLevel = level;
 
-        PLAYER_ATK = defaultValues.currentAttack;
+        PLAYER_ATK = 300;
         PLAYER_DEF = defaultValues.currentDefence;
 
         setWidth(playerTexture.getWidth());
@@ -64,7 +64,7 @@ public class playerActor extends Actor {
     public void resetStats(){
         PLAYER_ATK = defaultValues.playerDefaultAttack;
     }
-//Liitetty reducehealth metodi pelaajalle myös. Voiko käyttää samaa metodia jos sen tekee uuteen luokkaan, ja kutsuu arvoja mm this.health (täytyy tehdä olio-ohjelmoinnilla parent olio, jolla on attribbutti HEALTH)
+
     public void reduceHealth(int damageTaken) {
         if (shield_ON) {
             damageTaken = damageTaken / 3;
@@ -72,13 +72,13 @@ public class playerActor extends Actor {
         }
 
         int totalDamage = PLAYER_DEF-damageTaken;
+
         if (totalDamage >= 0) {
             totalDamage = -1;
         }
 
         this.PLAYER_HEALTH = this.PLAYER_HEALTH + totalDamage;
         healthAmount = "" + PLAYER_HEALTH;
-
     }
 
 

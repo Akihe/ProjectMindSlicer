@@ -10,6 +10,7 @@ import com.mygdx.game.enemyActor;
 import com.mygdx.game.playerActor;
 import com.mygdx.game.screens.level1;
 import com.mygdx.game.screens.level2;
+import com.mygdx.game.screens.level3;
 
 public class healButton extends Actor{
 
@@ -26,6 +27,8 @@ public class healButton extends Actor{
             player = level1.player;
         } else if (defaultValues.levelInd == 2) {
             player = level2.player;
+        } else if (defaultValues.levelInd == 3) {
+            player = level3.player;
         }
 
         addListener(new PlayerListener());

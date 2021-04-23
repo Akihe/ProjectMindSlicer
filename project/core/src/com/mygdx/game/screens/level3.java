@@ -9,8 +9,11 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
+import com.badlogic.gdx.scenes.scene2d.ui.Container;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.mygdx.game.buttons.*;
@@ -32,6 +35,8 @@ public class level3 implements Screen {
     Stage stage;
     String winner;
 
+    Skin skin;
+
     float timeSinceAttack = 0;
 
     private final Stage gameStage;
@@ -40,6 +45,8 @@ public class level3 implements Screen {
 
     public level3(Main host) {
         defaultValues.levelInd = 3;
+
+        skin = host.skin;
 
         BACKGROUND = new Texture("taustakoulu.png");
 
@@ -71,14 +78,44 @@ public class level3 implements Screen {
 
         kid = new kidActor();
         gameStage.addActor(kid);
+        settingsTable();
 
     }
+
+    public void settingsTable() {
+
+        Drawable background = skin.getDrawable("dialog4");
+
+        Container<Table> tableContainer = new Container<Table>();
+        tableContainer.setSize(Main.WORLD_WIDTH / 2f, Main.WORLD_HEIGHT / 2f);
+        tableContainer.setPosition(Main.WORLD_WIDTH / 4f, Main.WORLD_HEIGHT / 4f);
+        tableContainer.fillX();
+
+        Table table = new Table(skin);
+
+        table.setBackground(background);
+
+        playButton returni = new playButton();
+        returnButton returnbutton = new returnButton(0,0,"ingameSettings");
+
+        table.add(returni);
+        table.row();
+
+        table.setFillParent(true);
+
+        table.setVisible(false);
+        table.setDebug(true);
+        table.add(returnbutton);
+        tableContainer.setActor(table);
+        gameStage.addActor(tableContainer);
+    }
+
 
     public void winPopup() {
 
         stage = new Stage();
-        Skin skin = new Skin(Gdx.files.internal("test-skin.json"));
-        Dialog dialog = new Dialog("Congratz!", skin, "window-popup") {
+        Skin skin = new Skin(Gdx.files.internal("skin.json"));
+        Dialog dialog = new Dialog("Congratz!", skin, "default") {
             public void result(Object obj) {
                 Gdx.app.log("nappi ", "nappi" + obj);
             }
