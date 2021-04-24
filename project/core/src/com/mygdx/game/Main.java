@@ -22,14 +22,15 @@ import java.util.Locale;
 
 public class Main extends Game {
 
+	public static boolean finnish;
 	public SpriteBatch batch;
 	public static BitmapFont font;
 
 	public static final int WORLD_WIDTH = 800;
 	public static final int WORLD_HEIGHT = 480;
 	public Skin skin;
-	public static Locale locale;
-	public boolean finnish;
+	public static Locale localeEN;
+	public static Locale localeFI;
 
 	public static Music menuMusic;
 	public static Music fightMusic;
@@ -42,18 +43,19 @@ public class Main extends Game {
 	public void create () {
 		fightMusic = Gdx.audio.newMusic(Gdx.files.internal("sounds/fightmusic.wav"));
 		fightMusic.setLooping(true);
-		fightMusic.play();
 
 		menuMusic = Gdx.audio.newMusic(Gdx.files.internal("sounds/menumusic.wav"));
 		menuMusic.setLooping(true);
 		menuMusic.play();
+
 		batch = new SpriteBatch();
 		open("player");
 
 		skin = new Skin(Gdx.files.internal("skin.json"));
 
 		font = skin.getFont("chilanka-normal");
-		locale = new Locale("");
+		localeEN = new Locale("en_US");
+		localeFI = new Locale("");
 		finnish = true;
 
 		setScreen(new mainMenuScreen(this));
@@ -61,24 +63,27 @@ public class Main extends Game {
 	}
 
 	public static final void setToEnglish() {
-		locale = new Locale("en_US");
+		localeEN = new Locale("en_US");
 	}
 
 	public static final void setToFinnish() {
-		locale = new Locale("");
+		localeFI = new Locale("");
 	}
 
 
 		// String text = getLevelText("level1");
 	public static final String getLevelText(String key) {
 		// Kysy käyttikseltä millä kielellä mennään
-		I18NBundle myBundleFin =
-				I18NBundle.createBundle(Gdx.files.internal("MyBundle"), locale, "utf-8");
 
-		I18NBundle myBundleEng =
-				I18NBundle.createBundle(Gdx.files.internal("MyBundle"), locale, "utf-8");
-
-		return myBundle.get(key);
+		if (finnish) {
+			I18NBundle myBundleFin =
+					I18NBundle.createBundle(Gdx.files.internal("MyBundle"), localeFI, "utf-8");
+			return myBundleFin.get(key);
+		} else {
+			I18NBundle myBundleEng =
+					I18NBundle.createBundle(Gdx.files.internal("MyBundle"), localeEN, "utf-8");
+			return myBundleEng.get(key);
+		}
 	}
 
 	public static void save(String name) {

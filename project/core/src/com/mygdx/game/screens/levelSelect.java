@@ -27,7 +27,10 @@ public class levelSelect implements Screen {
 
     String open;
 
-    levelButtons levelButtons;
+    levelButtons levelButton1;
+    levelButtons levelButton2;
+    levelButtons levelButton3;
+
     returnButton returnBtn;
     LevelLoungeButton LevelLoungeButton;
 
@@ -41,20 +44,25 @@ public class levelSelect implements Screen {
         Gdx.input.setInputProcessor(gameStage);
         open = Main.getLevelText("startingDialog");
 
+        Main.fightMusic.stop();
+        if (defaultValues.musicOn) {
+            Main.menuMusic.play();
+        }
+
         defaultValues.levelInd = 0;
 
         backgroundTexture = new Texture("mainmenu_screen.png");
         background = new Image(backgroundTexture);
         background.setPosition(0, 0);
 
-        levelButtons = new levelButtons(260f, 250f, 1);
-        gameStage.addActor(levelButtons);
+        levelButton1 = new levelButtons(260f, 250f, 1);
+        gameStage.addActor(levelButton1);
 
-        levelButtons = new levelButtons(360f, 250f, 2);
-        gameStage.addActor(levelButtons);
+        levelButton2 = new levelButtons(360f, 250f, 2);
+        gameStage.addActor(levelButton2);
 
-        levelButtons = new levelButtons(460f, 250f, 3);
-        gameStage.addActor(levelButtons);
+        levelButton3 = new levelButtons(460f, 250f, 3);
+        gameStage.addActor(levelButton3);
 
 
         returnBtn = new returnButton(100f,100f, "LevelSelect");
@@ -64,6 +72,10 @@ public class levelSelect implements Screen {
         gameStage.addActor(LevelLoungeButton);
 
         openingDialog();
+        if (!defaultValues.introShown) {
+            dialog.setVisible(true);
+            defaultValues.introShown = true;
+        }
     }
 
     private void openingDialog() {
@@ -82,6 +94,7 @@ public class levelSelect implements Screen {
         //  dialog.button("esim. nappi", false); //sends "false" as the result
         dialog.pack();
         dialog.setPosition(Main.WORLD_WIDTH/4f, Main.WORLD_HEIGHT/4f);
+        dialog.setVisible(false);
         gameStage.addActor(dialog);
     }
 

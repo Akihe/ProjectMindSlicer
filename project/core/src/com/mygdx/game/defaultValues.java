@@ -22,5 +22,7 @@ public class defaultValues {
     public static int monsterDefence = 15;
 
     public static boolean LoungeEntry = false;
+    public static boolean introShown = false;
+    public static boolean musicOn = true;
 
 }

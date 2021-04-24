@@ -5,22 +5,21 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.mygdx.game.buttons.*;
 import com.mygdx.game.*;
-import com.mygdx.game.screens.*;
 
 
 public class settings implements Screen {
@@ -35,6 +34,7 @@ public class settings implements Screen {
 
     private returnButton returnbutton;
     String languagebtn;
+    CheckBox musicCheckBox;
 
     public settings(final Main host) {
         this.host = host;
@@ -64,13 +64,11 @@ public class settings implements Screen {
         textbtn.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if (host.finnish) {
-                    host.setToEnglish();
-                    host.finnish = false;
+                if (Main.finnish) {
+                    Main.finnish = false;
                     Gdx.app.log("nappi", "suomeksi");
-                } else if (!host.finnish) {
-                    host.setToFinnish();
-                    host.finnish = true;
+                } else {
+                    Main.finnish = true;
                     Gdx.app.log("nappi", "vaihtuu enkuksi");
                 }
                 gameStage.clear();
@@ -93,7 +91,7 @@ public class settings implements Screen {
             }
         });
 
-        infoOpener.setPosition(250f, 250f);
+        infoOpener.setPosition(350f, 280f);
         gameStage.addActor(infoOpener);
     }
 
@@ -150,6 +148,27 @@ public class settings implements Screen {
 
   */
         gameStage.addActor(table);
+
+        musicCheckBox = new CheckBox("music", skin);
+
+        musicCheckBox.setBounds(350f, 350f, musicCheckBox.getWidth(), musicCheckBox.getHeight());
+
+        musicCheckBox.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                if (musicCheckBox.isChecked()) {
+                    defaultValues.musicOn = false;
+                    Gdx.app.log("music", "pois");
+                    Main.menuMusic.stop();
+                } else if (!musicCheckBox.isChecked()) {
+                    defaultValues.musicOn = true;
+                    Gdx.app.log("music", "päälle");
+                    Main.menuMusic.play();
+                }
+            }
+        });
+
+        gameStage.addActor(musicCheckBox);
     }
 
 

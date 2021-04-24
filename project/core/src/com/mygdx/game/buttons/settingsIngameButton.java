@@ -4,33 +4,32 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Container;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.mygdx.game.*;
-import com.mygdx.game.screens.*;
 
 public class settingsIngameButton extends Actor {
 
     private final Texture texture;
-    playerActor player;
     Skin skin;
-    public static Table table;
     public static Stage stage;
     soundOnOff soundonoff;
     Container<Table> tableContainer;
+    Table table;
+    Stage oldStage;
 
-    public settingsIngameButton(Skin skin1) {
+    public settingsIngameButton(Skin skin1, Stage gameStage) {
         texture = new Texture("asetusnappi.png");
         skin = skin1;
+        oldStage = gameStage;
 
         stage = new Stage(new StretchViewport(Main.WORLD_WIDTH,Main.WORLD_HEIGHT));
 
@@ -38,20 +37,19 @@ public class settingsIngameButton extends Actor {
         setHeight(texture.getHeight()/4f);
         setBounds(730, 410, getWidth(), getHeight());
 
-        player = level1.player;
-      //  settingsTable();
+        settingsTable();
         addListener(new PlayerListener());
 
         soundonoff = new soundOnOff();
     }
 
     public void draw(Batch batch, float alpha) {
-        batch.draw(texture, this.getX(), this.getY(), getWidth(), getHeight());
-
         stage.act();
         stage.draw();
+        batch.draw(texture, this.getX(), this.getY(), getWidth(), getHeight());
+
     }
-/*
+
     public void settingsTable() {
 
         Drawable background = skin.getDrawable("dialog4");
@@ -66,30 +64,34 @@ public class settingsIngameButton extends Actor {
         table.setBackground(background);
 
         playButton returni = new playButton();
-        returnButton returnbutton = new returnButton(0,0,"ingameSettings");
+        TextButton close = new TextButton("close", skin);
+        close.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                table.setVisible(false);
+                Gdx.input.setInputProcessor(oldStage);
+            }
+        });
 
         table.add(returni);
         table.row();
-
 
         table.setFillParent(true);
 
         table.setVisible(false);
         table.setDebug(true);
-        table.add(returnbutton);
+        table.add(close);
         tableContainer.setActor(table);
         stage.addActor(tableContainer);
     }
-
- */
 
 
         class PlayerListener extends InputListener {
 
         @Override
         public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-            level1.table.setVisible(true);
-            //Gdx.input.setInputProcessor(stage);
+            table.setVisible(true);
+            Gdx.input.setInputProcessor(stage);
             return true;
         }
     }

@@ -55,9 +55,14 @@ public class level1 implements Screen {
         batch = host.batch;
         BACKGROUND = new Texture("taustakoulu.png");
 
+        Main.menuMusic.stop();
+        if (defaultValues.musicOn) {
+            Main.fightMusic.play();
+        }
+
         winner = Main.getLevelText("winner");
 
-        this.gameStage = new Stage(new StretchViewport(Main.WORLD_WIDTH,Main.WORLD_HEIGHT));
+        gameStage = new Stage(new StretchViewport(Main.WORLD_WIDTH,Main.WORLD_HEIGHT));
         Gdx.input.setInputProcessor(gameStage);
 
         player = new playerActor(1);
@@ -67,7 +72,7 @@ public class level1 implements Screen {
         shieldButton = new shieldButton();
         healbutton = new healButton();
         kid = new kidActor();
-        settingsingame = new settingsIngameButton(skin);
+        settingsingame = new settingsIngameButton(skin, gameStage);
 
 
         gameStage.addActor(player);
@@ -79,10 +84,8 @@ public class level1 implements Screen {
         gameStage.addActor(kid);
         gameStage.addActor(settingsingame);
 
-        settingsTable();
         winPopup();
         openingDialog();
-
     }
     private void openingDialog() {
         String introduceKid = Main.getLevelText("kid1");
@@ -176,7 +179,7 @@ public class level1 implements Screen {
             host.setScreen(new GameOverScreen(host));
         }
     }
-
+/*
     public void settingsTable() {
 
         Drawable background = skin.getDrawable("dialog4");
@@ -205,6 +208,8 @@ public class level1 implements Screen {
         gameStage.addActor(tableContainer);
     }
 
+
+ */
 
     @Override
     public void render(float delta) {
@@ -249,5 +254,6 @@ public class level1 implements Screen {
     public void dispose() {
         batch.dispose();
         gameStage.dispose();
+        Main.menuMusic.dispose();
     }
 }
