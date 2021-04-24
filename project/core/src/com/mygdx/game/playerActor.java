@@ -129,6 +129,7 @@ public class playerActor extends Actor {
         shield_ON = true;
 
         playerActionDone = true;
+        enemyActor.allowPlayerAttack = false;
         enemyAttacksAfter = 3;
     }
 
@@ -141,6 +142,7 @@ public class playerActor extends Actor {
 
         PLAYER_HEALTH = PLAYER_HEALTH + 25;
         playerActionDone = true;
+        enemyActor.allowPlayerAttack = false;
         enemyAttacksAfter = 3;
     }
     public void resetPlayer() {
@@ -160,6 +162,7 @@ public class playerActor extends Actor {
         double ATK_RISE = PLAYER_ATK * 1.5;
         PLAYER_ATK = (int) ATK_RISE;
         playerActionDone = true;
+        enemyActor.allowPlayerAttack = false;
         enemyAttacksAfter = 3;
     }
 }

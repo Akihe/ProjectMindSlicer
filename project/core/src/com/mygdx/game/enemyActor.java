@@ -19,8 +19,9 @@ public class enemyActor extends Actor {
 
     private Texture enemyTexture;
 
-    public int ENEMY_HEALTH;
     private String healthAmount;
+
+    public int ENEMY_HEALTH;
     private int ATK_damage;
     private int ENEMY_DEF;
     public static Random attackRoll = new Random();
@@ -30,9 +31,13 @@ public class enemyActor extends Actor {
 
     private Texture buffTexture;
 
+    boolean usingBuffAttack;
+
     public enemyActor(int level) {
         allowPlayerAttack = true;
         currentLevel = level;
+
+        usingBuffAttack = false;
 
         if (currentLevel == 1) {
             enemyTexture = new Texture(Gdx.files.internal("rasistimonster.png"));
@@ -50,7 +55,6 @@ public class enemyActor extends Actor {
             ATK_damage = 80;
             ENEMY_DEF = 30;
         }
-
         setWidth(enemyTexture.getWidth());
         setHeight(enemyTexture.getHeight());
         setBounds(550,40, getWidth(), getHeight());
@@ -90,6 +94,9 @@ public class enemyActor extends Actor {
                 this.getRotation(),0,0,
                 enemyTexture.getWidth(), enemyTexture.getHeight(), false, false);
         Main.font.draw(batch, healthAmount, 660, 30);
+        if (usingBuffAttack) {
+            batch.draw(buffTexture, 500f, 150f, buffTexture.getWidth(), buffTexture.getHeight());
+        }
         batch.setColor(Color.WHITE); // reset the color
     }
 
@@ -155,12 +162,12 @@ public class enemyActor extends Actor {
 
         enemyActor.this.addAction(Think_Action);
 
+        usingBuffAttack = true;
         int buffAmount = 5;
         ATK_damage += buffAmount;
         playerActor.playerActionDone = false;
         allowPlayerToAttack(attackLength);
     }
-
 
     public void majorAttack() {
         int attackLength = 3;
@@ -214,11 +221,10 @@ public class enemyActor extends Actor {
             @Override
             public void run() {
                 allowPlayerAttack = true;
+                usingBuffAttack = false;
             }
         }, delay);
-
     }
-
 
 
     public void enemyDie() {
