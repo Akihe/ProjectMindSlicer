@@ -105,24 +105,27 @@ public class settings implements Screen {
         window.setSize(table.getWidth(), table.getHeight());
 
         Image attack = new Image(new Texture("bubble.png"));
-        Label attackText = new Label("Your basic attack,\nincreases inclusion by 15.", skin);
+        Label attackText = new Label(Main.getLevelText("AttackText"), skin);
+       // Label attackText = new Label("Your basic attack,\nincreases inclusion by 15.", skin);
 
         window.add(attack);
 
         Image buff = new Image(new Texture("coffee_cup.png"));
         window.add(buff);
-        Label buffText = new Label("You take a zip of coffee\nand re-focus, making your moves\nincrease inclusion even more", skin);
+        Label buffText = new Label(Main.getLevelText("buffText"), skin);
+    //    Label buffText = new Label("You take a zip of coffee\nand re-focus, making your moves\nincrease inclusion even more", skin);
+
         window.row();
         window.add(attackText);
         window.add(buffText);
         window.row();
 
         Image shield = new Image(new Texture("shield_icon1.png"));
-        Label shieldText = new Label("This will protect you\nfrom the monsters attacks", skin);
+        Label shieldText = new Label(Main.getLevelText("shieldText"), skin);
         window.add(shield);
 
         Image heal = new Image(new Texture("sweet_health.png"));
-        Label healText = new Label("This will make you happier\nand raise your health", skin);
+        Label healText = new Label(Main.getLevelText("healText"), skin);
         window.add(heal);
         window.row();
         window.add(shieldText);
