@@ -50,7 +50,6 @@ public class kidActor extends Actor {
         fadeOut = new SequenceAction();
         fadeOut.addAction((Actions.fadeOut(0)));
         kidActor.this.addAction(fadeOut);
-
     }
 
     public void appear() {

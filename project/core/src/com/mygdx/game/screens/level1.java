@@ -49,10 +49,11 @@ public class level1 implements Screen {
     public static enemyActor enemy;
 
     public level1(Main host) {
-        defaultValues.levelInd = 1;
         this.host = host;
         skin = host.skin;
         batch = host.batch;
+        defaultValues.levelInd = 1;
+
         BACKGROUND = new Texture("taustakoulu.png");
 
         Main.menuMusic.stop();
@@ -73,7 +74,6 @@ public class level1 implements Screen {
         healbutton = new healButton();
         kid = new kidActor();
         settingsingame = new settingsIngameButton(skin, gameStage);
-
 
         gameStage.addActor(player);
         gameStage.addActor(enemy);
@@ -112,9 +112,8 @@ public class level1 implements Screen {
         winDialog = new Dialog("Congratz!", skin, "default") {
             public void result(Object obj) {
                 Gdx.app.log("nappi ", "nappi" + obj);
-
                 if (obj.equals(true)) {
-                    winDialog.setVisible(false);
+                    host.setScreen(new levelSelect(host));
                 }
             }
         };
@@ -123,8 +122,8 @@ public class level1 implements Screen {
       //  dialog.button("esim. nappi", false); //sends "false" as the result
         winDialog.pack();
         winDialog.setPosition(Main.WORLD_WIDTH/4f, Main.WORLD_HEIGHT/4f);
-        gameStage.addActor(winDialog);
         winDialog.setVisible(false);
+        gameStage.addActor(winDialog);
     }
 
     @Override
@@ -255,5 +254,6 @@ public class level1 implements Screen {
         batch.dispose();
         gameStage.dispose();
         Main.menuMusic.dispose();
+        skin.dispose();
     }
 }

@@ -17,6 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.mygdx.game.buttons.*;
 import com.mygdx.game.*;
@@ -87,7 +88,7 @@ public class settings implements Screen {
         infoOpener.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                window.setVisible(true);
+                table.setVisible(true);
             }
         });
 
@@ -132,26 +133,33 @@ public class settings implements Screen {
         close.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                window.setVisible(false);
+                table.setVisible(false);
             }
         });
 
+        close.setOrigin(Align.center);
+
         window.add(close);
         window.setMovable(false);
-        window.setVisible(false);
+        window.setModal(true);
+        //window.setDebug(true);
 
+        table.setVisible(false);
         table.add(window);
 
-        window.setModal(true);
  /*       window.addAction(Actions.sequence(Actions.alpha(0)
                 , Actions.fadeIn(1f)));
 
   */
+        musicOnOff();
         gameStage.addActor(table);
 
-        musicCheckBox = new CheckBox("music", skin);
 
-        musicCheckBox.setBounds(350f, 350f, musicCheckBox.getWidth(), musicCheckBox.getHeight());
+    }
+
+    public void musicOnOff() {
+        musicCheckBox = new CheckBox("music", skin);
+        musicCheckBox.setBounds(350f, 120f, musicCheckBox.getWidth(), musicCheckBox.getHeight());
 
         musicCheckBox.addListener(new ChangeListener() {
             @Override
@@ -167,7 +175,6 @@ public class settings implements Screen {
                 }
             }
         });
-
         gameStage.addActor(musicCheckBox);
     }
 
