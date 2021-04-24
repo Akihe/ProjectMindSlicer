@@ -81,7 +81,27 @@ public class level2 implements Screen {
         kid = new kidActor();
         gameStage.addActor(kid);
         settingsTable();
+        openingDialog();
 
+    }
+    private void openingDialog() {
+        String introduceKid = Main.getLevelText("kid2");
+
+        openDialog = new Dialog("Työhakemus", skin, "default") {
+            public void result(Object obj) {
+                Gdx.app.log("nappi ", "nappi" + obj);
+
+                if (obj.equals(true)) {
+                    openDialog.setVisible(false);
+                }
+            }};
+
+        openDialog.text(introduceKid);
+        openDialog.button("Okay", true); //sends "true" as the result
+        openDialog.pack();
+        openDialog.setPosition(Main.WORLD_WIDTH/4f, Main.WORLD_HEIGHT/4f);
+        openDialog.setMovable(false);
+        gameStage.addActor(openDialog);
     }
 
     public void settingsTable() {
