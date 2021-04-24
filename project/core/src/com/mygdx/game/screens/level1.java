@@ -44,6 +44,10 @@ public class level1 implements Screen {
 
     float timeSinceAttack = 0;
 
+    Label playerTurn;
+    Label enemyTurn;
+
+
     private final Stage gameStage;
     public static playerActor player;
     public static enemyActor enemy;
@@ -54,7 +58,20 @@ public class level1 implements Screen {
         batch = host.batch;
         defaultValues.levelInd = 1;
 
+        gameStage = new Stage(new StretchViewport(Main.WORLD_WIDTH,Main.WORLD_HEIGHT));
+        Gdx.input.setInputProcessor(gameStage);
+
         BACKGROUND = new Texture("taustakoulu.png");
+
+        playerTurn = new Label("Its your turn!", skin);
+        enemyTurn = new Label("Its the enemies turn!", skin);
+
+        playerTurn.setPosition(Main.WORLD_WIDTH/2f, Main.WORLD_HEIGHT/1.5f);
+        enemyTurn.setPosition(Main.WORLD_WIDTH/2f, Main.WORLD_HEIGHT/2f);
+
+        playerTurn.setVisible(false);
+        enemyTurn.setVisible(false);
+
 
         Main.menuMusic.stop();
         if (defaultValues.musicOn) {
@@ -62,9 +79,6 @@ public class level1 implements Screen {
         }
 
         winner = Main.getLevelText("winner");
-
-        gameStage = new Stage(new StretchViewport(Main.WORLD_WIDTH,Main.WORLD_HEIGHT));
-        Gdx.input.setInputProcessor(gameStage);
 
         player = new playerActor(1);
         enemy = new enemyActor(1);
@@ -83,10 +97,25 @@ public class level1 implements Screen {
         gameStage.addActor(healbutton);
         gameStage.addActor(kid);
         gameStage.addActor(settingsingame);
+        gameStage.addActor(playerTurn);
+        gameStage.addActor(enemyTurn);
+
+
+        createLabels();
 
         winPopup();
         openingDialog();
     }
+
+    public void createLabels() {
+        playerTurn.setVisible(true);
+        if(enemyActor.allowPlayerAttack) {
+            playerTurn.addAction(Actions.sequence(Actions.alpha(0)
+                    , Actions.fadeIn(2f), Actions.fadeOut(2f)));
+        }
+    }
+
+
     private void openingDialog() {
         String introduceKid = Main.getLevelText("kid1");
 
@@ -152,6 +181,7 @@ public class level1 implements Screen {
             enemy.enemyDie();
             player.MONEY = player.MONEY + 500;
             kid.appear();
+            gameStage.getActors().removeValue(settingsingame, true);
 
             float delay = 2;
             Timer.schedule(new Timer.Task() {
@@ -159,6 +189,7 @@ public class level1 implements Screen {
                 public void run() {
                     gameStage.getActors().removeValue(enemy, true);
                     player.resetPlayer();
+
                 }
             }, delay);
 
