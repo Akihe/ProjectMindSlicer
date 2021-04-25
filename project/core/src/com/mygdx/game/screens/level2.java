@@ -117,7 +117,7 @@ public class level2 implements Screen {
 
         table.setBackground(background);
 
-        playButton returni = new playButton();
+        playButton returni = new playButton(skin);
         returnButton returnbutton = new returnButton(0,0,"ingameSettings");
 
         table.add(returni);

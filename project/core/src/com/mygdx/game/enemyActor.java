@@ -222,10 +222,10 @@ public class enemyActor extends Actor {
             public void run() {
                 allowPlayerAttack = true;
                 usingBuffAttack = false;
+                level1.playerTurnTeller();
             }
         }, delay);
     }
-
 
     public void enemyDie() {
 

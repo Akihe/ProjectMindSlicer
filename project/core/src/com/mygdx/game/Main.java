@@ -35,6 +35,9 @@ public class Main extends Game {
 	public static Music menuMusic;
 	public static Music fightMusic;
 
+	public static I18NBundle myBundleFin;
+	public static I18NBundle myBundleEng;
+
 	public SpriteBatch getBatch() {
 		return batch;
 	}
@@ -58,30 +61,16 @@ public class Main extends Game {
 		localeFI = new Locale("");
 		finnish = true;
 
-		setScreen(new mainMenuScreen(this));
+		myBundleFin = I18NBundle.createBundle(Gdx.files.internal("MyBundle"), localeFI, "utf-8");
+		myBundleEng = I18NBundle.createBundle(Gdx.files.internal("MyBundle_en_US"), localeEN, "utf-8");
 
+		setScreen(new mainMenuScreen(this, skin));
 	}
 
-	public static final void setToEnglish() {
-		localeEN = new Locale("en_US");
-	}
-
-	public static final void setToFinnish() {
-		localeFI = new Locale("");
-	}
-
-
-		// String text = getLevelText("level1");
 	public static final String getLevelText(String key) {
-		// Kysy käyttikseltä millä kielellä mennään
-
 		if (finnish) {
-			I18NBundle myBundleFin =
-					I18NBundle.createBundle(Gdx.files.internal("MyBundle"), localeFI, "utf-8");
 			return myBundleFin.get(key);
 		} else {
-			I18NBundle myBundleEng =
-					I18NBundle.createBundle(Gdx.files.internal("MyBundle"), localeEN, "utf-8");
 			return myBundleEng.get(key);
 		}
 	}

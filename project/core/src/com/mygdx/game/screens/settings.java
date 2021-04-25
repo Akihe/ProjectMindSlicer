@@ -29,7 +29,7 @@ public class settings implements Screen {
     SpriteBatch batch;
     private Stage gameStage;
     private Texture BACKGROUND;
-    Skin skin;
+    static Skin skin;
     private Window window;
     private Table table;
 
@@ -55,7 +55,7 @@ public class settings implements Screen {
     }
 
     public static void setMainMenuScreen() {
-        host.setScreen(new mainMenuScreen(host));
+        host.setScreen(new mainMenuScreen(host, skin));
     }
 
     private void languageButton() {
@@ -77,7 +77,7 @@ public class settings implements Screen {
             }
         });
 
-        textbtn.setPosition(250f, 200f);
+        textbtn.setBounds(250f, 200f, 280f, 50f);
         gameStage.addActor(textbtn);
     }
 
@@ -181,7 +181,6 @@ public class settings implements Screen {
         gameStage.addActor(musicCheckBox);
     }
 
-
     @Override
     public void show() {
 
@@ -204,7 +203,7 @@ public class settings implements Screen {
 
     @Override
     public void resize(int width, int height) {
-
+        gameStage.getViewport().update(width, height, true);
     }
 
     @Override

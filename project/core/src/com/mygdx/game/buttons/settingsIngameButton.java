@@ -44,9 +44,10 @@ public class settingsIngameButton extends Actor {
     }
 
     public void draw(Batch batch, float alpha) {
+        batch.draw(texture, this.getX(), this.getY(), getWidth(), getHeight());
+
         stage.act();
         stage.draw();
-        batch.draw(texture, this.getX(), this.getY(), getWidth(), getHeight());
 
     }
 
@@ -63,7 +64,7 @@ public class settingsIngameButton extends Actor {
 
         table.setBackground(background);
 
-        playButton returni = new playButton();
+        playButton returni = new playButton(skin);
         TextButton close = new TextButton("close", skin);
         close.addListener(new ClickListener() {
             @Override

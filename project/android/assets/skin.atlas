@@ -19,6 +19,14 @@ button
   orig: 66, 59
   offset: 0, 0
   index: -1
+button2
+  rotate: false
+  xy: 123, 133
+  size: 66, 59
+  split: 16, 15, 15, 17
+  orig: 66, 59
+  offset: 0, 0
+  index: -1
 buttonproto1
   rotate: false
   xy: 1, 133
@@ -46,7 +54,7 @@ dialog
   index: -1
 dialog4
   rotate: false
-  xy: 250, 191
+  xy: 132, 69
   size: 50, 62
   split: 14, 14, 28, 10
   pad: 14, 14, 31, 13
@@ -55,7 +63,7 @@ dialog4
   index: -1
 silent_mode1
   rotate: false
-  xy: 123, 126
+  xy: 73, 65
   size: 57, 66
   orig: 57, 66
   offset: 0, 0

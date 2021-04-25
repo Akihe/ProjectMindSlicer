@@ -44,8 +44,8 @@ com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle: {
 com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
 	default: {
 		font: chilanka-normal
-		up: button
-		down: button
+		up: button2
+		down: button2
 	}
 }
 com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle: {

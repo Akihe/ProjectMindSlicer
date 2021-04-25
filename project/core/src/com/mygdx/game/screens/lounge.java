@@ -79,7 +79,7 @@ public class lounge implements Screen {
     }
 
     public void upgradeTable() {
-        Drawable background = skin.getDrawable("dialog4");
+        Drawable background = skin.getDrawable("dialog");
         attackValue = defaultValues.currentAttack;
         defenceValue = defaultValues.currentDefence;
 
@@ -91,7 +91,7 @@ public class lounge implements Screen {
         Container<Table> tableContainer = new Container<Table>();
         tableContainer.setSize(Main.WORLD_WIDTH / 2f, Main.WORLD_HEIGHT / 2f);
         tableContainer.setPosition(Main.WORLD_WIDTH / 4f, Main.WORLD_HEIGHT / 4f);
-      //  tableContainer.fillX();
+        tableContainer.fill();
 
         table = new Table(skin);
 
@@ -102,7 +102,7 @@ public class lounge implements Screen {
 
         table.setBackground(background);
 
-        table.add(moneyLabel);
+        table.add(moneyLabel).center();
         table.row().pad(5f);
         table.add(attackMinus, attackLabel, attackPlus);
         table.row();
@@ -120,7 +120,7 @@ public class lounge implements Screen {
     }
 
     public void entryPopup() {
- //Dialog dialog is initialized on the top
+        //Dialog dialog is initialized on the top
         //boolean value for showing popup is changed to true in the render call
         stage = new Stage();
         Skin skin = new Skin(Gdx.files.internal("skin.json"));

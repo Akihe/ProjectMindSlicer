@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.mygdx.game.buttons.*;
 import com.mygdx.game.*;
@@ -22,10 +23,12 @@ public class mainMenuScreen implements Screen {
 
     playButton playbutton;
     settingsButton settingsbutton;
+    Skin skin;
 
-    public mainMenuScreen(final Main host) {
+    public mainMenuScreen(final Main host, Skin getSkin) {
         this.host = host;
         batch = host.batch;
+        skin = getSkin;
 
         gameStage = new Stage(new StretchViewport(Main.WORLD_WIDTH,Main.WORLD_HEIGHT));
         Gdx.input.setInputProcessor(gameStage);
@@ -34,7 +37,7 @@ public class mainMenuScreen implements Screen {
         background = new Image(backgroundTexture);
         background.setPosition(0, 0);
 
-        playbutton = new playButton();
+        playbutton = new playButton(skin);
         gameStage.addActor(playbutton);
 
         settingsbutton = new settingsButton();

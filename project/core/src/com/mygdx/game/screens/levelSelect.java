@@ -17,13 +17,12 @@ import com.mygdx.game.*;
 public class levelSelect implements Screen {
 
     static Main host;
-    SpriteBatch batch;
     private Stage gameStage;
     private Texture backgroundTexture;
     private Image background;
 
     Dialog dialog;
-    Skin skin;
+    static Skin skin;
 
     String open;
 
@@ -37,7 +36,6 @@ public class levelSelect implements Screen {
 
     public levelSelect (final Main host) {
         this.host = host;
-        batch = host.batch;
 
         skin = host.skin;
         gameStage = new Stage(new StretchViewport(Main.WORLD_WIDTH,Main.WORLD_HEIGHT));
@@ -115,7 +113,7 @@ public class levelSelect implements Screen {
     }
 
     public static void setMainMenu() {
-        host.setScreen(new mainMenuScreen(host));
+        host.setScreen(new mainMenuScreen(host, skin));
     }
 
     @Override
@@ -159,7 +157,6 @@ public class levelSelect implements Screen {
 
     @Override
     public void dispose() {
-        batch.dispose();
         gameStage.dispose();
     }
 }

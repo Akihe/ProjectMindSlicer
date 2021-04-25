@@ -6,7 +6,8 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.mygdx.game.*;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.mygdx.game.screens.*;
 
 
@@ -14,12 +15,13 @@ import com.mygdx.game.screens.*;
 public class playButton extends Actor {
 
     private final Texture texture;
+    TextButton btn;
 
-    public playButton() {
-        texture = new Texture(Gdx.files.internal("start.png"));
+    public playButton(Skin getSkin) {
+        texture = new Texture(Gdx.files.internal("start_button2.png"));
 
-        setWidth(texture.getWidth());
-        setHeight(texture.getHeight());
+        setWidth(texture.getWidth()/2f);
+        setHeight(texture.getHeight()/2f);
         setBounds(275, 270f, getWidth(), getHeight());
 
         addListener(new PlayerListener());
