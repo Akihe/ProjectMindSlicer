@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.mygdx.game.buttons.*;
@@ -31,7 +32,6 @@ public class level1 implements Screen {
     private settingsIngameButton settingsingame;
     kidActor kid;
     public static Table table;
-    Container<Table> tableContainer;
     boolean winScreenShown = false;
     Dialog openDialog;
     Dialog winDialog;
@@ -43,7 +43,6 @@ public class level1 implements Screen {
 
     public static Label playerTurn;
     public static Label enemyTurn;
-
 
     private final Stage gameStage;
     public static playerActor player;
@@ -67,7 +66,6 @@ public class level1 implements Screen {
 
         playerTurn.setVisible(false);
         enemyTurn.setVisible(false);
-
 
         Main.menuMusic.stop();
         if (defaultValues.musicOn) {
@@ -120,7 +118,6 @@ public class level1 implements Screen {
                     playerTurnTeller();
                 }
             }};
-
         openDialog.text(introduceKid);
         openDialog.button("Okay", true); //sends "true" as the result
         openDialog.pack();
@@ -128,7 +125,6 @@ public class level1 implements Screen {
         openDialog.setMovable(false);
         gameStage.addActor(openDialog);
     }
-
 
     public void winPopup() {
         winDialog = new Dialog("Congratz!", skin, "default") {
@@ -142,7 +138,6 @@ public class level1 implements Screen {
         };
         winDialog.text(winner);
         winDialog.button("Okay", true); //sends "true" as the result
-      //  dialog.button("esim. nappi", false); //sends "false" as the result
         winDialog.pack();
         winDialog.setPosition(Main.WORLD_WIDTH/4f, Main.WORLD_HEIGHT/4f);
         winDialog.setVisible(false);
@@ -198,37 +193,6 @@ public class level1 implements Screen {
             host.setScreen(new GameOverScreen(host));
         }
     }
-/*
-    public void settingsTable() {
-
-        Drawable background = skin.getDrawable("dialog4");
-
-        tableContainer = new Container<Table>();
-        tableContainer.setSize(Main.WORLD_WIDTH / 2f, Main.WORLD_HEIGHT / 2f);
-        tableContainer.setPosition(Main.WORLD_WIDTH / 4f, Main.WORLD_HEIGHT / 4f);
-        tableContainer.fillX();
-
-        table = new Table(skin);
-
-        table.setBackground(background);
-
-        playButton returni = new playButton();
-        returnButton returnbutton = new returnButton(0,0,"ingameSettings");
-
-        table.add(returni);
-        table.row();
-
-        table.setFillParent(true);
-
-        table.setVisible(false);
-        table.setDebug(true);
-        table.add(returnbutton);
-        tableContainer.setActor(table);
-        gameStage.addActor(tableContainer);
-    }
-
-
- */
 
     @Override
     public void show() {

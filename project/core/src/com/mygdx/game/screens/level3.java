@@ -51,7 +51,7 @@ public class level3 implements Screen {
 
         skin = host.skin;
 
-        BACKGROUND = new Texture("taustakoulu.png");
+        BACKGROUND = new Texture("taustakolme.png");
 
         this.host = host;
         batch = host.batch;
@@ -83,8 +83,8 @@ public class level3 implements Screen {
         gameStage.addActor(kid);
         settingsTable();
         openingDialog();
-
     }
+
     private void openingDialog() {
         String introduceKid = Main.getLevelText("kid3");
 

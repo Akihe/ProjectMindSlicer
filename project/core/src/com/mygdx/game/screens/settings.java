@@ -51,7 +51,9 @@ public class settings implements Screen {
         returnbutton = new returnButton(100f, 100f, "Settings");
         gameStage.addActor(returnbutton);
         languageButton();
+        musicOnOff();
         createTable();
+
     }
 
     public static void setMainMenuScreen() {
@@ -154,26 +156,25 @@ public class settings implements Screen {
                 , Actions.fadeIn(1f)));
 
   */
-        musicOnOff();
         gameStage.addActor(table);
-
-
     }
 
     public void musicOnOff() {
         musicCheckBox = new CheckBox("music", skin);
         musicCheckBox.setBounds(350f, 120f, musicCheckBox.getWidth(), musicCheckBox.getHeight());
 
+        musicCheckBox.setChecked(defaultValues.musicOn);
+
         musicCheckBox.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                if (musicCheckBox.isChecked()) {
+                if (!musicCheckBox.isChecked()) {
                     defaultValues.musicOn = false;
                     Gdx.app.log("music", "pois");
                     Main.menuMusic.stop();
-                } else if (!musicCheckBox.isChecked()) {
+                } else if (musicCheckBox.isChecked()) {
                     defaultValues.musicOn = true;
-                    Gdx.app.log("music", "päälle");
+                    Gdx.app.log("music", "paalle");
                     Main.menuMusic.play();
                 }
             }
