@@ -42,7 +42,6 @@ public class level1 implements Screen {
     float timeSinceAttack = 0;
 
     public static Label playerTurn;
-    public static Label enemyTurn;
 
     private final Stage gameStage;
     public static playerActor player;
@@ -59,13 +58,6 @@ public class level1 implements Screen {
 
         BACKGROUND = new Texture("taustakoulu.png");
 
-        playerTurn = new Label("Its your turn!", skin);
-        enemyTurn = new Label("Its the enemies turn!", skin);
-
-        playerTurn.setPosition(350f, Main.WORLD_HEIGHT/1.5f);
-
-        playerTurn.setVisible(false);
-        enemyTurn.setVisible(false);
 
         Main.menuMusic.stop();
         if (defaultValues.musicOn) {
@@ -73,6 +65,10 @@ public class level1 implements Screen {
         }
 
         winner = Main.getLevelText("winner");
+
+        playerTurn = new Label("Its your turn!", skin);
+        playerTurn.setPosition(350f, Main.WORLD_HEIGHT/1.5f);
+        playerTurn.setVisible(false);
 
         player = new playerActor(1);
         enemy = new enemyActor(1);
@@ -92,7 +88,6 @@ public class level1 implements Screen {
         gameStage.addActor(kid);
         gameStage.addActor(settingsingame);
         gameStage.addActor(playerTurn);
-        gameStage.addActor(enemyTurn);
 
         winPopup();
         openingDialog();
@@ -127,6 +122,7 @@ public class level1 implements Screen {
     }
 
     public void winPopup() {
+
         winDialog = new Dialog("Congratz!", skin, "default") {
             public void result(Object obj) {
                 Gdx.app.log("nappi ", "nappi" + obj);
@@ -136,6 +132,7 @@ public class level1 implements Screen {
                 }
             }
         };
+
         winDialog.text(winner);
         winDialog.button("Okay", true); //sends "true" as the result
         winDialog.pack();
