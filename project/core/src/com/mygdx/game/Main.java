@@ -70,7 +70,11 @@ public class Main extends Game {
 
 		setScreen(new mainMenuScreen(this, skin));
 
-		Gdx.app.log("save", "getteri " + open("money"));
+		try {
+			Gdx.app.log("save", "getteri " + open("money"));
+		} catch (Exception e ) {
+
+		}
 	}
 
 	public static final String getLevelText(String key) {

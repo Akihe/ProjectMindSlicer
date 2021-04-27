@@ -1,39 +1,41 @@
 package com.mygdx.game.buttons;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.mygdx.game.*;
 import com.mygdx.game.screens.*;
 
 
+public class loungeButton extends Actor {
 
-public class levelsButton extends Actor {
+    private final Texture playTexture;
 
-    private final Texture texture;
 
-    public levelsButton() {
-        texture = new Texture("buttonproto2.1.png");
+    public loungeButton() {
+        playTexture = new Texture(Gdx.files.internal("loungebtn.png"));
 
-        setWidth(texture.getWidth()/2);
-        setHeight(texture.getHeight()/2);
-        setBounds(350, 100f, getWidth(), getHeight());
+        setWidth(playTexture.getWidth());
+        setHeight(playTexture.getHeight());
+        setBounds(210, 260, getWidth() * 1.5f , getHeight() * 1.5f);
 
         addListener(new PlayerListener());
     }
 
     public void draw(Batch batch, float alpha) {
-        batch.draw(texture, this.getX(), this.getY(), getWidth(), getHeight());
+        batch.draw(playTexture, this.getX(), this.getY(), getWidth(), getHeight());
+
     }
 
     class PlayerListener extends InputListener {
 
         @Override
         public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-            mainMenuScreen.setPlayScreen();
+            levelSelect.setLevelUP();
             return true;
         }
     }
 }
+

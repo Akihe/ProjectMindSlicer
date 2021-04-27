@@ -28,7 +28,7 @@ public class levelButtons extends Actor {
 
         setWidth(texture.getWidth());
         setHeight(texture.getHeight());
-        setBounds(xPos, yPos, getWidth(), getHeight());
+        setBounds(xPos, yPos, getWidth() * 2f, getHeight() * 2f);
 
         addListener(new PlayerListener());
     }

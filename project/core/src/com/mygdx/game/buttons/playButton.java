@@ -22,7 +22,7 @@ public class playButton extends Actor {
 
         setWidth(texture.getWidth()/2f);
         setHeight(texture.getHeight()/2f);
-        setBounds(275, 270f, getWidth(), getHeight());
+        setBounds(275, 110f, getWidth(), getHeight());
 
         addListener(new PlayerListener());
     }
