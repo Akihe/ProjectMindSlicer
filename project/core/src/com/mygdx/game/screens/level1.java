@@ -48,10 +48,11 @@ public class level1 implements Screen {
     public static enemyActor enemy;
 
     public level1(Main host) {
+        defaultValues.levelInd = 1;
         this.host = host;
         skin = host.skin;
         batch = host.batch;
-        defaultValues.levelInd = 1;
+
 
         gameStage = new Stage(new StretchViewport(Main.WORLD_WIDTH,Main.WORLD_HEIGHT));
         Gdx.input.setInputProcessor(gameStage);
@@ -104,7 +105,7 @@ public class level1 implements Screen {
     private void openingDialog() {
         String introduceKid = Main.getLevelText("kid1");
 
-        openDialog = new Dialog("Työhakemus", skin, "default") {
+        openDialog = new Dialog("", skin, "default") {
             public void result(Object obj) {
                 Gdx.app.log("nappi ", "nappi" + obj);
 
@@ -116,19 +117,19 @@ public class level1 implements Screen {
         openDialog.text(introduceKid);
         openDialog.button("Okay", true); //sends "true" as the result
         openDialog.pack();
-        openDialog.setPosition(Main.WORLD_WIDTH/4f, Main.WORLD_HEIGHT/4f);
+        openDialog.setPosition(Main.WORLD_WIDTH/10f, Main.WORLD_HEIGHT/4f);
         openDialog.setMovable(false);
         gameStage.addActor(openDialog);
     }
 
     public void winPopup() {
 
-        winDialog = new Dialog("Congratz!", skin, "default") {
+        winDialog = new Dialog("Success!", skin, "default") {
             public void result(Object obj) {
                 Gdx.app.log("nappi ", "nappi" + obj);
                 if (obj.equals(true)) {
                     host.setScreen(new levelSelect(host));
-                    player.MONEY += 50;
+                    player.MONEY += 200;
                 }
             }
         };
@@ -136,7 +137,7 @@ public class level1 implements Screen {
         winDialog.text(winner);
         winDialog.button("Okay", true); //sends "true" as the result
         winDialog.pack();
-        winDialog.setPosition(Main.WORLD_WIDTH/4f, Main.WORLD_HEIGHT/4f);
+        winDialog.setPosition(Main.WORLD_WIDTH/10f, Main.WORLD_HEIGHT/4f);
         winDialog.setVisible(false);
         winDialog.setMovable(false);
         gameStage.addActor(winDialog);

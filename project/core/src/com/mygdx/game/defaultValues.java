@@ -10,7 +10,7 @@ public class defaultValues {
 
 
     //Starting values for the player
-    public static int startingMoney = 500;
+    public static int startingMoney = 100;
     public static final int playerDefaultAttack = 20;
     public static final int playerDefaultDefence = 5;
 
