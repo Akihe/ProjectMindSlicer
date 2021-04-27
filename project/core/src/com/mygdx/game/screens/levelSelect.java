@@ -91,7 +91,7 @@ public class levelSelect implements Screen {
         dialog.button("Okay", true); //sends "true" as the result
         //  dialog.button("esim. nappi", false); //sends "false" as the result
         dialog.pack();
-        dialog.setPosition(Main.WORLD_WIDTH/4f, Main.WORLD_HEIGHT/4f);
+        dialog.setPosition(Main.WORLD_WIDTH/10, Main.WORLD_HEIGHT/4f);
         dialog.setVisible(false);
         gameStage.addActor(dialog);
     }

@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Container;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
@@ -29,17 +30,20 @@ public class level2 implements Screen {
     private actionButton actionbutton;
     private thinkButton thinkbutton;
     private shieldButton shieldButton;
-    private HealButton HealButton;
+    private healButton healbutton;
+    private settingsIngameButton settingsingame;
     kidActor kid;
-
+    public static Table table;
+    boolean winScreenShown = false;
     Dialog openDialog;
     Dialog winDialog;
 
     Skin skin;
-
     String winner;
 
     float timeSinceAttack = 0;
+
+    public static Label playerTurn;
 
     private final Stage gameStage;
     public static playerActor player;
@@ -48,60 +52,147 @@ public class level2 implements Screen {
     public level2(Main host) {
         Main.save("player");
         defaultValues.levelInd = 2;
+        this.host = host;
         skin = host.skin;
+        batch = host.batch;
+
+
+        gameStage = new Stage(new StretchViewport(Main.WORLD_WIDTH,Main.WORLD_HEIGHT));
+        Gdx.input.setInputProcessor(gameStage);
 
         BACKGROUND = new Texture("puisto.png");
 
-        this.host = host;
-        batch = host.batch;
+
+        Main.menuMusic.stop();
+        if (defaultValues.musicOn) {
+            Main.fightMusic.play();
+        }
 
         winner = Main.getLevelText("winner");
 
-        this.gameStage = new Stage(new StretchViewport(Main.WORLD_WIDTH,Main.WORLD_HEIGHT));
-        Gdx.input.setInputProcessor(gameStage);
+        playerTurn = new Label("Its your turn!", skin);
+        playerTurn.setPosition(350f, Main.WORLD_HEIGHT/1.5f);
+        playerTurn.setVisible(false);
 
         player = new playerActor(2);
-        gameStage.addActor(player);
-
         enemy = new enemyActor(2);
-        gameStage.addActor(enemy);
-
         actionbutton = new actionButton();
-        gameStage.addActor(actionbutton);
-
         thinkbutton = new thinkButton();
-        gameStage.addActor(thinkbutton);
-
         shieldButton = new shieldButton();
-        gameStage.addActor(shieldButton);
-
-        HealButton = new HealButton();
-        gameStage.addActor(HealButton);
-
+        healbutton = new healButton();
         kid = new kidActor();
-        gameStage.addActor(kid);
-        settingsTable();
-        openingDialog();
+        settingsingame = new settingsIngameButton(skin, gameStage);
 
+        gameStage.addActor(player);
+        gameStage.addActor(enemy);
+        gameStage.addActor(actionbutton);
+        gameStage.addActor(thinkbutton);
+        gameStage.addActor(shieldButton);
+        gameStage.addActor(healbutton);
+        gameStage.addActor(kid);
+        gameStage.addActor(settingsingame);
+        gameStage.addActor(playerTurn);
+
+        winPopup();
+        openingDialog();
     }
+
+    public static void playerTurnTeller() {
+        if(enemyActor.allowPlayerAttack) {
+            playerTurn.setVisible(true);
+            playerTurn.addAction(Actions.sequence(Actions.alpha(0)
+                    , Actions.fadeIn(2f), Actions.fadeOut(2f)));
+        }
+    }
+
     private void openingDialog() {
         String introduceKid = Main.getLevelText("kid2");
 
-        openDialog = new Dialog("Työhakemus", skin, "default") {
+        openDialog = new Dialog("", skin, "default") {
             public void result(Object obj) {
                 Gdx.app.log("nappi ", "nappi" + obj);
 
                 if (obj.equals(true)) {
                     openDialog.setVisible(false);
+                    playerTurnTeller();
                 }
             }};
-
         openDialog.text(introduceKid);
         openDialog.button("Okay", true); //sends "true" as the result
         openDialog.pack();
-        openDialog.setPosition(Main.WORLD_WIDTH/4f, Main.WORLD_HEIGHT/4f);
+        openDialog.setPosition(Main.WORLD_WIDTH/10f, Main.WORLD_HEIGHT/4f);
         openDialog.setMovable(false);
         gameStage.addActor(openDialog);
+    }
+
+    public void winPopup() {
+
+        winDialog = new Dialog("Success!", skin, "default") {
+            public void result(Object obj) {
+                Gdx.app.log("nappi ", "nappi" + obj);
+                if (obj.equals(true)) {
+                    host.setScreen(new levelSelect(host));
+                    player.MONEY += 200;
+                }
+            }
+        };
+
+        winDialog.text(winner);
+        winDialog.button("Okay", true); //sends "true" as the result
+        winDialog.pack();
+        winDialog.setPosition(Main.WORLD_WIDTH/10f, Main.WORLD_HEIGHT/4f);
+        winDialog.setVisible(false);
+        winDialog.setMovable(false);
+        gameStage.addActor(winDialog);
+    }
+
+    public void fight() {
+
+        //Enemy attacks only after the player has attacked, and DeltaTime counts a delay for the enemies move, based on how long the players invidual attack lasts.
+        if(player.playerActionDone && enemy.ENEMY_HEALTH > 0){
+            timeSinceAttack += Gdx.graphics.getDeltaTime();
+            if (timeSinceAttack > player.enemyAttacksAfter) {
+                enemy.randomAttack();
+                enemy.chooseAttack();
+                timeSinceAttack = 0;
+                player.enemyAttacksAfter = 0;
+                player.resetPlayer();
+            }
+        }
+    }
+
+    public void loseWinCheck() {
+
+        if(enemy.ENEMY_HEALTH <= 0){
+            enemy.enemyDie();
+            kid.appear();
+            gameStage.getActors().removeValue(settingsingame, true);
+
+            float delay = 2;
+            Timer.schedule(new Timer.Task() {
+                @Override
+                public void run() {
+                    gameStage.getActors().removeValue(enemy, true);
+                    player.resetPlayer();
+
+                }
+            }, delay);
+
+            if (!winScreenShown) {
+                Timer.schedule(new Timer.Task() {
+                    @Override
+                    public void run() {
+                        winDialog.setVisible(true);
+                        winScreenShown = true;
+                    }
+                }, delay*2);
+            }
+        }
+
+        if(player.PLAYER_HEALTH <= 0){
+            player.resetStats();
+            host.setScreen(new GameOverScreen(host));
+        }
     }
 
     public void settingsTable() {
@@ -133,26 +224,6 @@ public class level2 implements Screen {
     }
 
 
-    public void winPopup() {
-
-        winDialog = new Dialog("Congratz!", skin, "default") {
-            public void result(Object obj) {
-                Gdx.app.log("nappi ", "nappi" + obj);
-
-                if (obj.equals(true)) {
-                    winDialog.setVisible(false);
-                }
-            }
-        };
-        winDialog.text(winner);
-        winDialog.button("Okay", true); //sends "true" as the result
-        //  dialog.button("esim. nappi", false); //sends "false" as the result
-        winDialog.pack();
-        winDialog.setPosition(Main.WORLD_WIDTH/4f, Main.WORLD_HEIGHT/4f);
-        gameStage.addActor(winDialog);
-        winDialog.setVisible(false);
-    }
-
     @Override
     public void show() {
 
@@ -170,40 +241,8 @@ public class level2 implements Screen {
         gameStage.getBatch().draw(BACKGROUND,0,0,Main.WORLD_WIDTH,Main.WORLD_HEIGHT);
         gameStage.getBatch().end();
 
-
-        //Enemy attacks only after the player attacks, and DeltaTime counts a 2 second delay for the enemies move.
-        if(player.playerActionDone && enemy.ENEMY_HEALTH > 0){
-            timeSinceAttack += Gdx.graphics.getDeltaTime();
-            if (timeSinceAttack > player.enemyAttacksAfter) {
-                enemy.randomAttack();
-                enemy.chooseAttack();
-                timeSinceAttack = 0;
-                player.enemyAttacksAfter = 0;
-                player.resetPlayer();
-            }
-        }
-
-        if(enemy.ENEMY_HEALTH <= 0){
-            enemy.enemyDie();
-            kid.appear();
-           defaultValues.levelInd=0;
-            defaultValues.startingMoney= defaultValues.startingMoney+500;
-
-            float delay = 2;
-            Timer.schedule(new Timer.Task() {
-                @Override
-                public void run() {
-                    gameStage.getActors().removeValue(enemy, true);
-                    winPopup();
-                }
-            }, delay);
-        }
-
-        if(player.PLAYER_HEALTH<=0){
-            player.resetStats();
-            host.setScreen(new GameOverScreen(host));
-            defaultValues.levelInd=0;
-        }
+        fight();
+        loseWinCheck();
 
         gameStage.act();
         gameStage.draw();
@@ -234,5 +273,7 @@ public class level2 implements Screen {
     public void dispose() {
         batch.dispose();
         gameStage.dispose();
+        Main.menuMusic.dispose();
+        skin.dispose();
     }
 }

@@ -42,7 +42,7 @@ public class enemyActor extends Actor {
         if (currentLevel == 1) {
             enemyTexture = new Texture(Gdx.files.internal("rasistimonster.png"));
             ENEMY_HEALTH = 100;
-            ATK_damage = 20;
+            ATK_damage = 30;
             ENEMY_DEF = 5;
         } else if (currentLevel == 2) {
             enemyTexture = new Texture(Gdx.files.internal("masismonster.png"));
@@ -52,7 +52,7 @@ public class enemyActor extends Actor {
         } else if (currentLevel == 3) {
             enemyTexture = new Texture(Gdx.files.internal("moneymonster.png"));
             ENEMY_HEALTH = 300;
-            ATK_damage = 80;
+            ATK_damage = 60;
             ENEMY_DEF = 30;
         }
         setWidth(enemyTexture.getWidth());
@@ -203,10 +203,10 @@ public class enemyActor extends Actor {
 
     public void randomAttack() {
         Gdx.app.log("random", "nro " + AttackNRO);
-        if(AttackNRO >= 0 && AttackNRO < 40){
+        if(AttackNRO >= 0 && AttackNRO < 50){
             enemyHit();
         }
-        if(AttackNRO >= 40 && AttackNRO < 80){
+        if(AttackNRO >= 50 && AttackNRO < 80){
             enemyBuff();
         }
         if(AttackNRO >= 80 && AttackNRO <= 100){
@@ -222,7 +222,15 @@ public class enemyActor extends Actor {
             public void run() {
                 allowPlayerAttack = true;
                 usingBuffAttack = false;
-                level1.playerTurnTeller();
+
+                if(currentLevel == 1) {
+                    level1.playerTurnTeller();;
+                } else if (currentLevel == 2) {
+                    level2.playerTurnTeller();;
+                } else if (currentLevel == 3) {
+                    level3.playerTurnTeller();;
+                }
+
             }
         }, delay);
     }
