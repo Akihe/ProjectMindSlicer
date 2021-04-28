@@ -31,6 +31,11 @@ public class mainMenuScreen implements Screen {
         batch = host.batch;
         skin = getSkin;
 
+        Main.fightMusic.stop();
+        if (defaultValues.musicOn) {
+            Main.menuMusic.play();
+        }
+
         gameStage = new Stage(new StretchViewport(Main.WORLD_WIDTH,Main.WORLD_HEIGHT));
         Gdx.input.setInputProcessor(gameStage);
 

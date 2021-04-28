@@ -65,7 +65,6 @@ public class level1 implements Screen {
 
         BACKGROUND = new Texture("taustakoulu.png");
 
-
         Main.menuMusic.stop();
         if (defaultValues.musicOn) {
             Main.fightMusic.play();
@@ -73,8 +72,8 @@ public class level1 implements Screen {
 
         winner = Main.getLevelText("winner1");
 
-        playerTurn = new Label("Its your turn!", skin);
-        playerTurn.setPosition(350f, Main.WORLD_HEIGHT/1.5f);
+        playerTurn = new Label("Its your turn!", skin, "chilanka-header", "RGBA_0_0_0_255");
+        playerTurn.setPosition(320f, Main.WORLD_HEIGHT/1.5f);
         playerTurn.setVisible(false);
 
         player = new playerActor(1);
@@ -84,7 +83,7 @@ public class level1 implements Screen {
         shieldButton = new shieldButton();
         healbutton = new healButton();
         kid = new kidActor(1);
-        settingsingame = new settingsIngameButton(skin, gameStage);
+        settingsingame = new settingsIngameButton(host, skin, gameStage);
 
         gameStage.addActor(player);
         gameStage.addActor(enemy);
@@ -167,6 +166,7 @@ public class level1 implements Screen {
     public void loseWinCheck() {
 
         if(enemy.ENEMY_HEALTH <= 0){
+            defaultValues.level1Defeated = true;
             enemy.enemyDie();
             kid.appear();
             gameStage.getActors().removeValue(settingsingame, true);
@@ -246,6 +246,7 @@ public class level1 implements Screen {
         batch.dispose();
         gameStage.dispose();
         Main.menuMusic.dispose();
+        Main.fightMusic.dispose();
         skin.dispose();
     }
 }

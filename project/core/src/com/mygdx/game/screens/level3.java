@@ -50,7 +50,7 @@ public class level3 implements Screen {
     public static enemyActor enemy;
 
     public level3(Main host) {
-        Main.save("player");
+        Main.save();
         defaultValues.levelInd = 3;
         this.host = host;
         skin = host.skin;
@@ -81,7 +81,7 @@ public class level3 implements Screen {
         shieldButton = new shieldButton();
         healbutton = new healButton();
         kid = new kidActor(3);
-        settingsingame = new settingsIngameButton(skin, gameStage);
+        settingsingame = new settingsIngameButton(host, skin, gameStage);
 
         gameStage.addActor(player);
         gameStage.addActor(enemy);
@@ -164,6 +164,7 @@ public class level3 implements Screen {
     public void loseWinCheck() {
 
         if(enemy.ENEMY_HEALTH <= 0){
+            defaultValues.level3Defeated = true;
             enemy.enemyDie();
             kid.appear();
             gameStage.getActors().removeValue(settingsingame, true);

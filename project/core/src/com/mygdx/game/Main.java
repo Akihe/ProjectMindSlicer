@@ -41,10 +41,6 @@ public class Main extends Game {
 
 	public static Preferences prefs;
 
-	public SpriteBatch getBatch() {
-		return batch;
-	}
-
 	@Override
 	public void create () {
 		fightMusic = Gdx.audio.newMusic(Gdx.files.internal("sounds/fightmusic.wav"));
@@ -57,11 +53,10 @@ public class Main extends Game {
 		prefs = Gdx.app.getPreferences("MyPreferencesSetti");
 
 		batch = new SpriteBatch();
-		open("player");
 
 		skin = new Skin(Gdx.files.internal("skin.json"));
 
-		font = skin.getFont("chilanka-normal");
+		font = skin.getFont("chilanka-header");
 
 		localeEN = new Locale("en_US");
 		localeFI = new Locale("");
@@ -73,8 +68,8 @@ public class Main extends Game {
 		setScreen(new mainMenuScreen(this, skin));
 
 		try {
-			Gdx.app.log("save", "getteri " + open("money"));
-		} catch (Exception e ) {
+			open();
+		} catch (Exception ignored) {
 
 		}
 	}
@@ -87,9 +82,8 @@ public class Main extends Game {
 		}
 	}
 
-	public static void save(String name) {
+	public static void save() {
 
-		prefs.putString("name", name);                           // <name>Jack</name>
 		prefs.putInteger("money", playerActor.MONEY);
 		prefs.putBoolean("lvl1", defaultValues.level1Defeated);
 		prefs.putBoolean("lvl2", defaultValues.level2Defeated);
@@ -97,15 +91,17 @@ public class Main extends Game {
 		prefs.flush();
 	}
 
-	public static String open(String key) {
+	public static void open() {
 
-		String name = prefs.getString(key, "No name stored");
 		int raha = prefs.getInteger("money");
 		boolean lvl1 = prefs.getBoolean("lvl1");
 		boolean lvl2 = prefs.getBoolean("lvl2");
 		boolean lvl3 = prefs.getBoolean("lvl3");
 
-		return name;
+		Gdx.app.log("save", "rahaa on " + prefs.getInteger("money"));
+		Gdx.app.log("save", "level 1 tapettu " + prefs.getBoolean("lvl1"));
+		Gdx.app.log("save", "level 2 tapettu " + prefs.getBoolean("lvl2"));
+		Gdx.app.log("save", "level 3 tapettu " + prefs.getBoolean("lvl3"));
 	}
 
 	@Override

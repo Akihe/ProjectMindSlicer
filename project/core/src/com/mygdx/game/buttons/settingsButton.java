@@ -19,7 +19,7 @@ public class settingsButton extends Actor {
 
         setWidth(texture.getWidth());
         setHeight(texture.getHeight());
-        setBounds(288, 40, getWidth(), getHeight());
+        setBounds(275, 40, getWidth(), getHeight());
 
         addListener(new PlayerListener());
     }

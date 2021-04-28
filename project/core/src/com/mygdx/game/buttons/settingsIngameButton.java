@@ -21,12 +21,17 @@ import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.mygdx.game.*;
+import com.mygdx.game.screens.mainMenuScreen;
+
+import javax.xml.soap.Text;
 
 public class settingsIngameButton extends Actor {
 
     private final Texture texture;
+
+    Main host;
     Skin skin;
-    public static Stage stage;
+    private Stage stage;
     Container<Table> tableContainer;
     Table table;
     Stage oldStage;
@@ -35,13 +40,13 @@ public class settingsIngameButton extends Actor {
     Table infoTable;
     Window window;
 
-
-    public settingsIngameButton(Skin skin1, Stage gameStage) {
+    public settingsIngameButton(Main host, Skin skin1, Stage gameStage) {
         texture = new Texture("asetusnappi.png");
         skin = skin1;
         oldStage = gameStage;
+        this.host = host;
 
-        stage = new Stage(new StretchViewport(Main.WORLD_WIDTH,Main.WORLD_HEIGHT));
+        stage = new Stage(gameStage.getViewport());
 
         setWidth(texture.getWidth()/4f);
         setHeight(texture.getHeight()/4f);
@@ -87,31 +92,15 @@ public class settingsIngameButton extends Actor {
 
         Image attack = new Image(new Texture("bubble.png"));
         Label attackText = new Label(Main.getLevelText("AttackText"), skin);
-        // Label attackText = new Label("Your basic attack,\nincreases inclusion by 15.", skin);
-
-        window.add(attack);
 
         Image buff = new Image(new Texture("coffee_cup.png"));
-        window.add(buff);
         Label buffText = new Label(Main.getLevelText("buffText"), skin);
-        //    Label buffText = new Label("You take a zip of coffee\nand re-focus, making your moves\nincrease inclusion even more", skin);
-
-        window.row();
-        window.add(attackText);
-        window.add(buffText);
-        window.row();
 
         Image shield = new Image(new Texture("shield_icon1.png"));
         Label shieldText = new Label(Main.getLevelText("shieldText"), skin);
-        window.add(shield);
 
         Image heal = new Image(new Texture("sweet_health.png"));
         Label healText = new Label(Main.getLevelText("healText"), skin);
-        window.add(heal);
-        window.row();
-        window.add(shieldText);
-        window.add(healText);
-        window.row();
 
         TextButton close = new TextButton("close", skin);
         close.addListener(new ClickListener() {
@@ -121,19 +110,24 @@ public class settingsIngameButton extends Actor {
             }
         });
 
-        close.setOrigin(Align.center);
-
-
-
+        window.add(attack);
+        window.add(buff);
+        window.row();
+        window.add(attackText);
+        window.add(buffText);
+        window.row();
+        window.add(shield);
+        window.add(heal);
+        window.row();
+        window.add(shieldText);
+        window.add(healText);
+        window.row();
         window.add(close);
         window.setMovable(false);
-        window.setModal(true);
-        //window.setDebug(true);
 
         infoTable.setVisible(false);
         infoTable.add(window);
 
-        stage.addActor(infoTable);
     }
 
     public void settingsTable() {
@@ -149,7 +143,15 @@ public class settingsIngameButton extends Actor {
 
         table.setBackground(background);
 
-        playButton returni = new playButton();
+        TextButton backToMain = new TextButton("backToMain", skin);
+        backToMain.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                host.setScreen(new mainMenuScreen(host, skin));
+            }
+        });
+
+
         TextButton close = new TextButton("close", skin);
         close.addListener(new ClickListener() {
             @Override
@@ -177,7 +179,7 @@ public class settingsIngameButton extends Actor {
             }
         });
 
-        table.add(returni);
+        table.add(backToMain);
         table.row().pad(5f);
         table.add(musicCheckBox);
         table.row().pad(5f);
@@ -189,10 +191,10 @@ public class settingsIngameButton extends Actor {
 
         table.setFillParent(true);
         table.setVisible(false);
-        //table.setDebug(true);
 
         tableContainer.setActor(table);
         stage.addActor(tableContainer);
+        stage.addActor(infoTable);
     }
 
     class PlayerListener extends InputListener {

@@ -56,13 +56,8 @@ public class playerActor extends Actor {
 
     }
 
-    public void updateStats(){
-        PLAYER_ATK = defaultValues.currentAttack;
-        PLAYER_DEF = defaultValues.currentDefence;
-    }
-
     public void resetStats(){
-        PLAYER_ATK = defaultValues.playerDefaultAttack;
+        PLAYER_ATK = defaultValues.currentAttack;
     }
 
     public void reduceHealth(int damageTaken) {
