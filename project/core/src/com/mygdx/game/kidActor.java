@@ -14,14 +14,28 @@ public class kidActor extends Actor {
     Texture texture;
     SequenceAction fadeIn;
     SequenceAction fadeOut;
+private int currentLevel;
 
+    public kidActor(int level) {
+currentLevel=level;
+        //texture = new Texture("child1.png");
+        if (currentLevel == 1) {
+            texture = new Texture(Gdx.files.internal("child1.png"));
+        } else if (currentLevel == 2) {
+            texture = new Texture(Gdx.files.internal("child3.png"));
+        } else if (currentLevel == 3) {
+            texture = new Texture(Gdx.files.internal("child2.png"));
+        }
 
-    public kidActor() {
+        if (currentLevel==1){
+            setWidth(texture.getWidth()/3f);
+            setHeight(texture.getHeight()/3f);
+         }
+        else{
+            setWidth(texture.getWidth()/1f);
+            setHeight(texture.getHeight()/1f);
+        }
 
-        texture = new Texture("child1.png");
-
-        setWidth(texture.getWidth()/3f);
-        setHeight(texture.getHeight()/3f);
         setBounds(580,40, getWidth(), getHeight());
 
         initialFade();

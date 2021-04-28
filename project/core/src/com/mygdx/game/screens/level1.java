@@ -65,7 +65,7 @@ public class level1 implements Screen {
             Main.fightMusic.play();
         }
 
-        winner = Main.getLevelText("winner");
+        winner = Main.getLevelText("winner1");
 
         playerTurn = new Label("Its your turn!", skin);
         playerTurn.setPosition(350f, Main.WORLD_HEIGHT/1.5f);
@@ -77,7 +77,7 @@ public class level1 implements Screen {
         thinkbutton = new thinkButton();
         shieldButton = new shieldButton();
         healbutton = new healButton();
-        kid = new kidActor();
+        kid = new kidActor(1);
         settingsingame = new settingsIngameButton(skin, gameStage);
 
         gameStage.addActor(player);

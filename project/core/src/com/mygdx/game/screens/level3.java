@@ -68,7 +68,7 @@ public class level3 implements Screen {
             Main.fightMusic.play();
         }
 
-        winner = Main.getLevelText("winner");
+        winner = Main.getLevelText("winner3");
 
         playerTurn = new Label("Its your turn!", skin);
         playerTurn.setPosition(350f, Main.WORLD_HEIGHT/1.5f);
@@ -80,7 +80,7 @@ public class level3 implements Screen {
         thinkbutton = new thinkButton();
         shieldButton = new shieldButton();
         healbutton = new healButton();
-        kid = new kidActor();
+        kid = new kidActor(3);
         settingsingame = new settingsIngameButton(skin, gameStage);
 
         gameStage.addActor(player);
@@ -132,7 +132,7 @@ public class level3 implements Screen {
                 Gdx.app.log("nappi ", "nappi" + obj);
                 if (obj.equals(true)) {
                     host.setScreen(new levelSelect(host));
-                    player.MONEY += 200;
+                    player.MONEY += 300;
                 }
             }
         };
