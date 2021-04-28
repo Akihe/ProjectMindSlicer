@@ -192,9 +192,9 @@ public class enemyActor extends Actor {
         if (currentLevel == 1) {
             level1.player.reduceHealth(50);
         } else if (currentLevel == 2) {
-            level2.player.reduceHealth(100);
+            level2.player.reduceHealth(50);
         } else if (currentLevel == 3) {
-            level3.player.reduceHealth(150);
+            level3.player.reduceHealth(50);
         }
 
         playerActor.playerActionDone = false;
