@@ -12,12 +12,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.mygdx.game.Main;
-import com.mygdx.game.buttons.actionButton;
-import com.mygdx.game.buttons.levelsButton;
-import com.mygdx.game.buttons.playButton;
-import com.mygdx.game.buttons.thinkButton;
-import com.mygdx.game.enemyActor;
-import com.mygdx.game.playerActor;
 
 public class GameOverScreen implements Screen {
 
@@ -25,11 +19,8 @@ public class GameOverScreen implements Screen {
     Main host;
     SpriteBatch batch;
     private Texture BACKGROUND;
-    Stage stage;
     Skin skin;
     private Stage gameStage;
-
-private levelsButton levelsButton;
 
     public GameOverScreen(Main host) {
         BACKGROUND = new Texture("gameover.png");
@@ -37,8 +28,6 @@ private levelsButton levelsButton;
         this.host = host;
         batch = host.batch;
         skin=host.skin;
-
-
 
         this.gameStage = new Stage(new StretchViewport(Main.WORLD_WIDTH,Main.WORLD_HEIGHT));
         Gdx.input.setInputProcessor(gameStage);

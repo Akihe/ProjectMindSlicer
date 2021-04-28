@@ -20,6 +20,7 @@ public class mainMenuScreen implements Screen {
     private Stage gameStage;
     private Texture backgroundTexture;
     private Image background;
+    private Texture logoText;
 
     playButton playbutton;
     settingsButton settingsbutton;
@@ -34,6 +35,7 @@ public class mainMenuScreen implements Screen {
         Gdx.input.setInputProcessor(gameStage);
 
         backgroundTexture = new Texture("mainmenu_screen.png");
+        logoText = new Texture("mindslicerlogo.png");
         background = new Image(backgroundTexture);
         background.setPosition(0, 0);
 
@@ -65,6 +67,7 @@ public class mainMenuScreen implements Screen {
 
         gameStage.getBatch().begin();
         gameStage.getBatch().draw(backgroundTexture, 0,0, Main.WORLD_WIDTH, Main.WORLD_HEIGHT);
+        gameStage.getBatch().draw(logoText, 200,200,logoText.getWidth(), logoText.getHeight());
         gameStage.getBatch().end();
 
         gameStage.act();

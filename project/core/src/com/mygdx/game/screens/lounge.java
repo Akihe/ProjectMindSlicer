@@ -38,8 +38,6 @@ public class lounge implements Screen {
 
     public static Table table;
 
-    public static Table tableExit;
-
     Label attackLabel;
     Label moneyLabel;
     Label defenceLabel;
@@ -47,7 +45,7 @@ public class lounge implements Screen {
 
     public void updateStats() {
         attackValue = defaultValues.currentAttack;
-        defenceValue = defaultValues.currentDefence;   //Vaiko PLAYER_DEFENSE
+        defenceValue = defaultValues.currentDefence;
 
         attackLabel.setText("Attack : " + attackValue + "  ");
         moneyLabel.setText("Coins : " + playerActor.MONEY);
@@ -66,7 +64,7 @@ public class lounge implements Screen {
         background = new Image(backgroundTexture);
         background.setPosition(0, 0);
 
-        returnBtn = new returnButton(100f,100f, "LevelUP");
+        returnBtn = new returnButton(50f,50f, "LevelUP");
         gameStage.addActor((returnBtn));
 
         statsBtn = new statsButton();
@@ -75,7 +73,6 @@ public class lounge implements Screen {
         skin = host.skin;
 
         upgradeTable();
-
     }
 
     public void upgradeTable() {
@@ -110,7 +107,7 @@ public class lounge implements Screen {
 
         table.setFillParent(true);
 
-        table.debugAll();
+        //table.debugAll();
 
         table.setVisible(false);
 

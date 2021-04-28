@@ -8,7 +8,6 @@ public class defaultValues {
     public static int levelInd;
     //index used for player actor to see which level the player is on(for enemy's damage taken)
 
-
     //Starting values for the player
     public static int startingMoney = 100;
     public static final int playerDefaultAttack = 20;
@@ -28,6 +27,4 @@ public class defaultValues {
     public static boolean level1Defeated = false;
     public static boolean level2Defeated = false;
     public static boolean level3Defeated = false;
-
-
 }

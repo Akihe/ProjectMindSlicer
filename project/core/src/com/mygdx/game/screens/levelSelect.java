@@ -2,7 +2,6 @@ package com.mygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -31,7 +30,7 @@ public class levelSelect implements Screen {
     levelButtons levelButton3;
 
     returnButton returnBtn;
-    LevelLoungeButton LevelLoungeButton;
+    loungeButton loungeButton;
 
 
     public levelSelect (final Main host) {
@@ -53,21 +52,21 @@ public class levelSelect implements Screen {
         background = new Image(backgroundTexture);
         background.setPosition(0, 0);
 
-        levelButton1 = new levelButtons(260f, 250f, 1);
+        levelButton1 = new levelButtons(160f, 150f, 1);
         gameStage.addActor(levelButton1);
 
-        levelButton2 = new levelButtons(360f, 250f, 2);
+        levelButton2 = new levelButtons(350f, 150f, 2);
         gameStage.addActor(levelButton2);
 
-        levelButton3 = new levelButtons(460f, 250f, 3);
+        levelButton3 = new levelButtons(540f, 150f, 3);
         gameStage.addActor(levelButton3);
 
 
-        returnBtn = new returnButton(100f,100f, "LevelSelect");
+        returnBtn = new returnButton(50f,50f, "LevelSelect");
         gameStage.addActor((returnBtn));
 
-        LevelLoungeButton = new LevelLoungeButton();
-        gameStage.addActor(LevelLoungeButton);
+        loungeButton = new loungeButton();
+        gameStage.addActor(loungeButton);
 
         openingDialog();
         if (!defaultValues.introShown) {
