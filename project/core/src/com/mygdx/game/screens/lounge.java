@@ -43,15 +43,6 @@ public class lounge implements Screen {
     Label defenceLabel;
     Dialog dialog;
 
-    public void updateStats() {
-        attackValue = defaultValues.currentAttack;
-        defenceValue = defaultValues.currentDefence;
-
-        attackLabel.setText("Attack : " + attackValue + "  ");
-        moneyLabel.setText("Coins : " + playerActor.MONEY);
-        defenceLabel.setText("Defence : " + defenceValue + "  ");
-    }
-
     public lounge(Main host){
         this.host = host;
         batch = host.batch;
@@ -75,6 +66,15 @@ public class lounge implements Screen {
         upgradeTable();
     }
 
+    public void updateStats() {
+        attackValue = defaultValues.currentAttack;
+        defenceValue = defaultValues.currentDefence;
+
+        attackLabel.setText("Attack : " + attackValue + "  ");
+        moneyLabel.setText("Coins : " + playerActor.MONEY);
+        defenceLabel.setText("Defence : " + defenceValue + "  ");
+    }
+
     public void upgradeTable() {
         Drawable background = skin.getDrawable("dialog");
         attackValue = defaultValues.currentAttack;
@@ -82,8 +82,13 @@ public class lounge implements Screen {
 
         attackLabel = new Label(" Attack : " + attackValue, skin);
         defenceLabel = new Label(" Defence : " + defenceValue, skin);
-
         moneyLabel = new Label(" Coins : " + playerActor.MONEY, skin);
+
+        attackLabel.setSize(300f, 100f);
+        defenceLabel.setSize(300f, 100f);
+        moneyLabel.setSize(300f, 10f);
+
+        Gdx.app.log("attack", "koko " + attackLabel.getScaleX());
 
         Container<Table> tableContainer = new Container<Table>();
         tableContainer.setSize(Main.WORLD_WIDTH / 2f, Main.WORLD_HEIGHT / 2f);
@@ -157,7 +162,7 @@ public class lounge implements Screen {
 
         gameStage.act();
         gameStage.draw();
-        if (defaultValues.LoungeEntry==false){
+        if (!defaultValues.LoungeEntry){
             entryPopup();
             defaultValues.LoungeEntry=true;
         }

@@ -39,7 +39,7 @@ public class mainMenuScreen implements Screen {
         background = new Image(backgroundTexture);
         background.setPosition(0, 0);
 
-        playbutton = new playButton(skin);
+        playbutton = new playButton();
         gameStage.addActor(playbutton);
 
         settingsbutton = new settingsButton();

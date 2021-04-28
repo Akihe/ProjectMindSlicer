@@ -6,87 +6,53 @@ filter: Linear,Linear
 repeat: none
 Chilanka-Regular
   rotate: false
-  xy: 1, 168
+  xy: 1, 167
   size: 505, 145
   orig: 505, 145
   offset: 0, 0
   index: -1
-button
-  rotate: false
-  xy: 195, 107
-  size: 66, 59
-  split: 17, 17, 15, 17
-  orig: 66, 59
-  offset: 0, 0
-  index: -1
-button2
-  rotate: false
-  xy: 263, 107
-  size: 66, 59
-  split: 16, 15, 15, 17
-  orig: 66, 59
-  offset: 0, 0
-  index: -1
 button3
   rotate: false
-  xy: 331, 107
+  xy: 78, 106
   size: 66, 59
   split: 13, 12, 13, 13
   orig: 66, 59
   offset: 0, 0
   index: -1
-buttonproto1
-  rotate: false
-  xy: 1, 46
-  size: 120, 120
-  split: 30, 57, 64, 46
-  pad: 32, 59, 66, 47
-  orig: 120, 120
-  offset: 0, 0
-  index: -1
 chilanka-normal
   rotate: false
-  xy: 1, 403
+  xy: 1, 402
   size: 506, 103
   orig: 506, 103
   offset: 0, 0
   index: -1
 chilanka-smaller
   rotate: false
-  xy: 1, 315
+  xy: 1, 314
   size: 506, 86
   orig: 506, 86
   offset: 0, 0
   index: -1
 dialog
   rotate: false
-  xy: 123, 79
+  xy: 1, 13
   size: 70, 87
   split: 16, 16, 43, 12
   pad: 16, 16, 48, 12
   orig: 70, 87
   offset: 0, 0
   index: -1
-dialog4
+soundoff
   rotate: false
-  xy: 458, 104
-  size: 50, 62
-  split: 14, 14, 28, 10
-  pad: 14, 14, 31, 13
-  orig: 50, 62
+  xy: 146, 102
+  size: 45, 63
+  orig: 45, 63
   offset: 0, 0
   index: -1
-silent_mode1
+soundon
   rotate: false
-  xy: 399, 100
-  size: 57, 66
-  orig: 57, 66
-  offset: 0, 0
-  index: -1
-speaker_fullsound2
-  rotate: false
-  xy: 123, 11
-  size: 57, 66
-  orig: 57, 66
+  xy: 1, 102
+  size: 75, 63
+  orig: 75, 63
   offset: 0, 0
   index: -1

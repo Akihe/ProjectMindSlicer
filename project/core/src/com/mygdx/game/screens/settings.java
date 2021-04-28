@@ -53,7 +53,6 @@ public class settings implements Screen {
         languageButton();
         musicOnOff();
         createTable();
-
     }
 
     public static void setMainMenuScreen() {
@@ -152,15 +151,11 @@ public class settings implements Screen {
         table.setVisible(false);
         table.add(window);
 
- /*       window.addAction(Actions.sequence(Actions.alpha(0)
-                , Actions.fadeIn(1f)));
-
-  */
         gameStage.addActor(table);
     }
 
     public void musicOnOff() {
-        musicCheckBox = new CheckBox("music", skin);
+        musicCheckBox = new CheckBox("", skin);
         musicCheckBox.setBounds(350f, 120f, musicCheckBox.getWidth(), musicCheckBox.getHeight());
 
         musicCheckBox.setChecked(defaultValues.musicOn);

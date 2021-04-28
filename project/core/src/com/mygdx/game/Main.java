@@ -29,11 +29,12 @@ public class Main extends Game {
 	public static final int WORLD_WIDTH = 800;
 	public static final int WORLD_HEIGHT = 480;
 	public Skin skin;
-	public static Locale localeEN;
-	public static Locale localeFI;
 
 	public static Music menuMusic;
 	public static Music fightMusic;
+
+	public static Locale localeEN;
+	public static Locale localeFI;
 
 	public static I18NBundle myBundleFin;
 	public static I18NBundle myBundleEng;

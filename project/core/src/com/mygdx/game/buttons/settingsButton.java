@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.mygdx.game.Main;
 import com.mygdx.game.screens.*;
 
 
@@ -13,10 +14,11 @@ public class settingsButton extends Actor {
     private final Texture texture;
 
     public settingsButton() {
-        texture = new Texture("settings_button.png");
 
-        setWidth(texture.getWidth()/2);
-        setHeight(texture.getHeight()/2);
+        texture = new Texture(Main.getLevelText("settings"));
+
+        setWidth(texture.getWidth());
+        setHeight(texture.getHeight());
         setBounds(288, 40, getWidth(), getHeight());
 
         addListener(new PlayerListener());

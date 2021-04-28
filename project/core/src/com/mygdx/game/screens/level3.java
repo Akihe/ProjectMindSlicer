@@ -208,7 +208,7 @@ public class level3 implements Screen {
 
         table.setBackground(background);
 
-        playButton returni = new playButton(skin);
+        playButton returni = new playButton();
         returnButton returnbutton = new returnButton(0,0,"ingameSettings");
 
         table.add(returni);

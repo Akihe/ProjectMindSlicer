@@ -21,27 +21,18 @@ com.badlogic.gdx.graphics.Color: {
 com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle: {
 	default: {
 		up: button3
-		down: button
 	}
 }
 com.badlogic.gdx.scenes.scene2d.ui.CheckBox$CheckBoxStyle: {
 	default: {
-		checkboxOn: speaker_fullsound2
-		checkboxOff: silent_mode1
+		checkboxOn: soundon
+		checkboxOff: soundoff
 		font: chilanka-normal
 	}
 }
 com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
 	default: {
 		font: chilanka-smaller
-	}
-}
-com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle: {
-	default: {
-		font: chilanka-normal
-		fontColorSelected: RGBA_0_0_0_255
-		fontColorUnselected: RGBA_0_0_0_255
-		selection: buttonproto1
 	}
 }
 com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {

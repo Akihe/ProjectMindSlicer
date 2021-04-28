@@ -17,24 +17,18 @@ public class kidActor extends Actor {
 private int currentLevel;
 
     public kidActor(int level) {
-currentLevel=level;
+        currentLevel=level;
         //texture = new Texture("child1.png");
         if (currentLevel == 1) {
-            texture = new Texture(Gdx.files.internal("child1.png"));
+            texture = new Texture(Gdx.files.internal("child_one.png"));
         } else if (currentLevel == 2) {
             texture = new Texture(Gdx.files.internal("child3.png"));
         } else if (currentLevel == 3) {
             texture = new Texture(Gdx.files.internal("child2.png"));
         }
 
-        if (currentLevel==1){
-            setWidth(texture.getWidth()/3f);
-            setHeight(texture.getHeight()/3f);
-         }
-        else{
-            setWidth(texture.getWidth()/1f);
-            setHeight(texture.getHeight()/1f);
-        }
+        setWidth(texture.getWidth());
+        setHeight(texture.getHeight());
 
         setBounds(580,40, getWidth(), getHeight());
 
