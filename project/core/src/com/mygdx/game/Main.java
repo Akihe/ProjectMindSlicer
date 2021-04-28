@@ -61,6 +61,7 @@ public class Main extends Game {
 		skin = new Skin(Gdx.files.internal("skin.json"));
 
 		font = skin.getFont("chilanka-normal");
+
 		localeEN = new Locale("en_US");
 		localeFI = new Locale("");
 		finnish = true;
