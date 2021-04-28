@@ -43,17 +43,17 @@ public class enemyActor extends Actor {
             enemyTexture = new Texture(Gdx.files.internal("rasistimonster.png"));
             ENEMY_HEALTH = 100;
             ATK_damage = 30;
-            ENEMY_DEF = 5;
+            ENEMY_DEF = 10;
         } else if (currentLevel == 2) {
             enemyTexture = new Texture(Gdx.files.internal("masismonster.png"));
             ENEMY_HEALTH = 150;
             ATK_damage = 40;
-            ENEMY_DEF = 15;
+            ENEMY_DEF = 20;
         } else if (currentLevel == 3) {
             enemyTexture = new Texture(Gdx.files.internal("moneymonster.png"));
             ENEMY_HEALTH = 300;
-            ATK_damage = 60;
-            ENEMY_DEF = 30;
+            ATK_damage = 50;
+            ENEMY_DEF = 40;
         }
         setWidth(enemyTexture.getWidth());
         setHeight(enemyTexture.getHeight());

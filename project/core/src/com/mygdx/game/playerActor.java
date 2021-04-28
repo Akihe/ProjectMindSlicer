@@ -47,7 +47,7 @@ public class playerActor extends Actor {
         healthAmount = "" + PLAYER_HEALTH;
         currentLevel = level;
 
-        PLAYER_ATK = defaultValues.currentAttack;;
+        PLAYER_ATK = 500; //defaultValues.currentAttack;;
         PLAYER_DEF = defaultValues.currentDefence;
 
         setWidth(playerTexture.getWidth());
