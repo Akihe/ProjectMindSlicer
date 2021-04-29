@@ -5,6 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Container;
@@ -13,6 +14,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.mygdx.game.buttons.*;
@@ -29,7 +32,6 @@ public class lounge implements Screen {
     returnButton returnBtn;
     statsButton statsBtn;
 
-    Stage stage;
     String enter;
     Skin skin;
 
@@ -84,14 +86,21 @@ public class lounge implements Screen {
         defenceLabel = new Label(" Defence : " + defenceValue, skin);
         moneyLabel = new Label(" Coins : " + playerActor.MONEY, skin);
 
-        attackLabel.setSize(300f, 100f);
-        defenceLabel.setSize(300f, 100f);
-        moneyLabel.setSize(300f, 10f);
+        moneyLabel.setWrap(false);
+        moneyLabel.setSize(400f,20f);
+
+        TextButton close = new TextButton("close", skin);
+        close.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                table.setVisible(false);
+            }
+        });
 
         Gdx.app.log("attack", "koko " + attackLabel.getScaleX());
 
         Container<Table> tableContainer = new Container<Table>();
-        tableContainer.setSize(Main.WORLD_WIDTH / 2f, Main.WORLD_HEIGHT / 2f);
+        tableContainer.setSize(300f, Main.WORLD_HEIGHT / 2f);
         tableContainer.setPosition(Main.WORLD_WIDTH / 4f, Main.WORLD_HEIGHT / 4f);
         tableContainer.fill();
 
@@ -104,15 +113,15 @@ public class lounge implements Screen {
 
         table.setBackground(background);
 
-        table.add(moneyLabel).center();
+        table.add(moneyLabel).colspan(3).center();
         table.row().pad(5f);
         table.add(attackMinus, attackLabel, attackPlus);
         table.row();
         table.add(defenceMinus, defenceLabel, defencePlus);
+        table.row();
+        table.add(close).colspan(3).center();
 
         table.setFillParent(true);
-
-        //table.debugAll();
 
         table.setVisible(false);
 
@@ -124,21 +133,18 @@ public class lounge implements Screen {
     public void entryPopup() {
         //Dialog dialog is initialized on the top
         //boolean value for showing popup is changed to true in the render call
-        stage = new Stage();
         Skin skin = new Skin(Gdx.files.internal("skin.json"));
-         dialog = new Dialog("Welcome", skin, "default") {
+        dialog = new Dialog(Main.getLevelText("welcome"), skin) {
             public void result(Object obj) {
                 if(obj.equals(true)){
                     dialog.setVisible(false);
                 }
-
-                Gdx.app.log("nappi ", "nappi" + obj);
-            }
-        };
+            }};
         dialog.text(enter);
         dialog.button("Okay", true); //sends "true" as the result
         dialog.pack();
         dialog.setPosition(Main.WORLD_WIDTH/4f, Main.WORLD_HEIGHT/4f);
+        dialog.setMovable(false);
         gameStage.addActor(dialog);
     }
 

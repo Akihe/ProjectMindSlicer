@@ -122,7 +122,7 @@ public class settingsIngameButton extends Actor {
         window.add(shieldText);
         window.add(healText);
         window.row();
-        window.add(close);
+        window.add(close).colspan(2).center();
         window.setMovable(false);
 
         infoTable.setVisible(false);

@@ -77,21 +77,20 @@ public class levelSelect implements Screen {
 
     private void openingDialog() {
 
-        dialog = new Dialog("Työhakemus", skin, "default") {
+        dialog = new Dialog(Main.getLevelText("applicationHeader"), skin, "default") {
             public void result(Object obj) {
-                Gdx.app.log("nappi ", "nappi" + obj);
-
                 if (obj.equals(true)) {
                     dialog.setVisible(false);
                 }
             }
         };
         dialog.text(open);
-        dialog.button("Okay", true); //sends "true" as the result
+        dialog.button("Ok", true); //sends "true" as the result
         //  dialog.button("esim. nappi", false); //sends "false" as the result
         dialog.pack();
-        dialog.setPosition(Main.WORLD_WIDTH/10, Main.WORLD_HEIGHT/4f);
+        dialog.setPosition(70, 50);
         dialog.setVisible(false);
+        dialog.setMovable(false);
         gameStage.addActor(dialog);
     }
 
