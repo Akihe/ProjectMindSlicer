@@ -1,12 +1,12 @@
-package com.mygdx.game.buttons;
+package com.mygdx.MindSlicer.buttons;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.mygdx.game.*;
-import com.mygdx.game.screens.*;
+import com.mygdx.MindSlicer.enemyActor;
+import com.mygdx.MindSlicer.screens.level3;
 
 /**
  * Button for the players basic attack. Has a texture and an inputlistener.
@@ -17,7 +17,7 @@ import com.mygdx.game.screens.*;
 public class actionButton extends Actor {
 
     private final Texture playTexture;
-    playerActor player;
+    com.mygdx.MindSlicer.playerActor player;
 
     public actionButton() {
         playTexture = new Texture("bubble.png");
@@ -26,11 +26,11 @@ public class actionButton extends Actor {
         setHeight(playTexture.getHeight());
         setBounds(20, 230, getWidth(), getHeight());
 
-        if (defaultValues.levelInd == 1) {
-            player = level1.player;
-        } else if (defaultValues.levelInd == 2) {
-            player = level2.player;
-        } else if (defaultValues.levelInd == 3) {
+        if (com.mygdx.MindSlicer.defaultValues.levelInd == 1) {
+            player = com.mygdx.MindSlicer.screens.level1.player;
+        } else if (com.mygdx.MindSlicer.defaultValues.levelInd == 2) {
+            player = com.mygdx.MindSlicer.screens.level2.player;
+        } else if (com.mygdx.MindSlicer.defaultValues.levelInd == 3) {
             player = level3.player;
         }
 
@@ -46,7 +46,7 @@ public class actionButton extends Actor {
 
         @Override
         public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-            if (!playerActor.playerActionDone && enemyActor.allowPlayerAttack) {
+            if (!com.mygdx.MindSlicer.playerActor.playerActionDone && enemyActor.allowPlayerAttack) {
                 player.hitAction();
             }
             return true;
