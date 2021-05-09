@@ -175,9 +175,9 @@ public class lounge implements Screen {
         gameStage.act();
         gameStage.draw();
 
-        if (!defaultValues.LoungeEntry){
+        if (!defaultValues.loungeEntry){
             entryPopup();
-            defaultValues.LoungeEntry = true;
+            defaultValues.loungeEntry = true;
         }
     }
 

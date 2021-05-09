@@ -16,7 +16,7 @@ public class defaultValues {
     public static int currentAttack = 25;
     public static int currentDefence = 5;
 
-    public static boolean LoungeEntry = false;
+    public static boolean loungeEntry = false;
     public static boolean introShown = false;
     public static boolean completionShown = false;
 

@@ -106,6 +106,8 @@ public class Main extends Game {
 		prefs.putBoolean("lvl1", defaultValues.level1Defeated);
 		prefs.putBoolean("lvl2", defaultValues.level2Defeated);
 		prefs.putBoolean("lvl3", defaultValues.level3Defeated);
+		prefs.putBoolean("intro", defaultValues.introShown);
+		prefs.putBoolean("lounge", defaultValues.loungeEntry);
 		prefs.flush();
 	}
 
@@ -119,6 +121,8 @@ public class Main extends Game {
 		defaultValues.level1Defeated = prefs.getBoolean("lvl1");
 		defaultValues.level2Defeated = prefs.getBoolean("lvl2");
 		defaultValues.level3Defeated = prefs.getBoolean("lvl3");
+		defaultValues.introShown = prefs.getBoolean("intro");
+		defaultValues.loungeEntry = prefs.getBoolean("lounge");
 	}
 
 	private void openFirstSave() {

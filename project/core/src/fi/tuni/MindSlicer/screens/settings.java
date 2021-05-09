@@ -138,6 +138,7 @@ public class settings implements Screen {
         resetDialog.button("Ok",true); //sends "true" as the result
         resetDialog.button("no", false);
         resetDialog.pack();
+        resetDialog.setModal(true);
         resetDialog.setPosition(200,150);
         resetDialog.setVisible(false);
         resetDialog.setMovable(false);
