@@ -83,13 +83,14 @@ public class levelSelect implements Screen {
         openingDialog();
         completedDialog();
 
-        tutorialText.setVisible(false);
+
         if (!defaultValues.introShown) {
             dialog.setVisible(true);
             defaultValues.introShown = true;
         }
-        if(defaultValues.level1Defeated==true ||defaultValues.level2Defeated==true||defaultValues.level3Defeated==true){
+        if(defaultValues.level1Defeated==true && defaultValues.level2Defeated==true && defaultValues.level3Defeated==true && defaultValues.introShown==true && defaultValues.completionShown==false){
             endgame.setVisible(true);
+            defaultValues.completionShown=true;
         }
     }
 
@@ -98,7 +99,6 @@ public class levelSelect implements Screen {
         dialog = new Dialog(Main.getLevelText("applicationHeader"), skin, "default") {
             public void result(Object obj) {
                 if (obj.equals(true)) {
-                    dialog.setVisible(false);
                     tutorialText.setVisible(true);
                 }
             }
@@ -126,22 +126,22 @@ public class levelSelect implements Screen {
         tutorialText.pack();
         tutorialText.setPosition(100, 50);
         tutorialText.setMovable(false);
+        tutorialText.setVisible(false);
         gameStage.addActor(tutorialText);
     }
     private void completedDialog() {
 
-        endgame = new Dialog(Main.getLevelText("applicationHeader"), skin, "default") {
+        endgame = new Dialog(Main.getLevelText("completedHeader"), skin, "default") {
             public void result(Object obj) {
                 if (obj.equals(true)) {
-                    dialog.setVisible(false);
-                    tutorialText.setVisible(true);
+                    endgame.setVisible(false);
                 }
             }
         };
-        endgame.text(open);
+        endgame.text(gameBeaten);
         endgame.button("Ok",true); //sends "true" as the result
         endgame.pack();
-        endgame.setPosition(70,50);
+        endgame.setPosition(180,140);
         endgame.setVisible(false);
         endgame.setMovable(false);
         gameStage.addActor(endgame);

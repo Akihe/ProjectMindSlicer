@@ -24,4 +24,5 @@ public class defaultValues {
     public static boolean level1Defeated = false;
     public static boolean level2Defeated = false;
     public static boolean level3Defeated = false;
+    public static boolean completionShown=false;
 }
