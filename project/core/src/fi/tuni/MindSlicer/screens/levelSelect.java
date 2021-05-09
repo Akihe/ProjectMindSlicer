@@ -88,7 +88,7 @@ public class levelSelect implements Screen {
             dialog.setVisible(true);
             defaultValues.introShown = true;
         }
-        if(defaultValues.level1Defeated==true && defaultValues.level2Defeated==true && defaultValues.level3Defeated==true && defaultValues.introShown==true && defaultValues.completionShown==false){
+        if(defaultValues.level1Defeated && defaultValues.level2Defeated && defaultValues.level3Defeated && defaultValues.introShown && !defaultValues.completionShown){
             endgame.setVisible(true);
             defaultValues.completionShown = true;
         }
