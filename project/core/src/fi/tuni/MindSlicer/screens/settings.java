@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -33,6 +34,7 @@ public class settings implements Screen {
     static Skin skin;
     private Window window;
     private Table table;
+    private Dialog resetDialog;
 
     private returnButton returnbutton;
     String languagebtn;
@@ -51,6 +53,7 @@ public class settings implements Screen {
         returnbutton = new returnButton(50f, 50f, "Settings");
         gameStage.addActor(returnbutton);
         languageButton();
+        saveResetDialog();
         saveResetButton();
         musicOnOff();
         createTable();
@@ -83,7 +86,7 @@ public class settings implements Screen {
 
     public void infoButton() {
         TextButton infoOpener;
-        infoOpener = new TextButton("Help", skin);
+        infoOpener = new TextButton("Info", skin);
 
         infoOpener.addListener(new ClickListener() {
             @Override
@@ -97,27 +100,48 @@ public class settings implements Screen {
     }
 
     public void saveResetButton() {
-        TextButton saveReset = new TextButton("Help", skin);
+        TextButton saveReset = new TextButton(Main.getLevelText("saveResetButton"), skin);
 
         saveReset.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                Main.prefs.clear();
-                playerActor.MONEY = defaultValues.startingMoney;
-                defaultValues.currentAttack = defaultValues.playerDefaultAttack;
-                defaultValues.currentDefence = defaultValues.playerDefaultDefence;
-                defaultValues.firstSaveDone = true;
-                defaultValues.level1Defeated = false;
-                defaultValues.level2Defeated = false;
-                defaultValues.level3Defeated = false;
-                Main.save();
+                resetDialog.setVisible(true);
             }
         });
-
-        saveReset.setPosition(350f, 360f);
+        saveReset.setPosition(350f, 330f);
         gameStage.addActor(saveReset);
     }
 
+    public void saveResetDialog() {
+
+        resetDialog = new Dialog(Main.getLevelText("applicationHeader"), skin, "default") {
+            public void result(Object obj) {
+                if (obj.equals(true)) {
+                    Main.prefs.clear();
+                    playerActor.MONEY = defaultValues.startingMoney;
+                    defaultValues.currentAttack = defaultValues.playerDefaultAttack;
+                    defaultValues.currentDefence = defaultValues.playerDefaultDefence;
+                    defaultValues.firstSaveDone = true;
+                    defaultValues.level1Defeated = false;
+                    defaultValues.level2Defeated = false;
+                    defaultValues.level3Defeated = false;
+                    Main.save();
+                    resetDialog.setVisible(false);
+                } else {
+                    resetDialog.setVisible(false);
+                }
+            }
+        };
+
+        resetDialog.text(Main.getLevelText("saveResetText"));
+        resetDialog.button("Ok",true); //sends "true" as the result
+        resetDialog.button("no", false);
+        resetDialog.pack();
+        resetDialog.setPosition(70,50);
+        resetDialog.setVisible(false);
+        resetDialog.setMovable(false);
+        gameStage.addActor(resetDialog);
+    }
 
     public void createTable() {
         infoButton();
