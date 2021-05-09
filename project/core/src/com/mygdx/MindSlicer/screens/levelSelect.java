@@ -21,9 +21,11 @@ public class levelSelect implements Screen {
     private Image background;
 
     Dialog dialog;
+    Dialog tutorialText;
     static Skin skin;
 
     String open;
+    String tutorial;
 
     private com.mygdx.MindSlicer.buttons.levelButtons levelButton1;
     private com.mygdx.MindSlicer.buttons.levelButtons levelButton2;
@@ -42,6 +44,7 @@ public class levelSelect implements Screen {
         gameStage = new Stage(new StretchViewport(com.mygdx.MindSlicer.Main.WORLD_WIDTH, com.mygdx.MindSlicer.Main.WORLD_HEIGHT));
         Gdx.input.setInputProcessor(gameStage);
         open = com.mygdx.MindSlicer.Main.getLevelText("startingDialog");
+        tutorial=com.mygdx.MindSlicer.Main.getLevelText("tutorial");
         completed = new Texture("checked.png");
 
         com.mygdx.MindSlicer.Main.fightMusic.stop();
@@ -70,7 +73,9 @@ public class levelSelect implements Screen {
         loungeButton = new com.mygdx.MindSlicer.buttons.loungeButton();
         gameStage.addActor(loungeButton);
 
+        tutorialDialog();
         openingDialog();
+
         if (!com.mygdx.MindSlicer.defaultValues.introShown) {
             dialog.setVisible(true);
             com.mygdx.MindSlicer.defaultValues.introShown = true;
@@ -79,10 +84,11 @@ public class levelSelect implements Screen {
 
     private void openingDialog() {
 
-        dialog = new Dialog(com.mygdx.MindSlicer.Main.getLevelText("applicationHeader"), skin, "default") {
-            public void result(Object obj) {
-                if (obj.equals(true)) {
+        dialog = new Dialog(com.mygdx.MindSlicer.Main.getLevelText("applicationHeader"), skin, "default"){
+            public void result(Object obj){
+                if (obj.equals(true)){
                     dialog.setVisible(false);
+                    tutorialText.setVisible(true);
                 }
             }
         };
@@ -93,6 +99,22 @@ public class levelSelect implements Screen {
         dialog.setVisible(false);
         dialog.setMovable(false);
         gameStage.addActor(dialog);
+    }
+    private void tutorialDialog() {
+
+        tutorialText = new Dialog(com.mygdx.MindSlicer.Main.getLevelText("tutorialHeader"), skin, "default") {
+            public void result(Object obj) {
+                if (obj.equals(true)) {
+                    tutorialText.setVisible(false);
+                }
+            }
+        };
+        tutorialText.text(tutorial);
+        tutorialText.button("Ok", true); //sends "true" as the result
+        tutorialText.pack();
+        tutorialText.setPosition(100, 50);
+        tutorialText.setMovable(false);
+        gameStage.addActor(tutorialText);
     }
 
     public static void setLevel1() {
