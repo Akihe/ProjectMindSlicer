@@ -1,4 +1,4 @@
-package com.mygdx.MindSlicer;
+package com.mygdx.game;
 
 import android.os.Bundle;
 
