@@ -21,6 +21,7 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 import fi.tuni.MindSlicer.Main;
 import fi.tuni.MindSlicer.buttons.returnButton;
 import fi.tuni.MindSlicer.defaultValues;
+import fi.tuni.MindSlicer.playerActor;
 
 
 public class settings implements Screen {
@@ -50,6 +51,7 @@ public class settings implements Screen {
         returnbutton = new returnButton(50f, 50f, "Settings");
         gameStage.addActor(returnbutton);
         languageButton();
+        saveResetButton();
         musicOnOff();
         createTable();
     }
@@ -81,7 +83,7 @@ public class settings implements Screen {
 
     public void infoButton() {
         TextButton infoOpener;
-        infoOpener = new TextButton("help", skin);
+        infoOpener = new TextButton("Help", skin);
 
         infoOpener.addListener(new ClickListener() {
             @Override
@@ -93,6 +95,29 @@ public class settings implements Screen {
         infoOpener.setPosition(350f, 260f);
         gameStage.addActor(infoOpener);
     }
+
+    public void saveResetButton() {
+        TextButton saveReset = new TextButton("Help", skin);
+
+        saveReset.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                Main.prefs.clear();
+                playerActor.MONEY = defaultValues.startingMoney;
+                defaultValues.currentAttack = defaultValues.playerDefaultAttack;
+                defaultValues.currentDefence = defaultValues.playerDefaultDefence;
+                defaultValues.firstSaveDone = true;
+                defaultValues.level1Defeated = false;
+                defaultValues.level2Defeated = false;
+                defaultValues.level3Defeated = false;
+                Main.save();
+            }
+        });
+
+        saveReset.setPosition(350f, 360f);
+        gameStage.addActor(saveReset);
+    }
+
 
     public void createTable() {
         infoButton();

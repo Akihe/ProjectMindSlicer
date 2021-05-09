@@ -15,14 +15,18 @@ import fi.tuni.MindSlicer.screens.level3;
 /**
  * Button for the players basic attack. Has a texture and an inputlistener.
  *
- * <p>This class will be created in each level. When the texture is pressed, this calls the players hitAction method
- * which is the basic attack in our game. </p>
+ * <p>An object of this class will be created in each level. This is an actor that is added to a stage in each level. When the texture is pressed, this calls the players hitAction method
+ *  which is the basic attack in our game.</p>
  */
 public class actionButton extends Actor {
 
     private final Texture playTexture;
     playerActor player;
 
+    /**
+     * Texture and position of the button is set on the constructor.
+     * Level index is fetched to see in which level this button is used.
+     */
     public actionButton() {
         playTexture = new Texture("bubble.png");
 
@@ -41,13 +45,26 @@ public class actionButton extends Actor {
         addListener(new PlayerListener());
     }
 
+    /**
+     * Draws the texture.
+     * @param batch
+     * @param alpha
+     */
     public void draw(Batch batch, float alpha) {
         batch.draw(playTexture, this.getX(), this.getY(), getWidth(), getHeight());
-
     }
 
+    /**
+     * Inputlistener is created to read when the player touches the texture.
+     */
     class PlayerListener extends InputListener {
 
+        /**
+         * Touching the texture calls the players hitAction.
+         *
+         * <p>A Check is performed here to see if the enemy has finished his action. This prevents the player from
+         * pressing the button repeatedly.</p>
+         */
         @Override
         public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
             if (!playerActor.playerActionDone && enemyActor.allowPlayerAttack) {

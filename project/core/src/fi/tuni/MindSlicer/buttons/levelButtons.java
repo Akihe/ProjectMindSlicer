@@ -10,7 +10,10 @@ import fi.tuni.MindSlicer.screens.levelSelect;
 
 
 /**
- * Creates a button for the called level. Has a texture based and
+ * Button for the players heal action. Has a texture and an inputlistener.
+ *
+ *  * <p>An object of this class will be created in each level. This is an actor that is added to a stage in each level. When the texture is pressed, this calls the players heal method
+ *  *  which is our healing skill.</p>
  */
 public class levelButtons extends Actor {
 
