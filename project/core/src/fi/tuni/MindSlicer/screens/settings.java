@@ -53,10 +53,10 @@ public class settings implements Screen {
         returnbutton = new returnButton(50f, 50f, "Settings");
         gameStage.addActor(returnbutton);
         languageButton();
-        saveResetDialog();
         saveResetButton();
         musicOnOff();
         createTable();
+        saveResetDialog();
     }
 
     public static void setMainMenuScreen() {
@@ -100,7 +100,8 @@ public class settings implements Screen {
     }
 
     public void saveResetButton() {
-        TextButton saveReset = new TextButton(Main.getLevelText("saveResetButton"), skin);
+        TextButton saveReset;
+        saveReset = new TextButton(Main.getLevelText("saveResetButton"), skin);
 
         saveReset.addListener(new ClickListener() {
             @Override
@@ -108,7 +109,7 @@ public class settings implements Screen {
                 resetDialog.setVisible(true);
             }
         });
-        saveReset.setPosition(350f, 330f);
+        saveReset.setPosition(300f, 330f);
         gameStage.addActor(saveReset);
     }
 
@@ -137,7 +138,7 @@ public class settings implements Screen {
         resetDialog.button("Ok",true); //sends "true" as the result
         resetDialog.button("no", false);
         resetDialog.pack();
-        resetDialog.setPosition(70,50);
+        resetDialog.setPosition(200,150);
         resetDialog.setVisible(false);
         resetDialog.setMovable(false);
         gameStage.addActor(resetDialog);

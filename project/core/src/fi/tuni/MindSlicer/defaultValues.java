@@ -18,11 +18,13 @@ public class defaultValues {
 
     public static boolean LoungeEntry = false;
     public static boolean introShown = false;
+    public static boolean completionShown = false;
+
     public static boolean musicOn = true;
 
     public static boolean firstSaveDone = false;
+
     public static boolean level1Defeated = false;
     public static boolean level2Defeated = false;
     public static boolean level3Defeated = false;
-    public static boolean completionShown=false;
 }

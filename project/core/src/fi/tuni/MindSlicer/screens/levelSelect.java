@@ -90,7 +90,7 @@ public class levelSelect implements Screen {
         }
         if(defaultValues.level1Defeated==true && defaultValues.level2Defeated==true && defaultValues.level3Defeated==true && defaultValues.introShown==true && defaultValues.completionShown==false){
             endgame.setVisible(true);
-            defaultValues.completionShown=true;
+            defaultValues.completionShown = true;
         }
     }
 
