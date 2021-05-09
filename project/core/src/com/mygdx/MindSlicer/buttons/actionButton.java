@@ -10,6 +10,9 @@ import com.mygdx.MindSlicer.screens.level3;
 
 /**
  * Button for the players basic attack. Has a texture and an inputlistener.
+ *
+ * <p>This class will be created in each level. When the texture is pressed, this calls the players hitAction method
+ * which is the basic attack in our game. Calling th</p>
  */
 public class actionButton extends Actor {
 

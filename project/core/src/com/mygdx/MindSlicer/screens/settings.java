@@ -24,7 +24,7 @@ import com.mygdx.MindSlicer.buttons.returnButton;
 
 public class settings implements Screen {
 
-    static com.mygdx.MindSlicer.Main host;
+    static Main host;
     SpriteBatch batch;
     private Stage gameStage;
     private Texture BACKGROUND;
@@ -32,16 +32,16 @@ public class settings implements Screen {
     private Window window;
     private Table table;
 
-    private com.mygdx.MindSlicer.buttons.returnButton returnbutton;
+    private returnButton returnbutton;
     String languagebtn;
     CheckBox musicCheckBox;
 
-    public settings(final com.mygdx.MindSlicer.Main host) {
+    public settings(final Main host) {
         this.host = host;
         skin = host.skin;
-        languagebtn = com.mygdx.MindSlicer.Main.getLevelText("languagebtn");
+        languagebtn = Main.getLevelText("languagebtn");
 
-        gameStage = new Stage(new StretchViewport(com.mygdx.MindSlicer.Main.WORLD_WIDTH, com.mygdx.MindSlicer.Main.WORLD_HEIGHT));
+        gameStage = new Stage(new StretchViewport(Main.WORLD_WIDTH, Main.WORLD_HEIGHT));
         Gdx.input.setInputProcessor(gameStage);
 
         BACKGROUND = new Texture("mainmenu_screen.png");
@@ -64,10 +64,10 @@ public class settings implements Screen {
         textbtn.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if (com.mygdx.MindSlicer.Main.finnish) {
-                    com.mygdx.MindSlicer.Main.finnish = false;
+                if (Main.finnish) {
+                    Main.finnish = false;
                 } else {
-                    com.mygdx.MindSlicer.Main.finnish = true;
+                    Main.finnish = true;
                 }
                 gameStage.clear();
                 host.setScreen(new settings(host));
@@ -97,7 +97,7 @@ public class settings implements Screen {
         infoButton();
 
         table = new Table();
-        table.setSize(com.mygdx.MindSlicer.Main.WORLD_WIDTH, com.mygdx.MindSlicer.Main.WORLD_HEIGHT);
+        table.setSize(Main.WORLD_WIDTH, Main.WORLD_HEIGHT);
         window = new Window("", skin);
         window.setSize(table.getWidth(), table.getHeight());
 
@@ -183,7 +183,7 @@ public class settings implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         gameStage.getBatch().begin();
-        gameStage.getBatch().draw(BACKGROUND,0,0, com.mygdx.MindSlicer.Main.WORLD_WIDTH, Main.WORLD_HEIGHT);
+        gameStage.getBatch().draw(BACKGROUND,0,0, Main.WORLD_WIDTH, Main.WORLD_HEIGHT);
         gameStage.getBatch().end();
 
         gameStage.act();
