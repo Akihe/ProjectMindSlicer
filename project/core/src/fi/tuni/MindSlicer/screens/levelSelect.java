@@ -85,23 +85,24 @@ public class levelSelect implements Screen {
 
     private void openingDialog() {
 
-        dialog = new Dialog(com.mygdx.MindSlicer.Main.getLevelText("applicationHeader"), skin, "default"){
-            public void result(Object obj){
-                if (obj.equals(true)){
+        dialog = new Dialog(Main.getLevelText("applicationHeader"), skin, "default") {
+            public void result(Object obj) {
+                if (obj.equals(true)) {
                     tutorialText.setVisible(true);
                 }
             }
+        };
         dialog.text(open);
-        dialog.button("Ok", true); //sends "true" as the result
+        dialog.button("Ok",true); //sends "true" as the result
         dialog.pack();
-        dialog.setPosition(70, 50);
+        dialog.setPosition(70,50);
         dialog.setVisible(false);
         dialog.setMovable(false);
         gameStage.addActor(dialog);
-    }
+        }
     private void tutorialDialog() {
 
-        tutorialText = new Dialog(com.mygdx.MindSlicer.Main.getLevelText("tutorialHeader"), skin, "default") {
+        tutorialText = new Dialog(Main.getLevelText("tutorialHeader"), skin, "default") {
             public void result(Object obj) {
                 if (obj.equals(true)) {
                     tutorialText.setVisible(false);
