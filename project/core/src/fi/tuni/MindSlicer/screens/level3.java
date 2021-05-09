@@ -117,7 +117,7 @@ public class level3 implements Screen {
                 }
             }};
         openDialog.text(introduceKid);
-        openDialog.button("Okay", true); //sends "true" as the result
+        openDialog.button("Ok", true); //sends "true" as the result
         openDialog.pack();
         openDialog.setPosition(Main.WORLD_WIDTH/10f, Main.WORLD_HEIGHT/4f);
         openDialog.setMovable(false);
@@ -136,7 +136,7 @@ public class level3 implements Screen {
             }};
 
         winDialog.text(winner);
-        winDialog.button("Okay", true); //sends "true" as the result
+        winDialog.button("Ok", true); //sends "true" as the result
         winDialog.pack();
         winDialog.setPosition(Main.WORLD_WIDTH/10f, Main.WORLD_HEIGHT/4f);
         winDialog.setVisible(false);

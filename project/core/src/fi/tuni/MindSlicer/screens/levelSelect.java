@@ -25,10 +25,12 @@ public class levelSelect implements Screen {
 
     Dialog dialog;
     Dialog tutorialText;
+    Dialog endgame;
     static Skin skin;
 
     String open;
     String tutorial;
+    String gameBeaten;
 
     private levelButtons levelButton1;
     private levelButtons levelButton2;
@@ -47,6 +49,8 @@ public class levelSelect implements Screen {
         gameStage = new Stage(new StretchViewport(Main.WORLD_WIDTH, Main.WORLD_HEIGHT));
         Gdx.input.setInputProcessor(gameStage);
         open = Main.getLevelText("startingDialog");
+        tutorial = Main.getLevelText("tutorial");
+        gameBeaten=Main.getLevelText("completed");
         completed = new Texture("checked.png");
 
         Main.fightMusic.stop();
@@ -77,9 +81,15 @@ public class levelSelect implements Screen {
 
         tutorialDialog();
         openingDialog();
+        completedDialog();
+
+        tutorialText.setVisible(false);
         if (!defaultValues.introShown) {
             dialog.setVisible(true);
             defaultValues.introShown = true;
+        }
+        if(defaultValues.level1Defeated==true ||defaultValues.level2Defeated==true||defaultValues.level3Defeated==true){
+            endgame.setVisible(true);
         }
     }
 
@@ -88,6 +98,7 @@ public class levelSelect implements Screen {
         dialog = new Dialog(Main.getLevelText("applicationHeader"), skin, "default") {
             public void result(Object obj) {
                 if (obj.equals(true)) {
+                    dialog.setVisible(false);
                     tutorialText.setVisible(true);
                 }
             }
@@ -115,6 +126,24 @@ public class levelSelect implements Screen {
         tutorialText.setPosition(100, 50);
         tutorialText.setMovable(false);
         gameStage.addActor(tutorialText);
+    }
+    private void completedDialog() {
+
+        endgame = new Dialog(Main.getLevelText("applicationHeader"), skin, "default") {
+            public void result(Object obj) {
+                if (obj.equals(true)) {
+                    dialog.setVisible(false);
+                    tutorialText.setVisible(true);
+                }
+            }
+        };
+        endgame.text(open);
+        endgame.button("Ok",true); //sends "true" as the result
+        endgame.pack();
+        endgame.setPosition(70,50);
+        endgame.setVisible(false);
+        endgame.setMovable(false);
+        gameStage.addActor(endgame);
     }
 
     public static void setLevel1() {
