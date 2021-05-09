@@ -99,7 +99,8 @@ public class levelSelect implements Screen {
         dialog.setVisible(false);
         dialog.setMovable(false);
         gameStage.addActor(dialog);
-        }
+    }
+
     private void tutorialDialog() {
 
         tutorialText = new Dialog(Main.getLevelText("tutorialHeader"), skin, "default") {
