@@ -10,6 +10,11 @@ import fi.tuni.MindSlicer.screens.levelSelect;
 import fi.tuni.MindSlicer.screens.mainMenuScreen;
 import fi.tuni.MindSlicer.screens.settings;
 
+/**
+ * A button for returning to previous screen
+ *
+ * <p>This one has a texture and an Inputlistener. When the texture is pressed, it will run the touchdown method which takes you to the last screen</p>
+ */
 
 public class returnButton extends Actor {
 
@@ -33,6 +38,17 @@ public class returnButton extends Actor {
     }
 
     class PlayerListener extends InputListener {
+
+        /**
+         * Touching the texture calls the desired method.
+         * @param event
+         * @param x
+         * @param y
+         * @param pointer
+         * @param button
+         * @return
+         * <p>position is used to know, where the player is, and where the player will be taken</p>
+         */
 
         @Override
         public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {

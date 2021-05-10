@@ -22,6 +22,11 @@ import fi.tuni.MindSlicer.Main;
 import fi.tuni.MindSlicer.defaultValues;
 import fi.tuni.MindSlicer.screens.mainMenuScreen;
 
+/**
+ * a button that is created in each level for information to the player
+ * <p></p>
+ */
+
 public class settingsIngameButton extends Actor {
 
     private final Texture texture;

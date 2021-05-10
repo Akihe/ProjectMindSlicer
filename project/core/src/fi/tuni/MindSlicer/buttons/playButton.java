@@ -10,6 +10,11 @@ import fi.tuni.MindSlicer.Main;
 import fi.tuni.MindSlicer.defaultValues;
 import fi.tuni.MindSlicer.screens.mainMenuScreen;
 
+/**
+ * A button for entering the levelselect
+ *
+ * <p>This one has a texture and an Inputlistener. When the texture is pressed, it will run the touchdown method which takes you to a new screen</p>
+ */
 
 public class playButton extends Actor {
 
@@ -30,6 +35,12 @@ public class playButton extends Actor {
     }
 
         class PlayerListener extends InputListener {
+
+            /**
+             * Touching the texture calls the setPlayScreen() method.
+             *
+             * <p>a method that calls the mainMenusScreen's method for setting the appropriate Screen.</p>
+             */
 
         @Override
         public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {

@@ -12,8 +12,7 @@ import fi.tuni.MindSlicer.screens.levelSelect;
 /**
  * Button for the players heal action. Has a texture and an inputlistener.
  *
- *  * <p>An object of this class will be created in each level. This is an actor that is added to a stage in each level. When the texture is pressed, this calls the players heal method
- *  *  which is our healing skill.</p>
+ * <p>An object that is created to represent the levels. Specific texture is used based on the level</p>
  */
 public class levelButtons extends Actor {
 
@@ -45,6 +44,11 @@ public class levelButtons extends Actor {
 
     class PlayerListener extends InputListener {
 
+        /**
+         * Touching the texture calls the setLevel method.
+         *
+         * <p>a method that calls the levelselect's method for setting the selected stage.</p>
+         */
         @Override
         public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
             if (currentLevel == 1) {

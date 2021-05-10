@@ -1,5 +1,10 @@
 package fi.tuni.MindSlicer;
 
+/**
+ * a class for important values and parameters of the game and the player
+ * <p>defaultValues houses many important stats for the game, such as starting stats, updated stats, and booleans, so a popup isn't shown unnecessarily (introShown,loungeEntry, completionShown).
+ * has values to track the players progression, and if the music is on.</p>
+ */
 public class defaultValues {
 
     //Use these when creating a new character

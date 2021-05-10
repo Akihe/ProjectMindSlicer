@@ -10,6 +10,12 @@ import fi.tuni.MindSlicer.defaultValues;
 import fi.tuni.MindSlicer.screens.mainMenuScreen;
 
 
+/**
+ * A button for going to the settings screen
+ *
+ * <p>This one has a texture and an Inputlistener. When the texture is pressed, it will run the touchdown method which takes you to the settings screen</p>
+ */
+
 public class settingsButton extends Actor {
 
     private final Texture texture;
@@ -30,6 +36,12 @@ public class settingsButton extends Actor {
     }
 
     class PlayerListener extends InputListener {
+
+        /**
+         * Touching the texture calls the setSettingsScreen() method.
+         *
+         * <p>a method that calls the mainMenusScreen's method for setting the appropriate Screen. Saves the game</p>
+         */
 
         @Override
         public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {

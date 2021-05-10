@@ -37,6 +37,12 @@ public class loungeButton extends Actor {
 
     class PlayerListener extends InputListener {
 
+        /**
+         * Touching the texture calls the setLounge() method.
+         *
+         * <p>a method that calls the levelselect's method for setting the teacherslounge Screen.</p>
+         */
+
         @Override
         public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
             levelSelect.setLounge();
