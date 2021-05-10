@@ -12,19 +12,28 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import fi.tuni.MindSlicer.Main;
 
+/**
+ * Screen that is displayed when the player loses the fight.
+ *
+ * <p>A very simple screen due to not having enough time to make anything more special.
+ *    This screen will be displayed when the players HP goes to 0 or below.</p>
+ */
 public class GameOverScreen implements Screen {
 
-
-    Main host;
+    private Main host;
     private Texture BACKGROUND;
-    Skin skin;
+    private Skin skin;
     private Stage gameStage;
 
+    /**
+     * Setting background and creating a gamestage in the constructor
+     * @param host comes from the Main class
+     */
     public GameOverScreen(Main host) {
         BACKGROUND = new Texture("gameover.png");
 
         this.host = host;
-        skin=host.skin;
+        skin = host.skin;
 
         this.gameStage = new Stage(new StretchViewport(Main.WORLD_WIDTH, Main.WORLD_HEIGHT));
         Gdx.input.setInputProcessor(gameStage);
@@ -32,6 +41,9 @@ public class GameOverScreen implements Screen {
         retryButton();
     }
 
+    /**
+     * A Textbutton that takes you to the main menu when pressed.
+     */
     public void retryButton() {
         TextButton retry;
         retry = new TextButton(Main.getLevelText("retryText"), skin);
