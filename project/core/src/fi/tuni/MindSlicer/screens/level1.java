@@ -23,11 +23,21 @@ import fi.tuni.MindSlicer.enemyActor;
 import fi.tuni.MindSlicer.kidActor;
 import fi.tuni.MindSlicer.playerActor;
 
-
+/**
+ * The class for level 1. This is where stuff are combined and made into a level.
+ *
+ * <p>Alot of the classes will be combined here to build a stage that is our fighting stage.</p>
+ */
 public class level1 implements Screen {
 
+    /**
+     * Comes from constuctor.
+     */
     Main host;
-    SpriteBatch batch;
+
+    /**
+     * Background image.
+     */
     private Texture BACKGROUND;
 
     private actionButton actionbutton;
@@ -35,7 +45,7 @@ public class level1 implements Screen {
     private shieldButton shieldButton;
     private healButton healbutton;
     private settingsIngameButton settingsingame;
-    kidActor kid;
+    private kidActor kid;
     boolean winScreenShown = false;
     Dialog openDialog;
     Dialog winDialog;
@@ -51,12 +61,16 @@ public class level1 implements Screen {
     public static playerActor player;
     public static enemyActor enemy;
 
+    /**
+     * Everything is built in the constructor and added to a new stage in this screen.
+     *
+     * @param host will always be from the Main class
+     */
     public level1(Main host) {
         Main.save();
         defaultValues.levelInd = 1;
         this.host = host;
         skin = host.skin;
-
 
         gameStage = new Stage(new StretchViewport(Main.WORLD_WIDTH, Main.WORLD_HEIGHT));
         Gdx.input.setInputProcessor(gameStage);
@@ -97,6 +111,9 @@ public class level1 implements Screen {
         openingDialog();
     }
 
+    /**
+     * This method gives the player a pop-up message that tells them "its your turn!" at right times
+     */
     public static void playerTurnTeller() {
         if(enemyActor.allowPlayerAttack) {
             playerTurn.setVisible(true);
@@ -105,6 +122,12 @@ public class level1 implements Screen {
         }
     }
 
+    /**
+     * Story dialog
+     *
+     * <p>Here we are creating a dialog that gives the player some background of the level. This will be shown when entering the screen
+     *  And it has a button that closes the window. When the button is pressed, turnteller is called the first time to let the player know its their turn first</p>
+     */
     private void openingDialog() {
         String introduceKid = Main.getLevelText("kid1");
 
@@ -123,6 +146,12 @@ public class level1 implements Screen {
         gameStage.addActor(openDialog);
     }
 
+    /**
+     * Creates a dialog that will be shown when the fight is won.
+     *
+     * <p>This dialog has a text which congratulates the winning player. Position is somewhere around the middle.
+     * Has one button which closes the window and gives the player a reward of 200 coins and saves the game.</p>
+     */
     public void winPopup() {
 
         winDialog = new Dialog("Success!", skin, "default") {
@@ -144,6 +173,15 @@ public class level1 implements Screen {
         gameStage.addActor(winDialog);
     }
 
+    /**
+     * This checks the players moves and does enemies moves after.
+     *
+     * <p>Once the boolean playerActionDone is over and the enemy has more than 0 health,
+     *  The game will calculate seconds based on a timer inside the player class, that is changed depending on which
+     *  skill the player uses and how much time it takes.
+     *  After these are done, we are choosing a random attack for the enemy to use and rendering it. After this we set the
+     *  modifiers back to defaults to prepare for the next turn.</p>
+     */
     public void fight() {
 
         //Enemy attacks only after the player has attacked, and DeltaTime counts a delay for the enemies move, based on how long the players invidual attack lasts.
@@ -159,35 +197,44 @@ public class level1 implements Screen {
         }
     }
 
+    /**
+     * Will be checking players and the enemies HP.
+     *
+     * <p>This handles the HP check to see if you won or lost the fight. If the players HP goes to 0, this will change you to a whole new screen that just says game over.
+     *  If the enemies HP goes to 0, the enemy texture gets removed and we we are adding a kid Actor to the stage that appears slowly.
+     *  After a short delay you get a popup window that has a short story about the fight and information about earned coins.</p>
+     */
     public void loseWinCheck() {
 
+        //Enemy HP check, If enemy HP goes to 0 or under, you win the game and the fight ends.
         if(enemy.ENEMY_HEALTH <= 0){
             defaultValues.level1Defeated = true;
-            enemy.enemyDie();
-            kid.appear();
-            gameStage.getActors().removeValue(settingsingame, true);
+            enemy.enemyDie();   //Enemy texture fades out
+            kid.appear();   //Kid texture fades in
+            gameStage.getActors().removeValue(settingsingame, true); //We wanted to remove the settings button here as a way to prevent it from being pressed as its not needed anymore.
 
-            float delay = 2;
+            float delay = 2; //delay to run method below, in seconds.
             Timer.schedule(new Timer.Task() {
                 @Override
                 public void run() {
-                    gameStage.getActors().removeValue(enemy, true);
-                    player.resetPlayer();
+                    gameStage.getActors().removeValue(enemy, true); //Removing enemy value to stop rendering it on the background
+                    player.resetPlayer();   //Resetting players texture to default.
 
                 }
             }, delay);
 
-            if (!winScreenShown) {
+            if (!winScreenShown) {  //this is set to false by default, using a boolean to prevent the winning window being copied to the screen multiple times.
                 Timer.schedule(new Timer.Task() {
                     @Override
                     public void run() {
-                        winDialog.setVisible(true);
-                        winScreenShown = true;
+                        winDialog.setVisible(true); //Showing the winning window popup
+                        winScreenShown = true;  //Set to true so this gets performed only once
                     }
-                }, delay*2);
-            }
+                }, delay*2); //Using the same delay variable set above, so * 2 = 4 seconds
+            }                             //This means the dialog appears 4 seconds after the enemy HP goes to 0 or less.
         }
 
+        //Here we simply change to a new screen if the players health goes to 0 or less (player loses).
         if(player.PLAYER_HEALTH <= 0){
             player.resetStats();
             host.setScreen(new GameOverScreen(host));
@@ -217,6 +264,15 @@ public class level1 implements Screen {
 
     }
 
+
+    /**
+     * Resize method updates the viewport dimensions, mainly for desktop / emulator purposes.
+     *
+     * <p>Without the resize method, enlarging or decreasing the window size would make the buttons unclickable.
+     *    The textures would appear at a different place than where the clickable area is located at.</p>
+     * @param width comes from the game engine, window size
+     * @param height comes from the game engine, window size
+     */
     @Override
     public void resize(int width, int height) {
         gameStage.getViewport().update(width, height, true);
@@ -239,7 +295,6 @@ public class level1 implements Screen {
 
     @Override
     public void dispose() {
-        batch.dispose();
         gameStage.dispose();
         Main.menuMusic.dispose();
         Main.fightMusic.dispose();

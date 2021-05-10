@@ -55,7 +55,7 @@ public class settings implements Screen {
         languageButton();
         saveResetButton();
         musicOnOff();
-        createTable();
+        createInfoTable();
         saveResetDialog();
     }
 
@@ -145,7 +145,7 @@ public class settings implements Screen {
         gameStage.addActor(resetDialog);
     }
 
-    public void createTable() {
+    public void createInfoTable() {
         infoButton();
 
         table = new Table();

@@ -14,7 +14,7 @@ import java.util.Locale;
 /**
  * Main class handles the savefile and language swapping. Switches the screen to main Menu at open.
  *
- * @author  Aki Helin aki.helin@tuni.fi
+ * @author Aki Helin aki.helin@tuni.fi
  * @author Veeti Karilainen veeti.karilainen@tuni.fi
  * @version 2021.1.0
  *

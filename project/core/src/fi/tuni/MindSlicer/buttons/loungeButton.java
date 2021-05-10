@@ -10,11 +10,16 @@ import fi.tuni.MindSlicer.screens.levelSelect;
 
 /**
  * A button for entering the Lounge.
+ *
+ * <p>This one has a texture and an Inputlistener. When the texture is pressed, it will run the touchdown method which takes you to a new screen</p>
  */
 public class loungeButton extends Actor {
 
     private final Texture playTexture;
 
+    /**
+     * Texture and position is set in the constructor. Inputlistener is added.
+     */
     public loungeButton() {
         playTexture = new Texture(Gdx.files.internal("loungebtn.png"));
 
