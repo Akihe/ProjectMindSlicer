@@ -168,6 +168,13 @@ public class Main extends Game {
 		defaultValues.loungeEntry = prefs.getBoolean("lounge");
 	}
 
+	/**
+	 * Checks one value in the .xml file.
+	 *
+	 * <p>This was our solution to check if there is an existing save,
+	 * 	because on the first startup of the game there will not be a file.
+	 * 	Checking the whole file wouldn't be useful.</p>
+	 */
 	private void openFirstSave() {
 		defaultValues.firstSaveDone = prefs.getBoolean("saved");
 	}
