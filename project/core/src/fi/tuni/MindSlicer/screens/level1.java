@@ -40,26 +40,31 @@ public class level1 implements Screen {
      */
     private Texture BACKGROUND;
 
+    private Skin skin;
+    private String winner;
+
     private actionButton actionbutton;
     private thinkButton thinkbutton;
     private shieldButton shieldButton;
     private healButton healbutton;
     private settingsIngameButton settingsingame;
     private kidActor kid;
+    public static playerActor player;
+    public static enemyActor enemy;
+
+
+    //Using a boolean to display winning dialog only once.
     boolean winScreenShown = false;
-    Dialog openDialog;
-    Dialog winDialog;
 
-    Skin skin;
-    String winner;
+    private Dialog openDialog;
+    private Dialog winDialog;
 
-    float timeSinceAttack = 0;
+
+    private float timeSinceAttack = 0;
 
     public static Label playerTurn;
 
     private final Stage gameStage;
-    public static playerActor player;
-    public static enemyActor enemy;
 
     /**
      * Everything is built in the constructor and added to a new stage in this screen.
@@ -71,6 +76,7 @@ public class level1 implements Screen {
         defaultValues.levelInd = 1;
         this.host = host;
         skin = host.skin;
+
 
         gameStage = new Stage(new StretchViewport(Main.WORLD_WIDTH, Main.WORLD_HEIGHT));
         Gdx.input.setInputProcessor(gameStage);

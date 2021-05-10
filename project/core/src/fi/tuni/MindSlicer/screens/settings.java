@@ -19,6 +19,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
+
+import javax.xml.soap.Text;
+
 import fi.tuni.MindSlicer.Main;
 import fi.tuni.MindSlicer.buttons.returnButton;
 import fi.tuni.MindSlicer.defaultValues;
@@ -34,7 +37,7 @@ public class settings implements Screen {
     static Skin skin;
     private Window window;
     private Table table;
-    private Dialog resetDialog;
+    private Window resetWindow;
 
     private returnButton returnbutton;
     String languagebtn;
@@ -106,7 +109,8 @@ public class settings implements Screen {
         saveReset.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                resetDialog.setVisible(true);
+                resetWindow.setVisible(true);
+                Gdx.app.log("asd","asd");
             }
         });
         saveReset.setPosition(300f, 330f);
@@ -115,34 +119,45 @@ public class settings implements Screen {
 
     public void saveResetDialog() {
 
-        resetDialog = new Dialog(Main.getLevelText("applicationHeader"), skin, "default") {
-            public void result(Object obj) {
-                if (obj.equals(true)) {
-                    Main.prefs.clear();
-                    playerActor.MONEY = defaultValues.startingMoney;
-                    defaultValues.currentAttack = defaultValues.playerDefaultAttack;
-                    defaultValues.currentDefence = defaultValues.playerDefaultDefence;
-                    defaultValues.firstSaveDone = true;
-                    defaultValues.level1Defeated = false;
-                    defaultValues.level2Defeated = false;
-                    defaultValues.level3Defeated = false;
-                    Main.save();
-                    resetDialog.setVisible(false);
-                } else {
-                    resetDialog.setVisible(false);
-                }
-            }
-        };
+        resetWindow = new Window(Main.getLevelText("applicationHeader"), skin, "default");
 
-        resetDialog.text(Main.getLevelText("saveResetText"));
-        resetDialog.button("Ok",true); //sends "true" as the result
-        resetDialog.button("no", false);
-        resetDialog.pack();
-        resetDialog.setModal(true);
-        resetDialog.setPosition(200,150);
-        resetDialog.setVisible(false);
-        resetDialog.setMovable(false);
-        gameStage.addActor(resetDialog);
+        Label text = new Label(Main.getLevelText("saveResetText"), skin);
+
+        TextButton yes = new TextButton(Main.getLevelText("saveResetYes"), skin);
+        yes.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                Main.prefs.clear();
+                playerActor.MONEY = defaultValues.startingMoney;
+                defaultValues.currentAttack = defaultValues.playerDefaultAttack;
+                defaultValues.currentDefence = defaultValues.playerDefaultDefence;
+                defaultValues.firstSaveDone = true;
+                defaultValues.level1Defeated = false;
+                defaultValues.level2Defeated = false;
+                defaultValues.level3Defeated = false;
+                Main.save();
+                resetWindow.setVisible(false);
+            }
+        });
+
+        TextButton no = new TextButton(Main.getLevelText("saveResetNo"), skin);
+        no.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                resetWindow.setVisible(false);
+            }
+        });
+
+        resetWindow.add(text).colspan(2).center();
+        resetWindow.row().pad(5f);
+        resetWindow.add(yes);
+        resetWindow.add(no);
+        resetWindow.pack();
+        resetWindow.setPosition(180,150);
+        resetWindow.setMovable(false);
+        resetWindow.setVisible(false);
+
+        gameStage.addActor(resetWindow);
     }
 
     public void createInfoTable() {
