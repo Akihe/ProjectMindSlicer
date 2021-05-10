@@ -21,22 +21,65 @@ import java.util.Locale;
  */
 public class Main extends Game {
 
-	public static boolean finnish;
+	/**
+	 * World width.
+	 */
+	public static final int WORLD_WIDTH = 800;
+
+	/**
+	 * World height.
+	 */
+	public static final int WORLD_HEIGHT = 480;
+
+	/**
+	 * Our font, fetched from our skin.
+	 */
 	public static BitmapFont font;
 
-	public static final int WORLD_WIDTH = 800;
-	public static final int WORLD_HEIGHT = 480;
+
+	/**
+	 * Skin used widely in the game.
+	 */
 	public Skin skin;
 
+	/**
+	 * A boolean used to see which language is being used (Fin or Eng).
+	 */
+	public static boolean finnish;
+
+	/**
+	 * Menu music, used everywhere else but in fights.
+	 */
 	public static Music menuMusic;
+
+	/**
+	 * Fighting music, used in all fights only.
+	 */
 	public static Music fightMusic;
 
+	/**
+	 * English locale, for changing language.
+	 */
 	public static Locale localeEN;
+
+	/**
+	 * Finnish locale, for changing language.
+	 */
 	public static Locale localeFI;
 
+	/**
+	 * Finnish bundle file (.properties). All text are stored in here, in Finnish.
+	 */
 	public static I18NBundle myBundleFin;
+
+	/**
+	 * English bundle file (.properties). All text are stored in here, in English.
+	 */
 	public static I18NBundle myBundleEng;
 
+	/**
+	 * Save file (.xml) variable.
+	 */
 	public static Preferences prefs;
 
 	/**

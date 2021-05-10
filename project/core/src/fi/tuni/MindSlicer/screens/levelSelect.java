@@ -99,6 +99,7 @@ public class levelSelect implements Screen {
         dialog = new Dialog(Main.getLevelText("applicationHeader"), skin, "default") {
             public void result(Object obj) {
                 if (obj.equals(true)) {
+                    dialog.setVisible(false);
                     tutorialText.setVisible(true);
                 }
             }
@@ -106,7 +107,7 @@ public class levelSelect implements Screen {
         dialog.text(open);
         dialog.button("Ok",true); //sends "true" as the result
         dialog.pack();
-        dialog.setPosition(70,50);
+        dialog.setPosition(100,20);
         dialog.setVisible(false);
         dialog.setMovable(false);
         gameStage.addActor(dialog);
@@ -124,7 +125,7 @@ public class levelSelect implements Screen {
         tutorialText.text(tutorial);
         tutorialText.button("Ok", true); //sends "true" as the result
         tutorialText.pack();
-        tutorialText.setPosition(100, 50);
+        tutorialText.setPosition(100, 120);
         tutorialText.setMovable(false);
         tutorialText.setVisible(false);
         gameStage.addActor(tutorialText);

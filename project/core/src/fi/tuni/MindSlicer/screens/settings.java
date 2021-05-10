@@ -9,7 +9,6 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
-import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -20,14 +19,17 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 
-import javax.xml.soap.Text;
-
 import fi.tuni.MindSlicer.Main;
 import fi.tuni.MindSlicer.buttons.returnButton;
 import fi.tuni.MindSlicer.defaultValues;
 import fi.tuni.MindSlicer.playerActor;
 
-
+/**
+ * Screen for changing some settings.
+ *
+ * <p>In this Screen we have a few buttons. A button to reset your games savefile, info button to give you information about your skills
+ *    and about upgrading your stats. And an option to turn off your music.</p>
+ */
 public class settings implements Screen {
 
     static Main host;
@@ -43,6 +45,10 @@ public class settings implements Screen {
     String languagebtn;
     CheckBox musicCheckBox;
 
+    /**
+     * Creating all the needed buttons in the constructor
+     * @param host comes from the Main class, used to be able to use its methods.
+     */
     public settings(final Main host) {
         this.host = host;
         skin = host.skin;
@@ -59,13 +65,23 @@ public class settings implements Screen {
         saveResetButton();
         musicOnOff();
         createInfoTable();
-        saveResetDialog();
+        saveResetWindow();
     }
 
+    /**
+     * This is used for return button, to be able to go back to the main menu.
+     */
     public static void setMainMenuScreen() {
         host.setScreen(new mainMenuScreen(host, skin));
     }
 
+    /**
+     * Button for changing language.
+     *
+     * <p>Here we create a textbutton that uses our skin. Adding a clicklistener for it to register clicks and change language that way.
+     *    Clicking it has two different outcomes based on the language you are currently using.
+     *    Also clears the stage and sets the same screen again to update the texts in this screen.</p>
+     */
     private void languageButton() {
         TextButton textbtn;
         textbtn = new TextButton(languagebtn, skin);
@@ -87,6 +103,9 @@ public class settings implements Screen {
         gameStage.addActor(textbtn);
     }
 
+    /**
+     * TextButton to display our information table.
+     */
     public void infoButton() {
         TextButton infoOpener;
         infoOpener = new TextButton("Info", skin);
@@ -102,6 +121,9 @@ public class settings implements Screen {
         gameStage.addActor(infoOpener);
     }
 
+    /**
+     * TextButton that pops up a window asking about resetting your save.
+     */
     public void saveResetButton() {
         TextButton saveReset;
         saveReset = new TextButton(Main.getLevelText("saveResetButton"), skin);
@@ -113,11 +135,19 @@ public class settings implements Screen {
                 Gdx.app.log("asd","asd");
             }
         });
-        saveReset.setPosition(300f, 330f);
+        saveReset.setPosition(290f, 330f);
         gameStage.addActor(saveReset);
     }
 
-    public void saveResetDialog() {
+    /**
+     * This will clear your savefile and puts our default values in it.
+     *
+     * <P>We are creating a Window here with texts and buttons that asks you to confirm that you want to delete your save file.
+     *    Creating a dialog didnt work here, because we could not get it to be visible more than once when pressing the button.
+     *    Confirming your will to erase your save and progress, clears all the values in the file and changes the current values inside
+     *    defaultValues class back to the defaults.</P>
+     */
+    public void saveResetWindow() {
 
         resetWindow = new Window(Main.getLevelText("applicationHeader"), skin, "default");
 
@@ -135,6 +165,8 @@ public class settings implements Screen {
                 defaultValues.level1Defeated = false;
                 defaultValues.level2Defeated = false;
                 defaultValues.level3Defeated = false;
+                defaultValues.introShown = false;
+                defaultValues.completionShown = false;
                 Main.save();
                 resetWindow.setVisible(false);
             }
@@ -160,6 +192,12 @@ public class settings implements Screen {
         gameStage.addActor(resetWindow);
     }
 
+    /**
+     * Creates a table full of information about the players skills.
+     *
+     * <p>Similar execution as in the method saveResetWindow. Creating a window and inserting labels and images inside
+     *  that provide information about the players skills.</p>
+     */
     public void createInfoTable() {
         infoButton();
 
@@ -182,7 +220,7 @@ public class settings implements Screen {
 
         Image upgradeMachine = new Image(new Texture("foodmachine.png"));
         Label upgradeText = new Label(Main.getLevelText("upgradeText"), skin);
-        upgradeMachine.setScale(0.8f);
+        upgradeMachine.setScale(0.8f); //Makes the image slightly smaller.
 
         TextButton close = new TextButton("close", skin);
         close.addListener(new ClickListener() {
@@ -217,16 +255,19 @@ public class settings implements Screen {
         gameStage.addActor(table);
     }
 
+    /**
+     * A Checkbox for turning music on / off.
+     */
     public void musicOnOff() {
         musicCheckBox = new CheckBox("", skin);
         musicCheckBox.setBounds(350f, 120f, musicCheckBox.getWidth(), musicCheckBox.getHeight());
 
-        musicCheckBox.setChecked(defaultValues.musicOn);
+        musicCheckBox.setChecked(defaultValues.musicOn); //Sets the image of the checkbox to match whether the sound is on or off.
 
         musicCheckBox.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                if (!musicCheckBox.isChecked()) {
+                if (!musicCheckBox.isChecked()) {   //Checks the state of the box to know if we are putting it on or off.
                     defaultValues.musicOn = false;
                     Main.menuMusic.stop();
                 } else if (musicCheckBox.isChecked()) {
