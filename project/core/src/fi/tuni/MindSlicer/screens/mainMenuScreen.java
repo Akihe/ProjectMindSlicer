@@ -13,6 +13,10 @@ import fi.tuni.MindSlicer.buttons.settingsButton;
 import fi.tuni.MindSlicer.buttons.playButton;
 import fi.tuni.MindSlicer.defaultValues;
 
+/**
+ * Screen for starting the game, the mainMenu
+ * <p>Houses assets and buttons necessary for the mainMenuScreen</p>
+ */
 
 public class mainMenuScreen implements Screen {
 
@@ -26,6 +30,12 @@ public class mainMenuScreen implements Screen {
     settingsButton settingsbutton;
     Skin skin;
 
+    /**
+     * constructor for the main menu
+     * @param host
+     * @param getSkin
+     * <p>Has a checker for music configurations. Creates screen accordingly, with provided assets</p>
+     */
     public mainMenuScreen(final Main host, Skin getSkin) {
         this.host = host;
         skin = getSkin;
@@ -51,9 +61,18 @@ public class mainMenuScreen implements Screen {
 
     }
 
+    /**
+     * method for changing to the levelselect
+     * <p>A method used by the start button, that moves the user to the desired screen</p>
+     */
     public static void setPlayScreen() {
         host.setScreen(new levelSelect(host));
     }
+
+    /**
+     * method for changing to the settingScreen
+     * <p>A method used by the settings button, that moves the user to the desired screen</p>
+     */
 
     public static void setSettingsScreen() {
         host.setScreen(new settings(host));
@@ -62,6 +81,11 @@ public class mainMenuScreen implements Screen {
     @Override
     public void show() {
     }
+
+    /**
+     * a method for updating and playing the starting screen
+     * @param delta
+     */
 
     @Override
     public void render(float delta) {
@@ -78,6 +102,11 @@ public class mainMenuScreen implements Screen {
         gameStage.draw();
     }
 
+    /**
+     * a method for adjusting the screen size
+     * @param width
+     * @param height
+     */
     @Override
     public void resize(int width, int height) {
         gameStage.getViewport().update(width, height, false);

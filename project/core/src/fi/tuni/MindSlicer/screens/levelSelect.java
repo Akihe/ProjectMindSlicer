@@ -15,6 +15,10 @@ import fi.tuni.MindSlicer.buttons.loungeButton;
 import fi.tuni.MindSlicer.buttons.returnButton;
 import fi.tuni.MindSlicer.defaultValues;
 
+/**
+ * A class for creating the level selection screen
+ * <p>This Screen has dialogs, a Stage, a background, multiple constructed buttons and textures for completed stages</p>
+ */
 
 public class levelSelect implements Screen {
 
@@ -41,7 +45,11 @@ public class levelSelect implements Screen {
 
     private Texture completed;
 
-
+    /**
+     * constructor for levelselect
+     * @param host
+     * <p>set host to this host. Gets texte with Mains methods for dialogs. Checks if music should be played. Has checkers, so the game won't show certain dialogues unnecessarily.</p>
+     */
     public levelSelect (final Main host) {
         this.host = host;
 
@@ -94,6 +102,10 @@ public class levelSelect implements Screen {
         }
     }
 
+    /**
+     * method for starting dialog
+     * <p>Creates a new dialog. Its invisible as a default, but will be shown according to above requirements. When button is pressed, hides dialog, and shows the next dialog.</p>
+     */
     private void openingDialog() {
 
         dialog = new Dialog(Main.getLevelText("applicationHeader"), skin, "default") {
@@ -113,6 +125,11 @@ public class levelSelect implements Screen {
         gameStage.addActor(dialog);
     }
 
+    /**
+     * method for tutorial dialog
+     * <p>Creates a new dialog. Its invisible as a default, but will be shown according to above requirements. When button is pressed, hides dialog.</p>
+     */
+
     private void tutorialDialog() {
 
         tutorialText = new Dialog(Main.getLevelText("tutorialHeader"), skin, "default") {
@@ -130,6 +147,12 @@ public class levelSelect implements Screen {
         tutorialText.setVisible(false);
         gameStage.addActor(tutorialText);
     }
+
+    /**
+     * method for completion dialog
+     * <p>Creates a new dialog. Its invisible as a default, but will be shown according to above requirements. When button is pressed, hides dialog, and shows the next dialog.</p>
+     */
+
     private void completedDialog() {
 
         endgame = new Dialog(Main.getLevelText("completedHeader"), skin, "default") {
@@ -148,6 +171,10 @@ public class levelSelect implements Screen {
         gameStage.addActor(endgame);
     }
 
+    /**
+     * methods for setting specific levels
+     * <p>These methods are used in corresponding buttons to set the desired screen.</p>
+     */
     public static void setLevel1() {
         host.setScreen(new level1(host));
     }
@@ -172,6 +199,12 @@ public class levelSelect implements Screen {
     public void show() {
     }
 
+
+    /**
+     * render for levelselect.
+     * @param delta
+     * <p>Has checkers for tracking which stages are cleared, and updated textures accordingly</p>
+     */
     @Override
     public void render(float delta) {
 
@@ -199,6 +232,12 @@ public class levelSelect implements Screen {
 
     }
 
+    /**
+     * resixe method for the screen
+     * @param width
+     * @param height
+     * <p>Consistently updates screen size when changed</p>
+     */
     @Override
     public void resize(int width, int height) {
         gameStage.getViewport().update(width, height, false);
@@ -219,6 +258,10 @@ public class levelSelect implements Screen {
 
     }
 
+    /**
+     * dispose method for levelselect
+     * <p>Disposes needless assets</p>
+     */
     @Override
     public void dispose() {
         gameStage.dispose();
