@@ -24,7 +24,12 @@ import fi.tuni.MindSlicer.buttons.statsButton;
 import fi.tuni.MindSlicer.defaultValues;
 import fi.tuni.MindSlicer.playerActor;
 
-
+/**
+ * Screen for the teachers lounge where the player can upgrade stats.
+ *
+ * <p>This is just a screen with some images and one imageButton. Clicking the button opens up
+ *    a window that has buttons for upgrading the players Attack and Defence stats.</p>
+ */
 public class lounge implements Screen {
 
     static Main host;
@@ -51,6 +56,11 @@ public class lounge implements Screen {
     Label defenceLabel;
     Dialog dialog;
 
+    /**
+     * Constructor creates the buttons and textures that are used.
+     *
+     * @param host Comes from the Main class.
+     */
     public lounge(Main host){
         this.host = host;
 
@@ -76,6 +86,9 @@ public class lounge implements Screen {
         upgradeTable();
     }
 
+    /**
+     * Used to update the labels to display correct information in real time.
+     */
     public void updateStats() {
         attackValue = defaultValues.currentAttack;
         defenceValue = defaultValues.currentDefence;
@@ -85,6 +98,14 @@ public class lounge implements Screen {
         defenceLabel.setText("Defence : " + defenceValue + "  ");
     }
 
+    /**
+     * A Table that contains all the buttons for upgrading the players stats.
+     *
+     * <p>This creates a table that contains labels for your attack and defence values,
+     * a label that tells you how much money you have and 4 imageButtons to increase or decrease your stats.
+     * A container is used to contol the size of the table. The table is hidden and will be changed to be visible
+     * when pressing the drinking machine imageButton.</p>
+     */
     public void upgradeTable() {
         Drawable background = skin.getDrawable("dialog");
         attackValue = defaultValues.currentAttack;
@@ -111,12 +132,12 @@ public class lounge implements Screen {
         tableContainer.setPosition(230f, Main.WORLD_HEIGHT / 4f);
         tableContainer.fill();
 
-        table = new Table(skin);
-
         statsPlusMinus attackPlus = new statsPlusMinus("attackPlus");
         statsPlusMinus attackMinus = new statsPlusMinus("attackMinus");
         statsPlusMinus defencePlus = new statsPlusMinus("defencePlus");
         statsPlusMinus defenceMinus = new statsPlusMinus("defenceMinus");
+
+        table = new Table(skin);
 
         table.setBackground(background);
 
@@ -129,7 +150,6 @@ public class lounge implements Screen {
         table.add(close).colspan(3).center();
 
         table.setFillParent(true);
-
         table.setVisible(false);
 
         tableContainer.setActor(table);
@@ -137,10 +157,15 @@ public class lounge implements Screen {
         gameStage.addActor(tableContainer);
     }
 
+    /**
+     * A popup dialog that gives you information about the room.
+     *
+     * <p>This popup will only be shown on your first entry.</p>
+     */
     public void entryPopup() {
         //Dialog dialog is initialized on the top
         //boolean value for showing popup is changed to true in the render call
-        Skin skin = new Skin(Gdx.files.internal("skin.json"));
+        Skin skin = host.skin;
         dialog = new Dialog(Main.getLevelText("welcome"), skin) {
             public void result(Object obj) {
                 if(obj.equals(true)){
@@ -175,7 +200,7 @@ public class lounge implements Screen {
         gameStage.act();
         gameStage.draw();
 
-        if (!defaultValues.loungeEntry){
+        if (!defaultValues.loungeEntry){ //Popup will only be shown on your first entry.
             entryPopup();
             defaultValues.loungeEntry = true;
         }

@@ -23,7 +23,13 @@ import fi.tuni.MindSlicer.enemyActor;
 import fi.tuni.MindSlicer.kidActor;
 import fi.tuni.MindSlicer.playerActor;
 
-
+/**
+ * Level 3 fighting stage, please check level 1 for more information.
+ *
+ * <p>Level 3 class doesn't really differ from level 1 part from the background.
+ *    All the differences regarding the fights are written in other classes like in enemyActor,
+ *    in which we give attack, defence and HP values based on where the object is created in (constructor usage).</p>
+ */
 public class level3 implements Screen {
 
     Main host;
