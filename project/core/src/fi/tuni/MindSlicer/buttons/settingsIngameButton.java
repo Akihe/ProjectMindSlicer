@@ -24,7 +24,7 @@ import fi.tuni.MindSlicer.screens.mainMenuScreen;
 
 /**
  * a button that is created in each level for information to the player
- * <p></p>
+ * <p>creates a table that shows information, text and textures. Checkbox for configuring music</p>
  */
 
 public class settingsIngameButton extends Actor {
@@ -69,6 +69,11 @@ public class settingsIngameButton extends Actor {
         stage.getBatch().end();
     }
 
+    /**
+     * method for creating a help button
+     * <p>When clicked, shows the created info table</p>
+     */
+
     public void infoButton() {
         TextButton infoOpener;
         infoOpener = new TextButton("help", skin);
@@ -84,6 +89,10 @@ public class settingsIngameButton extends Actor {
         table.add(infoOpener);
     }
 
+    /**
+     * method for creating the info table
+     * <p>A table, that compiles information and images for the players attacks. When button is clicked, the table is closed</p>
+     */
     public void createInfoTable() {
         infoButton();
 
@@ -197,7 +206,16 @@ public class settingsIngameButton extends Actor {
     }
 
     class PlayerListener extends InputListener {
-
+        /**
+         * Listener for the setting button
+         * @param event
+         * @param x
+         * @param y
+         * @param pointer
+         * @param button
+         * @return
+         * <p>When pressed, shows the settings info table</p>
+         */
         @Override
         public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
             table.setVisible(true);
