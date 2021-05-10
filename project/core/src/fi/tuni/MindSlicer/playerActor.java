@@ -10,6 +10,11 @@ import fi.tuni.MindSlicer.screens.level1;
 import fi.tuni.MindSlicer.screens.level3;
 import fi.tuni.MindSlicer.screens.level2;
 
+/**
+ * Player actor class
+ * <p>This class is for constructing the player with it's necessary variables, values and textures, as well as managing the methods of the player.
+ * PLAYER_HEALTH is the players base hp value. MONEY is the players currency for buying statPoints. enemyAttackAfter indicates how long the opponent has to wait after a player action.</p>
+ */
 
 public class playerActor extends Actor {
 
@@ -37,6 +42,11 @@ public class playerActor extends Actor {
 
     public static int statPointsBought = 0;
 
+    /**
+     * players construction
+     * @param level Is necessary, so the code knows, which level the player is in when constructing. statsPointsBought keeps track of the players upgrades.
+     *              <p> Here the player is constructed to a stage with it's proper parameters and textures</p>
+     */
     public playerActor(int level) {
 
         playerActionDone = false;
@@ -60,10 +70,19 @@ public class playerActor extends Actor {
 
     }
 
+    /**
+     * a method for clearing buffs
+     * <p>This method clears any buffs on the player after stage</p>
+     */
     public void resetStats(){
         PLAYER_ATK = defaultValues.currentAttack;
     }
 
+    /**
+     * the method for the players incoming damage calculation
+     * @param damageTaken is a value that comes from the opponent of the stage in question
+     * <p>This method is used to reduce the players health when taking damage, and takes into account if the player has a shield active</p>
+     */
     public void reduceHealth(int damageTaken) {
         if (shield_ON) {
             damageTaken = damageTaken / 3;
@@ -80,6 +99,12 @@ public class playerActor extends Actor {
         healthAmount = "" + PLAYER_HEALTH;
     }
 
+    /**
+     * playe's draw method
+     * @param batch
+     * @param alpha
+     * <p> in the draw method for the player, the players health points are also consistently drawn on the screen</p>
+     */
     @Override
     public void draw(Batch batch, float alpha) {
         batch.draw(playerTexture,
@@ -96,6 +121,11 @@ public class playerActor extends Actor {
         Main.font.draw(batch, healthAmount, 145, 30);
     }
 
+    /**
+     * the players offensive skill
+     * <p>a method that reduces the correct stage's opponents health according to the player attack and the enemy's defense stats
+     * The players texture is updated to a new one for the duration of the action and after the action, playerActionDone=true lets the opponents attack</p>
+     */
     public void hitAction() {
         hitSound.play();
         hitTexture = new Texture("thumbs_up.png");
@@ -117,6 +147,11 @@ public class playerActor extends Actor {
         enemyAttacksAfter = 4;
     }
 
+    /**
+     * players defensive skill
+     * <p>method that actives shield_On=true for player, that affects damage calculation in damageTaken() method
+     * The players texture is updated to a new one for the duration of the action and after the action, playerActionDone=true lets the opponents attack</p>
+     */
     public void superShield(){
         shieldSound.play();
         hitTexture = new Texture("main_def.png");
@@ -132,6 +167,11 @@ public class playerActor extends Actor {
         enemyAttacksAfter = 3;
     }
 
+    /**
+     * heal()
+     * <p>increases the players hp for a set amount
+     * The players texture is updated to a new one for the duration of the action and after the action, playerActionDone=true lets the opponents attack</p>
+     */
     public void heal(){
         healSound.play();
         hitTexture = new Texture("sweet_health_buff.png");
@@ -147,12 +187,21 @@ public class playerActor extends Actor {
         healthAmount = "" + PLAYER_HEALTH;
     }
 
+    /**
+     * changes players texture to normal
+     * <p>changes the player texture after an action </p>
+     */
     public void resetPlayer() {
         playerTexture = defaultTexture;
         setWidth(playerTexture.getWidth());
         setHeight(playerTexture.getHeight());
     }
 
+    /**
+     * the players buff action
+     * <p>the players action for temporarily increasing the attack value. resetStats() clears these buffs after the stage
+     * The players texture is updated to a new one for the duration of the action and after the action, playerActionDone=true lets the opponents attack</p>
+     */
     public void thinkAction() {
         buffSound.play();
         hitTexture = new Texture("drink_coffee_buff1.png");
@@ -161,7 +210,7 @@ public class playerActor extends Actor {
         setWidth(playerTexture.getWidth());
         setHeight(playerTexture.getHeight());
 
-        double ATK_RISE = PLAYER_ATK * 1.2;
+        double ATK_RISE = PLAYER_ATK * 1.3;
         PLAYER_ATK = (int) ATK_RISE;
         playerActionDone = true;
         enemyActor.allowPlayerAttack = false;
