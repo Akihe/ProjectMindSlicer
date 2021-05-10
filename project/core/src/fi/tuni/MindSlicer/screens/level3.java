@@ -12,7 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
-import fi.tuni.MindSlicer.Main;
+import fi.tuni.MindSlicer.main;
 import fi.tuni.MindSlicer.buttons.settingsIngameButton;
 import fi.tuni.MindSlicer.buttons.actionButton;
 import fi.tuni.MindSlicer.buttons.healButton;
@@ -32,7 +32,7 @@ import fi.tuni.MindSlicer.playerActor;
  */
 public class level3 implements Screen {
 
-    Main host;
+    main host;
     SpriteBatch batch;
     private Texture BACKGROUND;
 
@@ -57,28 +57,28 @@ public class level3 implements Screen {
     public static playerActor player;
     public static enemyActor enemy;
 
-    public level3(Main host) {
-        Main.save();
+    public level3(main host) {
+        main.save();
         defaultValues.levelInd = 3;
         this.host = host;
         skin = host.skin;
 
 
-        gameStage = new Stage(new StretchViewport(Main.WORLD_WIDTH, Main.WORLD_HEIGHT));
+        gameStage = new Stage(new StretchViewport(main.WORLD_WIDTH, main.WORLD_HEIGHT));
         Gdx.input.setInputProcessor(gameStage);
 
         BACKGROUND = new Texture("taustakolme.png");
 
 
-        Main.menuMusic.stop();
+        main.menuMusic.stop();
         if (defaultValues.musicOn) {
-            Main.fightMusic.play();
+            main.fightMusic.play();
         }
 
-        winner = Main.getLevelText("winner3");
+        winner = main.getLevelText("winner3");
 
         playerTurn = new Label("Its your turn!", skin, "chilanka-header", "RGBA_0_0_0_255");
-        playerTurn.setPosition(320f, Main.WORLD_HEIGHT/1.5f);
+        playerTurn.setPosition(320f, main.WORLD_HEIGHT/1.5f);
         playerTurn.setVisible(false);
 
         player = new playerActor(3);
@@ -113,7 +113,7 @@ public class level3 implements Screen {
     }
 
     private void openingDialog() {
-        String introduceKid = Main.getLevelText("kid3");
+        String introduceKid = main.getLevelText("kid3");
 
         openDialog = new Dialog("", skin, "default") {
             public void result(Object obj) {
@@ -125,7 +125,7 @@ public class level3 implements Screen {
         openDialog.text(introduceKid);
         openDialog.button("Ok", true); //sends "true" as the result
         openDialog.pack();
-        openDialog.setPosition(Main.WORLD_WIDTH/10f, Main.WORLD_HEIGHT/4f);
+        openDialog.setPosition(main.WORLD_WIDTH/10f, main.WORLD_HEIGHT/4f);
         openDialog.setMovable(false);
         gameStage.addActor(openDialog);
     }
@@ -137,14 +137,14 @@ public class level3 implements Screen {
                 if (obj.equals(true)) {
                     host.setScreen(new levelSelect(host));
                     player.MONEY += 300;
-                    Main.save();
+                    main.save();
                 }
             }};
 
         winDialog.text(winner);
         winDialog.button("Ok", true); //sends "true" as the result
         winDialog.pack();
-        winDialog.setPosition(Main.WORLD_WIDTH/10f, Main.WORLD_HEIGHT/4f);
+        winDialog.setPosition(main.WORLD_WIDTH/10f, main.WORLD_HEIGHT/4f);
         winDialog.setVisible(false);
         winDialog.setMovable(false);
         gameStage.addActor(winDialog);
@@ -213,7 +213,7 @@ public class level3 implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         gameStage.getBatch().begin();
-        gameStage.getBatch().draw(BACKGROUND,0,0, Main.WORLD_WIDTH, Main.WORLD_HEIGHT);
+        gameStage.getBatch().draw(BACKGROUND,0,0, main.WORLD_WIDTH, main.WORLD_HEIGHT);
         gameStage.getBatch().end();
 
         fight();
@@ -248,7 +248,7 @@ public class level3 implements Screen {
     public void dispose() {
         batch.dispose();
         gameStage.dispose();
-        Main.menuMusic.dispose();
+        main.menuMusic.dispose();
         skin.dispose();
     }
 }

@@ -100,7 +100,7 @@ public class playerActor extends Actor {
     }
 
     /**
-     * playe's draw method
+     * players draw method
      * @param batch
      * @param alpha
      * <p> in the draw method for the player, the players health points are also consistently drawn on the screen</p>
@@ -118,7 +118,7 @@ public class playerActor extends Actor {
                 this.getRotation(),0,0,
                 playerTexture.getWidth(), playerTexture.getHeight(), false, false);
 
-        Main.font.draw(batch, healthAmount, 145, 30);
+        main.font.draw(batch, healthAmount, 145, 30);
     }
 
     /**
@@ -168,7 +168,8 @@ public class playerActor extends Actor {
     }
 
     /**
-     * heal()
+     * Players healing skill.
+     *
      * <p>increases the players hp for a set amount
      * The players texture is updated to a new one for the duration of the action and after the action, playerActionDone=true lets the opponents attack</p>
      */

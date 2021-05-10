@@ -9,7 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
-import fi.tuni.MindSlicer.Main;
+import fi.tuni.MindSlicer.main;
 import fi.tuni.MindSlicer.buttons.levelButtons;
 import fi.tuni.MindSlicer.buttons.loungeButton;
 import fi.tuni.MindSlicer.buttons.returnButton;
@@ -22,7 +22,7 @@ import fi.tuni.MindSlicer.defaultValues;
 
 public class levelSelect implements Screen {
 
-    static Main host;
+    static main host;
     private Stage gameStage;
     private Texture backgroundTexture;
     private Image background;
@@ -50,20 +50,20 @@ public class levelSelect implements Screen {
      * @param host
      * <p>set host to this host. Gets texte with Mains methods for dialogs. Checks if music should be played. Has checkers, so the game won't show certain dialogues unnecessarily.</p>
      */
-    public levelSelect (final Main host) {
+    public levelSelect (final main host) {
         this.host = host;
 
         skin = host.skin;
-        gameStage = new Stage(new StretchViewport(Main.WORLD_WIDTH, Main.WORLD_HEIGHT));
+        gameStage = new Stage(new StretchViewport(main.WORLD_WIDTH, main.WORLD_HEIGHT));
         Gdx.input.setInputProcessor(gameStage);
-        open = Main.getLevelText("startingDialog");
-        tutorial = Main.getLevelText("tutorial");
-        gameBeaten=Main.getLevelText("completed");
+        open = main.getLevelText("startingDialog");
+        tutorial = main.getLevelText("tutorial");
+        gameBeaten= main.getLevelText("completed");
         completed = new Texture("checked.png");
 
-        Main.fightMusic.stop();
+        main.fightMusic.stop();
         if (defaultValues.musicOn) {
-            Main.menuMusic.play();
+            main.menuMusic.play();
         }
 
         defaultValues.levelInd = 0;
@@ -108,7 +108,7 @@ public class levelSelect implements Screen {
      */
     private void openingDialog() {
 
-        dialog = new Dialog(Main.getLevelText("applicationHeader"), skin, "default") {
+        dialog = new Dialog(main.getLevelText("applicationHeader"), skin, "default") {
             public void result(Object obj) {
                 if (obj.equals(true)) {
                     dialog.setVisible(false);
@@ -132,7 +132,7 @@ public class levelSelect implements Screen {
 
     private void tutorialDialog() {
 
-        tutorialText = new Dialog(Main.getLevelText("tutorialHeader"), skin, "default") {
+        tutorialText = new Dialog(main.getLevelText("tutorialHeader"), skin, "default") {
             public void result(Object obj) {
                 if (obj.equals(true)) {
                     tutorialText.setVisible(false);
@@ -155,7 +155,7 @@ public class levelSelect implements Screen {
 
     private void completedDialog() {
 
-        endgame = new Dialog(Main.getLevelText("completedHeader"), skin, "default") {
+        endgame = new Dialog(main.getLevelText("completedHeader"), skin, "default") {
             public void result(Object obj) {
                 if (obj.equals(true)) {
                     endgame.setVisible(false);
@@ -212,7 +212,7 @@ public class levelSelect implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         gameStage.getBatch().begin();
-        gameStage.getBatch().draw(backgroundTexture, 0,0, Main.WORLD_WIDTH, Main.WORLD_HEIGHT);
+        gameStage.getBatch().draw(backgroundTexture, 0,0, main.WORLD_WIDTH, main.WORLD_HEIGHT);
 
         if (defaultValues.level1Defeated) {
             gameStage.getBatch().draw(completed, 250, 230, completed.getWidth(), completed.getHeight());

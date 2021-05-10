@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
-import fi.tuni.MindSlicer.Main;
+import fi.tuni.MindSlicer.main;
 import fi.tuni.MindSlicer.defaultValues;
 import fi.tuni.MindSlicer.screens.mainMenuScreen;
 
@@ -22,7 +22,7 @@ public class settingsButton extends Actor {
 
     public settingsButton() {
 
-        texture = new Texture(Main.getLevelText("settings"));
+        texture = new Texture(main.getLevelText("settings"));
 
         setWidth(texture.getWidth());
         setHeight(texture.getHeight());
@@ -47,7 +47,7 @@ public class settingsButton extends Actor {
         public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
             mainMenuScreen.setSettingsScreen();
             defaultValues.firstSaveDone = true;
-            Main.save();
+            main.save();
             return true;
         }
     }

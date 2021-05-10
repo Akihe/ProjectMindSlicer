@@ -8,7 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
-import fi.tuni.MindSlicer.Main;
+import fi.tuni.MindSlicer.main;
 import fi.tuni.MindSlicer.buttons.settingsButton;
 import fi.tuni.MindSlicer.buttons.playButton;
 import fi.tuni.MindSlicer.defaultValues;
@@ -20,7 +20,7 @@ import fi.tuni.MindSlicer.defaultValues;
 
 public class mainMenuScreen implements Screen {
 
-    static Main host;
+    static main host;
     private Stage gameStage;
     private Texture backgroundTexture;
     private Image background;
@@ -36,16 +36,16 @@ public class mainMenuScreen implements Screen {
      * @param getSkin
      * <p>Has a checker for music configurations. Creates screen accordingly, with provided assets</p>
      */
-    public mainMenuScreen(final Main host, Skin getSkin) {
+    public mainMenuScreen(final main host, Skin getSkin) {
         this.host = host;
         skin = getSkin;
 
-        Main.fightMusic.stop();
+        main.fightMusic.stop();
         if (defaultValues.musicOn) {
-            Main.menuMusic.play();
+            main.menuMusic.play();
         }
 
-        gameStage = new Stage(new StretchViewport(Main.WORLD_WIDTH, Main.WORLD_HEIGHT));
+        gameStage = new Stage(new StretchViewport(main.WORLD_WIDTH, main.WORLD_HEIGHT));
         Gdx.input.setInputProcessor(gameStage);
 
         backgroundTexture = new Texture("mainmenu_screen.png");
@@ -94,7 +94,7 @@ public class mainMenuScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         gameStage.getBatch().begin();
-        gameStage.getBatch().draw(backgroundTexture, 0,0, Main.WORLD_WIDTH, Main.WORLD_HEIGHT);
+        gameStage.getBatch().draw(backgroundTexture, 0,0, main.WORLD_WIDTH, main.WORLD_HEIGHT);
         gameStage.getBatch().draw(logoText, 200,200,logoText.getWidth(), logoText.getHeight());
         gameStage.getBatch().end();
 

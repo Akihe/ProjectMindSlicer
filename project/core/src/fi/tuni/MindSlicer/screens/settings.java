@@ -19,7 +19,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 
-import fi.tuni.MindSlicer.Main;
+import fi.tuni.MindSlicer.main;
 import fi.tuni.MindSlicer.buttons.returnButton;
 import fi.tuni.MindSlicer.defaultValues;
 import fi.tuni.MindSlicer.playerActor;
@@ -32,7 +32,7 @@ import fi.tuni.MindSlicer.playerActor;
  */
 public class settings implements Screen {
 
-    static Main host;
+    static main host;
     SpriteBatch batch;
     private Stage gameStage;
     private Texture BACKGROUND;
@@ -49,12 +49,12 @@ public class settings implements Screen {
      * Creating all the needed buttons in the constructor
      * @param host comes from the Main class, used to be able to use its methods.
      */
-    public settings(final Main host) {
+    public settings(final main host) {
         this.host = host;
         skin = host.skin;
-        languagebtn = Main.getLevelText("languagebtn");
+        languagebtn = main.getLevelText("languagebtn");
 
-        gameStage = new Stage(new StretchViewport(Main.WORLD_WIDTH, Main.WORLD_HEIGHT));
+        gameStage = new Stage(new StretchViewport(main.WORLD_WIDTH, main.WORLD_HEIGHT));
         Gdx.input.setInputProcessor(gameStage);
 
         BACKGROUND = new Texture("mainmenu_screen.png");
@@ -89,10 +89,10 @@ public class settings implements Screen {
         textbtn.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if (Main.finnish) {
-                    Main.finnish = false;
+                if (main.finnish) {
+                    main.finnish = false;
                 } else {
-                    Main.finnish = true;
+                    main.finnish = true;
                 }
                 gameStage.clear();
                 host.setScreen(new settings(host));
@@ -126,13 +126,12 @@ public class settings implements Screen {
      */
     public void saveResetButton() {
         TextButton saveReset;
-        saveReset = new TextButton(Main.getLevelText("saveResetButton"), skin);
+        saveReset = new TextButton(main.getLevelText("saveResetButton"), skin);
 
         saveReset.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 resetWindow.setVisible(true);
-                Gdx.app.log("asd","asd");
             }
         });
         saveReset.setPosition(290f, 330f);
@@ -149,15 +148,15 @@ public class settings implements Screen {
      */
     public void saveResetWindow() {
 
-        resetWindow = new Window(Main.getLevelText("applicationHeader"), skin, "default");
+        resetWindow = new Window("", skin, "default");
 
-        Label text = new Label(Main.getLevelText("saveResetText"), skin);
+        Label text = new Label(main.getLevelText("saveResetText"), skin);
 
-        TextButton yes = new TextButton(Main.getLevelText("saveResetYes"), skin);
+        TextButton yes = new TextButton(main.getLevelText("saveResetYes"), skin);
         yes.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                Main.prefs.clear();
+                main.prefs.clear();
                 playerActor.MONEY = defaultValues.startingMoney;
                 defaultValues.currentAttack = defaultValues.playerDefaultAttack;
                 defaultValues.currentDefence = defaultValues.playerDefaultDefence;
@@ -167,12 +166,13 @@ public class settings implements Screen {
                 defaultValues.level3Defeated = false;
                 defaultValues.introShown = false;
                 defaultValues.completionShown = false;
-                Main.save();
+                defaultValues.loungeEntry = false;
+                main.save();
                 resetWindow.setVisible(false);
             }
         });
 
-        TextButton no = new TextButton(Main.getLevelText("saveResetNo"), skin);
+        TextButton no = new TextButton(main.getLevelText("saveResetNo"), skin);
         no.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -202,24 +202,24 @@ public class settings implements Screen {
         infoButton();
 
         table = new Table();
-        table.setSize(Main.WORLD_WIDTH, Main.WORLD_HEIGHT);
+        table.setSize(main.WORLD_WIDTH, main.WORLD_HEIGHT);
         window = new Window("", skin);
         window.setSize(table.getWidth(), table.getHeight());
 
         Image attack = new Image(new Texture("bubble.png"));
-        Label attackText = new Label(Main.getLevelText("AttackText"), skin);
+        Label attackText = new Label(main.getLevelText("AttackText"), skin);
 
         Image buff = new Image(new Texture("coffee_cup.png"));
-        Label buffText = new Label(Main.getLevelText("buffText"), skin);
+        Label buffText = new Label(main.getLevelText("buffText"), skin);
 
         Image shield = new Image(new Texture("shield_icon1.png"));
-        Label shieldText = new Label(Main.getLevelText("shieldText"), skin);
+        Label shieldText = new Label(main.getLevelText("shieldText"), skin);
 
         Image heal = new Image(new Texture("sweet_health.png"));
-        Label healText = new Label(Main.getLevelText("healText"), skin);
+        Label healText = new Label(main.getLevelText("healText"), skin);
 
         Image upgradeMachine = new Image(new Texture("foodmachine.png"));
-        Label upgradeText = new Label(Main.getLevelText("upgradeText"), skin);
+        Label upgradeText = new Label(main.getLevelText("upgradeText"), skin);
         upgradeMachine.setScale(0.8f); //Makes the image slightly smaller.
 
         TextButton close = new TextButton("close", skin);
@@ -269,10 +269,10 @@ public class settings implements Screen {
             public void changed(ChangeEvent event, Actor actor) {
                 if (!musicCheckBox.isChecked()) {   //Checks the state of the box to know if we are putting it on or off.
                     defaultValues.musicOn = false;
-                    Main.menuMusic.stop();
+                    main.menuMusic.stop();
                 } else if (musicCheckBox.isChecked()) {
                     defaultValues.musicOn = true;
-                    Main.menuMusic.play();
+                    main.menuMusic.play();
                 }
             }
         });
@@ -291,7 +291,7 @@ public class settings implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         gameStage.getBatch().begin();
-        gameStage.getBatch().draw(BACKGROUND,0,0, Main.WORLD_WIDTH, Main.WORLD_HEIGHT);
+        gameStage.getBatch().draw(BACKGROUND,0,0, main.WORLD_WIDTH, main.WORLD_HEIGHT);
         gameStage.getBatch().end();
 
         gameStage.act();

@@ -18,7 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
-import fi.tuni.MindSlicer.Main;
+import fi.tuni.MindSlicer.main;
 import fi.tuni.MindSlicer.defaultValues;
 import fi.tuni.MindSlicer.screens.mainMenuScreen;
 
@@ -31,7 +31,7 @@ public class settingsIngameButton extends Actor {
 
     private final Texture texture;
 
-    Main host;
+    main host;
     Skin skin;
     private Stage stage;
     Container<Table> tableContainer;
@@ -42,7 +42,7 @@ public class settingsIngameButton extends Actor {
     Table infoTable;
     Window window;
 
-    public settingsIngameButton(Main host, Skin skin1, Stage gameStage) {
+    public settingsIngameButton(main host, Skin skin1, Stage gameStage) {
         texture = new Texture("asetusnappi.png");
         skin = skin1;
         oldStage = gameStage;
@@ -97,21 +97,21 @@ public class settingsIngameButton extends Actor {
         infoButton();
 
         infoTable = new Table();
-        infoTable.setSize(Main.WORLD_WIDTH, Main.WORLD_HEIGHT);
+        infoTable.setSize(main.WORLD_WIDTH, main.WORLD_HEIGHT);
         window = new Window("", skin);
         window.setSize(infoTable.getWidth(), infoTable.getHeight());
 
         Image attack = new Image(new Texture("bubble.png"));
-        Label attackText = new Label(Main.getLevelText("AttackText"), skin);
+        Label attackText = new Label(main.getLevelText("AttackText"), skin);
 
         Image buff = new Image(new Texture("coffee_cup.png"));
-        Label buffText = new Label(Main.getLevelText("buffText"), skin);
+        Label buffText = new Label(main.getLevelText("buffText"), skin);
 
         Image shield = new Image(new Texture("shield_icon1.png"));
-        Label shieldText = new Label(Main.getLevelText("shieldText"), skin);
+        Label shieldText = new Label(main.getLevelText("shieldText"), skin);
 
         Image heal = new Image(new Texture("sweet_health.png"));
-        Label healText = new Label(Main.getLevelText("healText"), skin);
+        Label healText = new Label(main.getLevelText("healText"), skin);
 
         TextButton close = new TextButton("close", skin);
         close.addListener(new ClickListener() {
@@ -146,15 +146,15 @@ public class settingsIngameButton extends Actor {
         Drawable background = skin.getDrawable("dialog");
 
         tableContainer = new Container<Table>();
-        tableContainer.setSize(Main.WORLD_WIDTH / 2f, Main.WORLD_HEIGHT / 1.5f);
-        tableContainer.setPosition(Main.WORLD_WIDTH / 4f, Main.WORLD_HEIGHT / 4f);
+        tableContainer.setSize(main.WORLD_WIDTH / 2f, main.WORLD_HEIGHT / 1.5f);
+        tableContainer.setPosition(main.WORLD_WIDTH / 4f, main.WORLD_HEIGHT / 4f);
         tableContainer.fillX();
 
         table = new Table(skin);
 
         table.setBackground(background);
 
-        TextButton backToMain = new TextButton(Main.getLevelText("backToMain"), skin);
+        TextButton backToMain = new TextButton(main.getLevelText("backToMain"), skin);
         backToMain.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -179,10 +179,10 @@ public class settingsIngameButton extends Actor {
             public void changed(ChangeEvent event, Actor actor) {
                 if (!musicCheckBox.isChecked()) {
                     defaultValues.musicOn = false;
-                    Main.fightMusic.stop();
+                    main.fightMusic.stop();
                 } else if (musicCheckBox.isChecked()) {
                     defaultValues.musicOn = true;
-                    Main.fightMusic.play();
+                    main.fightMusic.play();
                 }
             }
         });

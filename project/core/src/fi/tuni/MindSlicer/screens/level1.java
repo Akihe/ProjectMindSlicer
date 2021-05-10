@@ -11,7 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
-import fi.tuni.MindSlicer.Main;
+import fi.tuni.MindSlicer.main;
 import fi.tuni.MindSlicer.buttons.actionButton;
 import fi.tuni.MindSlicer.buttons.healButton;
 import fi.tuni.MindSlicer.buttons.settingsIngameButton;
@@ -32,7 +32,7 @@ public class level1 implements Screen {
     /**
      * Comes from constuctor.
      */
-    Main host;
+    main host;
 
     /**
      * Background image.
@@ -40,6 +40,10 @@ public class level1 implements Screen {
     private Texture BACKGROUND;
 
     private Skin skin;
+
+    /**
+     * Fetched from the properties files.
+     */
     private String winner;
 
     private actionButton actionbutton;
@@ -52,13 +56,17 @@ public class level1 implements Screen {
     public static enemyActor enemy;
 
 
-    //Using a boolean to display winning dialog only once.
+    /**
+     * Using a boolean to display winning dialog only once.
+     */
     boolean winScreenShown = false;
 
     private Dialog openDialog;
     private Dialog winDialog;
 
-
+    /**
+     * Variable that is used to count seconds.
+     */
     private float timeSinceAttack = 0;
 
     public static Label playerTurn;
@@ -70,27 +78,27 @@ public class level1 implements Screen {
      *
      * @param host will always be from the Main class
      */
-    public level1(Main host) {
-        Main.save();
+    public level1(main host) {
+        main.save();
         defaultValues.levelInd = 1;
         this.host = host;
         skin = host.skin;
 
 
-        gameStage = new Stage(new StretchViewport(Main.WORLD_WIDTH, Main.WORLD_HEIGHT));
+        gameStage = new Stage(new StretchViewport(main.WORLD_WIDTH, main.WORLD_HEIGHT));
         Gdx.input.setInputProcessor(gameStage);
 
         BACKGROUND = new Texture("taustakoulu.png");
 
-        Main.menuMusic.stop();
+        main.menuMusic.stop();
         if (defaultValues.musicOn) {
-            Main.fightMusic.play();
+            main.fightMusic.play();
         }
 
-        winner = Main.getLevelText("winner1");
+        winner = main.getLevelText("winner1");
 
         playerTurn = new Label("Its your turn!", skin, "chilanka-header", "RGBA_0_0_0_255");
-        playerTurn.setPosition(320f, Main.WORLD_HEIGHT/1.5f);
+        playerTurn.setPosition(320f, main.WORLD_HEIGHT/1.5f);
         playerTurn.setVisible(false);
 
         player = new playerActor(1);
@@ -134,7 +142,7 @@ public class level1 implements Screen {
      *  And it has a button that closes the window. When the button is pressed, turnteller is called the first time to let the player know its their turn first</p>
      */
     private void openingDialog() {
-        String introduceKid = Main.getLevelText("kid1");
+        String introduceKid = main.getLevelText("kid1");
 
         openDialog = new Dialog("", skin, "default") {
             public void result(Object obj) {
@@ -146,7 +154,7 @@ public class level1 implements Screen {
         openDialog.text(introduceKid);
         openDialog.button("Ok", true); //sends "true" as the result
         openDialog.pack();
-        openDialog.setPosition(Main.WORLD_WIDTH/10f, Main.WORLD_HEIGHT/4f);
+        openDialog.setPosition(main.WORLD_WIDTH/10f, main.WORLD_HEIGHT/4f);
         openDialog.setMovable(false);
         gameStage.addActor(openDialog);
     }
@@ -164,7 +172,7 @@ public class level1 implements Screen {
                 if (obj.equals(true)) {
                     host.setScreen(new levelSelect(host));
                     player.MONEY += 200;
-                    Main.save();
+                    main.save();
                 }
             }
         };
@@ -172,7 +180,7 @@ public class level1 implements Screen {
         winDialog.text(winner);
         winDialog.button("Ok", true); //sends "true" as the result
         winDialog.pack();
-        winDialog.setPosition(Main.WORLD_WIDTH/10f, Main.WORLD_HEIGHT/4f);
+        winDialog.setPosition(main.WORLD_WIDTH/10f, main.WORLD_HEIGHT/4f);
         winDialog.setVisible(false);
         winDialog.setMovable(false);
         gameStage.addActor(winDialog);
@@ -258,7 +266,7 @@ public class level1 implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         gameStage.getBatch().begin();
-        gameStage.getBatch().draw(BACKGROUND,0,0, Main.WORLD_WIDTH, Main.WORLD_HEIGHT);
+        gameStage.getBatch().draw(BACKGROUND,0,0, main.WORLD_WIDTH, main.WORLD_HEIGHT);
         gameStage.getBatch().end();
 
         fight();
@@ -301,8 +309,8 @@ public class level1 implements Screen {
     @Override
     public void dispose() {
         gameStage.dispose();
-        Main.menuMusic.dispose();
-        Main.fightMusic.dispose();
+        main.menuMusic.dispose();
+        main.fightMusic.dispose();
         skin.dispose();
     }
 }

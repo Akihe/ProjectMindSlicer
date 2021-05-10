@@ -17,7 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
-import fi.tuni.MindSlicer.Main;
+import fi.tuni.MindSlicer.main;
 import fi.tuni.MindSlicer.buttons.statsPlusMinus;
 import fi.tuni.MindSlicer.buttons.returnButton;
 import fi.tuni.MindSlicer.buttons.statsButton;
@@ -32,7 +32,7 @@ import fi.tuni.MindSlicer.playerActor;
  */
 public class lounge implements Screen {
 
-    static Main host;
+    static main host;
     private Stage gameStage;
 
     private Texture backgroundTexture;
@@ -61,14 +61,14 @@ public class lounge implements Screen {
      *
      * @param host Comes from the Main class.
      */
-    public lounge(Main host){
+    public lounge(main host){
         this.host = host;
 
         flippedPlayer = new TextureRegion(new Texture("playercharacter.png"));
         flippedPlayer.flip(true, false);
 
-        enter = Main.getLevelText("Enter");
-        gameStage = new Stage(new StretchViewport(Main.WORLD_WIDTH, Main.WORLD_HEIGHT));
+        enter = main.getLevelText("Enter");
+        gameStage = new Stage(new StretchViewport(main.WORLD_WIDTH, main.WORLD_HEIGHT));
         Gdx.input.setInputProcessor(gameStage);
 
         backgroundTexture = new Texture("tlounge.png");
@@ -123,13 +123,13 @@ public class lounge implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 table.setVisible(false);
-                Main.save();
+                main.save();
             }
         });
 
         Container<Table> tableContainer = new Container<Table>();
-        tableContainer.setSize(300f, Main.WORLD_HEIGHT / 2f);
-        tableContainer.setPosition(230f, Main.WORLD_HEIGHT / 4f);
+        tableContainer.setSize(300f, main.WORLD_HEIGHT / 2f);
+        tableContainer.setPosition(230f, main.WORLD_HEIGHT / 4f);
         tableContainer.fill();
 
         statsPlusMinus attackPlus = new statsPlusMinus("attackPlus");
@@ -166,7 +166,7 @@ public class lounge implements Screen {
         //Dialog dialog is initialized on the top
         //boolean value for showing popup is changed to true in the render call
         Skin skin = host.skin;
-        dialog = new Dialog(Main.getLevelText("welcome"), skin) {
+        dialog = new Dialog(main.getLevelText("welcome"), skin) {
             public void result(Object obj) {
                 if(obj.equals(true)){
                     dialog.setVisible(false);
@@ -175,7 +175,7 @@ public class lounge implements Screen {
         dialog.text(enter);
         dialog.button("Okay", true); //sends "true" as the result
         dialog.pack();
-        dialog.setPosition(230f, Main.WORLD_HEIGHT/4f);
+        dialog.setPosition(230f, main.WORLD_HEIGHT/4f);
         dialog.setMovable(false);
         gameStage.addActor(dialog);
     }
@@ -193,7 +193,7 @@ public class lounge implements Screen {
         updateStats();
 
         gameStage.getBatch().begin();
-        gameStage.getBatch().draw(backgroundTexture,0,0, Main.WORLD_WIDTH, Main.WORLD_HEIGHT);
+        gameStage.getBatch().draw(backgroundTexture,0,0, main.WORLD_WIDTH, main.WORLD_HEIGHT);
         gameStage.getBatch().draw(flippedPlayer,400f,40f, flippedPlayer.getRegionWidth(), flippedPlayer.getRegionHeight());
         gameStage.getBatch().end();
 

@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
-import fi.tuni.MindSlicer.Main;
+import fi.tuni.MindSlicer.main;
 import fi.tuni.MindSlicer.defaultValues;
 import fi.tuni.MindSlicer.screens.mainMenuScreen;
 
@@ -21,7 +21,7 @@ public class playButton extends Actor {
     private final Texture texture;
 
     public playButton() {
-        texture = new Texture(Gdx.files.internal(Main.getLevelText("start")));
+        texture = new Texture(Gdx.files.internal(main.getLevelText("start")));
 
         setWidth(texture.getWidth());
         setHeight(texture.getHeight());
@@ -46,7 +46,7 @@ public class playButton extends Actor {
         public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
             mainMenuScreen.setPlayScreen();
             defaultValues.firstSaveDone = true;
-            Main.save();
+            main.save();
             return true;
         }
     }

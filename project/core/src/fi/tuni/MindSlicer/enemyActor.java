@@ -135,7 +135,7 @@ public class enemyActor extends Actor {
                 this.getScaleY(),
                 this.getRotation(),0,0,
                 enemyTexture.getWidth(), enemyTexture.getHeight(), false, false);
-        Main.font.draw(batch, healthAmount, 600, 30);
+        main.font.draw(batch, healthAmount, 600, 30);
 
         if (usingBuffAttack) {
             if (currentLevel == 1) {

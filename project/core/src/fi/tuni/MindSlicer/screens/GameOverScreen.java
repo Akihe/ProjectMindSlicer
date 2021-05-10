@@ -10,7 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
-import fi.tuni.MindSlicer.Main;
+import fi.tuni.MindSlicer.main;
 
 /**
  * Screen that is displayed when the player loses the fight.
@@ -20,7 +20,7 @@ import fi.tuni.MindSlicer.Main;
  */
 public class GameOverScreen implements Screen {
 
-    private Main host;
+    private main host;
     private Texture BACKGROUND;
     private Skin skin;
     private Stage gameStage;
@@ -29,13 +29,13 @@ public class GameOverScreen implements Screen {
      * Setting background and creating a gamestage in the constructor
      * @param host comes from the Main class
      */
-    public GameOverScreen(Main host) {
+    public GameOverScreen(main host) {
         BACKGROUND = new Texture("gameover.png");
 
         this.host = host;
         skin = host.skin;
 
-        this.gameStage = new Stage(new StretchViewport(Main.WORLD_WIDTH, Main.WORLD_HEIGHT));
+        this.gameStage = new Stage(new StretchViewport(main.WORLD_WIDTH, main.WORLD_HEIGHT));
         Gdx.input.setInputProcessor(gameStage);
 
         retryButton();
@@ -46,7 +46,7 @@ public class GameOverScreen implements Screen {
      */
     public void retryButton() {
         TextButton retry;
-        retry = new TextButton(Main.getLevelText("retryText"), skin);
+        retry = new TextButton(main.getLevelText("retryText"), skin);
 
         retry.addListener(new ClickListener() {
             @Override
@@ -70,7 +70,7 @@ public class GameOverScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         gameStage.getBatch().begin();
-        gameStage.getBatch().draw(BACKGROUND, 0, 0, Main.WORLD_WIDTH, Main.WORLD_HEIGHT);
+        gameStage.getBatch().draw(BACKGROUND, 0, 0, main.WORLD_WIDTH, main.WORLD_HEIGHT);
         gameStage.getBatch().end();
 
         gameStage.act();

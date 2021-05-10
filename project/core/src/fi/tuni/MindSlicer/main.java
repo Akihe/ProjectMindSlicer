@@ -19,7 +19,7 @@ import java.util.Locale;
  * @version 2021.1.0
  *
  */
-public class Main extends Game {
+public class main extends Game {
 
 	/**
 	 * World width.
