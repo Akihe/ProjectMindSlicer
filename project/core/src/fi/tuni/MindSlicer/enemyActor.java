@@ -19,6 +19,12 @@ import java.util.Random;
 import fi.tuni.MindSlicer.screens.level2;
 import fi.tuni.MindSlicer.screens.level3;
 
+/**
+ * Enemy actor class
+ * <p>This class is for constructing the enemy with it's necessary variables, values and textures, as well as managing the methods of the enemy
+ * different textures are for spesific actions. healthAmount is a string that indicates the current hp ENEMY_HEALTH, thats used in damage calculations
+ * ENEMY_ATK and ENEMY_DEF are the base values for the opponents. attackRoll is used to calculate which move the enemy uses. Boolean usingBuffAttack is used to determine, if buff texture is drawn</p>
+ */
 public class enemyActor extends Actor {
 
     private Texture enemyTexture;
@@ -43,6 +49,11 @@ public class enemyActor extends Actor {
 
     public static boolean allowPlayerAttack;
 
+    /**
+     * Enemy construction
+     * @param level Is necessary, so the code knows, which level the player is in when constructing. This helps keep track of which stats and textures to use.
+     *              <p> Here the enemy is constructed to a stage with it's proper parameters and textures</p>
+     */
     public enemyActor(int level) {
         allowPlayerAttack = true;
         currentLevel = level;
@@ -79,6 +90,11 @@ public class enemyActor extends Actor {
         buffTexture = new Texture("bad_words.png");
     }
 
+    /**
+     * the method for the enemy's incoming damage calculation
+     * @param damageTaken is a value that comes from the players action
+     * <p>This method is used to reduce the enemy's health when taking damage, and takes into account the defense amount</p>
+     */
     public void reduceHealth(int damageTaken) {
 
         int totalDamage = ENEMY_DEF - damageTaken;
@@ -90,10 +106,21 @@ public class enemyActor extends Actor {
         healthAmount = "" + ENEMY_HEALTH;
     }
 
+    /**
+     * the rng method for attacking
+     * <p>a method that rolls a new random value for choosing an attack</p>
+     */
     public void chooseAttack(){
        attackNumber = attackRoll.nextInt(100);
     }
 
+    /**
+     *the enemy's draw method
+     * @param batch
+     * @param alpha
+     * <p> in the draw method for the enemy, the enemy's health points are also consistently drawn on the screen.
+     * boolean usingBuffAttack is used to see if the buffTexture is drawn. batch.setColor resets the color</p>
+     */
     @Override
     public void draw(Batch batch, float alpha) {
         batch.setColor(this.getColor());
@@ -121,6 +148,14 @@ public class enemyActor extends Actor {
         }
         batch.setColor(Color.WHITE); // reset the color
     }
+
+    /**
+     * the opponents main offensive skill
+     * <p>a method that reduces the correct stage's opponents health according to the enemy's attack and the player's defense stats
+     * The opponent moves according to a SequenceAction updated to a new one for the duration of the action and after the action, playerActionDone=false lets the player attack.
+     * currentLevel is used to track which level the player is on.
+     * attackLength is used to measure th time of the action, to pace the fight</p>
+     */
 
     public void enemyHit() {
         hitSound.play();
@@ -152,6 +187,12 @@ public class enemyActor extends Actor {
         playerActor.playerActionDone = false;
         allowPlayerToAttack(attackLength);
     }
+    /**
+     * the opponent's buff action
+     * <p>the opponent's action for temporarily increasing the attack value by a base value.
+     * The opponent moves according to a SequenceAction updated to a new one for the duration of the action and after the action, playerActionDone=false lets the player attack.
+     * currentLevel is used to track which level the player is on. attackLength is used to measure th time of the action, to pace the fight</p>
+      */
 
     public void enemyBuff() {
         buffSound.play();
@@ -191,6 +232,12 @@ public class enemyActor extends Actor {
         allowPlayerToAttack(attackLength);
     }
 
+    /**
+     * the opponent's strong action
+     * <p>the opponent's action for dealing big damage according to a base value.
+     * The opponent moves according to a SequenceAction updated to a new one for the duration of the action and after the action, playerActionDone=false lets the player attack.
+     * currentLevel is used to track which level the player is on. attackLength is used to measure th time of the action, to pace the fight</p>
+     */
     public void majorAttack() {
         majorHitSound.play();
         int attackLength = 3;
@@ -224,6 +271,10 @@ public class enemyActor extends Actor {
         allowPlayerToAttack(attackLength);
     }
 
+    /**
+     * the method that tells which attack to use
+     * <p>the method holds certain probabilities for using specific actions, based the randomised attack roll</p>
+     */
     public void randomAttack() {
         if(attackNumber >= 0 && attackNumber < 50){
             enemyHit();
@@ -236,6 +287,11 @@ public class enemyActor extends Actor {
         }
     }
 
+    /**
+     * timing the turn structure of levels
+     * @param delay int value for
+     *              <p>uses the lengths of the enemy's actions to tell when the player can take a new action</p>
+     */
 
     public void allowPlayerToAttack(int delay) {
         Timer.schedule(new Timer.Task() {
@@ -256,6 +312,10 @@ public class enemyActor extends Actor {
         }, delay);
     }
 
+    /**
+     * the method for when the opponent is defeated
+     * <p>creates and playes a sequenceAction, where the opponent dissapears. Used along with the kid actor's appear method.</p>
+     */
     public void enemyDie() {
         SequenceAction fadeOut = new SequenceAction();
         fadeOut.addAction((Actions.fadeOut(2)));

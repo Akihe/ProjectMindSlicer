@@ -10,6 +10,13 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.utils.Timer;
 
+/**
+ *
+ * Kid actor class
+ * <p>This class is for constructing the child with it's necessary variables, values and textures, as well as managing the methods of it</p>
+ *
+ */
+
 public class kidActor extends Actor {
 
     Texture texture;
@@ -20,6 +27,12 @@ public class kidActor extends Actor {
     boolean soundPlayed;
 
     private int currentLevel;
+
+    /**
+     * kid's construction
+     * @param level Is necessary, so the code knows, which level the player is in when constructing, and which texture to choose.
+     *              <p> Here the kid is constructed to a stage with it's proper parameters and textures.</p>
+     */
 
     public kidActor(int level) {
         currentLevel = level;
@@ -42,6 +55,12 @@ public class kidActor extends Actor {
         initialFade();
     }
 
+    /**
+     * kid's draw method
+     * @param batch
+     * @param alpha
+     * <p>here the alpha value is tweaked</p>
+     */
     @Override
     public void draw(Batch batch, float alpha) {
 
@@ -61,11 +80,20 @@ public class kidActor extends Actor {
         batch.setColor(Color.WHITE); // reset the color
     }
 
+    /**
+     * kid's method for fading
+     * <p>a method that makes the kid invisible immediately at the start of a level with a fadeOut sequenceAction</p>
+     */
     public void initialFade() {
         fadeOut = new SequenceAction();
         fadeOut.addAction((Actions.fadeOut(0)));
         kidActor.this.addAction(fadeOut);
     }
+
+    /**
+     * kid's method for appearing
+     * <p>a method that makes the kid appear at the end of a level with a fadeIn sequenceAction, with a slight delay and a sound effect</p>
+     */
 
     public void appear() {
         fadeIn = new SequenceAction();
